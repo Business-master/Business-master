@@ -53,8 +53,10 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        phoneEt.setText("18500241615");
-        passwordEt.setText("admin");
+//        phoneEt.setText("18500241615");
+//        passwordEt.setText("admin");
+//        phoneEt.setText("");
+//        passwordEt.setText("");
     }
 
     private void initDialog() {
@@ -101,7 +103,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void registeJpushToService(){
-        if (TextUtils.isEmpty(App.getJpushId()))return;
+//        if (TextUtils.isEmpty(App.getJpushId()))return;
         RetrofitManager.getInstance(1).getRegisterJpushInObservable(UsrMgr.getUseId(), App.getJpushId())
                 .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                 .subscribe(new Subscriber<BaseRspObj>() {
