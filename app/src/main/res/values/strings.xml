@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">Business</string>
+
+    <!-- 页面名称 -->
+    <string name="main_navigation_home">首页</string>
+    <string name="main_navigation_im">会务</string>
+    <string name="main_navigation_interest">万花筒</string>
+    <string name="main_navigation_expert">专家</string>
+    <string name="main_navigation_user">我的</string>
+
+    <string name="internet_error">网络异常,请检查网络设置</string>
+    <string name="load_error">加载失败</string>
+    <string name="retry_after">请稍后重试</string>
+    <string name="retry_refresh_news">点我一下 重新加载</string>
+    <string name="no_more">没有更多了</string>
+
+    <string name="account_manager">账号管理</string>
+    <string name="assis_btn">添加助理</string>
+    <string name="save">保存</string>
+    <string name="account_ok">√正确</string>
+    <string name="assis_name">助理名字 ：</string>
+    <string name="fil_name">填写姓名 ：</string>
+    <string name="fil_phone">填写电话 ：</string>
+    <string name="fil_pass">填写密码 ：</string>
+    <string name="firm_pass">确认密码 ：</string>
+    <string name="assis_pass">请设置密码 ：</string>
+    <string name="assis_affirm_pass">请确认密码 ：</string>
+    <string name="assis_affirm_hint">请再次输入密码</string>
+    <string name="assis_pass_hint">6-20为字符，不可用纯数字</string>
+    <string name="assis_name_hint">请输入用户名，3-8字符</string>
+    <string name="assis_phone_hint">请输入11位手机号码</string>
+    <string name="assis_manager">助理管理</string>
+    <string name="account_safe">账号安全</string>
+    <string name="news_manager">新消息通知</string>
+    <string name="news_push">新消息是否推送</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="about">关于</string>
+    <string name="quit_account">退出登录</string>
+
+    <string name="plz_search_hint">请输入搜索内容</string>
+    <string name="search_hint">搜索会务</string>
+    <string name="cancel_string">取消</string>
+
+    <string name="second_back_hint">再按一次退出程序</string>
+
+    <string-array name="city_list">
+        <item>市工商联</item>
+        <item>东城区</item>
+        <item>朝阳区</item>
+        <item>西城区</item>
+        <item>海淀区</item>
+        <item>丰台区</item>
+        <item>门头沟区</item>
+        <item>石景山区</item>
+        <item>房山区</item>
+        <item>通州区</item>
+        <item>顺义区</item>
+        <item>昌平区</item>
+        <item>大兴区</item>
+        <item>怀柔区</item>
+        <item>平谷区</item>
+        <item>延庆区</item>
+        <item>密云区</item>
+    </string-array>
+
+    <string-array name="actions_images">
+        <item>@mipmap/img_tagxzc</item>
+        <item>@mipmap/img_ba</item>
+        <item>@mipmap/img_bj_bank</item>
+        <item>@mipmap/img_bjnsyh</item>
+        <item>@mipmap/img_bjxf</item>
+        <item>@mipmap/img_cjt</item>
+        <item>@mipmap/img_dfjh</item>
+        <item>@mipmap/img_gjl</item>
+        <item>@mipmap/img_gs_bank</item>
+        <item>@mipmap/img_hm</item>
+        <item>@mipmap/img_hxyh</item>
+        <item>@mipmap/img_lfyh</item>
+        <item>@mipmap/img_pyq</item>
+        <item>@mipmap/img_rh</item>
+        <item>@mipmap/img_twaf</item>
+        <item>@mipmap/img_xyyh</item>
+        <item>@mipmap/img_yjs</item>
+        <item>@mipmap/img_yy</item>
+        <item>@mipmap/img_yz</item>
+        <item>@mipmap/img_zgmsyh</item>
+        <item>@mipmap/img_zgnyyh</item>
+        <item>@mipmap/img_zgyh</item>
+        <item>@mipmap/img_zjh</item>
+    </string-array>
+    <string-array name="actions_urls">
+        <item>http://www.atzuche.com/</item>
+        <item>http://www.rwybaoan.com/</item>
+        <item>http://www.bankofbeijing.com.cn/</item>
+        <item>http://www.bjrcb.com/</item>
+        <item>http://www.bobcfc.com/</item>
+        <item>http://www.chanjet.com/</item>
+        <item>http://www.315job.com/</item>
+        <item>http://www.gujinlai.com/</item>
+        <item>http://www.icbc.com.cn</item>
+        <item>http://www.aceway.com.cn</item>
+        <item>http://www.hxb.com.cn/home/cn/</item>
+        <item>http://www.lccb.com.cn/</item>
+        <item>http://www.chanjet.com/collection</item>
+        <item>http://www.bjrhjt.cn/subject/subject-cylm.html</item>
+        <item>http://www.cnguardee.com/index.html</item>
+        <item>http://www.cib.com.cn/cn/index.html</item>
+        <item>https://www.yyfax.com/h5/activity/channel.html?code=lhbb</item>
+        <item>http://www.yonyou.com/index.html?t=0.9121916741132736</item>
+        <item>http://www.psbc.com/cn/index.html</item>
+        <item>http://www.cmbc.com.cn/</item>
+        <item>http://www.abchina.com/cn/</item>
+        <item>http://www.boc.cn/</item>
+        <item>http://www.zjhcpa.com.cn/</item>
+    </string-array>
+
+    <string name="apply_join" >参会人 ：</string>
+    <string name="leave" >请假</string>
+    <string name="apply_cancel" >取消报名</string>
+    <string name="apply_ensure" >报名</string>
+    <string name="submit" >提交</string>
+    <string name="apply_join1" >本人</string>
+    <string name="apply_join2" >助理</string>
+    <string name="apply_eat" >饮食 ：</string>
+    <string name="apply_eat1" >汉族</string>
+    <string name="apply_eat2" >少数民族</string>
+    <string name="apply_sleep" >住宿 ：</string>
+    <string-array name="apply_sleeplist">
+        <item>自行住宿</item>
+        <item>指定A</item>
+        <item>指定B</item>
+        <item>指定C</item>
+    </string-array>
+</resources>

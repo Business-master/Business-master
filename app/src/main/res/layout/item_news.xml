@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/daimajia_slider_image"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/item_margin"
+        android:scaleType="centerCrop"
+        tools:src="@mipmap/ic_launcher"
+        tools:targetApi="lollipop" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="@dimen/item_margin"
+        android:layout_marginRight="@dimen/item_margin"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/daimajia_slider_image">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="2"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp"
+            tools:text="习近平:吹响建设科技强国号角国号角国号角习近平:吹响建设科技强国号角国号角国号角习近平:吹响建设科技强国号角国号角国号角" />
+
+        <TextView
+            android:id="@+id/item_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/item_title"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/item_title"
+            android:gravity="bottom"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            tools:text="东城区" />
+
+        <TextView
+            android:id="@+id/item_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@id/item_type"
+            android:layout_marginLeft="@dimen/item_margin"
+            android:layout_toRightOf="@+id/item_type"
+            android:gravity="bottom"
+            android:textColor="@color/color_999999"
+            android:textSize="12sp"
+            tools:text="05-28 20:09" />
+    </RelativeLayout>
+</RelativeLayout>

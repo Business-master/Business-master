@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 新版本的会议布局 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp">
+        <TextView
+            android:id="@+id/tv_name"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="会议名称"
+           style="@style/font3_text" />
+        <TextView
+            android:id="@+id/tv_date"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_12"
+            android:text="会议时间"
+            style="@style/font3_text" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_address"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_12"
+            android:text="会议地址"
+           style="@style/font_text" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="150dp">
+        <Button
+            android:padding="1dp"
+            android:id="@+id/jointype_tv"
+            android:text="@string/apply_ensure"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:background="@drawable/grey_circle_5"
+            android:layout_width="85dp"
+            android:layout_height="35dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_state"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="150dp">
+        <Button
+            android:layout_marginBottom="2dp"
+            android:id="@+id/cancel_apply"
+            android:text="@string/apply_cancel"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:background="@drawable/btn_rectange"
+            android:layout_width="80dp"
+            android:layout_height="35dp" />
+        <Button
+            android:id="@+id/btn_apply"
+            android:text="@string/apply_ensure"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/text_color_rectange"
+            android:background="@drawable/btn_rectange"
+            android:layout_width="80dp"
+            android:layout_height="35dp" />
+        <Button
+            android:layout_marginTop="2dp"
+            android:id="@+id/btn_leave"
+            android:text="@string/leave"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/text_color_rectange"
+            android:background="@drawable/btn_rectange"
+            android:layout_width="80dp"
+            android:layout_height="35dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:gravity="right|center_vertical"
+        android:layout_height="150dp">
+        <ImageView
+            android:id="@+id/next_newme_item"
+            android:src="@mipmap/ic_setting_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

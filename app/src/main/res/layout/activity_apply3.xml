@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--会议报名UI布局 -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_apply"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    android:background="@color/background_color"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_main_header"/>
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"></View>
+        <TextView
+            android:background="@color/white"
+            android:padding="20dp"
+            android:textColor="@color/color_999999"
+            android:textSize="16sp"
+            android:text="参会人"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"></View>
+        <RadioGroup
+            android:background="@color/white"
+            android:id="@+id/meeting_rg"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RadioGroup>
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:id="@+id/assis_ll"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:background="@color/split_color"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+            <RadioGroup
+                android:background="@color/white"
+                android:id="@+id/assistant_rg"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </RadioGroup>
+        </LinearLayout>
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+        <TextView
+            android:background="@color/white"
+            android:padding="20dp"
+            android:textColor="@color/color_999999"
+            android:textSize="16sp"
+            android:text="饮食"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"></View>
+
+        <RadioGroup
+            android:background="@color/white"
+            android:id="@+id/eat_rg"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RadioGroup>
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"></View>
+        <TextView
+            android:background="@color/white"
+            android:padding="20dp"
+            android:textColor="@color/color_999999"
+            android:textSize="16sp"
+            android:text="住宿"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"></View>
+        <RadioGroup
+            android:background="@color/white"
+            android:id="@+id/sleep_rg"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </RadioGroup>
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"></View>
+        <TextView
+            android:background="@color/white"
+            android:padding="20dp"
+            android:textColor="@color/color_999999"
+            android:textSize="16sp"
+            android:text="司机"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"></View>
+
+            <RadioGroup
+                android:background="@color/white"
+                android:id="@+id/driver_rg"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </RadioGroup>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:background="@color/split_color"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"></View>
+            <LinearLayout
+                android:padding="20dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/color_999999"
+                    android:textSize="16sp"
+                    android:text="车牌号"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:layout_marginLeft="2dp"
+                    android:id="@+id/car_num"
+                    android:maxLines="1"
+                    android:background="@drawable/hint_rectange"
+                    android:hint="请输入车牌号"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:background="@color/split_color"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"></View>
+            <LinearLayout
+                android:padding="20dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/color_999999"
+                    android:textSize="16sp"
+                    android:text="备注 : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/remark_apply"
+                        android:maxLength="200"
+                        android:background="@drawable/hint_rectange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_alignRight="@id/remark_apply"
+                        android:layout_below="@id/remark_apply"
+                        android:padding="20dp"
+                        android:textColor="@color/color_999999"
+                        android:textSize="16sp"
+                        android:text="备注:200字以内"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+          <ImageButton
+              android:id="@+id/ensure_apply"
+              android:layout_margin="20dp"
+              android:layout_gravity="center"
+              android:background="@mipmap/ensure"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent" />
+    </LinearLayout>
+
+</ScrollView>

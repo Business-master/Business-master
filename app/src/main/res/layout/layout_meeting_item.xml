@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 以前版本的会议布局 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="105dp"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/img_add"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:text="参会"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/blue_circle_5" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/img_add"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="放假了大解放了看到就阿狸分开多久啊放了多久啊离开封疆大吏减肥大事了,放了多久啊离开封疆大吏减肥大事了"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/text_size_16" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="地址："
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_size_12" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@+id/img_add"
+        android:gravity="bottom"
+        android:layout_toRightOf="@+id/tv_address"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_alignParentBottom="true"
+        android:text="2016-5-6"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_size_12" />
+
+</RelativeLayout>

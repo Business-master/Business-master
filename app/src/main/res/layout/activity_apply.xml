@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--会议报名原型布局 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_apply"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.bus.business.mvp.ui.activities.ApplyActivity">
+    <include  layout="@layout/layout_main_header"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:gravity="center"
+            android:layout_margin="20dp"
+            android:id="@+id/appley_join"
+            android:text="@string/apply_join"
+            style="@style/font3_text" />
+        <CheckBox
+            android:layout_alignBottom="@id/appley_join"
+            android:layout_toRightOf="@id/appley_join"
+            android:id="@+id/appley_join1"
+            android:checked="true"
+            android:text="@string/apply_join1"
+            style="@style/font3_text" />
+        <CheckBox
+            android:layout_marginLeft="30dp"
+            android:layout_alignBottom="@id/appley_join"
+            android:layout_toRightOf="@id/appley_join1"
+            android:id="@+id/appley_join2"
+            android:checked="true"
+            android:text="@string/apply_join2"
+            style="@style/font3_text" />
+        <TextView
+            android:gravity="center"
+            android:layout_below="@id/appley_join"
+            android:layout_alignRight="@id/appley_join"
+            android:id="@+id/appley_eat"
+            android:text="@string/apply_eat"
+            style="@style/font3_text" />
+        <RadioGroup
+            android:layout_alignLeft="@id/appley_join1"
+            android:layout_alignBottom="@id/appley_eat"
+            android:id="@+id/rg_apply"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/appley_eat1"
+                android:text="@string/apply_eat1"
+                style="@style/font3_text" />
+            <RadioButton
+                android:layout_marginLeft="30dp"
+                android:id="@+id/appley_eat2"
+                android:text="@string/apply_eat2"
+                style="@style/font3_text" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:layout_below="@id/appley_eat"
+            android:layout_alignRight="@id/appley_eat"
+            android:id="@+id/appley_sleep"
+            android:text="@string/apply_sleep"
+            style="@style/font3_text" />
+
+        <Spinner
+            android:background="@drawable/assis_rectange"
+            android:entries="@array/apply_sleeplist"
+            android:layout_marginLeft="30dp"
+            android:layout_alignRight="@id/rg_apply"
+            android:layout_alignBaseline="@id/appley_sleep"
+            android:layout_toRightOf="@id/appley_sleep"
+            android:id="@+id/sp_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+
+        <Button
+            android:layout_below="@id/appley_sleep"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="50dp"
+            android:text="@string/submit"
+            style="@style/font3_text"
+            android:background="@drawable/apply_btn_rectange"
+            android:layout_width="150dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

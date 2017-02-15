@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+	<!-- 设计规范颜色值 begin -->
+
+	<integer-array name="gplus_colors">
+		<item>@color/gplus_color_1</item>
+		<item>@color/gplus_color_2</item>
+		<item>@color/gplus_color_3</item>
+		<item>@color/gplus_color_4</item>
+	</integer-array>
+
+	<color name="gplus_color_1">#3e802f</color>
+	<color name="gplus_color_2">#f4b400</color>
+	<color name="gplus_color_3">#427fed</color>
+	<color name="gplus_color_4">#b23424</color>
+
+	<!-- 主背景色值 -->
+	<color name="background_color">#f4f4f4</color>
+	<color name="status_bar_bg">#EF3A19</color>
+	<color name="main_header_bg">#EF3A19</color>
+	<color name="main_footer_bg">#f4f4f4</color>
+
+	<!-- 底栏字体颜色 -->
+	<color name="footer_text_color_normal">#343434</color>
+	<color name="footer_text_color_selected">#0dadd5</color>
+
+	<!-- 字体颜色值 -->
+	<color name="text_color_blue">#0081E1</color>
+	<color name="text_color_rectange">#6BC8E1</color>
+	<color name="text_color_black">#323232</color>
+	<color name="text_color_white">#ffffff</color>
+	<color name="text_color_gray">#888888</color>
+	<color name="text_color_gray_light">#A8A8A8</color>
+	<color name="text_color_red">#FF5B46</color>
+	<color name="text_color_hint">#ffaaaaaa</color>
+	<color name="text_color_input">#ff111111</color>
+
+	<color name="btn_blue_normal">#0081E1</color>
+	<color name="btn_blue_pressed">#0066FF</color>
+
+	<!-- 分割线色值 -->
+	<color name="short_blue">#48B7FF</color>
+	<color name="short_red">#FF5B46</color>
+	<color name="short_orange">#F3B720</color>
+	<color name="split_color">#D9D9D9</color>
+	<color name="border_color">#A8A8A8</color>
+
+
+	<!--竖分割线-->
+	<color name="vertical_line_color">#B5B5B5</color>
+
+	<!-- 透明半透明色值 -->
+	<color name="transparent">#00000000</color>
+	<color name="transparent_half">#66000000</color>
+
+	<!-- 设计规范颜色值 end-->
+
+	<!-- 黑白色值 -->
+	<color name="white">#FFFFFF</color>
+	<color name="black">#000000</color>
+	<color name="orange">#FFA500</color>
+	<color name="gray">#D1D1D1</color>
+	<color name="red">#FF0000</color>
+	<color name="gold">#FFD700</color>
+	<color name="yellow">#FFFF00</color>
+	<color name="green">#008000</color>
+	<color name="blue">#0000FF</color>
+	<color name="purple">#800080</color>
+	<color name="pink">#FFC0CB</color>
+	<color name="yellow_lemon">#FFFACD</color>
+	<color name="gray_light">#DFDFDF</color>
+	<color name="gray_white">#F5F5F5</color>
+	<color name="gray_slate">#708090</color>
+	<color name="blue_light">#0083FF</color>
+	<color name="gray_lighter">#F2F4F5</color>
+	<color name="color_333333">#333333</color>
+	<color name="color_666666">#666666</color>
+	<color name="color_999999">#999999</color>
+	<color name="color_e1dfdf">#e1dfdf</color>
+	<color name="color_1e9edc">#1e9edc</color>
+	<color name="color_3bd1f7">#3bd1f7</color>
+	<color name="color_fc5115">#fc5115</color>
+	<color name="color_0dadd5">#0dadd5</color>
+	<color name="color_border">#0CADD5</color>
+
+
+	<!--87%white-->
+	<color name="primary_text">#de000000</color>
+	<!--87%black-->
+	<color name="secondary_text">#8a000000</color>
+	<!--54%black-->
+	<color name="tertiary_text">#8a000000</color>
+	<!--54%black-->
+	<color name="image_place_holder">#DFDFDF</color>
+	<color name="image_place_holder_night">#272B2F</color>
+	<!--87%white-->
+	<color name="progress_bar_unfinished">#D4D4D4</color>
+
+	<color name="item_alpha_back">#43000000</color>
+
+</resources>

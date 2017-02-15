@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 新版本的会议布局 -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/white">
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center"
+            android:text="会议名称"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_alignLeft="@id/tv_name"
+            android:layout_below="@id/tv_name"
+            android:id="@+id/tv_date"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_12"
+            android:text="会议时间"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_alignLeft="@id/tv_name"
+            android:layout_below="@id/tv_date"
+            android:id="@+id/tv_address"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_12"
+            android:text="会议地址"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"/>
+
+
+        <Button
+            android:layout_marginRight="30dp"
+            android:layout_alignBaseline="@id/tv_date"
+           android:layout_toLeftOf="@+id/btn_apply"
+            android:id="@+id/jointype_tv"
+            android:text="@string/apply_ensure"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:background="@drawable/grey_circle_5"
+            android:layout_width="100dp"
+            android:layout_height="30dp" />
+
+    <ImageView
+        android:layout_alignTop="@id/tv_date"
+        android:layout_alignParentRight="true"
+        android:id="@+id/next_newme_item"
+        android:src="@mipmap/ic_setting_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp" />
+
+
+        <Button
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/next_newme_item"
+            android:layout_alignBaseline="@id/tv_name"
+            android:id="@+id/cancel_apply"
+            android:text="@string/apply_cancel"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:background="@drawable/btn_rectange"
+            android:padding="3dp"
+            android:layout_width="75dp"
+            android:layout_height="25dp" />
+
+        <Button
+            android:layout_alignBaseline="@id/tv_date"
+            android:layout_alignLeft="@id/cancel_apply"
+            android:id="@+id/btn_apply"
+            android:text="@string/apply_ensure"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/text_color_rectange"
+            android:background="@drawable/btn_rectange"
+            android:padding="3dp"
+            android:layout_width="75dp"
+            android:layout_height="25dp" />
+        <Button
+            android:layout_alignBaseline="@id/tv_address"
+            android:layout_alignLeft="@id/cancel_apply"
+            android:id="@+id/btn_leave"
+            android:text="@string/leave"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/text_color_rectange"
+            android:background="@drawable/btn_rectange"
+            android:padding="3dp"
+            android:layout_width="75dp"
+            android:layout_height="25dp" />
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/white"
+    android:layout_marginBottom="1dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:navigationIcon="@mipmap/left_arrow">
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxWidth="200dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="ddd"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/sp_16" />
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        android:padding="10dp"
+        android:src="@mipmap/top_logo" />
+
+    <RelativeLayout
+        android:id="@+id/rl_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="10dp"
+            android:src="@mipmap/top_logo" />
+
+        <ImageView
+            android:id="@+id/choice_qr_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@mipmap/icon_scan" />
+
+        <TextView
+            android:id="@+id/choice_search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="14dp"
+            android:layout_toLeftOf="@+id/choice_qr_scan"
+            android:layout_toRightOf="@+id/logo"
+            android:background="@drawable/circle_linear_back"
+            android:drawableLeft="@mipmap/icon_search"
+            android:drawablePadding="2dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="60dp"
+            android:text="@string/plz_search_hint" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>
