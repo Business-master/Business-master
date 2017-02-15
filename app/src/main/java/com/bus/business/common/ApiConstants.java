@@ -12,7 +12,7 @@ public class ApiConstants {
     public static final String NETEAST_IMG_HOST = "http://files.heweather.com/cond_icon/%s.png";
 
     //线上
- //   public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
+//    public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
 
     public static String getHost() {
         return NETEAST_HOST;
@@ -44,6 +44,10 @@ public class ApiConstants {
     public static final String ADD_ASSIS_URL = "/gsl-api/user/addUserAssistant";
 
     public static final String SELECT_ASSIS_URL = "/gsl-api/user/selectAssistant";
+
+    public static final String GET_AREA_LIST = "/gsl-api/mblDictionary/getCodeList";//地区行业字典查询
+
+    public static final String AREA_SEARCH_DATA = "/gsl-api/search/getResource";//根据区域和行业查询新闻商讯
 
     public static final String PHONE_BOOK_URL = "/gsl-api/phoneBook/getUsers";
 

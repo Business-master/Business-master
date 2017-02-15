@@ -50,5 +50,17 @@ public class MeetingInteractorImpl implements NewsInteractor<RspMeetingBean> {
                     }
                 });
     }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspMeetingBean> listener) {
+        return null;
+    }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspMeetingBean> listener, int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
+        return null;
+    }
+
+
 }
 

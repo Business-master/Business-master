@@ -6,6 +6,8 @@ import android.util.SparseArray;
 import com.bus.business.App;
 import com.bus.business.common.ApiConstants;
 import com.bus.business.common.UsrMgr;
+import com.bus.business.mvp.entity.response.RspAreaBean;
+import com.bus.business.mvp.entity.response.RspAreaSeaBean;
 import com.bus.business.mvp.entity.response.RspAssisBean;
 import com.bus.business.mvp.entity.response.RspBannerBean;
 import com.bus.business.mvp.entity.response.RspBusDetailBean;
@@ -283,6 +285,30 @@ public class RetrofitManager {
         map.put("userId",UsrMgr.getUseId());
         KLog.a(map.toString());
         return mNewsService.getSelectAssis(map);
+    }
+
+
+    public Observable<RspAreaBean> getAreaListObservable() {
+        Map<String, String> map = new HashMap<>();
+        KLog.a(map.toString());
+        return mNewsService.getAreaList(map);
+    }
+
+    public Observable<RspAreaSeaBean> getAreaSeaListObservable(int pageNum,int numPerPage,String areaCode,String chambreCode,String title) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pageNum", pageNum + "");
+        map.put("numPerPage", numPerPage + "");
+        if ("空".equals(areaCode)){
+            map.put("areaCode", areaCode + "");
+        }
+        if ("空".equals(chambreCode)){
+            map.put("chambreCode", chambreCode + "");
+        }
+
+        if (!TextUtils.isEmpty(title))
+            map.put("title", title);
+        KLog.a(map.toString());
+        return mNewsService.getAreaSeaList(map);
     }
 
     public Observable<RspPhoneBookbean> getPhonesListObservable(String userId) {

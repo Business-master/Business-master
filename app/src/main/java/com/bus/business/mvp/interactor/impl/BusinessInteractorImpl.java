@@ -46,4 +46,16 @@ public class BusinessInteractorImpl implements NewsInteractor<RspBusinessBean> {
                     }
                 });
     }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspBusinessBean> listener) {
+        return null;
+    }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspBusinessBean> listener, int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
+        return null;
+    }
+
+
 }

@@ -52,4 +52,16 @@ public class AssisInteractorImpl implements NewsInteractor<RspAssisBean> {
                     }
                 });
     }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspAssisBean> listener) {
+        return null;
+    }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspAssisBean> listener, int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
+        return null;
+    }
+
+
 }

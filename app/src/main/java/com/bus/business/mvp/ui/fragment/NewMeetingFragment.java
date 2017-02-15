@@ -54,19 +54,19 @@ public class NewMeetingFragment extends BaseFragment  {
     }
 
     private void ininData() {
-        titles.add("正在召开会议");
         titles.add("即将召开会议");
+        titles.add("正在召开会议");
         titles.add("历史会议");
 
-        MeetingFragment m1 = new MeetingFragment();
-        m1.getInstance(1);
         MeetingFragment m0 = new MeetingFragment();
         m0.getInstance(0);
+        MeetingFragment m1 = new MeetingFragment();
+        m1.getInstance(1);
         MeetingFragment m2 = new MeetingFragment();
         m2.getInstance(2);
 
-        list.add(m1);
         list.add(m0);
+        list.add(m1);
         list.add(m2);
 
     }

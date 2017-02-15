@@ -11,4 +11,10 @@ import rx.Subscription;
  */
 public interface NewsInteractor<T> {
     Subscription loadNews(RequestCallBack<T> listener,int pageNum, int numPerPage,String title,int status);
+
+    //地区行业字典查询
+    Subscription loadNews(RequestCallBack<T> listener);
+
+    //根据区域和行业查询新闻商讯
+    Subscription loadNews(RequestCallBack<T> listener,int pageNum, int numPerPage,String title,String areaCode,String chambreCode);
 }

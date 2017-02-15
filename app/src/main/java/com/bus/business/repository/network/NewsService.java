@@ -1,6 +1,8 @@
 package com.bus.business.repository.network;
 
 import com.bus.business.common.ApiConstants;
+import com.bus.business.mvp.entity.response.RspAreaBean;
+import com.bus.business.mvp.entity.response.RspAreaSeaBean;
 import com.bus.business.mvp.entity.response.RspAssisBean;
 import com.bus.business.mvp.entity.response.RspBannerBean;
 import com.bus.business.mvp.entity.response.RspBusDetailBean;
@@ -97,6 +99,14 @@ public interface NewsService {
     @GET
     Observable<ResponseBody> getNewsBodyHtmlPhoto(
             @Url String photoPath);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.GET_AREA_LIST)
+    Observable<RspAreaBean> getAreaList(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.AREA_SEARCH_DATA)
+    Observable<RspAreaSeaBean> getAreaSeaList(@FieldMap Map<String, String> map);
 
     @FormUrlEncoded
     @POST(ApiConstants.PHONE_BOOK_URL)

@@ -107,6 +107,7 @@ public class MeetingDetailActivity extends BaseActivity{
 
 
         cancel_apply.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
+        btn_apply.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
         btn_leave.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
 
         mTitle.setText(meetingBean.getMeetingName());

@@ -16,8 +16,9 @@ public class NewsType {
     public static final int TYPE_REFRESH_XUNXI = 1;
     public static final int TYPE_REFRESH_XIEHUI = 2;
     public static final int TYPE_REFRESH_HUIWU = 3;
+    public static final int TYPE_REFRESH_AREA = 4;
 
-    @IntDef({TYPE_REFRESH_XUNXI, TYPE_REFRESH_XIEHUI, TYPE_REFRESH_HUIWU})
+    @IntDef({TYPE_REFRESH_XUNXI, TYPE_REFRESH_XIEHUI, TYPE_REFRESH_HUIWU,TYPE_REFRESH_AREA})
     @Retention(RetentionPolicy.SOURCE)
     public @interface checker {
     }

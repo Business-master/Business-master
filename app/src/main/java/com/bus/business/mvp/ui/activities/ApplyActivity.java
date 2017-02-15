@@ -302,8 +302,9 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
                         if (responseBody.getHead().getRspCode().equals("0")) {
 //                            meetingBean.setJoinType(true);
                             EventBus.getDefault().post(new JoinToMeetingEvent(1));
+                            finish();
                         }
-                        UT.show(responseBody.getHead().getRspMsg());
+//                        UT.show(responseBody.getHead().getRspMsg());
 
                     }
                 });

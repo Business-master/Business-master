@@ -28,6 +28,7 @@ import com.bus.business.common.ApiConstants;
 import com.bus.business.common.Constants;
 import com.bus.business.common.LoadNewsType;
 import com.bus.business.common.NewsType;
+import com.bus.business.mvp.entity.AreaSeaBean;
 import com.bus.business.mvp.entity.BannerBean;
 import com.bus.business.mvp.entity.WeatherBean;
 import com.bus.business.mvp.entity.WeathersBean;
@@ -39,6 +40,7 @@ import com.bus.business.mvp.presenter.impl.NewsPresenterImpl;
 import com.bus.business.mvp.ui.activities.NewDetailActivity;
 import com.bus.business.mvp.ui.adapter.NewsAdapter;
 import com.bus.business.mvp.ui.fragment.base.BaseLazyFragment;
+import com.bus.business.mvp.view.AreaSeaView;
 import com.bus.business.mvp.view.BusinessView;
 import com.bus.business.mvp.view.NewsView;
 import com.bus.business.repository.network.RetrofitManager;
@@ -69,10 +71,11 @@ import static android.view.View.VISIBLE;
  * @author xch
  * @version 1.0
  * @create_date 16/12/23
+ * 首页碎片 模板
  */
 public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
         , NewsView<List<BaseNewBean>>
-        , BusinessView
+        , BusinessView,AreaSeaView
         , BaseQuickAdapter.RequestLoadMoreListener
         , BaseQuickAdapter.OnRecyclerViewItemClickListener
         , BaseSliderView.OnSliderClickListener {
@@ -112,7 +115,8 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
     private List<BaseNewBean> likeBeanList;
 
     private int pageNum = 1;
-    private boolean isXunFrg;//true是讯息页,false是协会页
+//    private boolean isXunFrg;//true是讯息页,false是协会页
+    private int  isXunFrg;//1是讯息页,2是协会页,4区域选择
 
     public static NewsFragment getInstance(@NewsType.checker int checker) {
         NewsFragment newsFragment = new NewsFragment();
@@ -149,12 +153,19 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
     }
 
     private void initIntentData() {
-        isXunFrg = getArguments() == null || getArguments().getInt(NEW_TYPE) == 1;
+//        isXunFrg = getArguments() == null || getArguments().getInt(NEW_TYPE) == 1;
+        if (getArguments() == null){
+            isXunFrg=1;
+        }else {
+            isXunFrg=getArguments().getInt(NEW_TYPE);
+        }
+
     }
 
 
     private void initHeadView() {
-        if (!isXunFrg) return;
+//        if (!isXunFrg) return;
+        if (isXunFrg!=1)return;
         weatherView = View.inflate(mActivity, R.layout.layout_weather, null);
         mTitleHeader = View.inflate(mActivity, R.layout.layout_head_text, null);
         mSlideHeader = View.inflate(mActivity, R.layout.layout_autoloop_viewpage, null);
@@ -181,12 +192,12 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
     }
 
     private void initPresenter() {
-        if (isXunFrg) {
+        if (isXunFrg==1) {
             mNewsPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",-1);
             mNewsPresenter.attachView(this);
             mPresenter = mNewsPresenter;
             mPresenter.onCreate();
-        } else {
+        } else  {
             mBusinessPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",-1);
             mBusinessPresenter.attachView(this);
             mPresenter = mBusinessPresenter;
@@ -206,7 +217,7 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
         likeBeanList = new ArrayList<>();
         mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);
-        if (isXunFrg) {
+        if (isXunFrg==1) {
             mNewsListAdapter.addHeaderView(weatherView);
             mNewsListAdapter.addHeaderView(mSlideHeader);
             mNewsListAdapter.addHeaderView(mTitleHeader);
@@ -221,7 +232,7 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
      * 初始化导航图
      */
     private void initSlider() {
-        if (!isXunFrg || sliderLayout == null || pagerIndicator == null) return;
+        if (isXunFrg!=1 || sliderLayout == null || pagerIndicator == null) return;
         sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
         sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         sliderLayout.setDuration(4000);
@@ -234,7 +245,7 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
      * @param mList
      */
     private void initSlider(List<BannerBean> mList) {
-        if (!isXunFrg) return;
+        if (isXunFrg!=1) return;
         if (mList!=null&&mList.size()>0){
             mSlideHeader.setVisibility(VISIBLE);
         }else {
@@ -288,7 +299,7 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
     }
 
     private void loadBannerData() {
-        if (!isXunFrg) return;
+        if (isXunFrg!=1) return;
         RetrofitManager.getInstance(1).getBannersObservable()
                 .compose(TransformUtils.<RspBannerBean>defaultSchedulers())
                 .subscribe(new Subscriber<RspBannerBean>() {
@@ -310,7 +321,7 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
     }
 
     private void loadWeather() {
-        if (!isXunFrg) return;
+        if (isXunFrg!=1) return;
         RetrofitManager.getInstance(1).getWeatherObservable()
                 .compose(TransformUtils.<RspWeatherBean>defaultSchedulers())
                 .subscribe(new Subscriber<RspWeatherBean>() {
@@ -380,9 +391,9 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        if (isXunFrg) {
+        if (isXunFrg==1) {
             mNewsPresenter.refreshData();
-        } else {
+        } else  {
             mBusinessPresenter.refreshData();
         }
 
@@ -392,7 +403,7 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (isXunFrg) {
+        if (isXunFrg==1) {
             mNewsPresenter.onDestory();
         } else {
             mBusinessPresenter.onDestory();
@@ -402,15 +413,25 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
 
     @Override
     public void onLoadMoreRequested() {
-        if (isXunFrg) {
+        if (isXunFrg==1) {
             mNewsPresenter.loadMore();
-        } else {
+        } else{
             mBusinessPresenter.loadMore();
         }
 
     }
 
     private void checkIsEmpty(List<BaseNewBean> newsSummary) {
+        if (newsSummary == null && mNewsListAdapter.getData() == null) {
+            mNewsRV.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+        } else {
+            mNewsRV.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
+        }
+    }
+
+    private void checkEmpty(List<AreaSeaBean> newsSummary) {
         if (newsSummary == null && mNewsListAdapter.getData() == null) {
             mNewsRV.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
@@ -436,7 +457,9 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
         List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
         Intent intent = new Intent(mActivity, NewDetailActivity.class);
         intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
-        intent.putExtra(Constants.NEWS_TYPE, isXunFrg ? "1" : "2");
+        intent.putExtra(Constants.NEWS_TYPE, (isXunFrg==1) ? "1" : "2");
+
+//        intent.putExtra(Constants.NEWS_TYPE, isXunFrg);
         return intent;
     }
 
@@ -485,6 +508,31 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
                     Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
                 } else {
                     mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
+                }
+                break;
+            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
+
+                break;
+        }
+    }
+
+    @Override
+    public void setAreaSeaBeanList(List<AreaSeaBean> areaSeaBeanList, @LoadNewsType.checker int loadType) {
+        switch (loadType) {
+            case LoadNewsType.TYPE_REFRESH_SUCCESS:
+                mSwipeRefreshLayout.setRefreshing(false);
+                mNewsListAdapter.setNewData(areaSeaBeanList);
+                checkEmpty(areaSeaBeanList);
+                break;
+            case LoadNewsType.TYPE_REFRESH_ERROR:
+                mSwipeRefreshLayout.setRefreshing(false);
+                checkEmpty(areaSeaBeanList);
+                break;
+            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
+                if (areaSeaBeanList == null || areaSeaBeanList.size() == 0) {
+                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    mNewsListAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, true);
                 }
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:

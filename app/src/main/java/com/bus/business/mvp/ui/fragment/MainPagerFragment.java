@@ -29,10 +29,12 @@ import butterknife.OnClick;
  * @author xch
  * @version 1.0
  * @create_date 16/12/22
+ * 注释为以前首页，新的添加了区域选择
  */
 public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
 
-    private static final String[] TITLE = {"新闻 • 简讯","商情 • 资讯"};
+//    private static final String[] TITLE = {"新闻 • 简讯","商情 • 资讯"};
+    private static final String[] TITLE = {"新闻 • 简讯","商情 • 资讯","地区"};
 
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
@@ -55,8 +57,12 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
     public void initViews(View view) {
         mTitles.add(TITLE[0]);
         mTitles.add(TITLE[1]);
+        mTitles.add(TITLE[2]);
+
         mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XUNXI));
         mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XIEHUI));
+        mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_AREA));
+
         mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(), mTitles, mFragments);
         mViewPager.addOnPageChangeListener(this);
         mViewPager.setAdapter(mViewPageAdapter);
@@ -72,10 +78,10 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
         return R.layout.fragment_main_page;
     }
 
-    @OnClick(R.id.img_plus)
-    public void choiceCity(View v){
-      startActivity(new Intent(mActivity, PlaceActivity.class));
-    }
+//    @OnClick(R.id.img_plus)
+//    public void choiceCity(View v){
+//      startActivity(new Intent(mActivity, PlaceActivity.class));
+//    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -92,4 +98,6 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
     public void onPageScrollStateChanged(int state) {
 
     }
+
+
 }

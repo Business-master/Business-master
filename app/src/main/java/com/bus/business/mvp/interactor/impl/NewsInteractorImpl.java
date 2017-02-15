@@ -49,4 +49,16 @@ public class NewsInteractorImpl implements NewsInteractor<RspNewsBean> {
                     }
                 });
     }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspNewsBean> listener) {
+        return null;
+    }
+
+    @Override
+    public Subscription loadNews(RequestCallBack<RspNewsBean> listener, int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
+        return null;
+    }
+
+
 }

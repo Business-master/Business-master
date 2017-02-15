@@ -138,8 +138,11 @@ public  class ApplyUtils {
         switch (i){
             case 1:
                 mApply.setVisibility(View.INVISIBLE);
+                mCancel.setVisibility(View.VISIBLE);
+                mLeave.setVisibility(View.VISIBLE);
                 break;
             case 2:
+                mApply.setVisibility(View.VISIBLE);
                 mCancel.setVisibility(View.INVISIBLE);
                 mLeave.setVisibility(View.INVISIBLE);
                 break;
