@@ -1,6 +1,7 @@
 package com.bus.business.mvp.ui.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,15 +11,10 @@ import android.widget.TextView;
 
 import com.bus.business.R;
 import com.bus.business.mvp.entity.MeetingBean;
-import com.bus.business.mvp.entity.response.base.BaseRspObj;
-import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
-import com.bus.business.repository.network.RetrofitManager;
 import com.bus.business.utils.ApplyUtils;
 import com.bus.business.utils.DateUtil;
-import com.bus.business.utils.TransformUtils;
-import com.bus.business.utils.UT;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -26,8 +22,9 @@ import org.greenrobot.eventbus.Subscribe;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import rx.Subscriber;
+
+import static com.bus.business.mvp.entity.MeetingBean.MEETINGBEAN;
+import static com.bus.business.mvp.entity.MeetingBean.MEETINGPOS;
 
 /**
  * @author xch
@@ -64,6 +61,15 @@ public class MeetingDetailActivity extends BaseActivity{
     private MeetingBean meetingBean;
     private int currentPos;
     private String stateStr;
+
+    public static void startIntent(int meetingId, int pos,Context context){
+        Intent intent = new Intent(context, MeetingDetailActivity.class);
+        Bundle bundle1 = new Bundle();
+        bundle1.putSerializable(MEETINGBEAN, new MeetingBean(Integer.valueOf(meetingId)));
+        bundle1.putInt(MEETINGPOS, pos);
+        intent.putExtras(bundle1);
+        context.startActivity(intent);
+    }
 
 
     @Override

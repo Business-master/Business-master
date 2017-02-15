@@ -47,4 +47,6 @@ public class ApiConstants {
 
     public static final String PHONE_BOOK_URL = "/gsl-api/phoneBook/getUsers";
 
+    public static final String REGISTER_JPUSH_URL = "/gsl-api/push/ initRegistrationId";
+
 }

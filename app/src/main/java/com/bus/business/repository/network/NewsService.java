@@ -102,4 +102,9 @@ public interface NewsService {
     @POST(ApiConstants.PHONE_BOOK_URL)
     Observable<RspPhoneBookbean> getPhoneBook(@FieldMap Map<String, String> map);
 
+    @FormUrlEncoded
+    @POST(ApiConstants.REGISTER_JPUSH_URL)
+    Observable<BaseRspObj> registerJpush(@FieldMap Map<String, String> map);
+
+
 }

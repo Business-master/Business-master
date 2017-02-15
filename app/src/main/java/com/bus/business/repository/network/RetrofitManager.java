@@ -291,4 +291,13 @@ public class RetrofitManager {
         KLog.a(map.toString());
         return mNewsService.getPhoneBook(map);
     }
+
+    public Observable<BaseRspObj> getRegisterJpushInObservable(String userId, String registrationId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("registrationId", registrationId);
+        map.put("platform","2");
+        KLog.a(map.toString());
+        return mNewsService.registerJpush(map);
+    }
 }

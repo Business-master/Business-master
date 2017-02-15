@@ -3,13 +3,14 @@ package com.bus.business.mvp.ui.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.bus.business.App;
 import com.bus.business.R;
 import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.response.RspUserBean;
+import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.repository.network.RetrofitManager;
 import com.bus.business.utils.TransformUtils;
@@ -52,8 +53,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        phoneEt.setText("");
-        passwordEt.setText("");
+        phoneEt.setText("18500241615");
+        passwordEt.setText("admin");
     }
 
     private void initDialog() {
@@ -88,20 +89,44 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onNext(RspUserBean rspUserBean) {
+                        KLog.a("user--->" + rspUserBean.toString());
+                        if (rspUserBean.getHead().getRspCode().equals("0")) {
+                            UsrMgr.cacheUserInfo(new Gson().toJson(rspUserBean.getBody().getUser()));
+                            KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
+                            registeJpushToService();
+                        }
+                    }
+                });
+
+    }
+
+    private void registeJpushToService(){
+        RetrofitManager.getInstance(1).getRegisterJpushInObservable(UsrMgr.getUseId(), App.getJpushId())
+                .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
+                .subscribe(new Subscriber<BaseRspObj>() {
+                    @Override
+                    public void onCompleted() {
+                        KLog.d();
+                        pDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        KLog.e(e.toString());
+                        pDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onNext(BaseRspObj rspUserBean) {
                         pDialog.dismiss();
                         KLog.a("user--->" + rspUserBean.toString());
                         UT.show(rspUserBean.getHead().getRspMsg());
                         if (rspUserBean.getHead().getRspCode().equals("0")) {
-                            UsrMgr.cacheUserInfo(new Gson().toJson(rspUserBean.getBody().getUser()));
-                            KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             LoginActivity.this.finish();
-
                         }
 
                     }
                 });
-
-
     }
 }

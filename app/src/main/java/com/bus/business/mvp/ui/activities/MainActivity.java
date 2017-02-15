@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bus.business.R;
+import com.bus.business.common.Constants;
 import com.bus.business.common.NewsType;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.ChangeSearchStateEvent;
@@ -100,6 +101,13 @@ public class MainActivity extends BaseActivity {
         });
 
         showFragment();
+
+        Bundle bundle = getIntent().getBundleExtra(Constants.EXTRA_BUNDLE);
+        if (bundle != null) {
+            //如果bundle存在，取出其中的参数，启动DetailActivity
+            String meetingId = bundle.getString("meetingId");
+            MeetingDetailActivity.startIntent(Integer.valueOf(meetingId),-1,this);
+        }
     }
 
     private void initData() {
