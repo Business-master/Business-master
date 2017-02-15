@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bus.business.R;
@@ -50,11 +51,15 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.group)
     RadioGroup group;
 
+    @BindView(R.id.textUnreadLabel)
+    TextView textUnreadLabel;
+
     private ArrayList<String> fragmentTags;
     private FragmentManager fragmentManager;
     private Intent intent;
     private int searchIndex;
     private long mExitTime = 0;
+    private boolean hasPush = false;
 
     @Override
     public int getLayoutId() {
@@ -103,11 +108,13 @@ public class MainActivity extends BaseActivity {
         showFragment();
 
         Bundle bundle = getIntent().getBundleExtra(Constants.EXTRA_BUNDLE);
-        if (bundle != null) {
-            //如果bundle存在，取出其中的参数，启动DetailActivity
-            String meetingId = bundle.getString("meetingId");
-            MeetingDetailActivity.startIntent(Integer.valueOf(meetingId),-1,this);
+        //如果bundle存在，取出其中的参数，启动DetailActivity
+        KLog.a("hasPush---->"+hasPush);
+        if(bundle != null){
+            hasPush = true;
         }
+        textUnreadLabel.setVisibility(hasPush ? View.VISIBLE : View.GONE);
+
     }
 
     private void initData() {
@@ -119,6 +126,10 @@ public class MainActivity extends BaseActivity {
         setCustomTitle(index == 0 || index == 1 ? "" : setTabSelection(index));
         showOrGoneSearchRl(index == 0 || index == 1 ? View.VISIBLE : View.GONE);
         showOrGoneLogo(index == 2 ? View.VISIBLE : View.GONE);
+        if (index == 1) {
+            hasPush = false;
+            textUnreadLabel.setVisibility(View.GONE);
+        }
 
         currIndex = index;
         showFragment();
@@ -225,13 +236,17 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+
     @Subscribe
-    public void onEventMainThread(ChangeSearchStateEvent event) {
-        homeFragmentIndex = event.getMsg();
-        String msg = "onEventMainThread收到了消息：" + event.getMsg();
-        KLog.d("harvic", msg);
-        //    UT.show(msg);
+    public void onEventMainThread(ChangeSearchStateEvent event1) {
+            homeFragmentIndex = event1.getMsg();
+            String msg = "onEventMainThread收到了消息：" + event1.getMsg();
+            KLog.d("harvic", msg);
+            //    UT.show(msg);
+
     }
+
 
     @Override
     protected void onDestroy() {

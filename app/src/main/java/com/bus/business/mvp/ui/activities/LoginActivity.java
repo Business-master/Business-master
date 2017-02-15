@@ -101,6 +101,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void registeJpushToService(){
+        if (TextUtils.isEmpty(App.getJpushId()))return;
         RetrofitManager.getInstance(1).getRegisterJpushInObservable(UsrMgr.getUseId(), App.getJpushId())
                 .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                 .subscribe(new Subscriber<BaseRspObj>() {
