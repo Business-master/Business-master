@@ -13,6 +13,7 @@ import com.bus.business.mvp.entity.response.RspBusinessBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
+import com.bus.business.mvp.entity.response.RspPhoneBookbean;
 import com.bus.business.mvp.entity.response.RspUserBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
@@ -282,5 +283,12 @@ public class RetrofitManager {
         map.put("userId",UsrMgr.getUseId());
         KLog.a(map.toString());
         return mNewsService.getSelectAssis(map);
+    }
+
+    public Observable<RspPhoneBookbean> getPhonesListObservable(String userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        KLog.a(map.toString());
+        return mNewsService.getPhoneBook(map);
     }
 }

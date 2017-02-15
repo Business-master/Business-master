@@ -6,13 +6,13 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 
 import com.bus.business.R;
+import com.bus.business.common.Constants;
 import com.bus.business.common.UsrMgr;
 
 /**
  * @author xch
  * @version 1.0
  * @create_date 16/12/27
- * 程序刚进时的欢迎页面
  */
 public class SplashActivity extends FragmentActivity {
 
@@ -31,7 +31,16 @@ public class SplashActivity extends FragmentActivity {
             @Override
             public void run() {
                 cls = UsrMgr.isLogin() ? MainActivity.class : LoginActivity.class;
-                startActivity(new Intent(SplashActivity.this, cls));
+                Intent intent = new Intent(SplashActivity.this, cls);
+                if (UsrMgr.isLogin()){
+                    //如果启动app的Intent中带有额外的参数，表明app是从点击通知栏的动作中启动的
+                    //将参数取出，传递到MainActivity中
+                    if(getIntent().getBundleExtra(Constants.EXTRA_BUNDLE) != null){
+                        intent.putExtra(Constants.EXTRA_BUNDLE,
+                                getIntent().getBundleExtra(Constants.EXTRA_BUNDLE));
+                    }
+                }
+                startActivity(intent);
                 SplashActivity.this.finish();
             }
         }, 500);

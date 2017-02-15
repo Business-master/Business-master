@@ -1,7 +1,9 @@
 package com.bus.business.mvp.ui.fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,9 +12,8 @@ import com.bus.business.R;
 import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.UserBean;
 import com.bus.business.mvp.ui.activities.AboutActivity;
-import com.bus.business.mvp.ui.activities.AssisManActivity;
+import com.bus.business.mvp.ui.activities.AddressListActivity;
 import com.bus.business.mvp.ui.activities.LoginActivity;
-import com.bus.business.mvp.ui.activities.NewsManActivity;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 import com.bus.business.utils.FileUtil;
 import com.bus.business.utils.MethodsCompat;
@@ -24,6 +25,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static com.bus.business.mvp.ui.activities.MainActivity.CONTACTS_OK;
 
 /**
  * @author xch
@@ -66,17 +69,29 @@ public class MineFragment extends BaseFragment {
 
 
     @OnClick({R.id.tv_account_manager, R.id.about_us, R.id.rl_clear_cache
-    ,R.id.tv_logout,R.id.tv_assis_manager,R.id.news_manager})
+            , R.id.tv_logout, R.id.tv_address_list})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_account_manager:
                 userBean.intentToClass(mActivity);
                 break;
+            case R.id.tv_address_list:
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    /**
+                     * 请求权限是一个异步任务  不是立即请求就能得到结果 在结果回调中返回
+                     */
+                    mActivity.requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, CONTACTS_OK);
+                } else {
+                    startActivity(new Intent(mActivity, AddressListActivity.class));
+                }
+
+                break;
             case R.id.about_us:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             case R.id.rl_clear_cache:
-                initDialog("确定清除？","取消","确定",new SweetAlertDialog.OnSweetClickListener(){
+                initDialog("确定清除？", "取消", "确定", new SweetAlertDialog.OnSweetClickListener() {
 
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -88,7 +103,7 @@ public class MineFragment extends BaseFragment {
 
                 break;
             case R.id.tv_logout:
-                initDialog("确定退出？","取消","确定",new SweetAlertDialog.OnSweetClickListener(){
+                initDialog("确定退出？", "取消", "确定", new SweetAlertDialog.OnSweetClickListener() {
 
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -99,12 +114,6 @@ public class MineFragment extends BaseFragment {
                     }
                 });
 
-            break;
-            case R.id.tv_assis_manager:
-                startActivity(new Intent(mActivity, AssisManActivity.class));
-                break;
-            case R.id.news_manager:
-                startActivity(new Intent(mActivity, NewsManActivity.class));
                 break;
         }
     }
@@ -119,7 +128,7 @@ public class MineFragment extends BaseFragment {
 
         fileSize += FileUtil.getDirSize(cacheDir);
         // 2.2版本才有将应用缓存转移到sd卡的功能
-        if (App.isMethodsCompat(android.os.Build.VERSION_CODES.FROYO)) {
+        if (App.isMethodsCompat(Build.VERSION_CODES.FROYO)) {
             File externalCacheDir = MethodsCompat
                     .getExternalCacheDir(mActivity);
             fileSize += FileUtil.getDirSize(externalCacheDir);
@@ -130,7 +139,7 @@ public class MineFragment extends BaseFragment {
     }
 
 
-    private void initDialog(String title, String cancelStr, String confirmStr, SweetAlertDialog.OnSweetClickListener clickListener){
+    private void initDialog(String title, String cancelStr, String confirmStr, SweetAlertDialog.OnSweetClickListener clickListener) {
         new SweetAlertDialog(mActivity, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(title)
 //                .setContentText("Won't be able to recover this file!")

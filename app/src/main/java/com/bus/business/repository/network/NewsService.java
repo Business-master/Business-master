@@ -8,6 +8,7 @@ import com.bus.business.mvp.entity.response.RspBusinessBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
+import com.bus.business.mvp.entity.response.RspPhoneBookbean;
 import com.bus.business.mvp.entity.response.RspUserBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
@@ -96,4 +97,9 @@ public interface NewsService {
     @GET
     Observable<ResponseBody> getNewsBodyHtmlPhoto(
             @Url String photoPath);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.PHONE_BOOK_URL)
+    Observable<RspPhoneBookbean> getPhoneBook(@FieldMap Map<String, String> map);
+
 }

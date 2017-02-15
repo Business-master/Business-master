@@ -22,7 +22,6 @@ import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.fragment.ExpertFragment;
 import com.bus.business.mvp.ui.fragment.MainPagerFragment;
-import com.bus.business.mvp.ui.fragment.MeetingFragment;
 import com.bus.business.mvp.ui.fragment.MineFragment;
 import com.bus.business.mvp.ui.fragment.NewMeetingFragment;
 import com.bus.business.mvp.ui.fragment.WanFragment;
@@ -44,6 +43,7 @@ import rx.Subscriber;
 
 public class MainActivity extends BaseActivity {
     private static final int CAMERA_OK = 2;
+    public static final int CONTACTS_OK = 10000;
     private static int currIndex = 0;
     private int homeFragmentIndex = 0;
     @BindView(R.id.group)
@@ -130,6 +130,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        KLog.e("requestCode--->" + requestCode);
         switch (requestCode) {
             case CAMERA_OK:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -138,6 +139,13 @@ public class MainActivity extends BaseActivity {
                 } else {
                     //这里是拒绝给APP摄像头权限，给个提示什么的说明一下都可以。
                     UT.show("请手动打开相机权限");
+                }
+                break;
+            case CONTACTS_OK:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(new Intent(MainActivity.this, AddressListActivity.class));
+                } else {
+                    UT.show("请手动打开读取通讯录权限");
                 }
                 break;
             default:

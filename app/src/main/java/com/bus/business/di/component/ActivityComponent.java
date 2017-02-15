@@ -6,6 +6,7 @@ import android.content.Context;
 import com.bus.business.di.module.ActivityModule;
 import com.bus.business.di.scope.ContextLife;
 import com.bus.business.di.scope.PerActivity;
+import com.bus.business.mvp.ui.activities.AddressListActivity;
 import com.bus.business.mvp.ui.activities.ApplyActivity;
 import com.bus.business.mvp.ui.activities.AssisManActivity;
 import com.bus.business.mvp.ui.activities.ManagerActivity;
@@ -43,4 +44,6 @@ public interface ActivityComponent {
     void inject(AssisManActivity assisManActivity);
     void inject(NewsManActivity newsManActivity);
     void inject(ApplyActivity applyActivity);
+
+    void inject(AddressListActivity addressListActivity);
 }

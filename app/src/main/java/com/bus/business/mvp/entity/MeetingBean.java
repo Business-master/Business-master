@@ -44,6 +44,10 @@ public class MeetingBean implements Serializable{
     private String checkType;// 签到状态 0未签到 1已签到
     private int joinType;// 参会状态  0未报名 1未签到 2已签到 3本人参加 4助理参加  5请假   6取消报名 7未参加 8已过期
 
+    public MeetingBean(int id) {
+        this.id = id;
+    }
+
     public int getJoinType() {
         return joinType;
     }
