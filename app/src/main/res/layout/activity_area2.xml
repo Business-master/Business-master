@@ -1,33 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_area2"
+    android:scrollbars="none"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:fitsSystemWindows="true"
     tools:context="com.bus.business.mvp.ui.activities.AreaActivity">
-   <include layout="@layout/layout_main_header"></include>
     <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/layout_main_header"></include>
+        <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textColor="@color/color_333333"
             android:background="@color/background_color"
             android:text="地区"
             android:padding="10dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <GridView
+        <com.bus.business.mvp.view.CustomGridView
             android:id="@+id/area_gv"
             android:numColumns="3"
-            android:verticalSpacing="5dp"
+            android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </GridView>
+        </com.bus.business.mvp.view.CustomGridView>
+    </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/color_333333"
+                android:background="@color/background_color"
+                android:text="组织"
+                android:padding="10dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <com.bus.business.mvp.view.CustomGridView
+                android:id="@+id/orgina_gv"
+                android:numColumns="3"
+                android:verticalSpacing="10dp"
+                android:horizontalSpacing="10dp"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.bus.business.mvp.view.CustomGridView>
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>

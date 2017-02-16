@@ -35,6 +35,7 @@ import com.bus.business.mvp.entity.WeathersBean;
 import com.bus.business.mvp.entity.response.RspBannerBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
+import com.bus.business.mvp.event.AreaCodeEvent;
 import com.bus.business.mvp.presenter.impl.AreaSeaPresenterImpl;
 import com.bus.business.mvp.presenter.impl.BusinessPresenterImpl;
 import com.bus.business.mvp.presenter.impl.NewsPresenterImpl;
@@ -59,6 +60,9 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.socks.library.KLog;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +70,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import rx.Subscriber;
 
 import static android.view.View.VISIBLE;
@@ -129,6 +132,8 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
 //    private boolean isXunFrg;//true是讯息页,false是协会页
     private int  isXunFrg;//1是讯息页,2是协会页,4区域选择
 
+    private  String code="0001";
+    private String chamCode="";
     public static NewsFragment_new getInstance(@NewsType.checker int checker) {
         NewsFragment_new newsFragment = new NewsFragment_new();
         Bundle bundle = new Bundle();
@@ -144,7 +149,7 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
 
     @Override
     public void initViews(View view) {
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -153,7 +158,6 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     }
 
     private void initViews() {
-
         initIntentData();
         areaView = View.inflate(mActivity, R.layout.activity_area, null);
         area_tv = (TextView) areaView.findViewById(R.id.area_ch);
@@ -167,12 +171,33 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
         initSlider();
         initSwipeRefreshLayout();
         initRecyclerView();
-        initPresenter();
+        initPresenter(code, chamCode);
         loadBannerData();
         loadWeather();
     }
 
+    @Subscribe
+    public void onEventMainThread(AreaCodeEvent event){
 
+       boolean is = event.getArea();
+
+        if (event.getArea()){
+            code = event.getAreaBean().getCode();
+            chamCode="";
+        }else {
+            chamCode = event.getAreaBean().getCode();
+            code="";
+        }
+
+
+        initPresenter(code,chamCode);
+    }
+
+    @Override
+    public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView();
+    }
 
     private void initIntentData() {
 //        isXunFrg = getArguments() == null || getArguments().getInt(NEW_TYPE) == 1;
@@ -213,7 +238,7 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
         mSwipeRefreshLayout.setColorSchemeColors(getActivity().getResources().getIntArray(R.array.gplus_colors));
     }
 
-    private void initPresenter() {
+    private void initPresenter(String code, String chamCode) {
         if (isXunFrg==1) {
             mNewsPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",-1);
             mNewsPresenter.attachView(this);
@@ -225,7 +250,7 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
             mPresenter = mBusinessPresenter;
             mPresenter.onCreate();
         }else  if (isXunFrg==4){
-            mAreaSeaPresenterImpl.setNewsTypeAndId(pageNum, Constants.numPerPage, "","0001","");
+            mAreaSeaPresenterImpl.setNewsTypeAndId(pageNum, Constants.numPerPage, "", code, chamCode);
             mAreaSeaPresenterImpl.attachView(this);
             mPresenter = mAreaSeaPresenterImpl;
             mPresenter.onCreate();
@@ -509,7 +534,8 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
         }else if (isXunFrg==4){
             List<AreaSeaBean> newsSummaryList = mAreaAdapter.getData();
             intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
-            intent.putExtra(Constants.NEWS_TYPE, newsSummaryList.get(position).getType()+"");
+            String type = newsSummaryList.get(position).getType();
+            intent.putExtra(Constants.NEWS_TYPE, Integer.valueOf(type));
         }
 //        List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
 //        Intent intent = new Intent(mActivity, NewDetailActivity.class);

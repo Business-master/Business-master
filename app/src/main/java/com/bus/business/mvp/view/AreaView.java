@@ -14,4 +14,6 @@ import java.util.List;
  */
 public interface AreaView extends BaseView{
     void setAreaBeanList(List<AreaBean> areaBeanList, @LoadNewsType.checker int loadType);
+
+    void setChambreBeanList(List<AreaBean> chambrelist, @LoadNewsType.checker int loadType);
 }

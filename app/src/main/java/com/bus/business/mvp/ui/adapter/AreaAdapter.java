@@ -1,6 +1,8 @@
 package com.bus.business.mvp.ui.adapter;
 
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
@@ -31,6 +33,14 @@ public class AreaAdapter extends BaseQuickAdapter<AreaSeaBean> {
         baseViewHolder.setText(R.id.item_title, likeModel.getTitle());
         baseViewHolder.setText(R.id.item_desc, DateUtil.getCurGroupDay(likeModel.getCtime()));
         baseViewHolder.setText(R.id.item_type, "工商联");
+
+        TextView textView = baseViewHolder.getView(R.id.type);
+
+        if ("1".equals(likeModel.getType())){
+            textView.setVisibility(View.GONE);
+        }else {
+            textView.setVisibility(View.VISIBLE);
+        }
 
         ImageView img = baseViewHolder.getView(R.id.daimajia_slider_image);
 

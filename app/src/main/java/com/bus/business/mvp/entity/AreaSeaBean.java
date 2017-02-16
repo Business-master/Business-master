@@ -12,7 +12,7 @@ public class AreaSeaBean {
      * title : 习近平：各级领导干部要学网、懂网、用网
      * areaCode : 东城区工商联
      * fmImg : /news/40dff87b1710425da98447e7a614078a.jpg
-     * type : 1
+     * type : 1 新闻 2商讯
      * ctime : 1486629049000
      */
 

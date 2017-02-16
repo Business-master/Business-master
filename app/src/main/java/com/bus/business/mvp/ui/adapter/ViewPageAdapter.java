@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.socks.library.KLog;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,8 +17,9 @@ import javax.inject.Inject;
  * @create_date 16/12/23
  */
 public class ViewPageAdapter extends FragmentPagerAdapter {
-    private List<String> title;
+    private List<String> title=new ArrayList<>();
     private List<Fragment> views;
+
 
     @Inject
     public ViewPageAdapter(FragmentManager fm, List<String> title, List<Fragment> views) {
@@ -23,6 +27,10 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
         this.title = title;
         this.views = views;
     }
+
+
+
+
 
     @Override
     public Fragment getItem(int position) {
@@ -32,6 +40,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return views.size();
+
     }
 
 
@@ -39,5 +48,6 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return title.get(position);
+
     }
 }

@@ -57,6 +57,7 @@ public class AreaPresentetImpl extends BasePresenterImpl<AreaView,RspAreaBean> i
         if (mView != null) {
             int loadType = mIsRefresh ? LoadNewsType.TYPE_REFRESH_ERROR : LoadNewsType.TYPE_LOAD_MORE_ERROR;
             mView.setAreaBeanList(null, loadType);
+            mView.setChambreBeanList(null, loadType);
         }
     }
 
@@ -69,6 +70,7 @@ public class AreaPresentetImpl extends BasePresenterImpl<AreaView,RspAreaBean> i
         pageNum++;
         if (mView != null) {
             mView.setAreaBeanList(data.getBody().getAreaList(), loadType);
+            mView.setChambreBeanList(data.getBody().getChambrelist(), loadType);
             mView.hideProgress();
         }
     }
