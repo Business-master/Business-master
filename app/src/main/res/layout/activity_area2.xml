@@ -5,6 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context="com.bus.business.mvp.ui.activities.AreaActivity">
    <include layout="@layout/layout_main_header"></include>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:background="@color/background_color"
+            android:text="地区"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <GridView
+            android:id="@+id/area_gv"
+            android:numColumns="3"
+            android:verticalSpacing="5dp"
+            android:horizontalSpacing="10dp"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </GridView>
+    </LinearLayout>
+
 </LinearLayout>
