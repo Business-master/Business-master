@@ -21,6 +21,7 @@ import com.bus.business.common.NewsType;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.ChangeSearchStateEvent;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
+import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.fragment.ExpertFragment;
 import com.bus.business.mvp.ui.fragment.MainPagerFragment;
@@ -129,6 +130,7 @@ public class MainActivity extends BaseActivity {
         if (index == 1) {
             hasPush = false;
             textUnreadLabel.setVisibility(View.GONE);
+            EventBus.getDefault().post(new JoinToMeetingEvent());
         }
 
         currIndex = index;
