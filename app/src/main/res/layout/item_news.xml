@@ -70,6 +70,7 @@
             android:textSize="12sp"
             android:gravity="bottom"
             android:id="@+id/type"
+            android:visibility="gone"
             android:background="@color/white"
             android:textColor="@color/red"
             android:text="商讯"

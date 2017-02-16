@@ -179,7 +179,6 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     @Subscribe
     public void onEventMainThread(AreaCodeEvent event){
 
-       boolean is = event.getArea();
 
         if (event.getArea()){
             code = event.getAreaBean().getCode();
@@ -613,6 +612,7 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
                 if (areaSeaBeanList == null || areaSeaBeanList.size() == 0) {
+                    mAreaAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, false);
                     Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
                 } else {
                     mAreaAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, true);
