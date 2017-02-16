@@ -2,7 +2,6 @@ package com.bus.business.mvp.presenter.impl;
 
 import com.bus.business.common.LoadNewsType;
 import com.bus.business.mvp.entity.response.RspAreaBean;
-import com.bus.business.mvp.entity.response.RspAssisBean;
 import com.bus.business.mvp.interactor.NewsInteractor;
 import com.bus.business.mvp.interactor.impl.AreaInteractorImpl;
 import com.bus.business.mvp.presenter.NewsPresenter;

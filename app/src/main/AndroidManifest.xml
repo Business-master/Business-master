@@ -169,8 +169,7 @@
         <activity android:name=".mvp.ui.activities.ApplyActivity" />
         <activity android:name=".mvp.ui.activities.AddressListActivity" />
         <activity android:name=".mvp.ui.activities.PhoneDetailActivity" />
-        <activity android:name=".mvp.ui.activities.AreaActivity"></activity>
-        <activity android:name=".mvp.ui.activities.PhoneDetailActivity"/>
+        <activity android:name=".mvp.ui.activities.AreaActivity"/>
         <activity android:name=".mvp.ui.activities.TopicListActivity"/>
         <activity android:name=".mvp.ui.activities.ExamsActivity"/>
     </application>

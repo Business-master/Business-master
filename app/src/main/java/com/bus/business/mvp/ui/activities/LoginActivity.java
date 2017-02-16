@@ -93,14 +93,17 @@ public class LoginActivity extends BaseActivity {
                     public void onNext(RspUserBean rspUserBean) {
                         KLog.a("user--->" + rspUserBean.toString());
                         if (rspUserBean.getHead().getRspCode().equals("0")) {
-                            registeJpushToService(new Gson().toJson(rspUserBean.getBody().getUser()));
+                            UsrMgr.cacheUserInfo(new Gson().toJson(rspUserBean.getBody().getUser()));
+                            KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
+
+                            registeJpushToService();
                         }
                     }
                 });
 
     }
 
-    private void registeJpushToService(final String json){
+    private void registeJpushToService(){
 //        if (TextUtils.isEmpty(App.getJpushId()))return;
         RetrofitManager.getInstance(1).getRegisterJpushInObservable(UsrMgr.getUseId(), JPushInterface.getRegistrationID(this))
                 .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
@@ -123,9 +126,7 @@ public class LoginActivity extends BaseActivity {
                         KLog.a("user--->" + rspUserBean.toString());
                         UT.show(rspUserBean.getHead().getRspMsg());
                         if (rspUserBean.getHead().getRspCode().equals("0")) {
-                            UsrMgr.cacheUserInfo(json);
-                            KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             LoginActivity.this.finish();
                         }
 
