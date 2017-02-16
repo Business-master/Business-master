@@ -298,12 +298,14 @@ public class RetrofitManager {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
         map.put("numPerPage", numPerPage + "");
-        if ("空".equals(areaCode)){
-            map.put("areaCode", areaCode + "");
-        }
-        if ("空".equals(chambreCode)){
-            map.put("chambreCode", chambreCode + "");
-        }
+
+        if (!TextUtils.isEmpty(areaCode))
+            map.put("areaCode", areaCode);
+
+        if (!TextUtils.isEmpty(chambreCode))
+            map.put("chambreCode", chambreCode);
+
+
 
         if (!TextUtils.isEmpty(title))
             map.put("title", title);
