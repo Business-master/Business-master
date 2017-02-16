@@ -61,7 +61,7 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
 
         mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XUNXI));
         mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XIEHUI));
-        mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_AREA));
+        mFragments.add(NewsFragment_new.getInstance(NewsType.TYPE_REFRESH_AREA));
 
         mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(), mTitles, mFragments);
         mViewPager.addOnPageChangeListener(this);

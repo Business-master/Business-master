@@ -8,6 +8,7 @@ import com.bus.business.di.scope.ContextLife;
 import com.bus.business.di.scope.PerActivity;
 import com.bus.business.mvp.ui.activities.AddressListActivity;
 import com.bus.business.mvp.ui.activities.ApplyActivity;
+import com.bus.business.mvp.ui.activities.AreaActivity;
 import com.bus.business.mvp.ui.activities.AssisManActivity;
 import com.bus.business.mvp.ui.activities.ManagerActivity;
 import com.bus.business.mvp.ui.activities.MeetingDetailActivity;
@@ -46,4 +47,5 @@ public interface ActivityComponent {
     void inject(ApplyActivity applyActivity);
 
     void inject(AddressListActivity addressListActivity);
+    void inject(AreaActivity areaActivity);
 }

@@ -11,6 +11,7 @@ import com.bus.business.mvp.ui.fragment.MeetingFragment;
 import com.bus.business.mvp.ui.fragment.MineFragment;
 import com.bus.business.mvp.ui.fragment.NewMeetingFragment;
 import com.bus.business.mvp.ui.fragment.NewsFragment;
+import com.bus.business.mvp.ui.fragment.NewsFragment_new;
 import com.bus.business.mvp.ui.fragment.WanFragment;
 
 import dagger.Component;
@@ -39,4 +40,6 @@ public interface FragmentComponent {
     void inject(WanFragment wanFragment);
 
     void inject(MineFragment mineFragment);
+
+    void inject(NewsFragment_new newsFragment_new);
 }

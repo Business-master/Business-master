@@ -35,7 +35,6 @@ import com.bus.business.mvp.entity.WeathersBean;
 import com.bus.business.mvp.entity.response.RspBannerBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
-import com.bus.business.mvp.presenter.impl.AreaPresentetImpl;
 import com.bus.business.mvp.presenter.impl.AreaSeaPresenterImpl;
 import com.bus.business.mvp.presenter.impl.BusinessPresenterImpl;
 import com.bus.business.mvp.presenter.impl.NewsPresenterImpl;
@@ -78,7 +77,7 @@ import static android.view.View.VISIBLE;
  * @create_date 16/12/23
  * 首页碎片 模板
  */
-public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
+public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
         , NewsView<List<BaseNewBean>>
         , BusinessView,AreaSeaView
         , BaseQuickAdapter.RequestLoadMoreListener
@@ -130,8 +129,8 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
 //    private boolean isXunFrg;//true是讯息页,false是协会页
     private int  isXunFrg;//1是讯息页,2是协会页,4区域选择
 
-    public static NewsFragment getInstance(@NewsType.checker int checker) {
-        NewsFragment newsFragment = new NewsFragment();
+    public static NewsFragment_new getInstance(@NewsType.checker int checker) {
+        NewsFragment_new newsFragment = new NewsFragment_new();
         Bundle bundle = new Bundle();
         bundle.putInt(NEW_TYPE, checker);
         newsFragment.setArguments(bundle);
