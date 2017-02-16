@@ -103,7 +103,17 @@
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.NoActionBar" />
+    <style name="exam_text" parent="mine_text">
+        <item name="android:layout_height">70dp</item>
+        <item name="android:lines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 
+    <style name="view_A8A8A8_border">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/gray_lighter</item>
+    </style>
     <!-- 自适应TextView -->
     <declare-styleable name="AutofitTextView">
         <!-- Minimum size of the text. -->

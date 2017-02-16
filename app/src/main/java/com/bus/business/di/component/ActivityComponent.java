@@ -16,6 +16,8 @@ import com.bus.business.mvp.ui.activities.NewsManActivity;
 import com.bus.business.mvp.ui.activities.PlaceActivity;
 import com.bus.business.mvp.ui.activities.SearchActivity;
 
+import com.bus.business.mvp.ui.activities.TopicListActivity;
+
 import dagger.Component;
 
 /**
@@ -46,4 +48,5 @@ public interface ActivityComponent {
     void inject(ApplyActivity applyActivity);
 
     void inject(AddressListActivity addressListActivity);
+    void inject(TopicListActivity topicListActivity);
 }

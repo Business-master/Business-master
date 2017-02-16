@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_main_header" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/layout_head_text" />
+
+            <View style="@style/view_A8A8A8_border" />
+
+            <TextView
+                android:id="@+id/rl_1"
+                style="@style/exam_text"
+                android:text="什刹海商会、中小微联合帮办(北京)咨询服务中心培训、服务问卷调查" />
+
+            <View style="@style/view_A8A8A8_border" />
+
+            <TextView
+                android:id="@+id/rl_2"
+                style="@style/exam_text"
+                android:text="关于“一带一路”了解状况的调查问卷" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

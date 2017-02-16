@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <ImageView
+        android:id="@+id/img_topic"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@mipmap/banner_research" />
+
+    <ImageView
+        android:id="@+id/img_act"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="最新讯息"
-        android:gravity="center_vertical"
-        android:drawablePadding="8dp"
-        android:drawableLeft="@mipmap/img_line"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="1dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/img_reaserch" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="@color/white"
-        android:textSize="16sp"
+        android:drawableLeft="@mipmap/img_line"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:textColor="@color/text_color_black"/>
+        android:text="最新讯息"
+        android:textColor="@color/text_color_black"
+        android:textSize="16sp" />
 
 </LinearLayout>

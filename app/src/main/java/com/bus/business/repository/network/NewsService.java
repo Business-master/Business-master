@@ -11,6 +11,7 @@ import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
+import com.bus.business.mvp.entity.response.RspTopicsBean;
 import com.bus.business.mvp.entity.response.RspUserBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
@@ -44,7 +45,7 @@ public interface NewsService {
     @POST(ApiConstants.ASSISS_LIST_URL)
     Observable<RspAssisBean> getAssissList(@FieldMap Map<String, String> map);
 
-   @FormUrlEncoded
+    @FormUrlEncoded
     @POST(ApiConstants.ADD_ASSIS_URL)
     Observable<BaseRspObj> getAddAssis(@FieldMap Map<String, String> map);
 
@@ -74,6 +75,7 @@ public interface NewsService {
 
     /**
      * 参会
+     *
      * @param map
      * @return
      */
@@ -83,6 +85,7 @@ public interface NewsService {
 
     /**
      * 签到
+     *
      * @param map
      * @return
      */
@@ -116,5 +119,12 @@ public interface NewsService {
     @POST(ApiConstants.REGISTER_JPUSH_URL)
     Observable<BaseRspObj> registerJpush(@FieldMap Map<String, String> map);
 
+    @FormUrlEncoded
+    @POST(ApiConstants.TOPICS_URL)
+    Observable<RspTopicsBean> getTopicsList(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.TOPIC_DETAIL_URL)
+    Observable<RspNewDetailBean> getTopicDetail(@FieldMap Map<String, String> map);
 
 }

@@ -109,8 +109,8 @@ public class MainActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getBundleExtra(Constants.EXTRA_BUNDLE);
         //如果bundle存在，取出其中的参数，启动DetailActivity
-        KLog.a("hasPush---->"+hasPush);
-        if(bundle != null){
+        KLog.a("hasPush---->" + hasPush);
+        if (bundle != null) {
             hasPush = true;
         }
         textUnreadLabel.setVisibility(hasPush ? View.VISIBLE : View.GONE);
@@ -237,13 +237,18 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     @Subscribe
     public void onEventMainThread(ChangeSearchStateEvent event1) {
-            homeFragmentIndex = event1.getMsg();
-            String msg = "onEventMainThread收到了消息：" + event1.getMsg();
-            KLog.d("harvic", msg);
-            //    UT.show(msg);
+        if (event1.getMsg() == 3) {
+            hasPush = true;
+            textUnreadLabel.setVisibility(View.VISIBLE);
+
+            return;
+        }
+        homeFragmentIndex = event1.getMsg();
+        String msg = "onEventMainThread收到了消息：" + event1.getMsg();
+        KLog.d("harvic", msg);
+        //    UT.show(msg);
 
     }
 

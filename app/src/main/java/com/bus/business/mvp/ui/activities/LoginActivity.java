@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.bus.business.App;
 import com.bus.business.R;
 import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.response.RspUserBean;
@@ -20,6 +19,7 @@ import com.socks.library.KLog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Subscriber;
 
@@ -93,18 +93,16 @@ public class LoginActivity extends BaseActivity {
                     public void onNext(RspUserBean rspUserBean) {
                         KLog.a("user--->" + rspUserBean.toString());
                         if (rspUserBean.getHead().getRspCode().equals("0")) {
-                            UsrMgr.cacheUserInfo(new Gson().toJson(rspUserBean.getBody().getUser()));
-                            KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
-                            registeJpushToService();
+                            registeJpushToService(new Gson().toJson(rspUserBean.getBody().getUser()));
                         }
                     }
                 });
 
     }
 
-    private void registeJpushToService(){
+    private void registeJpushToService(final String json){
 //        if (TextUtils.isEmpty(App.getJpushId()))return;
-        RetrofitManager.getInstance(1).getRegisterJpushInObservable(UsrMgr.getUseId(), App.getJpushId())
+        RetrofitManager.getInstance(1).getRegisterJpushInObservable(UsrMgr.getUseId(), JPushInterface.getRegistrationID(this))
                 .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                 .subscribe(new Subscriber<BaseRspObj>() {
                     @Override
@@ -125,6 +123,8 @@ public class LoginActivity extends BaseActivity {
                         KLog.a("user--->" + rspUserBean.toString());
                         UT.show(rspUserBean.getHead().getRspMsg());
                         if (rspUserBean.getHead().getRspCode().equals("0")) {
+                            UsrMgr.cacheUserInfo(json);
+                            KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             LoginActivity.this.finish();
                         }

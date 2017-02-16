@@ -1,7 +1,5 @@
 package com.bus.business.mvp.entity;
 
-import android.text.TextUtils;
-
 /**
  * @author xch
  * @version 1.0
@@ -205,4 +203,6 @@ public class WeatherBean {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+
 }

@@ -21,7 +21,6 @@ public class App extends Application{
 
     private static Context sAppContext;
     private ApplicationComponent mApplicationComponent;
-    private static String jpushId;
 //   mApplicationComponent private RefWatcher refWatcher;
 //
 //    public static RefWatcher getRefWatcher(Context context) {
@@ -39,14 +38,9 @@ public class App extends Application{
         KLog.init(BuildConfig.LOG_DEBUG);
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
-        jpushId = JPushInterface.getRegistrationID(this);
         KLog.a("RegistrationID---->"+ JPushInterface.getRegistrationID(this));
     }
 
-
-    public static String getJpushId(){
-        return jpushId;
-    }
 //    private void initLeakCanary() {
 //        if (BuildConfig.DEBUG) {
 //            refWatcher = LeakCanary.install(this);

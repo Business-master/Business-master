@@ -134,13 +134,14 @@
                 tools:text="联系电话:"
                 android:textColor="@color/primary_text"
                 android:textSize="16sp" />
+
             <TextView
-                android:id="@+id/tv_landline"
+                android:id="@+id/tv_zuo_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_phone"
-                android:layout_marginTop="@dimen/space_15"
-                tools:text="座机号码:"
+                android:layout_marginTop="@dimen/space_8"
+                tools:text="座机电话:"
                 android:textColor="@color/primary_text"
                 android:textSize="16sp" />
         </RelativeLayout>

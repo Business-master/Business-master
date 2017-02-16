@@ -16,6 +16,7 @@ import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
+import com.bus.business.mvp.entity.response.RspTopicsBean;
 import com.bus.business.mvp.entity.response.RspUserBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
@@ -327,5 +328,22 @@ public class RetrofitManager {
         map.put("platform","2");
         KLog.a(map.toString());
         return mNewsService.registerJpush(map);
+    }
+
+    public Observable<RspTopicsBean> getTopicListObservable(int pageNum, int numPerPage, String newsId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pageNum", pageNum + "");
+        map.put("numPerPage", numPerPage + "");
+        map.put("newsId", newsId);
+        KLog.a(map.toString());
+        return mNewsService.getTopicsList(map);
+    }
+
+
+    public Observable<RspNewDetailBean> getTopicDetailObservable(String newsId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("dissId", newsId);
+        KLog.a(map.toString());
+        return mNewsService.getTopicDetail(map);
     }
 }
