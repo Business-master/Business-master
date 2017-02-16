@@ -78,6 +78,11 @@ public class MeetingPresenterImpl extends BasePresenterImpl<MeetingView,RspMeeti
     }
 
     @Override
+    public void setNewsTypeAndId(int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
+
+    }
+
+    @Override
     public void refreshData() {
         pageNum = 1;
         mIsRefresh = true;

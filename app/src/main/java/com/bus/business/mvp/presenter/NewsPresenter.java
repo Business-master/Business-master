@@ -7,7 +7,11 @@ package com.bus.business.mvp.presenter;
  */
 public interface NewsPresenter {
 
+    //status如果不用传值-1
     void setNewsTypeAndId(int pageNum, int numPerPage,String title,int status);
+
+    //areaCode,chambreCode如果不用传值""
+    void setNewsTypeAndId(int pageNum, int numPerPage,String title,String areaCode,String  chambreCode);
 
     void refreshData();
 

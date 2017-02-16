@@ -72,6 +72,8 @@ public class NewDetailActivity extends BaseActivity {
         newsId = getIntent().getStringExtra(Constants.NEWS_POST_ID);
         newsType = getIntent().getStringExtra(Constants.NEWS_TYPE);
 
+
+
         setCustomTitle(newsType.equals("1") ? "新闻详情" : "商讯详情");
         showOrGoneSearchRl(View.GONE);
         mFundTv.setVisibility(newsType.equals("1") ? View.GONE : View.VISIBLE);
@@ -103,7 +105,7 @@ public class NewDetailActivity extends BaseActivity {
                             fillData(rspNewDetailBean.getBody().getNews());
                         }
                     });
-        } else {
+        } else   if (newsType.equals("2")){
             RetrofitManager.getInstance(1).getBusDetailObservable(newsId)
                     .compose(TransformUtils.<RspBusDetailBean>defaultSchedulers())
                     .subscribe(new Subscriber<RspBusDetailBean>() {

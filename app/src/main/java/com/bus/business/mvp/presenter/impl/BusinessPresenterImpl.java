@@ -77,6 +77,11 @@ public class BusinessPresenterImpl extends BasePresenterImpl<BusinessView, RspBu
     }
 
     @Override
+    public void setNewsTypeAndId(int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
+
+    }
+
+    @Override
     public void refreshData() {
         pageNum = 1;
         mIsRefresh = true;

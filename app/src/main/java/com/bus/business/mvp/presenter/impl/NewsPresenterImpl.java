@@ -80,6 +80,11 @@ public class NewsPresenterImpl extends BasePresenterImpl<NewsView<List<BaseNewBe
     }
 
     @Override
+    public void setNewsTypeAndId(int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
+
+    }
+
+    @Override
     public void refreshData() {
         pageNum = 1;
         mIsRefresh = true;

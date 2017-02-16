@@ -20,7 +20,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -55,7 +54,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.ui.activities.MainActivity" android:launchMode="singleTask"/>
+        <activity
+            android:name=".mvp.ui.activities.MainActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".mvp.ui.activities.NewDetailActivity" />
         <activity android:name=".mvp.ui.activities.SearchActivity" />
         <activity android:name=".mvp.ui.activities.PlaceActivity" />
@@ -165,9 +166,10 @@
         <activity android:name=".mvp.ui.activities.AssisManActivity" />
         <activity android:name=".mvp.ui.activities.NewsManActivity" />
         <activity android:name=".mvp.ui.activities.AddAssisActivity" />
-        <activity android:name=".mvp.ui.activities.ApplyActivity"/>
+        <activity android:name=".mvp.ui.activities.ApplyActivity" />
         <activity android:name=".mvp.ui.activities.AddressListActivity" />
-        <activity android:name=".mvp.ui.activities.PhoneDetailActivity"/>
+        <activity android:name=".mvp.ui.activities.PhoneDetailActivity" />
+        <activity android:name=".mvp.ui.activities.AreaActivity"></activity>
     </application>
 
 </manifest>

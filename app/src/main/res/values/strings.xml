@@ -114,17 +114,17 @@
         <item>http://www.zjhcpa.com.cn/</item>
     </string-array>
 
-    <string name="apply_join" >参会人 ：</string>
-    <string name="leave" >请假</string>
-    <string name="apply_cancel" >取消报名</string>
-    <string name="apply_ensure" >报名</string>
-    <string name="submit" >提交</string>
-    <string name="apply_join1" >本人</string>
-    <string name="apply_join2" >助理</string>
-    <string name="apply_eat" >饮食 ：</string>
-    <string name="apply_eat1" >汉族</string>
-    <string name="apply_eat2" >少数民族</string>
-    <string name="apply_sleep" >住宿 ：</string>
+    <string name="apply_join">参会人 ：</string>
+    <string name="leave">请假</string>
+    <string name="apply_cancel">取消报名</string>
+    <string name="apply_ensure">报名</string>
+    <string name="submit">提交</string>
+    <string name="apply_join1">本人</string>
+    <string name="apply_join2">助理</string>
+    <string name="apply_eat">饮食 ：</string>
+    <string name="apply_eat1">汉族</string>
+    <string name="apply_eat2">少数民族</string>
+    <string name="apply_sleep">住宿 ：</string>
     <string-array name="apply_sleeplist">
         <item>自行住宿</item>
         <item>指定A</item>
