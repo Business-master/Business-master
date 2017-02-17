@@ -119,11 +119,11 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
                     public void onNext(RspAreaBean rspAreaBean) {
                         AreaBean areaBean =  rspAreaBean.getBody().getAreaList().get(0);
                         String str =areaBean.getName();
-                        int i = str.indexOf("工商联");
-                        customArea=str.substring(0,i);
+//                        int i = str.indexOf("工商联");
+//                        customArea=str.substring(0,i);
                         mTitles.add(TITLE[0]);
                         mTitles.add(TITLE[1]);
-                        mTitles.add(customArea);
+                        mTitles.add(str);
 
 
                         mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(),mTitles,mFragments);

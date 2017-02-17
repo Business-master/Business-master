@@ -21,7 +21,7 @@
         <TextView
             android:textColor="@color/color_333333"
             android:background="@color/background_color"
-            android:text="地区"
+            android:text="工商联"
             android:padding="10dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
@@ -29,6 +29,7 @@
         <com.bus.business.mvp.view.CustomGridView
             android:id="@+id/area_gv"
             android:numColumns="3"
+            android:gravity="center"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
             android:padding="10dp"
@@ -43,7 +44,7 @@
             <TextView
                 android:textColor="@color/color_333333"
                 android:background="@color/background_color"
-                android:text="组织"
+                android:text="商(协)会组织"
                 android:padding="10dp"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
@@ -51,6 +52,7 @@
             <com.bus.business.mvp.view.CustomGridView
                 android:id="@+id/orgina_gv"
                 android:numColumns="3"
+                android:gravity="center"
                 android:verticalSpacing="10dp"
                 android:horizontalSpacing="10dp"
                 android:padding="10dp"

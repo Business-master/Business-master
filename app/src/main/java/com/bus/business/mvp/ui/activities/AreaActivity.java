@@ -17,6 +17,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
+/**
+ * 选择切换地区的页面
+ */
 public class AreaActivity extends BaseActivity implements AreaView{
 
     @BindView(R.id.area_gv)
