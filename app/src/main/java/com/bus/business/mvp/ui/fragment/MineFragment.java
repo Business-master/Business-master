@@ -13,6 +13,7 @@ import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.UserBean;
 import com.bus.business.mvp.ui.activities.AboutActivity;
 import com.bus.business.mvp.ui.activities.AddressListActivity;
+import com.bus.business.mvp.ui.activities.AssisManActivity;
 import com.bus.business.mvp.ui.activities.LoginActivity;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 import com.bus.business.utils.FileUtil;
@@ -69,7 +70,7 @@ public class MineFragment extends BaseFragment {
 
 
     @OnClick({R.id.tv_account_manager, R.id.about_us, R.id.rl_clear_cache
-            , R.id.tv_logout, R.id.tv_address_list})
+            , R.id.tv_logout, R.id.tv_address_list,R.id.tv_assis_manager})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_account_manager:
@@ -114,6 +115,9 @@ public class MineFragment extends BaseFragment {
                     }
                 });
 
+                break;
+            case R.id.tv_assis_manager:
+                        startActivity(new Intent(mActivity, AssisManActivity.class));
                 break;
         }
     }

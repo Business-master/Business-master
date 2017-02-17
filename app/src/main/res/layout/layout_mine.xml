@@ -48,12 +48,11 @@
                 android:textSize="12sp" />
         </RelativeLayout>
 
-
         <TextView
-            android:id="@+id/tv_account_manager"
-            style="@style/mine_text"
             android:layout_marginTop="10dp"
-            android:text="@string/account_manager" />
+            android:id="@+id/tv_address_list"
+            style="@style/mine_text"
+            android:text="通讯录" />
 
         <View
             android:layout_width="match_parent"
@@ -62,9 +61,19 @@
             android:background="@mipmap/list_view_divider" />
 
         <TextView
-            android:id="@+id/tv_address_list"
+            android:id="@+id/tv_account_manager"
             style="@style/mine_text"
-            android:text="通讯录" />
+            android:text="@string/account_manager" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/list_view_divider" />
+        <TextView
+            android:id="@+id/tv_assis_manager"
+            style="@style/mine_text"
+            android:text="@string/assis_manager" />
+
 
         <!--<View-->
             <!--android:layout_width="match_parent"-->

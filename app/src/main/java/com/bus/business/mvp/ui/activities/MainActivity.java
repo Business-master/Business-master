@@ -28,6 +28,7 @@ import com.bus.business.mvp.ui.fragment.MainPagerFragment;
 import com.bus.business.mvp.ui.fragment.MineFragment;
 import com.bus.business.mvp.ui.fragment.NewMeetingFragment;
 import com.bus.business.mvp.ui.fragment.WanFragment;
+import com.bus.business.mvp.ui.fragment.WanFragment2;
 import com.bus.business.repository.network.RetrofitManager;
 import com.bus.business.utils.TransformUtils;
 import com.bus.business.utils.UT;
@@ -229,6 +230,7 @@ public class MainActivity extends BaseActivity {
                 return new NewMeetingFragment();
             case 2:
                 return new WanFragment();
+//                return new WanFragment2();
             case 3:
                 return new ExpertFragment();
             case 4:

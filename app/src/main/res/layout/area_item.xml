@@ -4,6 +4,7 @@
     android:clickable="true"
     android:layout_height="match_parent">
     <TextView
+        android:layout_gravity="center"
         android:clickable="true"
         android:id="@+id/area_tv_item"
         android:textSize="14sp"
