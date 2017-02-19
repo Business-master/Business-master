@@ -1,30 +1,16 @@
 package com.bus.business.mvp.ui.fragment;
 
-import android.app.Activity;
-
-
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-
 import android.view.View;
-import android.widget.Adapter;
-
 
 import com.bus.business.R;
-
-import com.bus.business.mvp.event.CheckMeetingStateEvent;
-
 import com.bus.business.mvp.ui.adapter.ViewPageAdapter;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 import butterknife.BindView;
 
@@ -55,8 +41,8 @@ public class NewMeetingFragment extends BaseFragment  {
     }
 
     private void ininData() {
-        titles.add("即将召开会议");
-        titles.add("正在召开会议");
+        titles.add("即将召开");
+        titles.add("正在召开");
         titles.add("历史会议");
 
         MeetingFragment m0 = new MeetingFragment();

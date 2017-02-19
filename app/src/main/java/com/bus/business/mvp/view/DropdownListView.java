@@ -14,6 +14,8 @@ import com.socks.library.KLog;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.bus.business.mvp.ui.fragment.DropDownFragment.TYPE_NAME;
+
 public class DropdownListView extends ScrollView {
     public LinearLayout linearLayout;
 
@@ -54,16 +56,37 @@ public class DropdownListView extends ScrollView {
                 boolean checked = data == current;
                 String suffix = data.getSuffix();
                 itemView.bind(TextUtils.isEmpty(suffix) ? data.text : data.text + suffix, checked);
-                if (checked) button.setText(data.text);
+                if (checked) button.setText(i == 0 ? subStr(data.getValue()) : data.text);
             }
-
         }
     }
 
+    private String subStr(String str) {
+        String result = str.substring(0, str.indexOf("@")) + "@";
+        KLog.a("result--->" + result);
+        for (int i = 0; i < 3; i++) {
+            if (result.equals(TYPE_NAME[i])) {
+                switch (i) {
+                    case 0:
+                        result = "抵押类型";
+                        break;
+                    case 1:
+                        result = "还款方式";
+                        break;
+                    case 2:
+                        result = "贷款期限";
+                        break;
+                }
+                break;
+            }
+        }
+        return result;
+    }
+
     public void bindList(List<? extends DropdownItemObject> list,
-                     DropdownButton button,
-                     final Container container,
-                     int selectedId
+                         DropdownButton button,
+                         final Container container,
+                         int selectedId
     ) {
         current = null;
         this.list = list;

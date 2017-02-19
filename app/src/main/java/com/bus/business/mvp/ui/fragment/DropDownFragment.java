@@ -1,7 +1,6 @@
 package com.bus.business.mvp.ui.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,7 +19,6 @@ import com.bus.business.common.LoadNewsType;
 import com.bus.business.mvp.entity.CashBean;
 import com.bus.business.mvp.entity.DropBean;
 import com.bus.business.mvp.presenter.impl.DropPresenterImpl;
-import com.bus.business.mvp.ui.activities.DropDetailActivity;
 import com.bus.business.mvp.ui.adapter.DropsAdapter;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 import com.bus.business.mvp.view.DropdownButton;
@@ -53,7 +51,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         , BaseQuickAdapter.OnRecyclerViewItemClickListener
         , NewsView<List<DropBean>> {
 
-    private static final String[] TYPE_NAME = new String[]{"pledgeCode@", "replayCode@", "loanCode@"};
+    public static final String[] TYPE_NAME = new String[]{"pledgeCode@", "replayCode@", "loanCode@"};
     @BindView(R.id.chooseType)
     DropdownButton chooseType;
     @BindView(R.id.chooseLanguage)
@@ -239,20 +237,21 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
     void init() {
         KLog.a("*****init");
         reset();
-        chooseTypeData.add(new DropdownItemObject("抵押类型", 0, TYPE_NAME[0]));
+        chooseTypeData.add(new DropdownItemObject("全部", 0, TYPE_NAME[0]));
         chooseTypeData.add(new DropdownItemObject("信贷", 1, TYPE_NAME[0] + "0001"));
         chooseTypeData.add(new DropdownItemObject("房贷", 2, TYPE_NAME[0] + "0002"));
         chooseTypeData.add(new DropdownItemObject("联保贷", 3, TYPE_NAME[0] + "0003"));
         chooseTypeData.add(new DropdownItemObject("无需抵押", 4, TYPE_NAME[0] + "0004"));
+        chooseTypeData.add(new DropdownItemObject("车辆抵押", 5, TYPE_NAME[0] + "0005"));
         dropdownType.bindList(chooseTypeData, chooseType, this, 0);
 
-        chooseLanguageData.add(new DropdownItemObject("还款方式", 0, TYPE_NAME[1] + ""));
+        chooseLanguageData.add(new DropdownItemObject("全部", 0, TYPE_NAME[1] + ""));
         chooseLanguageData.add(new DropdownItemObject("分期还款", 1, TYPE_NAME[1] + "0001"));
         chooseLanguageData.add(new DropdownItemObject("到期还款", 2, TYPE_NAME[1] + "0002"));
         chooseLanguageData.add(new DropdownItemObject("随借随还", 3, TYPE_NAME[1] + "0003"));
         dropdownLanguage.bindList(chooseLanguageData, chooseLanguage, this, 0);
 
-        chooseDateData.add(new DropdownItemObject("贷款期限", 0, TYPE_NAME[2] + ""));
+        chooseDateData.add(new DropdownItemObject("全部", 0, TYPE_NAME[2] + ""));
         chooseDateData.add(new DropdownItemObject("3个月", 1, TYPE_NAME[2] + "0001"));
         chooseDateData.add(new DropdownItemObject("6个月", 2, TYPE_NAME[2] + "0002"));
         chooseDateData.add(new DropdownItemObject("12个月", 3, TYPE_NAME[2] + "0003"));
@@ -283,7 +282,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
 
     @Override
     public void onItemClick(View view, int i) {
-        startActivity(new Intent(mActivity, DropDetailActivity.class));
+        ((DropBean) mNewsListAdapter.getData().get(i)).intentToDetail(mActivity);
     }
 
     @Override

@@ -1,14 +1,22 @@
 package com.bus.business.mvp.entity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.bus.business.mvp.ui.activities.DropDetailActivity;
+
+import java.io.Serializable;
+
 /**
  * @author xch
  * @version 1.0
  * @create_date 17/2/17
  */
 
-public class DropBean {
+public class DropBean implements Serializable{
 
-
+    public static final String DROP_BEAN = "drop_bean";
     /**
      * utime : null
      * pledgeCode : 房贷
@@ -39,7 +47,15 @@ public class DropBean {
     private String loanCode;
     private String productDesp;
     private String productName;
-    private int cashRate;
+    private String cashRate;
+
+    public void intentToDetail(Context context){
+        Intent intent = new Intent(context, DropDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(DROP_BEAN,this);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
 
     public Object getUtime() {
         return utime;
@@ -145,11 +161,11 @@ public class DropBean {
         this.productName = productName;
     }
 
-    public int getCashRate() {
+    public String getCashRate() {
         return cashRate;
     }
 
-    public void setCashRate(int cashRate) {
+    public void setCashRate(String cashRate) {
         this.cashRate = cashRate;
     }
 

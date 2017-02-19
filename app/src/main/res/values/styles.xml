@@ -102,6 +102,18 @@
         <item name="android:layout_height">40dp</item>
     </style>
 
+    <style name="assis_hint_edit">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">#ff111111</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">#cccccc</item>
+    </style>
+
     <style name="AppTheme.PopupOverlay" parent="Theme.AppCompat.NoActionBar" />
     <style name="exam_text" parent="mine_text">
         <item name="android:layout_height">70dp</item>

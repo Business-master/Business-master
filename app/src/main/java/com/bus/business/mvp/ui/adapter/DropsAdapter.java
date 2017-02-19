@@ -27,7 +27,9 @@ public class DropsAdapter extends BaseQuickAdapter<DropBean> {
     protected void convert(BaseViewHolder baseViewHolder, DropBean likeModel) {
 
         baseViewHolder.setText(R.id.item_title, likeModel.getBankName());
-        baseViewHolder.setText(R.id.address, "工商联");
+        baseViewHolder.setText(R.id.tv_type,likeModel.getPledgeCode());
+        baseViewHolder.setText(R.id.tv_lilv,likeModel.getCashRate()+"%");
+        baseViewHolder.setText(R.id.address, "贷款简介 : "+likeModel.getLoanIntroduction());
 
         ImageView img = baseViewHolder.getView(R.id.daimajia_slider_image);
 
