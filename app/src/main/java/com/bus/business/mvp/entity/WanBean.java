@@ -17,6 +17,25 @@ public class WanBean {
     private int imgSrc;
     private String url;
 
+    String title;
+    String detail;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
     public void intentToWebAct(Context context){
         Intent intent = new Intent(context, WebActivity.class);
         intent.putExtra(WEBURL,url);

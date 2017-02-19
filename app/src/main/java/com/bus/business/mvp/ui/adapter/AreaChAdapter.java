@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 public class AreaChAdapter extends BaseAdapter{
-//    Context context;
+
     List<AreaBean>  list=new ArrayList<>();
     AreaActivity areaActivity;
     boolean isArea;

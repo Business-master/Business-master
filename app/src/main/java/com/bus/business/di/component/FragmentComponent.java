@@ -14,6 +14,8 @@ import com.bus.business.mvp.ui.fragment.MineFragment;
 import com.bus.business.mvp.ui.fragment.NewMeetingFragment;
 import com.bus.business.mvp.ui.fragment.NewsFragment;
 import com.bus.business.mvp.ui.fragment.NewsFragment_new;
+import com.bus.business.mvp.ui.fragment.QzybFragment;
+import com.bus.business.mvp.ui.fragment.SzhwFragment;
 import com.bus.business.mvp.ui.fragment.WanFragment;
 import com.bus.business.mvp.ui.fragment.WanFragment2;
 
@@ -47,6 +49,10 @@ public interface FragmentComponent {
     void inject(NewsFragment_new newsFragment_new);
 
     void inject(WanFragment2 wanFragment2);
+
+    void inject(QzybFragment qzybFragment);
+
+    void inject(SzhwFragment szhwFragment);
 
     void inject(ExpertFragment expertFragment);
 

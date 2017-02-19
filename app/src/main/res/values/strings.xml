@@ -114,6 +114,94 @@
         <item>http://www.zjhcpa.com.cn/</item>
     </string-array>
 
+    <string-array name="wan_images">
+        <item>@mipmap/wan_17</item>
+        <item>@mipmap/wan_6</item>
+        <item>@mipmap/wan_8</item>
+        <item>@mipmap/wan_13</item>
+        <item>@mipmap/wan_15</item>
+          <item>@mipmap/wan_1</item>
+          <item>@mipmap/wan_2</item>
+          <item>@mipmap/wan_3</item>
+          <item>@mipmap/wan_4</item>
+          <item>@mipmap/wan_5</item>
+          <item>@mipmap/wan_7</item>
+          <item>@mipmap/wan_88</item>
+          <item>@mipmap/wan_10</item>
+          <item>@mipmap/wan_11</item>
+          <item>@mipmap/wan_12</item>
+          <item>@mipmap/wan_14</item>
+          <item>@mipmap/wan_16</item>
+          <item>@mipmap/wan_18</item>
+    </string-array>
+    <string-array name="wan_urls">
+        <item>http://mp.weixin.qq.com/s/Dhpq09t4tDjo-bZ7JywHog</item>
+        <item>http://mp.weixin.qq.com/s/0B3b7Oy_WLmT79QoopEf6w</item>
+        <item>http://mp.weixin.qq.com/s/mdaKCdUFSeHJJ_jnqcIm1A</item>
+        <item>http://mp.weixin.qq.com/s/LY3ObH5fSy8e65gq1QNJpQ</item>
+        <item>http://mp.weixin.qq.com/s/xQva9GPOyYiicsbHRH9W-Q</item>
+
+        <item>http://mp.weixin.qq.com/s/uQXJeW6lktADY9MSmPbj4w</item>
+        <item>http://mp.weixin.qq.com/s/-U2c4xHOXEmZLT6tqPWBPA</item>
+        <item>http://mp.weixin.qq.com/s/obGQJffX7CG8YarEnI8b2A</item>
+        <item>https://mp.weixin.qq.com/s/BMasimfHe7SLwmznz8-ztg</item>
+        <item>http://mp.weixin.qq.com/s/-w_DoZBZhE2_87O0EO9rmA</item>
+        <item>http://mp.weixin.qq.com/s/S6ERF2uTHh6ydRtJ7Yn1OA</item>
+        <item>http://mp.weixin.qq.com/s/VGTSUlSmIDoVymsQCnDeFw</item>
+        <item>http://mp.weixin.qq.com/s/2c-FBlwNSZgpr4GYgp78DQ</item>
+        <item>http://mp.weixin.qq.com/s/QAX3IRQ4SnB5o-HyItNKbg</item>
+        <item>http://mp.weixin.qq.com/s/CbnqsIRjepsbMggW4hrDrg</item>
+        <item>http://mp.weixin.qq.com/s/hQIJPjKbUY2JjKuP-AfV7w</item>
+        <item>http://mp.weixin.qq.com/s/LJxNwpPobG2u1Dpslm3xiA</item>
+        <item>http://mp.weixin.qq.com/s/Fmpocfip8A361HFOnSPxcg</item>
+    </string-array>
+<string-array name="wan_titles">
+        <item>谁说北京没有米其林，隐藏在帝都的10家准米其林餐厅，全世界吃货的梦想地！！</item>
+        <item>北京一女子每天吃煮熟的苹果，30天以后惊呆了所有人！</item>
+        <item>2017年，北京最新“十大怪”！！</item>
+       <item>北京各个区的特色！一句话讲到位！</item>
+       <item>烙饼时耍个小聪明，烙的饼张张薄如纸，还好吃！</item>
+        <item>为什么要生二胎，终于知道答案了……</item>
+        <item>刷爆朋友圈的一组漫画，您敢看吗？</item>
+        <item>北京人注意！2017年这33笔钱将打入您的账户！</item>
+        <item>人生歪理，歪得很有道理</item>
+        <item>这些属于北京的秘密，99%的北京人都看惊呆了！</item>
+        <item>走了5天路，换了9次车，跨越几千公里，遇车祸，北漂心未死……</item>
+        <item>古时候的杀人刑场，如今却养起了你们这帮人！！！</item>
+        <item>北京的上班族们，有一个振奋人心的消息要告诉大家！</item>
+        <item>北京排名最牛掰的区竟然是它？！</item>
+        <item>全球最古怪的14个地方，绝对让你大开眼界！</item>
+        <item>送别！又一个文玩圣地要和北京人说再见了……</item>
+        <item>北大发布的全国最好医院排名，详细到科室，关键时刻救命的（再不敢麻烦百度了！）</item>
+        <item>飞往北京的航班迫降美国背后，国人震惊！</item>
+    </string-array>
+    <string-array name="wan_details">
+        <item>虽然米其林还没有登录北京，但是！谁也阻挡不了吃货们对于顶级美食的探索与追求，于是，侦探美少女根据之情群众的爆料为大家收集了这10家准米其林餐厅，为了美食我们冲啊~~</item>
+        <item>自从本宝宝放荡不羁吃吃吃以后我就是一个胖仙女了……胖仙女现在就爱吃水果！虽然，大帝都的冬天有很多水果可以吃……</item>
+        <item>去年这当口，小编总结了北京城的“十大怪”，一年过去了，北京又诞生了不少逗比事儿，在此，小编就再总结一篇北京”新十大怪“，各位看官，您上眼：</item>
+        <item>如果让你形容北京的每个区你会怎么形容？北京各区第一印象，你的第一印象是什么？</item>
+        <item>如何把面饼烙得又薄又脆？其实你只要注意这几点烙出来的饼想多薄有多薄~~</item>
+       <item>曾有人说过，父母给孩子最好的礼物就是“手足”，一起玩耍，一起成长，当父母都已老去时，他们仍在彼此的生命中举足轻重！</item>
+       <item>刷爆Facebook的一组漫画：
+生命太短暂，我没时间讨厌你</item>
+       <item>上班第一周，大北京的好消息就接连不断！‍各种免费、福利、优惠、补贴.....各种利好政策，北京人又要发财的的节奏啊！2017年，这33笔钱将打入你的账户快来看看你的钱都是怎么涨起来的吧！</item>
+       <item>这些歪理，歪的有道理。你觉得呢？</item>
+       <item>北京作为历史悠久的古都，存在着数不清的传说和秘密，其中不少甚至连老北京人也不一定知道，今天妞儿就给小伙伴儿们说几个~</item>
+
+       <item>转眼之间，年就已经过完，从北上广深等城市回到老家的人们，都陆续回到了各自打拼的城市。开始着自己忙忙碌碌的上班生活。作为北漂中的一员，我们的编辑罗非是条鱼，用相机记录下他的回家之旅。</item>
+
+       <item>咱北京有一个地方明代的袁崇焕，大太监刘瑾都命丧在这里，但是如今这儿却成为了北京吃货们的聚集地，它的名字叫做——西四</item>
+       <item>是不是不想上班，是不是上班又饿又困？小编一招就让你上班瞬间，“神清气爽、精神百倍”</item>
+       <item>在北京有这样一个区，时髦炫酷吊炸天，这些个词儿放在它身上一点都不过分！</item>
+       <item>如果每一次旅行都当作一次猎奇，你会发现，虽然游走的每一座城市都有古怪的东西，但是总有一些新奇到让你觉得大自然的不可思议。一起来看看全球最古怪的景点有木有吓到你吧！</item>
+
+       <item>听说十里河天娇文化城要被拆了！去年潘家园的拆迁，曾让许多文玩人心碎。如今文玩圈又一个“圣地”也要跟我们说再见了！</item>
+
+       <item>2015年5月26日，国家医疗数据中心在北京大学医学部挂牌，同时首届北京大学临床学科评估发布——中国最佳临床学科评估排行榜出炉。哪家医院的哪些学科治疗水平高？要看什么病该去哪儿看？有了这份表格，还有什么可担心的呢？</item>
+
+       <item>当中国式聪明遇上国际式规则，结果会怎样？旅居加拿大的华人企业家、德华国际矿业集团董事长刘乃顺先生，通过其亲身所见，给国人好好上了一课。这件事发生在从温哥华飞往北京的加拿大航班上，当时刘乃顺先生坐位在经济舱倒数第三排，靠近机尾，他有幸看到了一对夫妇是如何耍小聪明，结果自讨苦吃的全过程……</item>
+    </string-array>
+
     <string name="apply_join">参会人 ：</string>
     <string name="leave">请假</string>
     <string name="apply_cancel">取消报名</string>

@@ -22,7 +22,7 @@ public class WanAdapter extends BaseQuickAdapter<WanBean>{
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, WanBean wanBean) {
-       ImageView img = baseViewHolder.getView(R.id.img_wan);
+         ImageView img = baseViewHolder.getView(R.id.img_wan);
         img.setImageResource(wanBean.getImgSrc());
     }
 }

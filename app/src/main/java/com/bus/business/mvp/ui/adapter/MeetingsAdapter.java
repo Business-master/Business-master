@@ -76,19 +76,13 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
          cancel_apply.setOnClickListener(myClick);
          btn_apply.setOnClickListener(myClick);
          btn_leave.setOnClickListener(myClick);
+        String str =   ApplyUtils.getInstance().initState_Hide(cancel_apply,btn_apply,btn_leave,likeBean.getJoinType());
+        jointype_tv.setText(str);
         if (index!=0){
             cancel_apply.setVisibility(View.INVISIBLE);
             btn_apply.setVisibility(View.INVISIBLE);
             btn_leave.setVisibility(View.INVISIBLE);
         }
-
-
-
-
-       String str =   ApplyUtils.getInstance().initState_Hide(cancel_apply,btn_apply,btn_leave,likeBean.getJoinType());
-
-
-       jointype_tv.setText(str);
 
 
 

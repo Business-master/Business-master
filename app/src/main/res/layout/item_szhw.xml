@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--奇珍异宝 一个item的布局 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/img_szhw"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/img_tagxzc" />
+    <TextView
+
+        android:id="@+id/title_szhw"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_333333"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp"
+        android:paddingRight="15dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/details_szhw"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_999999"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

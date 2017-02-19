@@ -229,8 +229,8 @@ public class MainActivity extends BaseActivity {
 //                return new MeetingFragment();
                 return new NewMeetingFragment();
             case 2:
-                return new WanFragment();
-//                return new WanFragment2();
+//                return new WanFragment();
+                return new WanFragment2();
             case 3:
                 return new ExpertFragment();
             case 4:

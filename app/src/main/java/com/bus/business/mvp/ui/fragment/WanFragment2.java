@@ -60,14 +60,14 @@ public class WanFragment2 extends BaseFragment {
     }
 
     private void ininData() {
-        titles.add("即将召开会议");
-        titles.add("正在召开会议");
-        titles.add("历史会议");
+        titles.add("奇珍异宝");
+        titles.add("山珍海味");
+        titles.add("翡翠玛瑙");
 
 
-        list.add(new WanFragment());
-        list.add(new WanFragment());
-        list.add(new WanFragment());
+        list.add(new QzybFragment());
+        list.add(new SzhwFragment());
+        list.add(new SzhwFragment());
 
     }
 
