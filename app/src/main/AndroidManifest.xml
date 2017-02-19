@@ -172,7 +172,8 @@
         <activity android:name=".mvp.ui.activities.AreaActivity" />
         <activity android:name=".mvp.ui.activities.TopicListActivity" />
         <activity android:name=".mvp.ui.activities.ExamsActivity" />
-        <activity android:name=".mvp.ui.activities.DropDetailActivity"></activity>
+        <activity android:name=".mvp.ui.activities.DropDetailActivity" />
+        <activity android:name=".mvp.ui.activities.QzybActivity"></activity>
     </application>
 
 </manifest>

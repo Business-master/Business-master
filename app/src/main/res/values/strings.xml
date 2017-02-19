@@ -63,25 +63,41 @@
         <item>密云区</item>
     </string-array>
 
+    <string-array name="hm_images">
+        <item>@mipmap/img_hm</item>
+    </string-array>
+    <string-array name="hm_urls">
+        <item>http://www.aceway.com.cn</item>
+    </string-array>
+
+    <string-array name="yy_images">
+        <item>@mipmap/img_yy</item>
+        <item>@mipmap/img_cjt</item>
+        <item>@mipmap/img_pyq</item>
+        <item>@mipmap/img_yjs</item>
+    </string-array>
+
+    <string-array name="yy_urls">
+        <item>http://www.yonyou.com/index.html?t=0.9121916741132736</item>
+        <item>http://www.chanjet.com/</item>
+        <item>http://www.chanjet.com/collection</item>
+        <item>https://www.yyfax.com/h5/activity/channel.html?code=lhbb</item>
+    </string-array>
+
     <string-array name="actions_images">
         <item>@mipmap/img_tagxzc</item>
         <item>@mipmap/img_ba</item>
         <item>@mipmap/img_bj_bank</item>
         <item>@mipmap/img_bjnsyh</item>
         <item>@mipmap/img_bjxf</item>
-        <item>@mipmap/img_cjt</item>
         <item>@mipmap/img_dfjh</item>
         <item>@mipmap/img_gjl</item>
         <item>@mipmap/img_gs_bank</item>
-        <item>@mipmap/img_hm</item>
         <item>@mipmap/img_hxyh</item>
         <item>@mipmap/img_lfyh</item>
-        <item>@mipmap/img_pyq</item>
         <item>@mipmap/img_rh</item>
         <item>@mipmap/img_twaf</item>
         <item>@mipmap/img_xyyh</item>
-        <item>@mipmap/img_yjs</item>
-        <item>@mipmap/img_yy</item>
         <item>@mipmap/img_yz</item>
         <item>@mipmap/img_zgmsyh</item>
         <item>@mipmap/img_zgnyyh</item>
@@ -94,19 +110,14 @@
         <item>http://www.bankofbeijing.com.cn/</item>
         <item>http://www.bjrcb.com/</item>
         <item>http://www.bobcfc.com/</item>
-        <item>http://www.chanjet.com/</item>
         <item>http://www.315job.com/</item>
         <item>http://www.gujinlai.com/</item>
         <item>http://www.icbc.com.cn</item>
-        <item>http://www.aceway.com.cn</item>
         <item>http://www.hxb.com.cn/home/cn/</item>
         <item>http://www.lccb.com.cn/</item>
-        <item>http://www.chanjet.com/collection</item>
         <item>http://www.bjrhjt.cn/subject/subject-cylm.html</item>
         <item>http://www.cnguardee.com/index.html</item>
         <item>http://www.cib.com.cn/cn/index.html</item>
-        <item>https://www.yyfax.com/h5/activity/channel.html?code=lhbb</item>
-        <item>http://www.yonyou.com/index.html?t=0.9121916741132736</item>
         <item>http://www.psbc.com/cn/index.html</item>
         <item>http://www.cmbc.com.cn/</item>
         <item>http://www.abchina.com/cn/</item>
@@ -114,27 +125,27 @@
         <item>http://www.zjhcpa.com.cn/</item>
     </string-array>
 
-    <string-array name="wan_images">
+    <string-array name="wan1_images">
         <item>@mipmap/wan_17</item>
         <item>@mipmap/wan_6</item>
         <item>@mipmap/wan_8</item>
         <item>@mipmap/wan_13</item>
         <item>@mipmap/wan_15</item>
-          <item>@mipmap/wan_1</item>
-          <item>@mipmap/wan_2</item>
-          <item>@mipmap/wan_3</item>
-          <item>@mipmap/wan_4</item>
-          <item>@mipmap/wan_5</item>
-          <item>@mipmap/wan_7</item>
-          <item>@mipmap/wan_88</item>
-          <item>@mipmap/wan_10</item>
-          <item>@mipmap/wan_11</item>
-          <item>@mipmap/wan_12</item>
-          <item>@mipmap/wan_14</item>
-          <item>@mipmap/wan_16</item>
-          <item>@mipmap/wan_18</item>
+        <item>@mipmap/wan_1</item>
+        <item>@mipmap/wan_2</item>
+        <item>@mipmap/wan_3</item>
+        <item>@mipmap/wan_4</item>
+        <item>@mipmap/wan_5</item>
+        <item>@mipmap/wan_7</item>
+        <item>@mipmap/wan_88</item>
+        <item>@mipmap/wan_10</item>
+        <item>@mipmap/wan_11</item>
+        <item>@mipmap/wan_12</item>
+        <item>@mipmap/wan_14</item>
+        <item>@mipmap/wan_16</item>
+        <item>@mipmap/wan_18</item>
     </string-array>
-    <string-array name="wan_urls">
+    <string-array name="wan1_urls">
         <item>http://mp.weixin.qq.com/s/Dhpq09t4tDjo-bZ7JywHog</item>
         <item>http://mp.weixin.qq.com/s/0B3b7Oy_WLmT79QoopEf6w</item>
         <item>http://mp.weixin.qq.com/s/mdaKCdUFSeHJJ_jnqcIm1A</item>
@@ -155,12 +166,12 @@
         <item>http://mp.weixin.qq.com/s/LJxNwpPobG2u1Dpslm3xiA</item>
         <item>http://mp.weixin.qq.com/s/Fmpocfip8A361HFOnSPxcg</item>
     </string-array>
-<string-array name="wan_titles">
+    <string-array name="wan1_titles">
         <item>谁说北京没有米其林，隐藏在帝都的10家准米其林餐厅，全世界吃货的梦想地！！</item>
         <item>北京一女子每天吃煮熟的苹果，30天以后惊呆了所有人！</item>
         <item>2017年，北京最新“十大怪”！！</item>
-       <item>北京各个区的特色！一句话讲到位！</item>
-       <item>烙饼时耍个小聪明，烙的饼张张薄如纸，还好吃！</item>
+        <item>北京各个区的特色！一句话讲到位！</item>
+        <item>烙饼时耍个小聪明，烙的饼张张薄如纸，还好吃！</item>
         <item>为什么要生二胎，终于知道答案了……</item>
         <item>刷爆朋友圈的一组漫画，您敢看吗？</item>
         <item>北京人注意！2017年这33笔钱将打入您的账户！</item>
@@ -175,31 +186,104 @@
         <item>北大发布的全国最好医院排名，详细到科室，关键时刻救命的（再不敢麻烦百度了！）</item>
         <item>飞往北京的航班迫降美国背后，国人震惊！</item>
     </string-array>
-    <string-array name="wan_details">
+    <string-array name="wan1_details">
         <item>虽然米其林还没有登录北京，但是！谁也阻挡不了吃货们对于顶级美食的探索与追求，于是，侦探美少女根据之情群众的爆料为大家收集了这10家准米其林餐厅，为了美食我们冲啊~~</item>
         <item>自从本宝宝放荡不羁吃吃吃以后我就是一个胖仙女了……胖仙女现在就爱吃水果！虽然，大帝都的冬天有很多水果可以吃……</item>
         <item>去年这当口，小编总结了北京城的“十大怪”，一年过去了，北京又诞生了不少逗比事儿，在此，小编就再总结一篇北京”新十大怪“，各位看官，您上眼：</item>
         <item>如果让你形容北京的每个区你会怎么形容？北京各区第一印象，你的第一印象是什么？</item>
         <item>如何把面饼烙得又薄又脆？其实你只要注意这几点烙出来的饼想多薄有多薄~~</item>
-       <item>曾有人说过，父母给孩子最好的礼物就是“手足”，一起玩耍，一起成长，当父母都已老去时，他们仍在彼此的生命中举足轻重！</item>
+        <item>曾有人说过，父母给孩子最好的礼物就是“手足”，一起玩耍，一起成长，当父母都已老去时，他们仍在彼此的生命中举足轻重！</item>
        <item>刷爆Facebook的一组漫画：
 生命太短暂，我没时间讨厌你</item>
-       <item>上班第一周，大北京的好消息就接连不断！‍各种免费、福利、优惠、补贴.....各种利好政策，北京人又要发财的的节奏啊！2017年，这33笔钱将打入你的账户快来看看你的钱都是怎么涨起来的吧！</item>
-       <item>这些歪理，歪的有道理。你觉得呢？</item>
-       <item>北京作为历史悠久的古都，存在着数不清的传说和秘密，其中不少甚至连老北京人也不一定知道，今天妞儿就给小伙伴儿们说几个~</item>
+        <item>上班第一周，大北京的好消息就接连不断！‍各种免费、福利、优惠、补贴.....各种利好政策，北京人又要发财的的节奏啊！2017年，这33笔钱将打入你的账户快来看看你的钱都是怎么涨起来的吧！</item>
+        <item>这些歪理，歪的有道理。你觉得呢？</item>
+        <item>北京作为历史悠久的古都，存在着数不清的传说和秘密，其中不少甚至连老北京人也不一定知道，今天妞儿就给小伙伴儿们说几个~</item>
 
-       <item>转眼之间，年就已经过完，从北上广深等城市回到老家的人们，都陆续回到了各自打拼的城市。开始着自己忙忙碌碌的上班生活。作为北漂中的一员，我们的编辑罗非是条鱼，用相机记录下他的回家之旅。</item>
+        <item>转眼之间，年就已经过完，从北上广深等城市回到老家的人们，都陆续回到了各自打拼的城市。开始着自己忙忙碌碌的上班生活。作为北漂中的一员，我们的编辑罗非是条鱼，用相机记录下他的回家之旅。</item>
 
-       <item>咱北京有一个地方明代的袁崇焕，大太监刘瑾都命丧在这里，但是如今这儿却成为了北京吃货们的聚集地，它的名字叫做——西四</item>
-       <item>是不是不想上班，是不是上班又饿又困？小编一招就让你上班瞬间，“神清气爽、精神百倍”</item>
-       <item>在北京有这样一个区，时髦炫酷吊炸天，这些个词儿放在它身上一点都不过分！</item>
-       <item>如果每一次旅行都当作一次猎奇，你会发现，虽然游走的每一座城市都有古怪的东西，但是总有一些新奇到让你觉得大自然的不可思议。一起来看看全球最古怪的景点有木有吓到你吧！</item>
+        <item>咱北京有一个地方明代的袁崇焕，大太监刘瑾都命丧在这里，但是如今这儿却成为了北京吃货们的聚集地，它的名字叫做——西四</item>
+        <item>是不是不想上班，是不是上班又饿又困？小编一招就让你上班瞬间，“神清气爽、精神百倍”</item>
+        <item>在北京有这样一个区，时髦炫酷吊炸天，这些个词儿放在它身上一点都不过分！</item>
+        <item>如果每一次旅行都当作一次猎奇，你会发现，虽然游走的每一座城市都有古怪的东西，但是总有一些新奇到让你觉得大自然的不可思议。一起来看看全球最古怪的景点有木有吓到你吧！</item>
 
-       <item>听说十里河天娇文化城要被拆了！去年潘家园的拆迁，曾让许多文玩人心碎。如今文玩圈又一个“圣地”也要跟我们说再见了！</item>
+        <item>听说十里河天娇文化城要被拆了！去年潘家园的拆迁，曾让许多文玩人心碎。如今文玩圈又一个“圣地”也要跟我们说再见了！</item>
 
-       <item>2015年5月26日，国家医疗数据中心在北京大学医学部挂牌，同时首届北京大学临床学科评估发布——中国最佳临床学科评估排行榜出炉。哪家医院的哪些学科治疗水平高？要看什么病该去哪儿看？有了这份表格，还有什么可担心的呢？</item>
+        <item>2015年5月26日，国家医疗数据中心在北京大学医学部挂牌，同时首届北京大学临床学科评估发布——中国最佳临床学科评估排行榜出炉。哪家医院的哪些学科治疗水平高？要看什么病该去哪儿看？有了这份表格，还有什么可担心的呢？</item>
 
-       <item>当中国式聪明遇上国际式规则，结果会怎样？旅居加拿大的华人企业家、德华国际矿业集团董事长刘乃顺先生，通过其亲身所见，给国人好好上了一课。这件事发生在从温哥华飞往北京的加拿大航班上，当时刘乃顺先生坐位在经济舱倒数第三排，靠近机尾，他有幸看到了一对夫妇是如何耍小聪明，结果自讨苦吃的全过程……</item>
+        <item>当中国式聪明遇上国际式规则，结果会怎样？旅居加拿大的华人企业家、德华国际矿业集团董事长刘乃顺先生，通过其亲身所见，给国人好好上了一课。这件事发生在从温哥华飞往北京的加拿大航班上，当时刘乃顺先生坐位在经济舱倒数第三排，靠近机尾，他有幸看到了一对夫妇是如何耍小聪明，结果自讨苦吃的全过程……</item>
+    </string-array>
+    <string-array name="wan2_images">
+        <item>@mipmap/wan2_1</item>
+        <item>@mipmap/wan2_2</item>
+        <item>@mipmap/wan2_3</item>
+        <item>@mipmap/wan2_4</item>
+        <item>@mipmap/wan2_5</item>
+        <item>@mipmap/wan2_6</item>
+        <item>@mipmap/wan2_7</item>
+        <item>@mipmap/wan2_8</item>
+        <item>@mipmap/wan2_88</item>
+        <item>@mipmap/wan2_10</item>
+        <item>@mipmap/wan2_11</item>
+        <item>@mipmap/wan2_12</item>
+        <item>@mipmap/wan2_13</item>
+        <item>@mipmap/wan2_14</item>
+        <item>@mipmap/wan2_15</item>
+        <item>@mipmap/wan2_16</item>
+    </string-array>
+    <string-array name="wan2_urls">
+        <item>http://mp.weixin.qq.com/s/BIqpt_-RwKZiGqRZCef91g</item>
+        <item>http://mp.weixin.qq.com/s/G0FRT3DZ0aUCUVhVRsWgcA</item>
+        <item>http://mp.weixin.qq.com/s/vMkNyPITZbXlHk5W3wy67g</item>
+        <item>http://mp.weixin.qq.com/s/I9uyhYU74uaQ1TEY6DoYkA</item>
+        <item>https://mp.weixin.qq.com/s/jEag-8kf_knd9NZGoCjIag</item>
+        <item>http://mp.weixin.qq.com/s/-8yEtLb1TmxNDc2c8ujWgw</item>
+        <item>http://mp.weixin.qq.com/s/IBz8u9XFaJQOPhB1eFEZNg</item>
+        <item>http://mp.weixin.qq.com/s/JzUWXXThJeQchz8yxgrPvg</item>
+        <item>http://mp.weixin.qq.com/s/go4JZLGcUqOWLh7RhuUpKA</item>
+        <item>http://mp.weixin.qq.com/s/QgXw5UsUUtxZ4dUKroRYPg</item>
+        <item>http://mp.weixin.qq.com/s/sOASxeVCvCi-DMGjjHO8MQ</item>
+        <item>http://mp.weixin.qq.com/s/oZpE6-mEfmYmLJ6AVx7xHA</item>
+        <item>http://mp.weixin.qq.com/s/CT66AQNu--HzKux34toAGg</item>
+        <item>https://mp.weixin.qq.com/s/xOeIsmOTHWFz_io1Vri3Yg</item>
+        <item>http://mp.weixin.qq.com/s/CCdG6neFTzqlGaSZ3eaqZg</item>
+        <item>http://mp.weixin.qq.com/s/7FtOO9bRGDXa2ztaXBGOLQ</item>
+    </string-array>
+    <string-array name="wan2_titles">
+        <item>春天刮肝经，无病一身轻</item>
+        <item>据说，这个笑话曾排名世界第一</item>
+        <item>☀老年四好 四养 四寿☀刚出的，句句有天机!(建议认真读)</item>
+        <item>太有才了！华裔女子用20张图片表达中西差异</item>
+        <item>40岁后九不要！（中年人都看看）</item>
+        <item>一个女人命好不好，从衣服就可以看出来</item>
+        <item>从欠款还款看人品</item>
+        <item>今年最潮的4句实话！（特精辟）</item>
+        <item>太形象了：70、80、90后同坐一个办公室，竟然是这样！</item>
+        <item>绝了！最全的地名谜语，太绝了，你猜对几个？</item>
+        <item>他只见她一面便决定为她终身不娶，守候一生一世，直至孤独终老！</item>
+        <item>醒来，每一天，都这么美好！</item>
+        <item>琴、棋、书、画、诗、酒、花、茶</item>
+        <item>时间验证了人心，见证了人性</item>
+        <item>被宠坏的中国式子女（深度好文）</item>
+        <item>渴望所有中国人都能看到这篇文章</item>
+    </string-array>
+    <string-array name="wan2_details">
+        <item>如果肝经出现了异常，身体即会呈现各种不适的症状，如脸色不佳、喉干、恶心、下痢、阴痛、腰痛、脚的第三指痛、焦燥、缺乏决断力等。解决这一系列的问题看上去比较费劲，其实，只需要你的举手之劳——每天刮肝经。</item>
+        <item>笑话：大家都要活下去</item>
+        <item>老年四最：最好的心态是知足，最好的医生是自己，最好的药物是时间，最好的活法是放下。</item>
+        <item>华裔设计师刘扬曾经在2007年出版了《东西相遇》一书，引起巨大反响。该书用简洁的笔画，用简单明了的图画向读者表现了德中两个社会的细节，比如两国家庭对待孩子的态度，人们旅游的方式，双方的审美观等等。大部分都是人们的日常经历，让德中读者们都能引起共鸣。</item>
+        <item>40岁后九不要！——如果你四十几岁了，不要斤斤计较，时光属于你的越来越少；</item>
+        <item>一个女人命好不好，从衣服就可以看出来。人的举止、服装、语言、动作都会暴露一个人的品位，身份。像禅师说的，不需要开口，走几步就知道你的境界几分，伪装不得。</item>
+        <item>欠款人大体上分为这么六种人：第一种：还没等你催就己经主动还款给你，这种人往往生意兴隆，实大体顾大局最后能成大气。</item>
+        <item>①不要炫耀你的钱，在医院那就像纸；②不要炫耀你的工作，你倒下了，无数人会比你做的更出色；③不要炫耀你的房，你去了，那就是别人的窝；④不要炫耀你的车，你离开了，车钥匙就握在别人手里了！</item>
+        <item>随着90后渐入职场，70后、80后、90后“三代同堂”越来越普遍。 此时，70后们正在向事业巅峰冲刺，80在感慨青春已逝的同时拼命工作养家糊口，而90后则带着独有的个性和不被70、80后理解的文化杀入职场。</item>
+        <item>有趣的地名谜语，不仅有趣，还能学到知识！快来看看你能猜对几个？</item>
+        <item>“你是爱，是暖，是希望，你是人间的四月天！”每当读到这句话，便会想到那个洋溢着四月的芬芳、如仙般的女子——林徽因，而说起林徽因，又不能不提那个痴情守望了她一生的男人，金岳霖。</item>
+        <item>清晨，打开窗户，薄薄的阳光，微凉的空气，顿时穿过我的身体，这感觉，像是一杯凉茶那样通透。</item>
+        <item>【一】琴——知音一曲百年经，荡尽红尘留世名。落雁平沙歌士志，鱼樵山水问心宁。轻弹旋律三分醉，揉断琴弦几处醒？纵是真情千万缕，子期不在有谁听？</item>
+        <item>水不试，不知深浅；人不交，不知好坏。时间是个好东西，
+验证了人心，见证了人性。说的好不如做得好，我总是担心身边会失去谁，可我却忘了问，又有谁会害怕失去我！</item>
+        <item>总有一些人，你活得青春无敌，你过得光鲜亮丽，却看不见你身后默默供养着你的父母，为了让你过上更好的生活，还在向这个世界低声下气。</item>
+        <item>古人寒窗苦读，十年如一日，才有了今天中华五千年博大精深的文化，而现代人确忽略的智慧的来源。</item>
     </string-array>
 
     <string name="apply_join">参会人 ：</string>

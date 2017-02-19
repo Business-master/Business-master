@@ -66,8 +66,8 @@ public class WanFragment2 extends BaseFragment {
 
 
         list.add(new QzybFragment());
-        list.add(new SzhwFragment());
-        list.add(new SzhwFragment());
+        list.add( SzhwFragment.getIntance(1));
+        list.add(SzhwFragment.getIntance(2));
 
     }
 

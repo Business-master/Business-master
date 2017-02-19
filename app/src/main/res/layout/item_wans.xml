@@ -6,6 +6,7 @@
     android:gravity="center">
 
     <ImageView
+        android:clickable="true"
         android:id="@+id/img_wan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

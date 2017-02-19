@@ -69,21 +69,21 @@ public class CustomAdapter extends BaseAdapter{
         if (convertView==null){
             holder=new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_qzyb,null,false);
-            holder.textView = (TextView) convertView.findViewById(R.id.name_qzyb);
-//            holder.imageView = (ImageView) convertView.findViewById(R.id.img_qzyb);
+//            holder.textView = (TextView) convertView.findViewById(R.id.name_qzyb);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.img_qzyb);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
         WanBean wanBean = getList().get(position);
-        holder.textView.setText(wanBean.getUrl());
-//        holder.imageView.setImageResource(wanBean.getImgSrc());
+//        holder.textView.setText(wanBean.getUrl());
+        holder.imageView.setImageResource(wanBean.getImgSrc());
         return convertView;
     }
 
     class  ViewHolder{
-//        ImageView imageView;
-        TextView textView;
+        ImageView imageView;
+//        TextView textView;
     }
 
 

@@ -1,5 +1,6 @@
 package com.bus.business.mvp.ui.adapter;
 
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bus.business.R;
@@ -24,5 +25,11 @@ public class WanAdapter extends BaseQuickAdapter<WanBean>{
     protected void convert(BaseViewHolder baseViewHolder, WanBean wanBean) {
          ImageView img = baseViewHolder.getView(R.id.img_wan);
         img.setImageResource(wanBean.getImgSrc());
+//        img.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 }

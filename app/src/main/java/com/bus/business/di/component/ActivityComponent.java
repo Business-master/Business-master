@@ -15,6 +15,7 @@ import com.bus.business.mvp.ui.activities.MeetingDetailActivity;
 import com.bus.business.mvp.ui.activities.NewDetailActivity;
 import com.bus.business.mvp.ui.activities.NewsManActivity;
 import com.bus.business.mvp.ui.activities.PlaceActivity;
+import com.bus.business.mvp.ui.activities.QzybActivity;
 import com.bus.business.mvp.ui.activities.SearchActivity;
 
 import com.bus.business.mvp.ui.activities.TopicListActivity;
@@ -51,4 +52,6 @@ public interface ActivityComponent {
     void inject(AddressListActivity addressListActivity);
     void inject(AreaActivity areaActivity);
     void inject(TopicListActivity topicListActivity);
+
+    void inject(QzybActivity qzybActivity);
 }

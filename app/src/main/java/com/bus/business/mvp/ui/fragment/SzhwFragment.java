@@ -2,6 +2,8 @@ package com.bus.business.mvp.ui.fragment;
 
 import android.app.Activity;
 import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -48,6 +50,16 @@ public class SzhwFragment extends BaseFragment implements BaseQuickAdapter.OnRec
     private SzhwAdapter adapter;
     private List<WanBean> wanList;
 
+    private   int index=1;
+
+    public static SzhwFragment getIntance(int i) {
+        SzhwFragment szhwFragment = new SzhwFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("index",i);
+        szhwFragment.setArguments(bundle);
+        return szhwFragment;
+    }
+
     @Override
     public void initInjector() {
         mFragmentComponent.inject(this);
@@ -55,6 +67,7 @@ public class SzhwFragment extends BaseFragment implements BaseQuickAdapter.OnRec
 
     @Override
     public void initViews(View view) {
+        index = getArguments().getInt("index");
         initDate();
         initRecyclerView();
     }
@@ -66,10 +79,17 @@ public class SzhwFragment extends BaseFragment implements BaseQuickAdapter.OnRec
 
     private void initDate() {
         wanList = new ArrayList<>();
-        TypedArray imgAr = mActivity.getResources().obtainTypedArray(R.array.wan_images);
-        TypedArray imgUrl = mActivity.getResources().obtainTypedArray(R.array.wan_urls);
-        TypedArray titles = mActivity.getResources().obtainTypedArray(R.array.wan_titles);
-        TypedArray details = mActivity.getResources().obtainTypedArray(R.array.wan_details);
+         int [] a ;
+
+        if (index==1){
+            a = new int[]{R.array.wan1_images,R.array.wan1_urls,R.array.wan1_titles,R.array.wan1_details};
+        }else {
+            a = new int[]{R.array.wan2_images,R.array.wan2_urls,R.array.wan2_titles,R.array.wan2_details};
+        }
+        TypedArray imgAr = mActivity.getResources().obtainTypedArray(a[0]);
+        TypedArray imgUrl = mActivity.getResources().obtainTypedArray(a[1]);
+        TypedArray titles = mActivity.getResources().obtainTypedArray(a[2]);
+        TypedArray details = mActivity.getResources().obtainTypedArray(a[3]);
 
         int len = imgUrl.length();
         for (int i = 0; i < len; i++) {

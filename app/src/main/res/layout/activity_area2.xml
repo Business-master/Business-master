@@ -30,7 +30,6 @@
             android:id="@+id/area_gv"
             android:numColumns="3"
             android:verticalSpacing="10dp"
-            android:stretchMode="columnWidth"
             android:horizontalSpacing="10dp"
             android:padding="10dp"
             android:layout_width="match_parent"
@@ -52,7 +51,6 @@
             <com.bus.business.mvp.view.CustomGridView
                 android:id="@+id/orgina_gv"
                 android:numColumns="3"
-                android:stretchMode="columnWidth"
                 android:verticalSpacing="10dp"
                 android:horizontalSpacing="10dp"
                 android:padding="10dp"

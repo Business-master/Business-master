@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 /**
  * Created by ATRSnail on 2017/2/8.
- * 自定义ListView
+ * 自定义 RecyclerView
  */
 
 public class CustomRecyclerView extends RecyclerView{

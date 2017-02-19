@@ -7,50 +7,13 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:fillViewport="true">
-     <!--<include android:id="@+id/hanming" layout="@layout/custom_gv_fragment"></include>-->
      <LinearLayout
          android:orientation="vertical"
          android:layout_width="match_parent"
          android:layout_height="match_parent">
-          <LinearLayout
-              android:orientation="horizontal"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:layout_width="match_parent">
-               <!--<View-->
-               <!--android:id="@+id/line_custom"-->
-               <!--android:layout_width="2dp"-->
-               <!--android:background="@color/blue"-->
-               <!--android:layout_height="40dp"/>-->
-
-               <TextView
-                   android:id="@+id/title_custom"
-                   android:textColor="@color/color_333333"
-                   android:text="工商联"
-                   android:padding="10dp"
-                   android:gravity="center_vertical"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content" />
-               <View
-                   android:layout_weight="1"
-                   android:layout_width="0dp"
-                   android:layout_height="0.5dp"
-                   android:layout_marginLeft="15dp"
-                   android:layout_marginRight="15dp"
-                   android:background="@mipmap/list_view_divider" />
-          </LinearLayout>
-
-          <com.bus.business.mvp.view.CustomGridView
-              android:id="@+id/details_qzub"
-              android:numColumns="3"
-              android:verticalSpacing="10dp"
-              android:stretchMode="spacingWidth"
-              android:horizontalSpacing="10dp"
-              android:padding="10dp"
-              android:layout_width="match_parent"
-              android:layout_weight="1"
-              android:layout_height="0dp">
-          </com.bus.business.mvp.view.CustomGridView>
+          <include android:id="@+id/hanming" layout="@layout/custom_gv_fragment"></include>
+          <include android:id="@+id/youqi" layout="@layout/custom_gv_fragment"></include>
+          <include android:id="@+id/all_qzyb" layout="@layout/custom_gv_fragment"></include>
      </LinearLayout>
 
 </ScrollView>
