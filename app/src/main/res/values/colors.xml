@@ -84,7 +84,9 @@
 	<color name="color_0dadd5">#0dadd5</color>
 	<color name="color_border">#0CADD5</color>
 
-
+	<color name="stand_bg">#fff6f6f6</color>
+	<color name="divide">#ffe4e4e4</color>
+	<color name="font_black_6">#ff666666</color>
 	<!--87%white-->
 	<color name="primary_text">#de000000</color>
 	<!--87%black-->
@@ -99,4 +101,5 @@
 
 	<color name="item_alpha_back">#43000000</color>
 
+	<color name="font_black_content">#222222</color>
 </resources>

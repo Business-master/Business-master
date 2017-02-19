@@ -6,12 +6,14 @@ import android.util.SparseArray;
 import com.bus.business.App;
 import com.bus.business.common.ApiConstants;
 import com.bus.business.common.UsrMgr;
+import com.bus.business.mvp.entity.CashBean;
 import com.bus.business.mvp.entity.response.RspAreaBean;
 import com.bus.business.mvp.entity.response.RspAreaSeaBean;
 import com.bus.business.mvp.entity.response.RspAssisBean;
 import com.bus.business.mvp.entity.response.RspBannerBean;
 import com.bus.business.mvp.entity.response.RspBusDetailBean;
 import com.bus.business.mvp.entity.response.RspBusinessBean;
+import com.bus.business.mvp.entity.response.RspDropBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
@@ -150,24 +152,22 @@ public class RetrofitManager {
         return mNewsService.getNewsList(map);
     }
 
-    public Observable<RspMeetingBean> getMeetingsListObservable(int pageNum, int numPerPage, String meetingName,int status) {
+    public Observable<RspMeetingBean> getMeetingsListObservable(int pageNum, int numPerPage, String meetingName, int status) {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
         map.put("numPerPage", numPerPage + "");
         map.put("userId", UsrMgr.getUseId());
-        if (status!=-1){
-            map.put("status",status+"");
-        }else {
-            map.put("status","");
+        if (status != -1) {
+            map.put("status", status + "");
+        } else {
+            map.put("status", "");
         }
 
         if (!TextUtils.isEmpty(meetingName))
-            map.put("meetingName",meetingName);
+            map.put("meetingName", meetingName);
         KLog.a(map.toString());
         return mNewsService.getMeetingsList(map);
     }
-
-
 
 
     public Observable<RspUserBean> getLoginInObservable(String phoneNum, String password) {
@@ -205,7 +205,6 @@ public class RetrofitManager {
     }
 
 
-
     public Observable<RspBusinessBean> getBusinessListObservable(int pageNum, int numPerPage, String title) {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
@@ -214,6 +213,22 @@ public class RetrofitManager {
             map.put("title", title);
         KLog.a(map.toString());
         return mNewsService.getBusinessList(map);
+    }
+
+    public Observable<RspDropBean> getDropListObservable(int pageNum, int numPerPage, CashBean cashBean) {
+        Map<String, String> map = new HashMap<>();
+        if (!TextUtils.isEmpty(cashBean.getCashType()))
+            map.put("cashType", cashBean.getCashType());
+        if (!TextUtils.isEmpty(cashBean.getPledgeCode()))
+            map.put("pledgeCode", cashBean.getPledgeCode());
+        if (!TextUtils.isEmpty(cashBean.getReplayCode()))
+            map.put("replayCode", cashBean.getReplayCode());
+        if (!TextUtils.isEmpty(cashBean.getLoanCode()))
+            map.put("loanCode", cashBean.getLoanCode());
+        map.put("page", pageNum + "");
+        map.put("size", numPerPage + "");
+        KLog.a(map.toString());
+        return mNewsService.getDropList(map);
     }
 
 
@@ -230,52 +245,52 @@ public class RetrofitManager {
     public Observable<BaseRspObj> signInMeeting(String meetingId) {
         Map<String, String> map = new HashMap<>();
         map.put("meetingId", meetingId);
-        map.put("userId",UsrMgr.getUseId());
+        map.put("userId", UsrMgr.getUseId());
         KLog.a(map.toString());
         return mNewsService.signInMeeting(map);
     }
 
     //修改会议参加状态新接口
-    public Observable<BaseRspObj> joinMeeting(int meetingId,int joinType,int foodId,int stay,String userAssistantId,String carNo,int driver,String cause,String desp) {
+    public Observable<BaseRspObj> joinMeeting(int meetingId, int joinType, int foodId, int stay, String userAssistantId, String carNo, int driver, String cause, String desp) {
         Map<String, String> map = new HashMap<>();
-        map.put("userId",UsrMgr.getUseId());
-        map.put("meetingId", meetingId+"");
-        map.put("joinType",String.valueOf(joinType));
-        map.put("foodId",String.valueOf(foodId));
-        map.put("stay",String.valueOf(stay));
-        map.put("userAssistantId",String.valueOf(userAssistantId));
-        map.put("carNo",carNo);
-        map.put("driver",String.valueOf(driver));
-        map.put("cause",cause);
-        map.put("desp",desp);
+        map.put("userId", UsrMgr.getUseId());
+        map.put("meetingId", meetingId + "");
+        map.put("joinType", String.valueOf(joinType));
+        map.put("foodId", String.valueOf(foodId));
+        map.put("stay", String.valueOf(stay));
+        map.put("userAssistantId", String.valueOf(userAssistantId));
+        map.put("carNo", carNo);
+        map.put("driver", String.valueOf(driver));
+        map.put("cause", cause);
+        map.put("desp", desp);
         KLog.a(map.toString());
         return mNewsService.joinMeeting(map);
     }
 
     //请假 或者取消报名
-    public Observable<BaseRspObj> joinMeeting(int meetingId,int joinType,String cause) {
+    public Observable<BaseRspObj> joinMeeting(int meetingId, int joinType, String cause) {
         Map<String, String> map = new HashMap<>();
-        map.put("userId",UsrMgr.getUseId());
-        map.put("meetingId", meetingId+"");
-        map.put("joinType",String.valueOf(joinType));
-        map.put("cause",cause);
+        map.put("userId", UsrMgr.getUseId());
+        map.put("meetingId", meetingId + "");
+        map.put("joinType", String.valueOf(joinType));
+        map.put("cause", cause);
         KLog.a(map.toString());
         return mNewsService.joinMeeting(map);
     }
 
     public Observable<RspAssisBean> getAssissListObservable() {
         Map<String, String> map = new HashMap<>();
-        map.put("userId",UsrMgr.getUseId());
+        map.put("userId", UsrMgr.getUseId());
         KLog.a(map.toString());
         return mNewsService.getAssissList(map);
     }
 
-    public Observable<BaseRspObj> getAddAssisListObservable(String name,String pass,String phone) {
+    public Observable<BaseRspObj> getAddAssisListObservable(String name, String pass, String phone) {
         Map<String, String> map = new HashMap<>();
-        map.put("assistantedId",UsrMgr.getUseId());
-        map.put("userName",name);
-        map.put("password",pass);
-        map.put("phoneNo",phone);
+        map.put("assistantedId", UsrMgr.getUseId());
+        map.put("userName", name);
+        map.put("password", pass);
+        map.put("phoneNo", phone);
         KLog.a(map.toString());
         return mNewsService.getAddAssis(map);
     }
@@ -283,7 +298,7 @@ public class RetrofitManager {
     // 用户选取助理接口传参
     public Observable<BaseRspObj> getSelectAssisObservable() {
         Map<String, String> map = new HashMap<>();
-        map.put("userId",UsrMgr.getUseId());
+        map.put("userId", UsrMgr.getUseId());
         KLog.a(map.toString());
         return mNewsService.getSelectAssis(map);
     }
@@ -295,7 +310,7 @@ public class RetrofitManager {
         return mNewsService.getAreaList(map);
     }
 
-    public Observable<RspAreaSeaBean> getAreaSeaListObservable(int pageNum,int numPerPage,String areaCode,String chambreCode,String title) {
+    public Observable<RspAreaSeaBean> getAreaSeaListObservable(int pageNum, int numPerPage, String areaCode, String chambreCode, String title) {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
         map.put("numPerPage", numPerPage + "");
@@ -305,7 +320,6 @@ public class RetrofitManager {
 
         if (!TextUtils.isEmpty(chambreCode))
             map.put("chambreCode", chambreCode);
-
 
 
         if (!TextUtils.isEmpty(title))
@@ -325,7 +339,7 @@ public class RetrofitManager {
         Map<String, String> map = new HashMap<>();
         map.put("userId", userId);
         map.put("registrationId", registrationId);
-        map.put("platform","2");
+        map.put("platform", "2");
         KLog.a(map.toString());
         return mNewsService.registerJpush(map);
     }

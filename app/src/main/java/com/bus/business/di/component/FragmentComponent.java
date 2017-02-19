@@ -6,6 +6,8 @@ import android.content.Context;
 import com.bus.business.di.module.FragmentModule;
 import com.bus.business.di.scope.ContextLife;
 import com.bus.business.di.scope.PerFragment;
+import com.bus.business.mvp.ui.fragment.DropDownFragment;
+import com.bus.business.mvp.ui.fragment.ExpertFragment;
 import com.bus.business.mvp.ui.fragment.MainPagerFragment;
 import com.bus.business.mvp.ui.fragment.MeetingFragment;
 import com.bus.business.mvp.ui.fragment.MineFragment;
@@ -45,4 +47,8 @@ public interface FragmentComponent {
     void inject(NewsFragment_new newsFragment_new);
 
     void inject(WanFragment2 wanFragment2);
+
+    void inject(ExpertFragment expertFragment);
+
+    void inject(DropDownFragment dropDownFragment);
 }

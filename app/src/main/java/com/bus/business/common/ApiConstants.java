@@ -12,7 +12,7 @@ public class ApiConstants {
     public static final String NETEAST_IMG_HOST = "http://files.heweather.com/cond_icon/%s.png";
 
     //线上
-   // public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
+ //   public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
 
     public static String getHost() {
         return NETEAST_HOST;
@@ -57,4 +57,6 @@ public class ApiConstants {
     public static final String TOPICS_URL = "/gsl-api/gsl/dissertation/disList";
     public static final String TOPIC_DETAIL_URL = "/gsl-api/gsl/dissertation/getdissertation";
 
+
+    public static final String DROP_LIST_URL = "/gsl-api/cashProfessor/list";
 }

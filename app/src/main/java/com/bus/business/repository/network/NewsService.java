@@ -7,6 +7,7 @@ import com.bus.business.mvp.entity.response.RspAssisBean;
 import com.bus.business.mvp.entity.response.RspBannerBean;
 import com.bus.business.mvp.entity.response.RspBusDetailBean;
 import com.bus.business.mvp.entity.response.RspBusinessBean;
+import com.bus.business.mvp.entity.response.RspDropBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
@@ -126,5 +127,10 @@ public interface NewsService {
     @FormUrlEncoded
     @POST(ApiConstants.TOPIC_DETAIL_URL)
     Observable<RspNewDetailBean> getTopicDetail(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.DROP_LIST_URL)
+    Observable<RspDropBean> getDropList(@FieldMap Map<String, String> map);
+
 
 }
