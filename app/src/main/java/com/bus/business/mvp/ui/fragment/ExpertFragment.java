@@ -26,9 +26,9 @@ import static com.bus.business.common.DropsType.TYPE_NO_BANK;
 public class ExpertFragment extends BaseFragment{
 
 
-    @BindView(R.id.vp_newm)
+    @BindView(R.id.vp_drop)
     ViewPager mViewPager;
-    @BindView(R.id.tl_newm)
+    @BindView(R.id.tl_drop)
     TabLayout mTabLayout;
     private List<String> titles= new ArrayList<>();
     private List<Fragment> list = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ExpertFragment extends BaseFragment{
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_newmeeting;
+        return R.layout.fragment_drop;
     }
 
 

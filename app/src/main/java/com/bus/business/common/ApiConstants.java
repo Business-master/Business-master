@@ -8,11 +8,11 @@ package com.bus.business.common;
 public class ApiConstants {
 
     //线下
-    public static final String NETEAST_HOST = "http://172.16.10.15:9300/";
+  //  public static final String NETEAST_HOST = "http://172.16.10.15:9300/";
     public static final String NETEAST_IMG_HOST = "http://files.heweather.com/cond_icon/%s.png";
 
     //线上
-  //  public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
+    public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
 
     public static String getHost() {
         return NETEAST_HOST;

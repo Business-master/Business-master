@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bus.business.App;
 import com.bus.business.R;
 import com.bus.business.common.ApiConstants;
@@ -28,8 +29,7 @@ public class DropDetailActivity extends BaseActivity {
 
     private DropBean dropBean;
 
-    @BindView(R.id.logo)
-    ImageView img;
+    private ImageView img;
     @BindView(R.id.address)
     TextView address;
     @BindView(R.id.name)
@@ -62,19 +62,14 @@ public class DropDetailActivity extends BaseActivity {
         showOrGoneSearchRl(View.GONE);
 
         dropBean = (DropBean) getIntent().getSerializableExtra(DROP_BEAN);
-
+        img = (ImageView) findViewById(R.id.img_logo);
         inputData();
     }
 
     private void inputData() {
 
         KLog.a("img_url--》"+ApiConstants.NETEAST_HOST+dropBean.getLogoUrl());
-        Glide.with(App.getAppContext()).load(ApiConstants.NETEAST_HOST+dropBean.getLogoUrl()).asBitmap() // gif格式有时会导致整体图片不显示，貌似有冲突
-                .format(DecodeFormat.PREFER_ARGB_8888)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.color.image_place_holder)
-                .error(R.drawable.ic_load_fail)
-                .into(img);
+
         name.setText(dropBean.getProductName()+" - 产品名称");
         tv_pledgeCode.setText(dropBean.getPledgeCode());
         tv_load.setText(dropBean.getPledgeCode());
@@ -83,6 +78,14 @@ public class DropDetailActivity extends BaseActivity {
         tv_loanIntroduction.setText(dropBean.getReplayCode());
         tv_cashRate.setText(dropBean.getCashRate()+"%");
         tv_productDesp.setText(dropBean.getLoanIntroduction());
+
+        Glide.with(App.getAppContext()).load(ApiConstants.NETEAST_HOST+dropBean.getLogoUrl())
+                .asBitmap() // gif格式有时会导致整体图片不显示体图片不显示，貌似有冲突
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.color.image_place_holder)
+                .error(R.drawable.ic_load_fail)
+                .into(img);
     }
 
     @OnClick(R.id.btnSure)
