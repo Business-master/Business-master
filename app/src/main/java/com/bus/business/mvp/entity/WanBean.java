@@ -5,13 +5,15 @@ import android.content.Intent;
 
 import com.bus.business.mvp.ui.activities.WebActivity;
 
+import java.io.Serializable;
+
 /**
  * @author xch
  * @version 1.0
  * @create_date 17/1/11
  */
 
-public class WanBean {
+public class WanBean implements Serializable{
 
     public static final String WEBURL = "web_url";
     private int imgSrc;
@@ -19,6 +21,24 @@ public class WanBean {
 
     String title;
     String detail;
+    private int icon;
+    private int banner;
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
+    public int getBanner() {
+        return banner;
+    }
+
+    public void setBanner(int banner) {
+        this.banner = banner;
+    }
 
     public String getTitle() {
         return title;

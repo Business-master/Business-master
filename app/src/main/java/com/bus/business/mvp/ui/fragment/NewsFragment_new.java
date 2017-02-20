@@ -493,22 +493,22 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     }
 
     private void checkIsEmpty(List<BaseNewBean> newsSummary) {
-        if (newsSummary == null && mNewsListAdapter.getData() == null) {
-            mNewsRV.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
-        } else {
+        if (newsSummary != null && mNewsListAdapter.getData().size()>0 ) {
             mNewsRV.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
+        } else {
+            mNewsRV.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
         }
     }
 
     private void checkEmpty(List<AreaSeaBean> newsSummary) {
-        if (newsSummary == null && mAreaAdapter.getData() == null) {
-            mNewsRV.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
-        } else {
+        if (newsSummary != null && mAreaAdapter.getData().size()>0) {
             mNewsRV.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
+        } else {
+            mNewsRV.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
         }
     }
 

@@ -19,6 +19,7 @@ import com.bus.business.common.LoadNewsType;
 import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.MeetingBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
+import com.bus.business.mvp.entity.response.base.BaseNewBean;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.presenter.impl.MeetingPresenterImpl;
@@ -128,7 +129,7 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
         likeBeanList = new ArrayList<>();
 //        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_meeting_item, likeBeanList);//
-        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item2, likeBeanList,index);
+        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item2, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);
         mNewsListAdapter.openLoadMore(20, true);
         mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
@@ -172,6 +173,17 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
         mNewsPresenter.loadMore();
     }
 
+    private void checkIsEmpty(List<MeetingBean> newsSummary) {
+        if (newsSummary != null && mNewsListAdapter.getData().size()>0) {
+            mNewsRV.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
+        } else {
+            mNewsRV.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+            mEmptyView.setText("暂无数据");
+        }
+    }
+
     @Override
     public void setMeetingList(List<MeetingBean> newsBean, @LoadNewsType.checker int loadType) {
 
@@ -179,9 +191,11 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
                 mNewsListAdapter.setNewData(newsBean);
+                checkIsEmpty(newsBean);
                 break;
             case LoadNewsType.TYPE_REFRESH_ERROR:
                 mSwipeRefreshLayout.setRefreshing(false);
+                checkIsEmpty(newsBean);
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
                 if (newsBean == null || newsBean.size() == 0) {

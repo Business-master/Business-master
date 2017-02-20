@@ -1,10 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_qzyb"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:scrollbars="none"
+    android:fitsSystemWindows="true"
     tools:context="com.bus.business.mvp.ui.activities.QzybActivity">
-    <include layout="@layout/layout_main_header"></include>
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <include  layout="@layout/layout_main_header"></include>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/empty_qzyb"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:text="@string/empty_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:padding="20dp"
+                android:id="@+id/ll_qzyb"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:adjustViewBounds="true"
+                    android:id="@+id/icon_qzyb"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/atzuche_t"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@color/color_333333"
+                    android:id="@+id/content_qzyb"
+                    android:layout_marginTop="10dp"
+                    android:text="凹凸租车率先将“车共享”理念带入中国。平台凭借优质的服务让车主安心将自己的闲置车辆通过平台租给他人使用；租客拥有更为丰富的车型选择，并且能够使用车况更好的车辆。
+平台车辆超高性价比，平均租金低于市场价30%-50%，车型数量远远大于传统市场。
+在凹凸租车的平台上，车主和租客不仅是承租双方的交易关系，双方将诚实互信、丰富体验、社会责任都建立在共享精神之上，创建一种更为高尚的人际关系。"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/banner_qzyb"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/atzuche_b"
+                    android:adjustViewBounds="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/ensure_qzyb"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:background="@drawable/blue_circle_5"
+                        android:textColor="@color/white"
+                        android:text="去看看"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

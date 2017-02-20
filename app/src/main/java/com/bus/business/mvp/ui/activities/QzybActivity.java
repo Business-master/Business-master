@@ -3,9 +3,18 @@ package com.bus.business.mvp.ui.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.bus.business.R;
+import com.bus.business.mvp.entity.WanBean;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
+import com.socks.library.KLog;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 奇珍异宝详情页面
@@ -13,6 +22,18 @@ import com.bus.business.mvp.ui.activities.base.BaseActivity;
 
 public class QzybActivity extends BaseActivity {
 
+    @BindView(R.id.icon_qzyb)
+    ImageView icon_qzyb;
+    @BindView(R.id.banner_qzyb)
+    ImageView banner_qzyb;
+    @BindView(R.id.content_qzyb)
+    TextView content_qzyb;
+    @BindView(R.id.empty_qzyb)
+    TextView empty_qzyb;
+    @BindView(R.id.ll_qzyb)
+    LinearLayout ll_qzyb;
+
+    private WanBean wanBean ;
     @Override
     public int getLayoutId() {
         return R.layout.activity_qzyb;
@@ -25,8 +46,32 @@ public class QzybActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-          setCustomTitle("汉铭集团");
-          showOrGoneSearchRl(View.GONE);
+        Bundle bundle = getIntent().getExtras();
+        wanBean = (WanBean) bundle.getSerializable("wanBean");
+
+        setCustomTitle("产品详情");
+        showOrGoneSearchRl(View.GONE);
+        KLog.a("aaaaaaaa"+wanBean.getDetail());
+        if ("-1".equals(wanBean.getDetail())){
+            ll_qzyb.setVisibility(View.GONE);
+            empty_qzyb.setVisibility(View.VISIBLE);
+        }else {
+            ll_qzyb.setVisibility(View.VISIBLE);
+            empty_qzyb.setVisibility(View.GONE);
+            content_qzyb.setText(wanBean.getDetail());
+            icon_qzyb.setImageResource(wanBean.getIcon());
+            Glide.with(this).load(wanBean.getBanner()).into(banner_qzyb);
+        }
+    }
+
+
+    @OnClick({R.id.ensure_qzyb})
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.ensure_qzyb:
+                wanBean.intentToWebAct(this);
+                break;
+        }
     }
 
 

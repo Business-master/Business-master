@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bus.business.R;
 import com.bus.business.mvp.entity.WanBean;
+import com.bus.business.mvp.ui.adapter.QzybAdapter;
 import com.bus.business.mvp.ui.adapter.WanAdapter;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 import com.bus.business.mvp.view.CustomRecyclerView;
@@ -49,7 +50,9 @@ public class QzybFragment extends BaseFragment  {
     Activity mActivity;
 
 
-
+     int [] array_all = new int[]{R.array.actions_images,R.array.actions_urls,R.array.actions_contents,R.array.actions_icons,R.array.actions_banners};
+     int [] array_hm = new int[]{R.array.hm_images,R.array.hm_urls,R.array.hm_contents,R.array.hm_icons,R.array.hm_banners};
+     int [] array_yy = new int[]{R.array.yy_images,R.array.yy_urls,R.array.yy_contents,R.array.yy_icons,R.array.yy_banners};
 
     @Override
     public int getLayoutId() {
@@ -71,10 +74,36 @@ public class QzybFragment extends BaseFragment  {
         scroll_qzyb.setFocusableInTouchMode(true);
         scroll_qzyb.requestFocus();
 
-        initCustomRecyclerView(textView1,recyclerView1,hanming,"汉铭",initData(R.array.hm_images,R.array.hm_urls));
-        initCustomRecyclerView(textView2,recyclerView2,youqi,"用友", initData(R.array.yy_images,R.array.yy_urls));
-        initCustomRecyclerView(textView3,recyclerView3,all_qzyb,"全部", initData(R.array.actions_images,R.array.actions_urls));
+        initCustomRecyclerView(textView1,recyclerView1,hanming,"汉铭",initData(array_hm));
+        initCustomRecyclerView(textView2,recyclerView2,youqi,"用友", initData(array_yy));
+        initCustomRecyclerView(textView3,recyclerView3,all_qzyb,"全部", initData(array_all));
 
+    }
+
+    private List<WanBean> initData(int[] array) {
+        List<WanBean> wanList=new ArrayList<>();
+        TypedArray imgAr = mActivity.getResources().obtainTypedArray(array[0]);
+        TypedArray imgUrl = mActivity.getResources().obtainTypedArray(array[1]);
+        TypedArray contents = mActivity.getResources().obtainTypedArray(array[2]);
+        TypedArray icons = mActivity.getResources().obtainTypedArray(array[3]);
+        TypedArray banners = mActivity.getResources().obtainTypedArray(array[4]);
+
+        int len = imgAr.length();
+        for (int i = 0; i < len; i++) {
+            WanBean wanBean = new WanBean();
+            wanBean.setImgSrc(imgAr.getResourceId(i, 0));
+            wanBean.setIcon(icons.getResourceId(i, 0));
+            wanBean.setBanner(banners.getResourceId(i, 0));
+            wanBean.setUrl(imgUrl.getString(i));
+            wanBean.setDetail(contents.getString(i));
+            wanList.add(wanBean);
+        }
+        imgAr.recycle();
+        contents.recycle();
+        icons.recycle();
+        banners.recycle();
+        imgUrl.recycle();
+        return wanList;
     }
 
     private void initCustomRecyclerView(TextView textView, CustomRecyclerView recyclerView, View view, String str, List<WanBean> wanList) {
@@ -86,35 +115,12 @@ public class QzybFragment extends BaseFragment  {
     }
 
     private void initRecyclerView(CustomRecyclerView recyclerView, List<WanBean> wanList) {
-
-
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerGridItemDecoration(mActivity));
         recyclerView.setLayoutManager(new GridLayoutManager(mActivity, 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        WanAdapter   adapter = new WanAdapter(R.layout.item_wans, wanList);
+        QzybAdapter adapter = new QzybAdapter(R.layout.item_wans, wanList);
         recyclerView.setAdapter(adapter);
     }
-
-
-    private List<WanBean> initData(int images,int urls) {
-        List<WanBean> wanList=new ArrayList<>();
-        TypedArray imgAr = mActivity.getResources().obtainTypedArray(images);
-        TypedArray imgUrl = mActivity.getResources().obtainTypedArray(urls);
-
-        int len = imgAr.length();
-        for (int i = 0; i < len; i++) {
-            WanBean wanBean = new WanBean();
-            wanBean.setImgSrc(imgAr.getResourceId(i, 0));
-            wanBean.setUrl(imgUrl.getString(i));
-            wanList.add(wanBean);
-        }
-        imgAr.recycle();
-        imgUrl.recycle();
-          return wanList;
-    }
-
-
-
 }

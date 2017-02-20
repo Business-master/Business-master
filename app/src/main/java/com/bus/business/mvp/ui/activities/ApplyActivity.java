@@ -277,10 +277,19 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
             return;
         }
 
-        if (joinType==4 & "".equals(userAssistantId)){
-            UT.show("请完善报名信息");
-            return;
+        if (assistantNames.length>0){
+            if (joinType==4 & "".equals(userAssistantId)){
+                UT.show("请完善报名信息");
+                return;
+            }
+        }else {
+            if (joinType!=3){
+                UT.show("请完善报名信息");
+                return;
+            }
         }
+
+
 
 
         RetrofitManager.getInstance(1).joinMeeting(meetingBean.getId(),joinType,foodId
@@ -316,11 +325,11 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         RadioButton ra = (RadioButton) group.findViewById(checkedId);
         String name = (String) ra.getTag();
-        initApplyData(name);
+        initApplyData(name,ra);
 
     }
 
-    private void initApplyData(String name) {
+    private void initApplyData(String name, RadioButton ra) {
 
         //参加会议
         if ( String.valueOf(meetings[0]).equals(name)){
@@ -329,20 +338,27 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
         }else if ( String.valueOf(meetings[1]).equals(name)){
             assis_ll.setVisibility(VISIBLE);
             joinType = 4;
+
         }
 
         if (joinType==4){
             //判断选取哪一个助理
             if (assistantNames.length>0&list!=null&list.size()>0){
-                for (int i = 0; i <assistantNames.length ; i++) {
+                for (int i = 0; i <list.size() ; i++) {
                     AssisBean  assisBean = list.get(i);
                     if (name.equals(assisBean.getUserName())){
                         userAssistantId = assisBean.getId();
                         break;
                     }
                 }
+            }else {
+                if ( String.valueOf(meetings[1]).equals(name)){
+                    ra.setChecked(false);
+                    UT.show("暂无数据");
+                }
             }
         }
+
 
 
         //饮食

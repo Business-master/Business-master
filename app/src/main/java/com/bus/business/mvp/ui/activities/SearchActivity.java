@@ -26,15 +26,19 @@ import com.bus.business.R;
 import com.bus.business.common.Constants;
 import com.bus.business.common.LoadNewsType;
 import com.bus.business.common.NewsType;
+import com.bus.business.mvp.entity.AreaSeaBean;
 import com.bus.business.mvp.entity.MeetingBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
+import com.bus.business.mvp.presenter.impl.AreaSeaPresenterImpl;
 import com.bus.business.mvp.presenter.impl.BusinessPresenterImpl;
 import com.bus.business.mvp.presenter.impl.MeetingPresenterImpl;
 import com.bus.business.mvp.presenter.impl.NewsPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
+import com.bus.business.mvp.ui.adapter.AreaAdapter;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.ui.adapter.NewsAdapter;
+import com.bus.business.mvp.view.AreaSeaView;
 import com.bus.business.mvp.view.BusinessView;
 import com.bus.business.mvp.view.MeetingView;
 import com.bus.business.mvp.view.NewsView;
@@ -58,6 +62,7 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
         , NewsView<List<BaseNewBean>>
         , MeetingView
         , BusinessView
+        ,AreaSeaView
         , BaseQuickAdapter.RequestLoadMoreListener
         , BaseQuickAdapter.OnRecyclerViewItemClickListener
         , TextView.OnEditorActionListener{
@@ -73,7 +78,8 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     private int searchIndex;
     private BaseQuickAdapter mNewsListAdapter;
-    private List<BaseNewBean> likeBeanList;
+//    private List<BaseNewBean> likeBeanList;
+    private List<AreaSeaBean> likeBeanList;
     private List<MeetingBean> meetList;
     private int pageNum = 1;
     private int numPerPage = 20;
@@ -85,7 +91,8 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     BusinessPresenterImpl mBusinessPresenter;
     @Inject
     MeetingPresenterImpl mMeetsPresenter;
-
+    @Inject
+    AreaSeaPresenterImpl mAreaSeaPresenterImpl;
 
     @Override
     public int getLayoutId() {
@@ -112,10 +119,11 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
         this.hideProgress();
         switch (searchIndex) {
             case NewsType.TYPE_REFRESH_XUNXI:
-                mSearchEdit.setHint("搜索你所需要的-新闻信息");
-                break;
+//                mSearchEdit.setHint("搜索你所需要的-新闻信息");
+//                break;
             case NewsType.TYPE_REFRESH_XIEHUI:
-                mSearchEdit.setHint("搜索你所需要的-商业信息");
+//                mSearchEdit.setHint("搜索你所需要的-商业信息");
+                mSearchEdit.setHint("搜索你所需要的-新闻信息");
                 break;
             case NewsType.TYPE_REFRESH_HUIWU:
                 mSearchEdit.setHint("搜索你所需要的-会议信息");
@@ -143,6 +151,12 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
         mPresenter = mBusinessPresenter;
         mPresenter.onCreate();
     }
+   private void initAreaSeaPresenter() {
+       mAreaSeaPresenterImpl.setNewsTypeAndId(pageNum, numPerPage, mSearchEdit.getText().toString().trim(), "", "");
+       mAreaSeaPresenterImpl.attachView(this);
+       mPresenter = mAreaSeaPresenterImpl;
+       mPresenter.onCreate();
+    }
 
     private void initMeetPresenter() {
         mMeetsPresenter.setNewsTypeAndId(pageNum, numPerPage, mSearchEdit.getText().toString().trim(),-1);
@@ -168,11 +182,12 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
             case NewsType.TYPE_REFRESH_XUNXI:
             case NewsType.TYPE_REFRESH_XIEHUI:
                 likeBeanList = new ArrayList<>();
-                mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
+//                mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
+                mNewsListAdapter = new AreaAdapter(R.layout.item_news, likeBeanList);
                 break;
             case NewsType.TYPE_REFRESH_HUIWU:
                 meetList = new ArrayList<>();
-                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item2, meetList,0);
+                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item2, meetList);
 //                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item, meetList);
 //                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_meeting_item, meetList);
                 break;
@@ -193,10 +208,11 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     public void onRefresh() {
         switch (searchIndex) {
             case NewsType.TYPE_REFRESH_XUNXI:
-                mNewsPresenter.refreshData();
-                break;
+//                mNewsPresenter.refreshData();
+//                break;
             case NewsType.TYPE_REFRESH_XIEHUI:
-                mBusinessPresenter.refreshData();
+//                mBusinessPresenter.refreshData();
+                mAreaSeaPresenterImpl.refreshData();
                 break;
             case NewsType.TYPE_REFRESH_HUIWU:
                 mMeetsPresenter.refreshData();
@@ -206,30 +222,30 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Override
     public void setNewsList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
-        switch (loadType) {
-            case LoadNewsType.TYPE_REFRESH_SUCCESS:
-                mSwipeRefreshLayout.setRefreshing(false);
-                mNewsListAdapter.setNewData(newsBean);
-                if (mNewsListAdapter.getData().size() == 0 && (newsBean==null||newsBean.size() == 0)){
-                UT.show("暂无数据");
-                return;
-            }
-
-                break;
-            case LoadNewsType.TYPE_REFRESH_ERROR:
-                mSwipeRefreshLayout.setRefreshing(false);
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (newsBean == null || newsBean.size() == 0) {
-                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
-                } else {
-                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
-                }
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
-
-                break;
-        }
+//        switch (loadType) {
+//            case LoadNewsType.TYPE_REFRESH_SUCCESS:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                mNewsListAdapter.setNewData(newsBean);
+//                if (mNewsListAdapter.getData().size() == 0 && (newsBean==null||newsBean.size() == 0)){
+//                UT.show("暂无数据");
+//                return;
+//            }
+//
+//                break;
+//            case LoadNewsType.TYPE_REFRESH_ERROR:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
+//                if (newsBean == null || newsBean.size() == 0) {
+//                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+//                } else {
+//                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
+//                }
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
+//
+//                break;
+//        }
     }
 
     @Override
@@ -268,10 +284,11 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     public void onLoadMoreRequested() {
         switch (searchIndex) {
             case NewsType.TYPE_REFRESH_XUNXI:
-                mNewsPresenter.loadMore();
-                break;
+//                mNewsPresenter.loadMore();
+//                break;
             case NewsType.TYPE_REFRESH_XIEHUI:
-                mBusinessPresenter.loadMore();
+//                mBusinessPresenter.loadMore();
+                mAreaSeaPresenterImpl.loadMore();
                 break;
             case NewsType.TYPE_REFRESH_HUIWU:
                 mMeetsPresenter.loadMore();
@@ -309,24 +326,52 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Override
     public void setBusinessList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
+//        switch (loadType) {
+//            case LoadNewsType.TYPE_REFRESH_SUCCESS:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                KLog.a(newsBean.toString());
+//                if (mNewsListAdapter.getData().size() == 0 && (newsBean==null||newsBean.size() == 0)){
+//                    UT.show("暂无数据");
+//                    return;
+//                }
+//                mNewsListAdapter.setNewData(newsBean);
+//                break;
+//            case LoadNewsType.TYPE_REFRESH_ERROR:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
+//                if (newsBean == null || newsBean.size() == 0) {
+//                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+//                } else {
+//                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
+//                }
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
+//
+//                break;
+//        }
+    }
+
+    @Override
+    public void setAreaSeaBeanList(List<AreaSeaBean> areaSeaBeanList, @LoadNewsType.checker int loadType) {
         switch (loadType) {
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
-                KLog.a(newsBean.toString());
-                if (mNewsListAdapter.getData().size() == 0 && (newsBean==null||newsBean.size() == 0)){
+                KLog.a(areaSeaBeanList.toString());
+                if (mNewsListAdapter.getData().size() == 0 && (areaSeaBeanList==null||areaSeaBeanList.size() == 0)){
                     UT.show("暂无数据");
                     return;
                 }
-                mNewsListAdapter.setNewData(newsBean);
+                mNewsListAdapter.setNewData(areaSeaBeanList);
                 break;
             case LoadNewsType.TYPE_REFRESH_ERROR:
                 mSwipeRefreshLayout.setRefreshing(false);
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (newsBean == null || newsBean.size() == 0) {
+                if (areaSeaBeanList == null || areaSeaBeanList.size() == 0) {
                     Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
                 } else {
-                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
+                    mNewsListAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, true);
                 }
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:
@@ -343,10 +388,13 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @NonNull
     private Intent setIntent(int position) {
-        List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
+//        List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
+        List<AreaSeaBean> newsSummaryList = mNewsListAdapter.getData();
         Intent intent = new Intent(mActivity, NewDetailActivity.class);
         intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId()+"");
-        intent.putExtra(Constants.NEWS_TYPE,searchIndex+"");
+//        intent.putExtra(Constants.NEWS_TYPE,searchIndex+"");
+        String type = newsSummaryList.get(position).getType();
+        intent.putExtra(Constants.NEWS_TYPE,Integer.valueOf(type));
         return intent;
     }
 
@@ -372,10 +420,11 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
            //TODO do something;
             switch (searchIndex) {
                 case NewsType.TYPE_REFRESH_XUNXI:
-                    initNewsPresenter();
-                    break;
+//                    initNewsPresenter();
+//                    break;
                 case NewsType.TYPE_REFRESH_XIEHUI:
-                    initBusPresenter();
+//                    initBusPresenter();
+                    initAreaSeaPresenter();
                     break;
                 case NewsType.TYPE_REFRESH_HUIWU:
                     initMeetPresenter();
@@ -398,4 +447,6 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
+
+
 }

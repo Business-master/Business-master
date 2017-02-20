@@ -20,6 +20,7 @@ import com.bus.business.common.Constants;
 import com.bus.business.common.LoadNewsType;
 import com.bus.business.mvp.entity.AssisBean;
 import com.bus.business.mvp.entity.response.RspAssisBean;
+import com.bus.business.mvp.entity.response.base.BaseNewBean;
 import com.bus.business.mvp.presenter.impl.AssisPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.adapter.AssisAdapter;
@@ -115,6 +116,16 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
 
         rv_assis.setAdapter(assisAdapter);
     }
+    private void checkIsEmpty(List<AssisBean> newsSummary) {
+        if (newsSummary != null && assisAdapter.getData().size()>0) {
+            rv_assis.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.GONE);
+        } else {
+            rv_assis.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.VISIBLE);
+
+        }
+    }
 
     @Override
     public void setAssissList(List<AssisBean> assissList, @LoadNewsType.checker int loadType) {
@@ -122,9 +133,11 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
                 assisAdapter.setNewData(assissList);
+                checkIsEmpty(assissList);
                 break;
             case LoadNewsType.TYPE_REFRESH_ERROR:
                 mSwipeRefreshLayout.setRefreshing(false);
+                checkIsEmpty(assissList);
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
                 if (assissList == null || assissList.size() == 0) {

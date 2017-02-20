@@ -36,6 +36,7 @@
     <string name="clear_cache">清除缓存</string>
     <string name="about">关于</string>
     <string name="quit_account">退出登录</string>
+    <string name="empty_data">暂无数据</string>
 
     <string name="plz_search_hint">请输入搜索内容</string>
     <string name="search_hint">搜索会务</string>
@@ -69,12 +70,40 @@
     <string-array name="hm_urls">
         <item>http://www.aceway.com.cn</item>
     </string-array>
+    <string-array name="hm_contents">
+        <item>-1</item>
+    </string-array>
+    <string-array name="hm_icons">
+        <item>-1</item>
+    </string-array>
+    <string-array name="hm_banners">
+        <item>-1</item>
+    </string-array>
 
     <string-array name="yy_images">
         <item>@mipmap/img_yy</item>
         <item>@mipmap/img_cjt</item>
         <item>@mipmap/img_pyq</item>
         <item>@mipmap/img_yjs</item>
+    </string-array>
+
+    <string-array name="yy_contents">
+        <item>-1</item>
+        <item>T+，领先的企业互联网应用，移动管理 All in One除满足企业对本地业务管理需求外，还帮助企业对异地仓库、办事处、门店、分支机构进行管控。全新的B2B管理，支持企业经销商自助下单订货；B2C管理，帮您管理多电商平台上的线上店铺。产品支持:最新《小企业会计准则》及《企业会计信息化工作规范》包含最新《行政单位会计制度》在内的“行政、事业单位、非营利机构”会计制度</item>
+        <item>工作圈是用友旗下畅捷通公司开发的一款企业移动办公平台，融合了企业经营管理所需的各项专业服务，是基于工作场景应用集成：公告、审批、任务、工作报告、签到、文件柜、电话会议、企业通讯录、圈子信息交流等组成的企业互联网应用，帮助企业提高沟通协作效率、简化工作流程、降低管理成本。让管理更简单，工作更轻松！</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="yy_icons">
+        <item>-1</item>
+        <item>@mipmap/img_cjt</item>
+        <item>@mipmap/img_pyq</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="yy_banners">
+        <item>-1</item>
+        <item>@mipmap/cjt_b</item>
+        <item>@mipmap/gzq_b</item>
+        <item>-1</item>
     </string-array>
 
     <string-array name="yy_urls">
@@ -123,6 +152,89 @@
         <item>http://www.abchina.com/cn/</item>
         <item>http://www.boc.cn/</item>
         <item>http://www.zjhcpa.com.cn/</item>
+    </string-array>
+    <string-array name="actions_titles">
+        <item>凹凸租车</item>
+        <item>-1</item>
+        <item>北京银行</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>东方汇佳</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="actions_contents">
+        <item>凹凸租车率先将“车共享”理念带入中国。平台凭借优质的服务让车主安心将自己的闲置车辆通过平台租给他人使用；租客拥有更为丰富的车型选择，并且能够使用车况更好的车辆。平台车辆超高性价比，平均租金低于市场价30%-50%，车型数量远远大于传统市场。在凹凸租车的平台上，车主和租客不仅是承租双方的交易关系，双方将诚实互信、丰富体验、社会责任都建立在共享精神之上，创建一种更为高尚的人际关系。</item>
+        <item>-1</item>
+        <item>北京银行始终将服务小微企业作为立行之本、发展之源，以打造“小巨人”品牌为核心，持续突出“科技金融”、“文化金融”、“绿色金融”特色品牌，积极落实国务院缓解企业融资成本高的十项措施及中国银监会完善和创新小微企业贷款服务的精神与要求，走出了一条独具特色的小微企业金融服务创新发展之路。截至2016年6月末，全行小微企业人民币贷款余额2800亿元，小微企业贷款增速、户数增长、申贷获得率实现“三个不低于”。累为11万家小微企业提供贷款近2万亿元，首都每4家中小微企业就有1家是北京银行的客户。
+凭借服务小微企业的表现，我行5次荣获中国银监会“全国银行业金融机构小微企业金融服务先进单位”的称号；连续多次在中国人民银行营管部北京辖区信贷政策导向效果评估中，中小企业、高新技术企业、文化创意企业、节能减排项目荣获单项评估一等奖；凭借国内首笔中小文化企业集合债券，荣获文化部“优秀文化金融合作创新成果”奖；获得银监会及国际金融公司（IFC）颁发的“绿色信贷水效项目开拓奖”。</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>东方汇佳成立于1999年，为国内首批专业人才服务机构，历经十多年的沉淀和积累，实现集团化发展的跃升，成为提供RPO招聘外包服务、HRO人事外包服务、培训与咨询及人力资源电子系统的人力资源整体解决方案供应商，为客户提供涵盖整个雇佣生命周期和商业周期的全方位服务，通过人力资源的开发与管理，实现人力资本价值最大化。</item>
+        <item>北京古今来知识产权代理事务所有限公司是经中华人民共和国工商行政管理机关批准设立的专业知识产权代理机构，经营范围包括商标行政诉讼、商标代理、著作权代理、软件企业认定等项目，并且公司有专职律师提供法律服务。</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>中建华公司”是由中建华会计师事务所有限责任公司、北京中建华投资顾问有限公司、北京中建华资产评估有限公司、北京中建华房地产土地评估有限责任公司等专业服务机构组成的共同体。能为客户提供审计、评估、工程审价、咨询、专业培训等全方位的专业服务，是全国具有相当规模和实力的专业服务机构之一。
+中建华会计师事务所有限责任公司前身是中建审计师事务所，成立于1994年，隶属于中华人民共和国建设部，1999年脱钩改制，并与华建会计师事务所合并成立中建华会计师事务所有限责任公司。2008年中建华会计师事务所有限责任公司与北京中达耀会计师事务所有限责任公司重组合并。
+北京中建华投资顾问有限公司是2006年2月由中建华会计师事务所有限责任公司分设独立，专营工程造价咨询、招标代理等业务的专业公司，具有中华人民共和国颁发的“工程造价咨询企业甲级资质证书”.</item>
+    </string-array>
+    <string-array name="actions_icons">
+        <item>@mipmap/img_tagxzc</item>
+        <item>-1</item>
+        <item>@mipmap/bj_t</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>@mipmap/img_dfjh</item>
+        <item>@mipmap/img_gjl</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>@mipmap/img_lfyh</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>@mipmap/img_zjh</item>
+    </string-array>
+    <string-array name="actions_banners">
+        <item>@mipmap/atzuche_b</item>
+        <item>-1</item>
+        <item>@mipmap/bj_b</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>@mipmap/df_b</item>
+        <item>@mipmap/gjl_b</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>@mipmap/lf_b</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>-1</item>
+        <item>@mipmap/zjh_b</item>
     </string-array>
 
     <string-array name="wan1_images">

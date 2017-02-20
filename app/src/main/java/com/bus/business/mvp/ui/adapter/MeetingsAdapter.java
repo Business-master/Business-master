@@ -46,12 +46,10 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
    private   Button btn_apply;
    private   Button   btn_leave;
 
-    private  int index ;
 
-    public MeetingsAdapter(int layoutResId, List<MeetingBean> data,int mindex) {
+
+    public MeetingsAdapter(int layoutResId, List<MeetingBean> data) {
         super(layoutResId, data);
-        this.index= mindex;
-
     }
 
     @Override
@@ -78,7 +76,9 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
          btn_leave.setOnClickListener(myClick);
         String str =   ApplyUtils.getInstance().initState_Hide(cancel_apply,btn_apply,btn_leave,likeBean.getJoinType());
         jointype_tv.setText(str);
-        if (index!=0){
+
+        int status = Integer.valueOf(likeBean.getStatus());
+      if (status!=0){
             cancel_apply.setVisibility(View.INVISIBLE);
             btn_apply.setVisibility(View.INVISIBLE);
             btn_leave.setVisibility(View.INVISIBLE);
