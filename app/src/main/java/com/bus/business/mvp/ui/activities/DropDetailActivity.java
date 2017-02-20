@@ -62,7 +62,7 @@ public class DropDetailActivity extends BaseActivity {
         showOrGoneSearchRl(View.GONE);
 
         dropBean = (DropBean) getIntent().getSerializableExtra(DROP_BEAN);
-        img = (ImageView) findViewById(R.id.img_logo);
+        img = (ImageView) findViewById(R.id.img_icon_logo);
         inputData();
     }
 

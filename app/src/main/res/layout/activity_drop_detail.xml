@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_manager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="com.bus.business.mvp.ui.activities.ManagerActivity">
+    android:orientation="vertical">
 
     <include layout="@layout/layout_main_header" />
 
@@ -20,7 +18,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/img_logo"
+            android:id="@+id/img_icon_logo"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="fitXY"
@@ -30,10 +28,10 @@
             android:id="@+id/name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/img_logo"
+            android:layout_alignTop="@+id/img_icon_logo"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
-            android:layout_toRightOf="@+id/img_logo"
+            android:layout_toRightOf="@+id/img_icon_logo"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="俏江南"
@@ -44,10 +42,10 @@
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img_logo"
+            android:layout_alignBottom="@+id/img_icon_logo"
             android:layout_marginBottom="3dp"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/img_logo"
+            android:layout_toRightOf="@+id/img_icon_logo"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="7"
@@ -58,7 +56,7 @@
             android:id="@+id/tv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img_logo"
+            android:layout_alignBottom="@+id/img_icon_logo"
             android:layout_marginBottom="3dp"
             android:layout_marginLeft="2dp"
             android:layout_toRightOf="@+id/address"
@@ -72,17 +70,17 @@
             android:id="@+id/tv_load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/img_logo"
+            android:layout_alignBottom="@+id/img_icon_logo"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/tv_text"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
             android:background="@drawable/blue_circle_20"
             android:ellipsize="end"
             android:maxLines="1"
+            android:paddingBottom="2dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="2dp"
             android:text="车抵押贷款"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_14" />
@@ -116,9 +114,9 @@
                 android:id="@+id/tv_pledgeCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:ellipsize="end"
                 android:text="贷款详情"
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
@@ -142,9 +140,9 @@
                 android:id="@+id/tv_loanIntroduction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:ellipsize="end"
                 android:text="贷款详情"
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
@@ -168,9 +166,9 @@
                 android:id="@+id/tv_loanCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:ellipsize="end"
                 android:text="贷款详情"
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
@@ -194,9 +192,9 @@
                 android:id="@+id/tv_cashRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:ellipsize="end"
                 android:text="贷款详情"
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
@@ -205,8 +203,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -221,9 +219,9 @@
                 android:id="@+id/tv_productDesp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:ellipsize="end"
                 android:text="贷款详情"
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
