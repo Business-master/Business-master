@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,18 +12,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingBottom="28dp"
+            android:layout_height="105dp"
+            android:background="@mipmap/img_page_mine"
             android:paddingTop="28dp">
-
-            <ImageView
-                android:id="@+id/img_icon"
-                android:layout_width="71dp"
-                android:layout_height="64dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="28dp"
-                android:src="@mipmap/personal_page_logo" />
 
             <TextView
                 android:id="@+id/tv_use_name"
@@ -31,9 +22,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="12dp"
-                android:layout_toRightOf="@+id/img_icon"
                 android:text="王总"
-                android:textColor="@color/color_333333"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <TextView
@@ -44,14 +34,124 @@
                 android:layout_below="@+id/tv_use_name"
                 android:layout_marginTop="6dp"
                 android:text="123455"
-                android:textColor="@color/color_999999"
-                android:textSize="12sp" />
+                android:textColor="@color/white"
+                android:textSize="14sp" />
         </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/mine_text"
+                android:layout_width="wrap_content"
+                android:drawableRight="@null"
+                android:text="单位名称" />
+
+            <TextView
+                android:id="@+id/tv_companyName"
+                style="@style/mine_text"
+                android:drawableRight="@null"
+                android:ellipsize="end"
+                android:gravity="right|center_vertical"
+                android:maxLines="1"
+                android:text="单位名称" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/list_view_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/mine_text"
+                android:layout_width="wrap_content"
+                android:drawableRight="@null"
+                android:text="市工商联职位" />
+
+            <TextView
+                android:id="@+id/tv_sgslPosition"
+                style="@style/mine_text"
+                android:drawableRight="@null"
+                android:ellipsize="end"
+                android:gravity="right|center_vertical"
+                android:maxLines="1"
+                android:text="单位名称" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/list_view_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/mine_text"
+                android:layout_width="wrap_content"
+                android:drawableRight="@null"
+                android:text="区工商联职位" />
+
+            <TextView
+                android:id="@+id/tv_qgslPosition"
+                style="@style/mine_text"
+                android:drawableRight="@null"
+                android:ellipsize="end"
+                android:gravity="right|center_vertical"
+                android:maxLines="1"
+                android:text="单位名称" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/list_view_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/mine_text"
+                android:layout_width="wrap_content"
+                android:drawableRight="@null"
+                android:text="单位职位" />
+
+            <TextView
+                android:id="@+id/tv_position"
+                style="@style/mine_text"
+                android:drawableRight="@null"
+                android:ellipsize="end"
+                android:gravity="right|center_vertical"
+                android:maxLines="1"
+                android:text="单位名称" />
+        </LinearLayout>
+
         <TextView
-            android:layout_marginTop="10dp"
             android:id="@+id/tv_address_list"
             style="@style/mine_text"
+            android:layout_marginTop="10dp"
             android:text="通讯录" />
 
         <View
@@ -64,11 +164,13 @@
             android:id="@+id/tv_account_manager"
             style="@style/mine_text"
             android:text="@string/account_manager" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginLeft="15dp"
             android:background="@mipmap/list_view_divider" />
+
         <TextView
             android:id="@+id/tv_assis_manager"
             style="@style/mine_text"
@@ -76,24 +178,24 @@
 
 
         <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:background="@mipmap/list_view_divider" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:background="@mipmap/list_view_divider" />-->
 
         <!--<TextView-->
-            <!--style="@style/mine_text"-->
-            <!--android:text="@string/account_safe" />-->
+        <!--style="@style/mine_text"-->
+        <!--android:text="@string/account_safe" />-->
 
         <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0.5dp"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:background="@mipmap/list_view_divider" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:background="@mipmap/list_view_divider" />-->
 
         <!--<TextView-->
-            <!--style="@style/mine_text"-->
-            <!--android:text="@string/news_manager" />-->
+        <!--style="@style/mine_text"-->
+        <!--android:text="@string/news_manager" />-->
 
         <View
             android:layout_width="match_parent"
@@ -105,19 +207,21 @@
             android:id="@+id/rl_clear_cache"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 style="@style/mine_text"
                 android:text="@string/clear_cache" />
+
             <TextView
                 android:id="@+id/tv_cache_size"
-                android:textSize="14sp"
-                android:textColor="@color/color_333333"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="50dp"
                 android:layout_centerVertical="true"
-                tools:text="20M"/>
+                android:layout_marginRight="50dp"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp"
+                tools:text="20M" />
         </RelativeLayout>
 
 
@@ -146,6 +250,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginLeft="15dp"
             android:background="@mipmap/list_view_divider" />
 

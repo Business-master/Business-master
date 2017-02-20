@@ -12,6 +12,15 @@ public class BaseNewBean {
     private long ctime;
     private Object areaId;
     private String title;
+    private String areaCode;
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
 
     public int getId() {
         return id;
@@ -61,6 +70,7 @@ public class BaseNewBean {
                 ", ctime=" + ctime +
                 ", areaId=" + areaId +
                 ", title='" + title + '\'' +
+                ", areaCode='" + areaCode + '\'' +
                 '}';
     }
 }

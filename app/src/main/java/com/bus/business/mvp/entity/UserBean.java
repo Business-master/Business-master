@@ -46,21 +46,21 @@ public class UserBean implements Serializable{
     private String assistantedId;
     private String imei;
     private String state;
-    private Object hasAssiistant;
+    private String hasAssiistant;
     private String userEmail;
     private String companyName;
-    private Object qgslPosition;
+    private String qgslPosition;
     private long ctime;
-    private Object sgslPosition;
+    private String sgslPosition;
     private String nation;
     private String phoneModel;
-    private Object organizationCode;
+    private String organizationCode;
     private String id;
     private String phoneNo;
     private String systemeType;
     private String userName;
     private int isAssistant;
-    private Object organizationType;
+    private String organizationType;
 
     public static final String USER_BEAN = "user_bean";
 
@@ -131,11 +131,11 @@ public class UserBean implements Serializable{
         this.state = state;
     }
 
-    public Object getHasAssiistant() {
+    public String getHasAssiistant() {
         return hasAssiistant;
     }
 
-    public void setHasAssiistant(Object hasAssiistant) {
+    public void setHasAssiistant(String hasAssiistant) {
         this.hasAssiistant = hasAssiistant;
     }
 
@@ -155,11 +155,11 @@ public class UserBean implements Serializable{
         this.companyName = companyName;
     }
 
-    public Object getQgslPosition() {
+    public String getQgslPosition() {
         return qgslPosition;
     }
 
-    public void setQgslPosition(Object qgslPosition) {
+    public void setQgslPosition(String qgslPosition) {
         this.qgslPosition = qgslPosition;
     }
 
@@ -171,11 +171,11 @@ public class UserBean implements Serializable{
         this.ctime = ctime;
     }
 
-    public Object getSgslPosition() {
+    public String getSgslPosition() {
         return sgslPosition;
     }
 
-    public void setSgslPosition(Object sgslPosition) {
+    public void setSgslPosition(String sgslPosition) {
         this.sgslPosition = sgslPosition;
     }
 
@@ -195,11 +195,11 @@ public class UserBean implements Serializable{
         this.phoneModel = phoneModel;
     }
 
-    public Object getOrganizationCode() {
+    public String getOrganizationCode() {
         return organizationCode;
     }
 
-    public void setOrganizationCode(Object organizationCode) {
+    public void setOrganizationCode(String organizationCode) {
         this.organizationCode = organizationCode;
     }
 
@@ -243,11 +243,39 @@ public class UserBean implements Serializable{
         this.isAssistant = isAssistant;
     }
 
-    public Object getOrganizationType() {
+    public String getOrganizationType() {
         return organizationType;
     }
 
-    public void setOrganizationType(Object organizationType) {
+    public void setOrganizationType(String organizationType) {
         this.organizationType = organizationType;
+    }
+
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "position='" + position + '\'' +
+                ", niceName='" + niceName + '\'' +
+                ", utime=" + utime +
+                ", sex='" + sex + '\'' +
+                ", assistantedId='" + assistantedId + '\'' +
+                ", imei='" + imei + '\'' +
+                ", state='" + state + '\'' +
+                ", hasAssiistant='" + hasAssiistant + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", qgslPosition='" + qgslPosition + '\'' +
+                ", ctime=" + ctime +
+                ", sgslPosition='" + sgslPosition + '\'' +
+                ", nation='" + nation + '\'' +
+                ", phoneModel='" + phoneModel + '\'' +
+                ", organizationCode='" + organizationCode + '\'' +
+                ", id='" + id + '\'' +
+                ", phoneNo='" + phoneNo + '\'' +
+                ", systemeType='" + systemeType + '\'' +
+                ", userName='" + userName + '\'' +
+                ", isAssistant=" + isAssistant +
+                ", organizationType='" + organizationType + '\'' +
+                '}';
     }
 }

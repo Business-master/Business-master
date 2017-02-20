@@ -175,7 +175,7 @@ public class NewDetailActivity extends BaseActivity {
     private void fillData(BusDetailBean bean) {
         mTitle.setText(bean.getTitle());
         mDateTv.setText("发表时间 : " + DateUtil.getCurGroupDay(bean.getCtime()));
-        mFrom.setText("北京工商联");
+        mFrom.setText(bean.getAreaCode());
         mFundTv.setText("项目总投资" + formAmount(bean.getInAmount()) + "元");
         mPhone.setText("联系电话 : " + bean.getPhoneNo());
         mZPhone.setText("座机电话 : "+bean.getPlane());

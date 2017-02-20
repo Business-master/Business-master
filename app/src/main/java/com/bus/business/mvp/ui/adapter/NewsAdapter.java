@@ -29,7 +29,7 @@ public class NewsAdapter extends BaseQuickAdapter<BaseNewBean> {
 
         baseViewHolder.setText(R.id.item_title, likeModel.getTitle());
         baseViewHolder.setText(R.id.item_desc, DateUtil.getCurGroupDay(likeModel.getCtime()));
-        baseViewHolder.setText(R.id.item_type, "工商联");
+        baseViewHolder.setText(R.id.item_type, likeModel.getAreaCode());
 
         ImageView img = baseViewHolder.getView(R.id.daimajia_slider_image);
 

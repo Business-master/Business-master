@@ -22,6 +22,19 @@ public class BusDetailBean {
     private String faxS;
     private long utime;
     private String types;
+    private String areaCode;
+
+    public void setInAmount(double inAmount) {
+        this.inAmount = inAmount;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
 
     public long getUtime() {
         return utime;
@@ -161,6 +174,7 @@ public class BusDetailBean {
                 ", faxS='" + faxS + '\'' +
                 ", utime=" + utime +
                 ", types='" + types + '\'' +
+                ", areaCode='" + areaCode + '\'' +
                 '}';
     }
 }

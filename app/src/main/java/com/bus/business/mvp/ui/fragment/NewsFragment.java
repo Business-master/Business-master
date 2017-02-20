@@ -209,12 +209,14 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
 
     private void initRecyclerView() {
         mNewsRV.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(mActivity,
+                LinearLayoutManager.VERTICAL, false);
         mNewsRV.addItemDecoration(new RecyclerViewDivider(mActivity,
                 LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
-        mNewsRV.setLayoutManager(new LinearLayoutManager(mActivity,
-                LinearLayoutManager.VERTICAL, false));
+        mNewsRV.setLayoutManager(mLayoutManager);
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
-
+//        mLayoutManager.scrollToPositionWithOffset(3, 0);
+//        mLayoutManager.setStackFromEnd(true);
         likeBeanList = new ArrayList<>();
         mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);

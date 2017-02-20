@@ -97,6 +97,8 @@ public class LoginActivity extends BaseActivity {
                             KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
 
                             registeJpushToService();
+                        }else {
+                            UT.show(rspUserBean.getHead().getRspMsg());
                         }
                     }
                 });

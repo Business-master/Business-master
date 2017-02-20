@@ -42,6 +42,14 @@ public class MineFragment extends BaseFragment {
     TextView mUsePhone;
     @BindView(R.id.tv_cache_size)
     TextView mCacheSize;
+    @BindView(R.id.tv_companyName)
+    TextView tv_companyName;
+    @BindView(R.id.tv_sgslPosition)
+    TextView tv_sgslPosition;
+    @BindView(R.id.tv_qgslPosition)
+    TextView tv_qgslPosition;
+    @BindView(R.id.tv_position)
+    TextView tv_position;
 
 
     private UserBean userBean;
@@ -59,6 +67,10 @@ public class MineFragment extends BaseFragment {
         userBean = UsrMgr.getUseInfo();
         mUseName.setText(userBean.getNiceName());
         mUsePhone.setText(userBean.getPhoneNo());
+        tv_companyName.setText(userBean.getCompanyName());
+        tv_sgslPosition.setText(userBean.getSgslPosition());
+        tv_qgslPosition.setText(userBean.getQgslPosition());
+        tv_position.setText(userBean.getPosition());
         caculateCacheSize();
     }
 
