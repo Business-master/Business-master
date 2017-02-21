@@ -70,6 +70,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import rx.Subscriber;
 
 import static android.view.View.VISIBLE;
@@ -507,8 +508,9 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
             mNewsRV.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
         } else {
-            mNewsRV.setVisibility(View.GONE);
+//            mNewsRV.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
+            mEmptyView.setText("暂无数据");
         }
     }
 
@@ -623,4 +625,14 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
                 break;
         }
     }
+
+//    @OnClick({R.id.empty_view})
+//    public void onclick(View v){
+//        switch (v.getId()){
+//            case R.id.empty_view:
+//                mSwipeRefreshLayout.setRefreshing(true);
+//                onRefresh();
+//                break;
+//        }
+//    }
 }
