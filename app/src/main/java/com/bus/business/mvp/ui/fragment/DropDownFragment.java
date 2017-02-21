@@ -70,6 +70,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
     ProgressBar mProgressBar;
     @BindView(R.id.img_banner)
     ImageView bannerImg;
+
     private BaseQuickAdapter mNewsListAdapter;
     private List<DropBean> likeBeanList;
 
@@ -147,6 +148,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
         mNewsListAdapter.openLoadMore(Constants.numPerPage, true);
         mNewsRV.setAdapter(mNewsListAdapter);
+
     }
 
     private void initPresenter() {
