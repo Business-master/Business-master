@@ -90,19 +90,25 @@ public class QzybFragment extends BaseFragment  {
 
         int len = imgAr.length();
         for (int i = 0; i < len; i++) {
-            WanBean wanBean = new WanBean();
-            wanBean.setImgSrc(imgAr.getResourceId(i, 0));
-            wanBean.setIcon(icons.getResourceId(i, 0));
-            wanBean.setBanner(banners.getResourceId(i, 0));
-            wanBean.setUrl(imgUrl.getString(i));
-            wanBean.setDetail(contents.getString(i));
-            wanList.add(wanBean);
+            //去除无数据的银行
+            if (!"-1".equals(contents.getString(i))){
+                WanBean wanBean = new WanBean();
+                wanBean.setImgSrc(imgAr.getResourceId(i, 0));
+                wanBean.setIcon(icons.getResourceId(i, 0));
+                wanBean.setBanner(banners.getResourceId(i, 0));
+                wanBean.setUrl(imgUrl.getString(i));
+                wanBean.setDetail(contents.getString(i));
+                wanList.add(wanBean);
+            }
+
         }
         imgAr.recycle();
         contents.recycle();
         icons.recycle();
         banners.recycle();
         imgUrl.recycle();
+
+
         return wanList;
     }
 

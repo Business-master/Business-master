@@ -4,7 +4,7 @@
     <!-- 页面名称 -->
     <string name="main_navigation_home">首页</string>
     <string name="main_navigation_im">会务</string>
-    <string name="main_navigation_interest">万花筒</string>
+    <string name="main_navigation_interest">百宝箱</string>
     <string name="main_navigation_expert">专家</string>
     <string name="main_navigation_user">我的</string>
 
@@ -71,19 +71,21 @@
         <item>http://www.aceway.com.cn</item>
     </string-array>
     <string-array name="hm_contents">
-        <item>-1</item>
+        <item>企业U道是什么?一个APP快速生成平台,一款企业级平台产品，一键同时生成APP、WEB、微信H5三端平台产品，一键式生成却能媲美按需定制，低廉的价格却能得到高品质的服务，为中小企业和创业企业提供了互联网+的完美解决方案。让用户省去高昂的APP开发成本、服务器租用成本、APP运维成本，让您以最经济且最专业的方式去拥抱互联网。
+企业U道从设计开发到面市推广，得到了国家工信部、电子信息产业研究院、北京市工商联、北京市中小企业服务平台和众多企业孵化器的关注和支持，并与多家机构签署了战略合作协议。
+不论多渺小的企业，都能拥有属于自己的移动服务平台，这是企业U道的理想。</item>
     </string-array>
     <string-array name="hm_icons">
-        <item>-1</item>
+        <item>@mipmap/img_hm</item>
     </string-array>
     <string-array name="hm_banners">
-        <item>-1</item>
+        <item>@mipmap/hm_b</item>
     </string-array>
 
     <string-array name="yy_images">
         <item>@mipmap/img_yy</item>
         <item>@mipmap/img_cjt</item>
-        <item>@mipmap/img_pyq</item>
+        <item>@mipmap/yygzq</item>
         <item>@mipmap/img_yjs</item>
     </string-array>
 
@@ -96,7 +98,7 @@
     <string-array name="yy_icons">
         <item>-1</item>
         <item>@mipmap/img_cjt</item>
-        <item>@mipmap/img_pyq</item>
+        <item>@mipmap/yygzq</item>
         <item>-1</item>
     </string-array>
     <string-array name="yy_banners">

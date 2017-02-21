@@ -28,8 +28,8 @@ public class QzybActivity extends BaseActivity {
     ImageView banner_qzyb;
     @BindView(R.id.content_qzyb)
     TextView content_qzyb;
-    @BindView(R.id.empty_qzyb)
-    TextView empty_qzyb;
+//    @BindView(R.id.empty_qzyb)
+//    TextView empty_qzyb;
     @BindView(R.id.ll_qzyb)
     LinearLayout ll_qzyb;
 
@@ -51,17 +51,17 @@ public class QzybActivity extends BaseActivity {
 
         setCustomTitle("产品详情");
         showOrGoneSearchRl(View.GONE);
-        KLog.a("aaaaaaaa"+wanBean.getDetail());
-        if ("-1".equals(wanBean.getDetail())){
-            ll_qzyb.setVisibility(View.GONE);
-            empty_qzyb.setVisibility(View.VISIBLE);
-        }else {
-            ll_qzyb.setVisibility(View.VISIBLE);
-            empty_qzyb.setVisibility(View.GONE);
-            content_qzyb.setText(wanBean.getDetail());
-            icon_qzyb.setImageResource(wanBean.getIcon());
-            Glide.with(this).load(wanBean.getBanner()).into(banner_qzyb);
-        }
+        ll_qzyb.setVisibility(View.VISIBLE);
+        content_qzyb.setText(wanBean.getDetail());
+        icon_qzyb.setImageResource(wanBean.getIcon());
+        Glide.with(this).load(wanBean.getBanner()).into(banner_qzyb);
+
+//        if ("-1".equals(wanBean.getDetail())){
+//            ll_qzyb.setVisibility(View.GONE);
+//            empty_qzyb.setVisibility(View.VISIBLE);
+//        }else {
+//            empty_qzyb.setVisibility(View.GONE);
+//        }
     }
 
 

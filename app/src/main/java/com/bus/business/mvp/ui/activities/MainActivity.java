@@ -191,7 +191,8 @@ public class MainActivity extends BaseActivity {
     private String setTabSelection(int index) {
         switch (index) {
             case 2:
-                return "万花筒";
+//                return "万花筒";
+                return "百宝箱";
             case 3:
                 return "金融";
             case 4:
