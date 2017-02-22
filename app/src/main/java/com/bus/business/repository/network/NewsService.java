@@ -1,6 +1,7 @@
 package com.bus.business.repository.network;
 
 import com.bus.business.common.ApiConstants;
+import com.bus.business.mvp.entity.NotReadBean;
 import com.bus.business.mvp.entity.response.RspAreaBean;
 import com.bus.business.mvp.entity.response.RspAreaSeaBean;
 import com.bus.business.mvp.entity.response.RspAssisBean;
@@ -131,6 +132,14 @@ public interface NewsService {
     @FormUrlEncoded
     @POST(ApiConstants.DROP_LIST_URL)
     Observable<RspDropBean> getDropList(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.Not_read_meeting)
+    Observable<NotReadBean> getNotReadCount(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.Change_meeting_read)
+    Observable<BaseRspObj> changeReadState(@FieldMap Map<String, String> map);
 
 
 }

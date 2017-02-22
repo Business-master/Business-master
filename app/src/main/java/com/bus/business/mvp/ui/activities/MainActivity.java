@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.TransitionRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,10 +19,12 @@ import android.widget.Toast;
 import com.bus.business.R;
 import com.bus.business.common.Constants;
 import com.bus.business.common.NewsType;
+import com.bus.business.mvp.entity.NotReadBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.ChangeSearchStateEvent;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
+import com.bus.business.mvp.event.ReadMeeting;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.fragment.ExpertFragment;
 import com.bus.business.mvp.ui.fragment.MainPagerFragment;
@@ -37,6 +40,8 @@ import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,7 +121,33 @@ public class MainActivity extends BaseActivity {
             hasPush = true;
         }
         textUnreadLabel.setVisibility(hasPush ? View.VISIBLE : View.GONE);
+        getNotReadCount();
+    }
 
+     private  int notReadCounnt=0;
+    private void getNotReadCount(){
+        RetrofitManager.getInstance(1).getNotReadCount()
+                .compose(TransformUtils.<NotReadBean>defaultSchedulers())
+                .subscribe(new Subscriber<NotReadBean>() {
+                    @Override
+                    public void onCompleted() {
+                        KLog.d();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        KLog.e(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(NotReadBean notReadBean) {
+                        if ("0".equals(notReadBean.getHead().getRspCode())){
+                            notReadCounnt = notReadBean.getBody().getNotReaded();
+
+                            KLog.a("**********"+notReadBean.getBody().getNotReaded());
+                        }
+                    }
+                });
     }
 
     private void initData() {
@@ -255,6 +286,13 @@ public class MainActivity extends BaseActivity {
         KLog.d("harvic", msg);
         //    UT.show(msg);
 
+    }
+
+    @Subscribe
+    public void onEventMainThread(ReadMeeting readMeeting) {
+        if (readMeeting.isRead()) {
+           getNotReadCount();
+        }
     }
 
 

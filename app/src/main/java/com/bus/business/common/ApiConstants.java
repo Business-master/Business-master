@@ -53,10 +53,14 @@ public class ApiConstants {
 
     public static final String REGISTER_JPUSH_URL = "/gsl-api/push/ initRegistrationId";
 
-
     public static final String TOPICS_URL = "/gsl-api/gsl/dissertation/disList";
+
     public static final String TOPIC_DETAIL_URL = "/gsl-api/gsl/dissertation/getdissertation";
 
-
     public static final String DROP_LIST_URL = "/gsl-api/cashProfessor/list";
+
+    public static final String Not_read_meeting = "/gsl-api/gsl/meeting/countUserRead";
+
+    public static final String Change_meeting_read = "/gsl-api/gsl/meeting/changeUserRead";
+
 }

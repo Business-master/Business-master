@@ -7,6 +7,7 @@ import com.bus.business.App;
 import com.bus.business.common.ApiConstants;
 import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.CashBean;
+import com.bus.business.mvp.entity.NotReadBean;
 import com.bus.business.mvp.entity.response.RspAreaBean;
 import com.bus.business.mvp.entity.response.RspAreaSeaBean;
 import com.bus.business.mvp.entity.response.RspAssisBean;
@@ -361,4 +362,22 @@ public class RetrofitManager {
         KLog.a(map.toString());
         return mNewsService.getTopicDetail(map);
     }
+
+    public Observable<NotReadBean> getNotReadCount() {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", UsrMgr.getUseId());
+        map.put("status", "0");
+        KLog.a(map.toString());
+        return mNewsService.getNotReadCount(map);
+    }
+
+ public Observable<BaseRspObj> changeReadState(String  meetingId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", UsrMgr.getUseId());
+        map.put("meetingId", meetingId);
+        KLog.a(map.toString());
+        return mNewsService.changeReadState(map);
+    }
+
+
 }

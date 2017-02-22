@@ -28,7 +28,18 @@ public class MeetingBean implements Serializable{
      * meetingContent : context
      * ctime : 1482722354000
      * areaId : 2
+     * hasReaded 1 会议信息未读 2 已读
      */
+
+    private int hasReaded;
+
+    public int getHasReaded() {
+        return hasReaded;
+    }
+
+    public void setHasReaded(int hasReaded) {
+        this.hasReaded = hasReaded;
+    }
 
     private int id;
     private long utime;

@@ -3,6 +3,7 @@ package com.bus.business.mvp.ui.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.BaseObj;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,8 +21,10 @@ import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.MeetingBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
+import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
+import com.bus.business.mvp.event.ReadMeeting;
 import com.bus.business.mvp.presenter.impl.MeetingPresenterImpl;
 import com.bus.business.mvp.ui.activities.ApplyActivity;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
@@ -212,8 +215,40 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     public void onItemClick(View view, int i) {
+        MeetingBean meetingBean1 =  mNewsListAdapter.getData().get(i);
         mNewsListAdapter.getData().get(i).intentToDetail(mActivity,i);
+        if (meetingBean1.getHasReaded()==1){
+            changeReadState(meetingBean1);
+        }
     }
+
+    private void changeReadState(final MeetingBean meetingBean1) {
+        RetrofitManager.getInstance(1).changeReadState(String.valueOf(meetingBean1.getId()))
+                .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
+                .subscribe(new Subscriber<BaseRspObj>() {
+                    @Override
+                    public void onCompleted() {
+                        KLog.d();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        KLog.e(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(BaseRspObj responseBody) {
+                        if ("0".equals(responseBody.getHead().getRspCode())){
+                            KLog.d(responseBody.toString());
+                            onRefresh();//跳转会议详情，刷新页面
+                            if ("0".equals(meetingBean1.getStatus())){
+                                EventBus.getDefault().post(new ReadMeeting(true));
+                            }
+                        }
+                    }
+                });
+    }
+
 
     @Subscribe
     public void onEventMainThread(JoinToMeetingEvent event) {

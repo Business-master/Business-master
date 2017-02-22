@@ -61,8 +61,12 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         baseViewHolder.setText(R.id.tv_address, likeBean.getMeetingLoc());
         baseViewHolder.setText(R.id.tv_date, DateUtil.getCurGroupDay(likeBean.getMeetingTime()));
 
-
-
+        TextView new_meeting = baseViewHolder.getView(R.id.new_meeting);
+         if (likeBean.getHasReaded()==1){
+             new_meeting.setVisibility(View.VISIBLE);
+         }else {
+             new_meeting.setVisibility(View.GONE);
+         }
 
 
         Button jointype_tv = baseViewHolder.getView(R.id.jointype_tv);
