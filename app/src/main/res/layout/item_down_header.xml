@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/drop_header"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.bus.business.mvp.view.DropdownButton
+            android:id="@+id/chooseType"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="18dp"
+            android:background="#dddddd" />
+
+        <com.bus.business.mvp.view.DropdownButton
+            android:id="@+id/chooseLanguage"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="18dp"
+            android:background="#dddddd" />
+
+        <com.bus.business.mvp.view.DropdownButton
+            android:id="@+id/chooseDate"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</LinearLayout>

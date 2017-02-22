@@ -52,6 +52,10 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         , NewsView<List<DropBean>> {
 
     public static final String[] TYPE_NAME = new String[]{"pledgeCode@", "replayCode@", "loanCode@"};
+
+    private DropdownButton drop_chooseType;
+    private DropdownButton drop_chooseLanguage;
+    private DropdownButton drop_chooseDate;
     @BindView(R.id.chooseType)
     DropdownButton chooseType;
     @BindView(R.id.chooseLanguage)
@@ -68,11 +72,15 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
     RecyclerView mNewsRV;
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
-    @BindView(R.id.img_banner)
-    ImageView bannerImg;
+    private ImageView bannerImg;
+    private View imgView;
+    private View dropView;
+    @BindView(R.id.drop_header)
+    View drop_header;
 
     private BaseQuickAdapter mNewsListAdapter;
     private List<DropBean> likeBeanList;
+    private LinearLayoutManager mLayoutManager;
 
     private DropdownListView currentDropdownList;
     Animation dropdown_in, dropdown_out, dropdown_mask_out;
@@ -90,6 +98,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
     private int dropType;
 
     private void initView() {
+        drop_header.setVisibility(View.GONE);
         bannerImg.setImageResource(dropType == 1 ? R.mipmap.banner01 : R.mipmap.banner02);
 
         dropdown_in = AnimationUtils.loadAnimation(mActivity, R.anim.dropdown_in);
@@ -124,9 +133,23 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
     @Override
     public void initViews(View view) {
         initIntentData();
+        initHeaderView();
         initView();
         initRecyclerView();
         initPresenter();
+    }
+
+    private void initHeaderView() {
+        imgView = View.inflate(mActivity, R.layout.item_img_header, null);
+        bannerImg = (ImageView) imgView.findViewById(R.id.img_banner);
+        dropView = View.inflate(mActivity, R.layout.item_drop_header, null);
+        //       mask = dropView.findViewById(R.id.mask);
+//        dropdownType = (DropdownListView) dropView.findViewById(R.id.dropdownType);
+//        dropdownLanguage = (DropdownListView) dropView.findViewById(R.id.dropdownLanguage);
+//        dropdownDate = (DropdownListView) dropView.findViewById(R.id.dropdownDate);
+        drop_chooseType = (DropdownButton) dropView.findViewById(R.id.drop_chooseType);
+        drop_chooseLanguage = (DropdownButton) dropView.findViewById(R.id.drop_chooseLanguage);
+        drop_chooseDate = (DropdownButton) dropView.findViewById(R.id.drop_chooseDate);
     }
 
     @Override
@@ -134,21 +157,40 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         return R.layout.fragment_drop_down;
     }
 
+    private int visibleItemCount, totalItemCount, firstVisiblesItem, lastVisibleItemCount;
+
     private void initRecyclerView() {
         mNewsRV.setHasFixedSize(true);
         mNewsRV.addItemDecoration(new RecyclerViewDivider(mActivity,
                 LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
-        mNewsRV.setLayoutManager(new LinearLayoutManager(mActivity,
-                LinearLayoutManager.VERTICAL, false));
+        mLayoutManager = new LinearLayoutManager(mActivity,
+                LinearLayoutManager.VERTICAL, false);
+        mNewsRV.setLayoutManager(mLayoutManager);
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
-
         likeBeanList = new ArrayList<>();
         mNewsListAdapter = new DropsAdapter(R.layout.item_drop, likeBeanList);
+        mNewsListAdapter.addHeaderView(imgView);
+        mNewsListAdapter.addHeaderView(dropView);
         mNewsListAdapter.setOnLoadMoreListener(this);
         mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
         mNewsListAdapter.openLoadMore(Constants.numPerPage, true);
         mNewsRV.setAdapter(mNewsListAdapter);
+        mNewsRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
 
+//                visibleItemCount = mNewsRV.getChildCount();
+//                totalItemCount = mLayoutManager.getItemCount();
+                firstVisiblesItem = mLayoutManager.findFirstVisibleItemPosition();
+//                lastVisibleItemCount = mLayoutManager.findLastVisibleItemPosition();
+                KLog.a("top---->" + visibleItemCount + "---" + firstVisiblesItem);
+                if (firstVisiblesItem >= 1 && drop_header.getVisibility() == View.GONE)
+                    drop_header.setVisibility(View.VISIBLE);
+                if (firstVisiblesItem < 1 && drop_header.getVisibility() == View.VISIBLE)
+                    drop_header.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void initPresenter() {
@@ -198,6 +240,12 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         UT.show(cashBean.toString());
     }
 
+    @Override
+    public void onTouchToTop() {
+        mLayoutManager.scrollToPositionWithOffset(1, 0);
+        mLayoutManager.setStackFromEnd(false);
+    }
+
     private void subStr(String str) {
         String result = str.substring(0, str.indexOf("@")) + "@";
         KLog.a("result--->" + result);
@@ -245,13 +293,13 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         chooseTypeData.add(new DropdownItemObject("联保贷", 3, TYPE_NAME[0] + "0003"));
         chooseTypeData.add(new DropdownItemObject("无需抵押", 4, TYPE_NAME[0] + "0004"));
         chooseTypeData.add(new DropdownItemObject("车辆抵押", 5, TYPE_NAME[0] + "0005"));
-        dropdownType.bindList(chooseTypeData, chooseType, this, 0);
+        dropdownType.bindList(chooseTypeData, chooseType, drop_chooseType, this, 0);
 
         chooseLanguageData.add(new DropdownItemObject("全部", 0, TYPE_NAME[1] + ""));
         chooseLanguageData.add(new DropdownItemObject("分期还款", 1, TYPE_NAME[1] + "0001"));
         chooseLanguageData.add(new DropdownItemObject("到期还款", 2, TYPE_NAME[1] + "0002"));
         chooseLanguageData.add(new DropdownItemObject("随借随还", 3, TYPE_NAME[1] + "0003"));
-        dropdownLanguage.bindList(chooseLanguageData, chooseLanguage, this, 0);
+        dropdownLanguage.bindList(chooseLanguageData, chooseLanguage, drop_chooseLanguage, this, 0);
 
         chooseDateData.add(new DropdownItemObject("全部", 0, TYPE_NAME[2] + ""));
         chooseDateData.add(new DropdownItemObject("3个月", 1, TYPE_NAME[2] + "0001"));
@@ -260,7 +308,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         chooseDateData.add(new DropdownItemObject("2年", 4, TYPE_NAME[2] + "0004"));
         chooseDateData.add(new DropdownItemObject("3年", 5, TYPE_NAME[2] + "0005"));
         chooseDateData.add(new DropdownItemObject("10年", 5, TYPE_NAME[2] + "0006"));
-        dropdownDate.bindList(chooseDateData, chooseDate, this, 0);
+        dropdownDate.bindList(chooseDateData, chooseDate, drop_chooseDate, this, 0);
 
         dropdown_mask_out.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -284,6 +332,8 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
 
     @Override
     public void onItemClick(View view, int i) {
+//        mLayoutManager.scrollToPositionWithOffset(1, 0);
+//        mLayoutManager.setStackFromEnd(true);
         ((DropBean) mNewsListAdapter.getData().get(i)).intentToDetail(mActivity);
     }
 

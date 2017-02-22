@@ -24,6 +24,7 @@ public class DropdownListView extends ScrollView {
     List<? extends DropdownItemObject> list;
 
     public DropdownButton button;
+    public DropdownButton buttonOne;
 
     public DropdownListView(Context context) {
         this(context, null);
@@ -43,7 +44,7 @@ public class DropdownListView extends ScrollView {
         linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
     }
 
-
+    private String str;
     public void flush() {
         for (int i = 0, n = linearLayout.getChildCount(); i < n; i++) {
             View view = linearLayout.getChildAt(i);
@@ -56,7 +57,11 @@ public class DropdownListView extends ScrollView {
                 boolean checked = data == current;
                 String suffix = data.getSuffix();
                 itemView.bind(TextUtils.isEmpty(suffix) ? data.text : data.text + suffix, checked);
-                if (checked) button.setText(i == 0 ? subStr(data.getValue()) : data.text);
+                if (checked) {
+                    str = i == 0 ? subStr(data.getValue()) : data.text;
+                    button.setText(str);
+                    buttonOne.setText(str);
+                }
             }
         }
     }
@@ -157,6 +162,23 @@ public class DropdownListView extends ScrollView {
         flush();
     }
 
+    public void bindList(List<? extends DropdownItemObject> list,
+                         final DropdownButton button,
+                         DropdownButton buttonOne,
+                         final Container container,
+                         int selectedId
+    ) {
+        this.buttonOne = buttonOne;
+        bindList(list,button, container, selectedId);
+        buttonOne.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                container.onTouchToTop();
+                button.performClick();
+            }
+        });
+    }
+
 
     public static interface Container {
         void show(DropdownListView listView);
@@ -164,6 +186,8 @@ public class DropdownListView extends ScrollView {
         void hide();
 
         void onSelectionChanged(DropdownListView view);
+
+        void onTouchToTop();
     }
 
 

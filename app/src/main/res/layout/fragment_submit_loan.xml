@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/stand_bg"
     android:orientation="vertical">
 
     <ScrollView
@@ -23,25 +23,35 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:scaleType="fitXY"
-                android:layout_marginTop="10dp"
                 android:src="@mipmap/img_description" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/grey_circle_8"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/white_circle_8"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:paddingBottom="15dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:paddingTop="15dp">
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="如有贷款需求请填写此表"
+                    android:textColor="@color/color_999999"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:text="企业贷款现状表"
                     android:textColor="@color/color_0dadd5"
                     android:textSize="16sp" />
@@ -88,6 +98,16 @@
                         android:layout_weight="1"
                         android:hint="利率" />
                 </LinearLayout>
+
+                <EditText
+                    style="@style/assis_hint_edit"
+                    android:layout_marginTop="10dp"
+                    android:hint="联系人姓名" />
+
+                <EditText
+                    style="@style/assis_hint_edit"
+                    android:layout_marginTop="10dp"
+                    android:hint="联系人手机号" />
 
                 <Button
                     android:id="@+id/btnSure"
