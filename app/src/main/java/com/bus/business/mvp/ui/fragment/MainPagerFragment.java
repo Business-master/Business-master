@@ -46,7 +46,7 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
 
 //    private static final String[] TITLE = {"新闻 • 简讯","商情 • 资讯"};
     String customArea="";
-    private static final String[] TITLE = {"新闻 • 简讯","商情 • 资讯","地区"};
+    private static final String[] TITLE = {"新闻 • 简讯","商情 • 资讯","基层 • 组织"};
 
     @BindView(R.id.tabs)
     TabLayout mTabLayout;
@@ -73,70 +73,67 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
     @Override
     public void initViews(View view) {
         EventBus.getDefault().register(this);
-        initTitles();
+
 
         mViewPager.addOnPageChangeListener(this);
 
-//        mTitles.add(TITLE[0]);
-//        mTitles.add(TITLE[1]);
-//        mTitles.add(TITLE[2]);
+        mTitles.add(TITLE[0]);
+        mTitles.add(TITLE[1]);
+        mTitles.add(TITLE[2]);
 
         mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XUNXI));
         mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XIEHUI));
         mFragments.add(NewsFragment_new.getInstance(NewsType.TYPE_REFRESH_AREA));
 
-//        mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(), mTitles, mFragments);
+        mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(), mTitles, mFragments);
 
-//        mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager());
-//        mViewPageAdapter.setTitle(mTitles);
-//        mViewPageAdapter.setViews(mFragments);
+
+        mViewPager.addOnPageChangeListener(this);
+        mViewPager.setAdapter(mViewPageAdapter);
+        //为TabLayout设置ViewPager
+        mTabLayout.setupWithViewPager(mViewPager);
+        //使用ViewPager的适配器
+        mTabLayout.setTabsFromPagerAdapter(mViewPageAdapter);
+
+    }
+
+
+//    private void initTitles() {
+//        RetrofitManager.getInstance(1).getAreaListObservable()
+//                .compose(TransformUtils.<RspAreaBean>defaultSchedulers())
+//                .subscribe(new Subscriber<RspAreaBean>() {
+//                    @Override
+//                    public void onCompleted() {
 //
-//        mViewPager.addOnPageChangeListener(this);
-//        mViewPager.setAdapter(mViewPageAdapter);
-//        //为TabLayout设置ViewPager
-//        mTabLayout.setupWithViewPager(mViewPager);
-//        //使用ViewPager的适配器
-//        mTabLayout.setTabsFromPagerAdapter(mViewPageAdapter);
-
-    }
-
-
-    private void initTitles() {
-        RetrofitManager.getInstance(1).getAreaListObservable()
-                .compose(TransformUtils.<RspAreaBean>defaultSchedulers())
-                .subscribe(new Subscriber<RspAreaBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(RspAreaBean rspAreaBean) {
-                        AreaBean areaBean =  rspAreaBean.getBody().getAreaList().get(0);
-                        String str =areaBean.getName();
-//                        int i = str.indexOf("工商联");
-//                        customArea=str.substring(0,i);
-                        mTitles.add(TITLE[0]);
-                        mTitles.add(TITLE[1]);
-                        mTitles.add(str);
-
-
-                        mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(),mTitles,mFragments);
-
-                        mViewPager.setAdapter(mViewPageAdapter);
-                        //为TabLayout设置ViewPager
-                        mTabLayout.setupWithViewPager(mViewPager);
-                        //使用ViewPager的适配器
-                        mTabLayout.setTabsFromPagerAdapter(mViewPageAdapter);
-
-                    }
-                });
-    }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(RspAreaBean rspAreaBean) {
+//                        AreaBean areaBean =  rspAreaBean.getBody().getAreaList().get(0);
+//                        String str =areaBean.getName();
+////                        int i = str.indexOf("工商联");
+////                        customArea=str.substring(0,i);
+//                        mTitles.add(TITLE[0]);
+//                        mTitles.add(TITLE[1]);
+//                        mTitles.add(str);
+//
+//
+//                        mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(),mTitles,mFragments);
+//
+//                        mViewPager.setAdapter(mViewPageAdapter);
+//                        //为TabLayout设置ViewPager
+//                        mTabLayout.setupWithViewPager(mViewPager);
+//                        //使用ViewPager的适配器
+//                        mTabLayout.setTabsFromPagerAdapter(mViewPageAdapter);
+//
+//                    }
+//                });
+//    }
 
     @Subscribe
     public void onEventMainThread(AreaCodeEvent event){
@@ -148,7 +145,7 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
 //        }else {
 //            mTabLayout.getTabAt(2).setText(event.getAreaBean().getName());
 //        }
-        mTabLayout.getTabAt(2).setText(event.getAreaBean().getName());
+//        mTabLayout.getTabAt(2).setText(event.getAreaBean().getName());
 
     }
 

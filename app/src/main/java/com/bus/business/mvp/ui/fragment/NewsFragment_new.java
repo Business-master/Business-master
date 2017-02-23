@@ -3,6 +3,7 @@ package com.bus.business.mvp.ui.fragment;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import com.bus.business.mvp.entity.response.RspBannerBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
 import com.bus.business.mvp.event.AreaCodeEvent;
+import com.bus.business.mvp.event.AreaFirstEvent;
 import com.bus.business.mvp.presenter.impl.AreaSeaPresenterImpl;
 import com.bus.business.mvp.presenter.impl.BusinessPresenterImpl;
 import com.bus.business.mvp.presenter.impl.NewsPresenterImpl;
@@ -162,6 +164,7 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
         initIntentData();
         areaView = View.inflate(mActivity, R.layout.activity_area, null);
         area_tv = (TextView) areaView.findViewById(R.id.area_ch);
+
         area_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,8 +192,18 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
             code="";
         }
 
-
+         area_tv.setText(event.getAreaBean().getName()+" >>");
         initPresenter(code,chamCode);
+    }
+
+    boolean flag = true;
+    @Subscribe
+    public void onEventMainThread(AreaFirstEvent event){
+        if (flag){
+            area_tv.setText(event.getAreaSeaBean().getAreaCode()+" >>");
+            flag=false;
+        }
+
     }
 
     @Override
@@ -613,11 +626,14 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
                 checkEmpty(areaSeaBeanList);
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (areaSeaBeanList == null || areaSeaBeanList.size() == 0) {
+                if (areaSeaBeanList == null){
+                    return;
+                }
+                if (areaSeaBeanList.size() == Constants.numPerPage){
+                    mAreaAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, true);
+                }else {
                     mAreaAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, false);
                     Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
-                } else {
-                    mAreaAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, true);
                 }
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:
@@ -626,13 +642,4 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
         }
     }
 
-//    @OnClick({R.id.empty_view})
-//    public void onclick(View v){
-//        switch (v.getId()){
-//            case R.id.empty_view:
-//                mSwipeRefreshLayout.setRefreshing(true);
-//                onRefresh();
-//                break;
-//        }
-//    }
 }

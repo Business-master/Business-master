@@ -134,7 +134,7 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
 //        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_meeting_item, likeBeanList);//
         mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item2, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);
-        mNewsListAdapter.openLoadMore(20, true);
+        mNewsListAdapter.openLoadMore(Constants.numPerPage, true);
         mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
         mNewsRV.setAdapter(mNewsListAdapter);
 
@@ -201,10 +201,14 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
                 checkIsEmpty(newsBean);
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (newsBean == null || newsBean.size() == 0) {
-                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
-                } else {
+                if (newsBean == null){
+                    return;
+                }
+                if (newsBean.size() == Constants.numPerPage){
                     mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
+                }else {
+                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, false);
+                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
                 }
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:

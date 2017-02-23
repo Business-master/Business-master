@@ -112,7 +112,7 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
         assisAdapter = new AssisAdapter(R.layout.layout_assis_item,assisBeanList);
         assisAdapter.setOnLoadMoreListener(this);
         assisAdapter.setOnRecyclerViewItemClickListener(this);
-        assisAdapter.openLoadMore(20,true);
+        assisAdapter.openLoadMore(Constants.numPerPage,true);
 
         rv_assis.setAdapter(assisAdapter);
     }
@@ -140,11 +140,17 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
                 checkIsEmpty(assissList);
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (assissList == null || assissList.size() == 0) {
-                    Snackbar.make(rv_assis, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
-                } else {
-                    assisAdapter.notifyDataChangedAfterLoadMore(assissList, true);
+                if (assissList == null){
+                    return;
                 }
+                if (assissList.size() == Constants.numPerPage){
+                    assisAdapter.notifyDataChangedAfterLoadMore(assissList, true);
+                }else {
+                    assisAdapter.notifyDataChangedAfterLoadMore(assissList, false);
+                    Snackbar.make(rv_assis, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+                }
+
+
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:
 

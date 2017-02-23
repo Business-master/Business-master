@@ -12,9 +12,13 @@ import com.bus.business.R;
 import com.bus.business.common.ApiConstants;
 import com.bus.business.mvp.entity.AreaSeaBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
+import com.bus.business.mvp.event.AreaFirstEvent;
 import com.bus.business.utils.DateUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.socks.library.KLog;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -29,10 +33,14 @@ public class AreaAdapter extends BaseQuickAdapter<AreaSeaBean> {
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, AreaSeaBean likeModel) {
+        if (baseViewHolder.getAdapterPosition()==1){
+            EventBus.getDefault().post(new AreaFirstEvent(likeModel));
+        }
+
 
         baseViewHolder.setText(R.id.item_title, likeModel.getTitle());
         baseViewHolder.setText(R.id.item_desc, DateUtil.getCurGroupDay(likeModel.getCtime()));
-        baseViewHolder.setText(R.id.item_type, "工商联");
+        baseViewHolder.setText(R.id.item_type, likeModel.getAreaCode());
 
         TextView textView = baseViewHolder.getView(R.id.type);
 

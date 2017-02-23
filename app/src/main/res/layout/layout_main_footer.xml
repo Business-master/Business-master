@@ -54,7 +54,13 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@null"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="31dp">
 
         <View
             android:layout_width="0dp"
@@ -74,20 +80,31 @@
                 android:layout_centerHorizontal="true"
                 android:background="@null" />
 
+            <!--<TextView-->
+                <!--android:id="@+id/textUnreadLabel"-->
+                <!--android:layout_width="23dp"-->
+                <!--android:layout_height="23dp"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_marginTop="2dp"-->
+                <!--android:background="@drawable/ic_bg_unread_count"-->
+                <!--android:gravity="center"-->
+                <!--android:text="14"-->
+                <!--android:textColor="#ffffff"-->
+                 <!--/>  -->
             <TextView
-                android:id="@+id/textUnreadLabel"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="2dp"
+                android:layout_alignParentRight="@id/viewSplitLine"
+                android:id="@+id/textUnreadLabel"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/viewSplitLine"
-                android:layout_toRightOf="@+id/viewSplitLine"
-                android:background="@drawable/ic_bg_unread_count"
+                android:background="@drawable/red_circle"
                 android:gravity="center"
-                android:text="1"
+                android:textSize="@dimen/text_size_10"
+                android:text="14"
                 android:textColor="#ffffff"
-                android:textSize="@dimen/text_size_13" />
+                 />
         </RelativeLayout>
 
         <View

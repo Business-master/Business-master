@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity {
     private int searchIndex;
     private long mExitTime = 0;
     private boolean hasPush = false;
-
+    private  int notReadCounnt=0;
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -120,11 +120,13 @@ public class MainActivity extends BaseActivity {
         if (bundle != null) {
             hasPush = true;
         }
-        textUnreadLabel.setVisibility(hasPush ? View.VISIBLE : View.GONE);
+//        textUnreadLabel.setVisibility(hasPush ? View.VISIBLE : View.GONE);
         getNotReadCount();
+
+
     }
 
-     private  int notReadCounnt=0;
+
     private void getNotReadCount(){
         RetrofitManager.getInstance(1).getNotReadCount()
                 .compose(TransformUtils.<NotReadBean>defaultSchedulers())
@@ -142,9 +144,16 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onNext(NotReadBean notReadBean) {
                         if ("0".equals(notReadBean.getHead().getRspCode())){
-                            notReadCounnt = notReadBean.getBody().getNotReaded();
 
-                            KLog.a("**********"+notReadBean.getBody().getNotReaded());
+                            notReadCounnt = notReadBean.getBody().getNotReaded();
+                            if (notReadCounnt>0){
+                                //未读会议
+                                textUnreadLabel.setVisibility(View.VISIBLE);
+                                textUnreadLabel.setText(notReadCounnt+"");
+                            }else {
+                                textUnreadLabel.setVisibility(View.GONE);
+                            }
+
                         }
                     }
                 });
@@ -161,7 +170,7 @@ public class MainActivity extends BaseActivity {
         showOrGoneLogo(index == 2 ? View.VISIBLE : View.GONE);
         if (index == 1) {
             hasPush = false;
-            textUnreadLabel.setVisibility(View.GONE);
+//            textUnreadLabel.setVisibility(View.GONE);
             EventBus.getDefault().post(new JoinToMeetingEvent());
         }
 
@@ -277,7 +286,7 @@ public class MainActivity extends BaseActivity {
     public void onEventMainThread(ChangeSearchStateEvent event1) {
         if (event1.getMsg() == 3) {
             hasPush = true;
-            textUnreadLabel.setVisibility(View.VISIBLE);
+//            textUnreadLabel.setVisibility(View.VISIBLE);
 
             return;
         }
