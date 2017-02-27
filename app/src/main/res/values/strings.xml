@@ -44,6 +44,13 @@
 
     <string name="second_back_hint">再按一次退出程序</string>
 
+    <string name="notifyTitle">提示</string>
+    <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="setting">设置</string>
+    <string name="cancel">取消</string>
+    <string name="hideOption">隐藏设置</string>
+    <string name="showOption">显示设置</string>
+
     <string-array name="city_list">
         <item>市工商联</item>
         <item>东城区</item>
