@@ -19,4 +19,10 @@ public class Constants {
     public static final String EXTRA_BUNDLE = "launchBundle";
     public static final String TRANSITION_ANIMATION_NEWS_PHOTOS = "transition_animation_news_photos";
 
+
+    //高德地图应用包名
+    public static final String AMAP_PACKAGENAME = "com.autonavi.minimap";
+    //百度地图应用包名
+    public static final String BAIDUMAP_PACKAGENAME = "com.baidu.BaiduMap";
+
 }

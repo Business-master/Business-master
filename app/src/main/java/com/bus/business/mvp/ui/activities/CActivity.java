@@ -1,7 +1,11 @@
 package com.bus.business.mvp.ui.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -11,7 +15,9 @@ import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
 import com.bus.business.R;
+import com.bus.business.common.Constants;
 import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
+import com.bus.business.utils.SystemUtils;
 
 public class CActivity extends CheckPermissionsActivity implements
         LocationSource
@@ -21,6 +27,7 @@ public class CActivity extends CheckPermissionsActivity implements
     private AMapLocationClientOption locationOption;
 
     private MapView mapView;
+    private Button btn;
     private AMap aMap;
     private OnLocationChangedListener mListener;
 
@@ -29,9 +36,24 @@ public class CActivity extends CheckPermissionsActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c);
         mapView = (MapView) findViewById(R.id.map);
+        btn = (Button) findViewById(R.id.btn);
         mapView.onCreate(savedInstanceState);// 此方法必须重写
 
         init();
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SystemUtils.isInstallByread(Constants.AMAP_PACKAGENAME)) {
+                    SystemUtils.openGaoDeMap(CActivity.this, "aa", "40.047669", "116.313082");
+                } else if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
+                    SystemUtils.openBaiduMap(CActivity.this, "aa", "aa", "40.047669", "ss");
+                } else {
+                    Uri uri = Uri.parse("http://api.map.baidu.com/marker?location=40.047669,116.313082&title=我的位置&content=百度奎科大厦&output=html&src=yourComponyName|yourAppName");
+                    Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(it);
+                }
+            }
+        });
     }
 
     /**
