@@ -8,11 +8,11 @@ package com.bus.business.common;
 public class ApiConstants {
 
     //线下
-//    public static final String NETEAST_HOST = "http://172.16.10.15:9300/";
+    public static final String NETEAST_HOST = "http://172.16.10.15:9300/";
     public static final String NETEAST_IMG_HOST = "http://files.heweather.com/cond_icon/%s.png";
 
     //线上
-    public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
+//    public static final String NETEAST_HOST = "http://59.108.94.40:9100/";
 
     public static String getHost() {
         return NETEAST_HOST;
@@ -62,5 +62,9 @@ public class ApiConstants {
     public static final String Not_read_meeting = "/gsl-api/gsl/meeting/countUserRead";
 
     public static final String Change_meeting_read = "/gsl-api/gsl/meeting/changeUserRead";
+
+    public static final String Meeting_file_list = "/gsl-api/meetingFile/fileList";
+
+    public static final String Meeting_file_download = "/gsl-api/meetingFile/download";
 
 }

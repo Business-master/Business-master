@@ -93,8 +93,8 @@
                  <!--/>  -->
             <TextView
                 android:layout_marginLeft="15dp"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="@id/viewSplitLine"
                 android:id="@+id/textUnreadLabel"

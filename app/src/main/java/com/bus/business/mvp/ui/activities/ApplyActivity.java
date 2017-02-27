@@ -4,9 +4,11 @@ package com.bus.business.mvp.ui.activities;
 
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
-import android.widget.ToggleButton;
+import android.widget.TextView;
 
 import com.bus.business.R;
 import com.bus.business.common.Constants;
@@ -27,16 +29,18 @@ import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.presenter.impl.AssisPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.view.AssisView;
+import com.bus.business.mvp.view.DialogUtils;
+import com.bus.business.mvp.view.WheelView;
 import com.bus.business.repository.network.RetrofitManager;
 import com.bus.business.utils.DensityUtil;
 import com.bus.business.utils.TransformUtils;
 import com.bus.business.utils.UT;
-import com.socks.library.KLog;
 
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,7 +54,7 @@ import static android.widget.LinearLayout.*;
 /**
  * 报名Activity
  */
-public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup.OnCheckedChangeListener{
+public class ApplyActivity extends BaseActivity implements AssisView{
 
     private MeetingBean meetingBean;
 
@@ -59,19 +63,19 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
     ScrollView scroll_apply;
 
 
-    @BindView(R.id.assis_ll)
-    LinearLayout assis_ll;
-
-    @BindView(R.id.meeting_rg)
-    RadioGroup meeting_rg;
-    @BindView(R.id.eat_rg)
-    RadioGroup eat_rg;
-    @BindView(R.id.assistant_rg)
-    RadioGroup assistant_rg;
-    @BindView(R.id.sleep_rg)
-    RadioGroup sleep_rg;
-    @BindView(R.id.driver_rg)
-    RadioGroup driver_rg;
+//    @BindView(R.id.assis_ll)
+//    LinearLayout assis_ll;
+//
+//    @BindView(R.id.meeting_rg)
+//    RadioGroup meeting_rg;
+//    @BindView(R.id.eat_rg)
+//    RadioGroup eat_rg;
+//    @BindView(R.id.assistant_rg)
+//    RadioGroup assistant_rg;
+//    @BindView(R.id.sleep_rg)
+//    RadioGroup sleep_rg;
+//    @BindView(R.id.driver_rg)
+//    RadioGroup driver_rg;
 
     @BindView(R.id.car_num)
     EditText car_num;
@@ -84,6 +88,26 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
     @Inject
     AssisPresenterImpl assisPresenterImpl;
 
+    @BindView(R.id.apply_self)
+     RadioButton apply_self;
+    @BindView(R.id.apply_assis)
+     RadioButton apply_assis;
+    @BindView(R.id.apply_man)
+     RadioButton apply_man;
+    @BindView(R.id.apply_woman)
+     RadioButton apply_woman;
+    @BindView(R.id.apply_name)
+     EditText apply_name;
+    @BindView(R.id.apply_company)
+     EditText apply_company;
+    @BindView(R.id.apply_duty)
+     EditText apply_duty;
+    @BindView(R.id.apply_phone)
+     EditText apply_phone;
+    @BindView(R.id.apply_cause)
+     EditText apply_cause;
+    @BindView(R.id.apply_nation)
+    TextView apply_nation;
 
 
     int[] meetings= new  int[]{R.drawable.apply_self,R.drawable.apply_assis};
@@ -102,12 +126,19 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
     private int driver=1;//司机的状态
     private String cause="";//拒绝或者请假原因
     private String desp="";//备注
+    private String leadName="";//领导名称
+    private String nation="";//民族
+    private String sex="";//性别
+    private String companyName="";//公司名称
+    private String job="";//职位
+
 
 
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_apply3;
+//        return R.layout.activity_apply;
+        return R.layout.activity_apply1;
     }
 
 
@@ -188,19 +219,21 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
         scroll_apply.setFocusableInTouchMode(true);
         scroll_apply.requestFocus();
 
-        setCustomTitle("报名信息");
+        setCustomTitle("会务报名");
         showOrGoneSearchRl(View.GONE);
         initPresenter();
 
-        initRadioGroup(meeting_rg,meetings);
-        initRadioGroup(eat_rg,eats);
-        initRadioGroup(sleep_rg,stayNames,stayNames);
-        initRadioGroup(driver_rg,driverNames,driverTagNames);
+//        apply_assis.setCompoundDrawablePadding(10);
 
-        meeting_rg.setOnCheckedChangeListener(this);
-        eat_rg.setOnCheckedChangeListener(this);
-        sleep_rg.setOnCheckedChangeListener(this);
-        driver_rg.setOnCheckedChangeListener(this);
+//        initRadioGroup(meeting_rg,meetings);
+//        initRadioGroup(eat_rg,eats);
+//        initRadioGroup(sleep_rg,stayNames,stayNames);
+//        initRadioGroup(driver_rg,driverNames,driverTagNames);
+//
+//        meeting_rg.setOnCheckedChangeListener(this);
+//        eat_rg.setOnCheckedChangeListener(this);
+//        sleep_rg.setOnCheckedChangeListener(this);
+//        driver_rg.setOnCheckedChangeListener(this);
 
     }
 
@@ -241,8 +274,8 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
             assistantNames[i] =stringList.get(i);
         }
 
-        initRadioGroup(assistant_rg,assistantNames,assistantNames);
-        assistant_rg.setOnCheckedChangeListener(this);
+//        initRadioGroup(assistant_rg,assistantNames,assistantNames);
+//        assistant_rg.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -260,14 +293,92 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
 
 
     }
+    private static final String[] PLANETS = new String[]{"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Uranus", "Neptune", "Pluto"};
 
-    @OnClick({R.id.ensure_apply})
+    @OnClick({R.id.apply_self,R.id.apply_assis,R.id.apply_man,R.id.apply_woman,
+            R.id.apply_duty,R.id.sleep_zl,R.id.sleep_need,R.id.eat_zl,R.id.eat_need
+            ,R.id.apply_nation,R.id.driver_zl,R.id.driver_need,R.id.ensure_apply})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.apply_self:
+                joinType = 3;
+                if (apply_self.isChecked()){
+                    apply_self.setTextColor(getResources().getColor(R.color.color_0dadd5));
+                }else {
+                    apply_self.setTextColor(getResources().getColor(R.color.color_cccccc));
+                }
+                break;
+            case R.id.apply_assis:
+                joinType = 4;
+                if (apply_assis.isChecked()){
+                    apply_assis.setTextColor(getResources().getColor(R.color.color_0dadd5));
+                }else {
+                    apply_assis.setTextColor(getResources().getColor(R.color.color_cccccc));
+                }
+                break;
+            case R.id.apply_man:
+                sex="男";
+                break;
+            case R.id.apply_woman:
+                sex="女";
+                break;
+            case R.id.apply_duty:
+                job=apply_duty.getText().toString();
+                break;
+            case R.id.sleep_zl:
+               stay = 1;
+                break;
+            case R.id.sleep_need:
+                stay = 2;
+                break;
+            case R.id.eat_zl:
+               foodId=1;
+                break;
+            case R.id.eat_need:
+                foodId=2;
+                break;
+            case R.id.apply_nation:
+                 initWheelView("请选择助理");
+
+                break;
+            case R.id.driver_zl:
+               driver=2;
+                break;
+            case R.id.driver_need:
+                driver=1;
+                break;
             case R.id.ensure_apply:
                applyMetting();
                 break;
         }
+    }
+
+    private void initWheelView(String title) {
+        View outerView = LayoutInflater.from(this).inflate(R.layout.wheel_view, null);
+        WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
+        wv.setOffset(2);
+        wv.setItems(Arrays.asList(PLANETS));
+        wv.setSeletion(0);
+        wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                apply_nation.setText(item);
+                nation =item;
+                UT.show(item);
+            }
+        });
+
+        new DialogUtils.Builder(this)
+                .setTitle(title)
+                .setContentView(outerView)
+                .setCancelable(false)
+                .setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                }).create().show();
     }
 
     private void applyMetting() {
@@ -309,11 +420,10 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
                     @Override
                     public void onNext(BaseRspObj responseBody) {
                         if (responseBody.getHead().getRspCode().equals("0")) {
-//                            meetingBean.setJoinType(true);
                             EventBus.getDefault().post(new JoinToMeetingEvent(1));
                             finish();
                         }
-//                        UT.show(responseBody.getHead().getRspMsg());
+                        UT.show(responseBody.getHead().getRspMsg());
 
                     }
                 });
@@ -321,67 +431,69 @@ public class ApplyActivity extends BaseActivity implements AssisView, RadioGroup
 
 
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        RadioButton ra = (RadioButton) group.findViewById(checkedId);
-        String name = (String) ra.getTag();
-        initApplyData(name,ra);
-
-    }
-
-    private void initApplyData(String name, RadioButton ra) {
-
-        //参加会议
-        if ( String.valueOf(meetings[0]).equals(name)){
-            assis_ll.setVisibility(GONE);
-            joinType = 3;
-        }else if ( String.valueOf(meetings[1]).equals(name)){
-            assis_ll.setVisibility(VISIBLE);
-            joinType = 4;
-
-        }
-
-        if (joinType==4){
-            //判断选取哪一个助理
-            if (assistantNames.length>0&list!=null&list.size()>0){
-                for (int i = 0; i <list.size() ; i++) {
-                    AssisBean  assisBean = list.get(i);
-                    if (name.equals(assisBean.getUserName())){
-                        userAssistantId = assisBean.getId();
-                        break;
-                    }
-                }
-            }else {
-                if ( String.valueOf(meetings[1]).equals(name)){
-                    ra.setChecked(false);
-                    UT.show("暂无数据");
-                }
-            }
-        }
 
 
+//    @Override
+//    public void onCheckedChanged(RadioGroup group, int checkedId) {
+//        RadioButton ra = (RadioButton) group.findViewById(checkedId);
+//        String name = (String) ra.getTag();
+////        initApplyData(name,ra);
+//
+//    }
 
-        //饮食
-        if (String.valueOf(eats[0]).equals(name)){
-            foodId = 1;
-        }else if (String.valueOf(eats[1]).equals(name)){
-            foodId = 2;
-        }
-
-        //住宿
-        if (stayNames[0].equals(name)){
-            stay = 1;
-        }else  if (stayNames[1].equals(name)){
-            stay = 2;
-        }
-
-        //司机
-        if (driverTagNames[0].equals(name)){
-            driver = 1;
-        }else  if (driverTagNames[1].equals(name)){
-            driver = 2;
-        }
-    }
+//    private void initApplyData(String name, RadioButton ra) {
+//
+//        //参加会议
+//        if ( String.valueOf(meetings[0]).equals(name)){
+//            assis_ll.setVisibility(GONE);
+//            joinType = 3;
+//        }else if ( String.valueOf(meetings[1]).equals(name)){
+//            assis_ll.setVisibility(VISIBLE);
+//            joinType = 4;
+//
+//        }
+//
+//        if (joinType==4){
+//            //判断选取哪一个助理
+//            if (assistantNames.length>0&list!=null&list.size()>0){
+//                for (int i = 0; i <list.size() ; i++) {
+//                    AssisBean  assisBean = list.get(i);
+//                    if (name.equals(assisBean.getUserName())){
+//                        userAssistantId = assisBean.getId();
+//                        break;
+//                    }
+//                }
+//            }else {
+//                if ( String.valueOf(meetings[1]).equals(name)){
+//                    ra.setChecked(false);
+//                    UT.show("暂无数据");
+//                }
+//            }
+//        }
+//
+//
+//
+//        //饮食
+//        if (String.valueOf(eats[0]).equals(name)){
+//            foodId = 1;
+//        }else if (String.valueOf(eats[1]).equals(name)){
+//            foodId = 2;
+//        }
+//
+//        //住宿
+//        if (stayNames[0].equals(name)){
+//            stay = 1;
+//        }else  if (stayNames[1].equals(name)){
+//            stay = 2;
+//        }
+//
+//        //司机
+//        if (driverTagNames[0].equals(name)){
+//            driver = 1;
+//        }else  if (driverTagNames[1].equals(name)){
+//            driver = 2;
+//        }
+//    }
 
 
 }

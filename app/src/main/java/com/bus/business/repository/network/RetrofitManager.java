@@ -16,6 +16,7 @@ import com.bus.business.mvp.entity.response.RspBusDetailBean;
 import com.bus.business.mvp.entity.response.RspBusinessBean;
 import com.bus.business.mvp.entity.response.RspDropBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
+import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
@@ -377,6 +378,20 @@ public class RetrofitManager {
         map.put("meetingId", meetingId);
         KLog.a(map.toString());
         return mNewsService.changeReadState(map);
+    }
+
+    public Observable<RspMeetingFileBean> getMeetingFileList(String  meetingId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("meetingId", meetingId);
+        KLog.a(map.toString());
+        return mNewsService.getMeetingFileList(map);
+    }
+
+    public Observable<BaseRspObj> downloadMeetingFile(String  meetingfileId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("meetingfileId", meetingfileId);
+        KLog.a(map.toString());
+        return mNewsService.downloadMeetingFile(map);
     }
 
 

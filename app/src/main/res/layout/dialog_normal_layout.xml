@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:clickable="true"
+    android:gravity="center"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_rectange"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/title_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:text=""
+                android:textColor="@color/color_333333"
+                android:textSize="16sp" />
+             <ImageView
+                 android:id="@+id/cancel"
+                 android:layout_centerVertical="true"
+                 android:layout_marginRight="25dp"
+                 android:layout_alignParentRight="true"
+                 android:src="@mipmap/icon_close_pop"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/content_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/message_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="60dp"
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:lineSpacingExtra="14dp"
+                android:text=""
+                android:textColor="@color/color_999999"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:background="@color/split_color"
+            android:id="@+id/btn_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:background="@null"
+                android:id="@+id/positiveButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/color_0dadd5"
+                android:gravity="center"
+                android:text="确定"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/line_dialog"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/color_cccccc" />
+
+            <Button
+                android:background="@null"
+                android:id="@+id/negativeButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/color_0dadd5"
+                android:gravity="center"
+                android:text="取消"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

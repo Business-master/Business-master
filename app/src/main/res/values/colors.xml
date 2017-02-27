@@ -75,6 +75,9 @@
 	<color name="blue_light">#0083FF</color>
 	<color name="gray_lighter">#F2F4F5</color>
 	<color name="color_333333">#333333</color>
+	<color name="color_fdae73">#fdae73</color>
+	<color name="color_cccccc">#cccccc</color>
+	<color name="color_f4f4f4">#f4f4f4</color>
 	<color name="color_666666">#666666</color>
 	<color name="color_999999">#999999</color>
 	<color name="color_e1dfdf">#e1dfdf</color>
@@ -102,4 +105,6 @@
 	<color name="item_alpha_back">#43000000</color>
 
 	<color name="font_black_content">#222222</color>
+
+
 </resources>

@@ -1,16 +1,12 @@
 package com.bus.business.mvp.ui.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.renderscript.BaseObj;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,14 +15,11 @@ import com.bus.business.common.Constants;
 import com.bus.business.common.LoadNewsType;
 import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.MeetingBean;
-import com.bus.business.mvp.entity.response.RspMeetingBean;
-import com.bus.business.mvp.entity.response.base.BaseNewBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.event.ReadMeeting;
 import com.bus.business.mvp.presenter.impl.MeetingPresenterImpl;
-import com.bus.business.mvp.ui.activities.ApplyActivity;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 import com.bus.business.mvp.view.MeetingView;
@@ -46,7 +39,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import rx.Subscriber;
 
 /**
@@ -131,8 +123,9 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
                 LinearLayoutManager.VERTICAL, false));
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
         likeBeanList = new ArrayList<>();
-//        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_meeting_item, likeBeanList);//
-        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item2, likeBeanList);
+
+//        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item, likeBeanList);
+        mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item3, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);
         mNewsListAdapter.openLoadMore(Constants.numPerPage, true);
         mNewsListAdapter.setOnRecyclerViewItemClickListener(this);

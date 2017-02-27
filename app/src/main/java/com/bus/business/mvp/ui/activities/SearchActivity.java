@@ -13,7 +13,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -37,7 +36,6 @@ import com.bus.business.mvp.presenter.impl.NewsPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.adapter.AreaAdapter;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
-import com.bus.business.mvp.ui.adapter.NewsAdapter;
 import com.bus.business.mvp.view.AreaSeaView;
 import com.bus.business.mvp.view.BusinessView;
 import com.bus.business.mvp.view.MeetingView;
@@ -187,7 +185,7 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case NewsType.TYPE_REFRESH_HUIWU:
                 meetList = new ArrayList<>();
-                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item2, meetList);
+                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item3,meetList);
 //                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_newmeeting_item, meetList);
 //                mNewsListAdapter = new MeetingsAdapter(R.layout.layout_meeting_item, meetList);
                 break;

@@ -86,17 +86,11 @@ public class MeetingDetailActivity extends BaseActivity{
     public void initViews() {
         EventBus.getDefault().register(this);
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
-//        currentPos = getIntent().getIntExtra(MeetingBean.MEETINGPOS,0);
 
         mProgressBar.setVisibility(View.GONE);
-        setCustomTitle(meetingBean.getMeetingName());
+        setCustomTitle("会务详情");
         showOrGoneSearchRl(View.GONE);
 
-//        if (meetingBean.getCheckType()){
-//            stateStr = "已参会";
-//        }else {
-//            stateStr = meetingBean.getJoinType()==1?"已报名":"报名";
-//        }
 
         stateStr = ApplyUtils.getInstance().initHide(cancel_apply,btn_apply,btn_leave,meetingBean.getJoinType());
         if(meetingBean.getJoinType()==0){
@@ -111,7 +105,6 @@ public class MeetingDetailActivity extends BaseActivity{
         btn_leave.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
 
         mTitle.setText(meetingBean.getMeetingName());
-//        btn_apply.setBackgroundResource(meetingBean.getJoinType()!=0 ? R.drawable.grey_circle_5 : R.drawable.blue_circle_5);
         mJoinDate.setText("参会时间:"+DateUtil.getCurGroupDay(meetingBean.getMeetingTime()));
         mPubDate.setText("发表时间:"+DateUtil.getCurGroupDay(meetingBean.getCtime()));
         mJoinAddress.setText("参会地点:"+meetingBean.getMeetingLoc());
@@ -120,16 +113,6 @@ public class MeetingDetailActivity extends BaseActivity{
 
 
 
-//    @OnClick(R.id.img_add)
-//    public void addToMeeting(View view){
-//        requestAddToMeeting();
-//
-//    }
-
-//    @Subscribe
-//    public void onCheckMeetingToRefresh(CheckMeetingStateEvent event){
-//
-//    }
 
 
     @Subscribe
@@ -167,22 +150,4 @@ public class MeetingDetailActivity extends BaseActivity{
 
 
 
-//    public void requestAddToMeeting(){
-////        if (meetingBean.getJoinType()==1){
-////            UT.show("已报名");
-////            return;
-////        }
-//        if (meetingBean.getJoinType()!=0){
-//            UT.show("已报名");
-//            return;
-//        }
-//
-//        Intent intent = new Intent(mActivity,ApplyActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putSerializable(MeetingBean.MEETINGBEAN,meetingBean);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
-//
-//
-//    }
 }
