@@ -37,7 +37,6 @@ import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
 import com.bus.business.mvp.presenter.impl.BusinessPresenterImpl;
 import com.bus.business.mvp.presenter.impl.NewsPresenterImpl;
-import com.bus.business.mvp.ui.activities.CActivity;
 import com.bus.business.mvp.ui.activities.ExamsActivity;
 import com.bus.business.mvp.ui.activities.NewDetailActivity;
 import com.bus.business.mvp.ui.activities.TopicListActivity;
@@ -450,7 +449,7 @@ public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout
     @NonNull
     private Intent setIntent(int position) {
         List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
-        Intent intent = new Intent(mActivity, CActivity.class);
+        Intent intent = new Intent(mActivity, NewDetailActivity.class);
         intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
         intent.putExtra(Constants.NEWS_TYPE, isXunFrg ? Constants.DETAIL_XUN_TYPE : Constants.DETAIL_XIE_TYPE);
         return intent;

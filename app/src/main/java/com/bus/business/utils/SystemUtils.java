@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.bus.business.common.Constants;
@@ -60,20 +61,16 @@ public class SystemUtils {
      * 百度地图的经纬度类型：默认为bd09经纬度坐标。允许的值为bd09ll、bd09mc、gcj02、wgs84。bd09ll表示百度经纬度坐标，gcj02表示经过国测局加密的坐标，wgs84表示gps获取的坐标。
      */
     public static void openBaiduMap(Activity activity,String title, String content, String lat, String log){
-        try {
 
-            if(isInstallByread(Constants.BAIDUMAP_PACKAGENAME)){
-                Intent intent = Intent.getIntent("intent://map/marker?coord_type=gcj02&location="
-                        +lat+","+log+"&title="+title+"&content="
-                        +content+"&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
-                activity.startActivity(intent); //启动调用
-                Log.e("GasStation", "百度地图客户端已经安装") ;
-            }else{
-                UT.show("没有安装百度地图客户端");
-                Log.e("GasStation", "没有安装百度地图客户端") ;
-            }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+        if(isInstallByread(Constants.BAIDUMAP_PACKAGENAME)){
+            Intent intent = new Intent();
+             // 地址解析
+            intent.setData(Uri.parse("baidumap://map/geocoder?src=openApiDemo&address=北京市海淀区上地信息路9号奎科科技大厦"));
+                    activity.startActivity(intent); //启动调用
+            Log.e("GasStation", "百度地图客户端已经安装") ;
+        }else{
+            UT.show("没有安装百度地图客户端");
+            Log.e("GasStation", "没有安装百度地图客户端") ;
         }
     }
 

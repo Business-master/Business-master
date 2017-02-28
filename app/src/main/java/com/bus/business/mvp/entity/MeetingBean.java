@@ -54,6 +54,24 @@ public class MeetingBean implements Serializable{
     private int areaId;
     private String checkType;// 签到状态 0未签到 1已签到
     private int joinType;// 参会状态  0未报名 1未签到 2已签到 3本人参加 4助理参加  5请假   6取消报名 7未参加 8已过期
+private String longitude;
+    private String latitude;
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 
     public MeetingBean(int id) {
         this.id = id;
@@ -183,7 +201,8 @@ public class MeetingBean implements Serializable{
     @Override
     public String toString() {
         return "MeetingBean{" +
-                "id=" + id +
+                "hasReaded=" + hasReaded +
+                ", id=" + id +
                 ", utime=" + utime +
                 ", meetingLoc='" + meetingLoc + '\'' +
                 ", duration=" + duration +
@@ -195,7 +214,9 @@ public class MeetingBean implements Serializable{
                 ", ctime=" + ctime +
                 ", areaId=" + areaId +
                 ", checkType='" + checkType + '\'' +
-                ", joinType='" + joinType + '\'' +
+                ", joinType=" + joinType +
+                ", longitude='" + longitude + '\'' +
+                ", latitude='" + latitude + '\'' +
                 '}';
     }
 

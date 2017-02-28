@@ -31,7 +31,7 @@ import java.util.List;
  * @类型名称：PermissionsChecker
  * @since 2.5.0
  */
-public class CheckPermissionsActivity extends Activity
+public abstract class CheckPermissionsActivity extends BaseActivity
 		implements
 			ActivityCompat.OnRequestPermissionsResultCallback {
 	/**

@@ -43,6 +43,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends ActionBarAct
 
     protected Subscription mSubscription;
 
+    protected Bundle savedInstanceState;
+
     public abstract int getLayoutId();
 
     public abstract void initInjector();
@@ -53,6 +55,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends ActionBarAct
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         KLog.i(getClass().getSimpleName());
+        this.savedInstanceState = savedInstanceState;
         NetUtil.isNetworkErrThenShowMsg();
         initActivityComponent();
         int layoutId = getLayoutId();

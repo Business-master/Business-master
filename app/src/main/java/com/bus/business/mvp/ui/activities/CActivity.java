@@ -1,6 +1,8 @@
 package com.bus.business.mvp.ui.activities;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +14,18 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.LocationSource;
 import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.CameraPosition;
+import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps2d.model.MarkerOptions;
 import com.bus.business.R;
 import com.bus.business.common.Constants;
-import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
 import com.bus.business.utils.SystemUtils;
 
-public class CActivity extends CheckPermissionsActivity implements
+public class CActivity extends Activity implements
         LocationSource
         , AMapLocationListener {
 
@@ -31,15 +37,17 @@ public class CActivity extends CheckPermissionsActivity implements
     private AMap aMap;
     private OnLocationChangedListener mListener;
 
+    private double latitude = 39.906901;//纬度
+    private double longitude = 116.397972;//经度
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c);
         mapView = (MapView) findViewById(R.id.map);
         btn = (Button) findViewById(R.id.btn);
-        mapView.onCreate(savedInstanceState);// 此方法必须重写
 
-        init();
+        init(savedInstanceState);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +56,7 @@ public class CActivity extends CheckPermissionsActivity implements
                 } else if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
                     SystemUtils.openBaiduMap(CActivity.this, "aa", "aa", "40.047669", "ss");
                 } else {
-                    Uri uri = Uri.parse("http://api.map.baidu.com/marker?location=40.047669,116.313082&title=我的位置&content=百度奎科大厦&output=html&src=yourComponyName|yourAppName");
+                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=北京市海淀区上地信息路9号奎科科技大厦&output=html&src=yourCompanyName|yourAppName");
                     Intent it = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(it);
                 }
@@ -59,17 +67,26 @@ public class CActivity extends CheckPermissionsActivity implements
     /**
      * 初始化AMap对象
      */
-    private void init() {
+    private void init(Bundle savedInstanceState) {
+        mapView.onCreate(savedInstanceState);// 此方法必须重写
         if (aMap == null) {
             aMap = mapView.getMap();
 
         }
         aMap.setMapType(AMap.MAP_TYPE_NORMAL);// 矢量地图模式
         aMap.setMapLanguage(AMap.CHINESE);
-// 设置定位监听
-        aMap.setLocationSource(this);
-// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-        aMap.setMyLocationEnabled(true);
+        aMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(latitude,longitude),14,30,0)));
+
+        LatLng latLng = new LatLng(latitude,longitude);
+        MarkerOptions markerOption = new MarkerOptions();
+        markerOption.position(latLng);
+        markerOption.title("北京市").snippet("DefaultMarker");
+
+        markerOption.draggable(true);//设置Marker可拖动
+        markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                .decodeResource(getResources(),R.drawable.ic_launcher)));
+        aMap.addMarker(markerOption);
+
     }
 
     /**

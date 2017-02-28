@@ -244,10 +244,12 @@ public class RetrofitManager {
     }
 
     //修改会议参加状态接口
-    public Observable<BaseRspObj> signInMeeting(String meetingId) {
+    public Observable<BaseRspObj> signInMeeting(String meetingId,double longitude,double latitude) {
         Map<String, String> map = new HashMap<>();
         map.put("meetingId", meetingId);
         map.put("userId", UsrMgr.getUseId());
+        map.put("longitude",longitude+"");
+        map.put("latitude",latitude+"");
         KLog.a(map.toString());
         return mNewsService.signInMeeting(map);
     }
