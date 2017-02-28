@@ -1,9 +1,7 @@
 package com.bus.business.mvp.ui.activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +20,6 @@ import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.bus.business.R;
-import com.bus.business.common.Constants;
-import com.bus.business.utils.SystemUtils;
 
 public class CActivity extends Activity implements
         LocationSource
@@ -51,15 +47,7 @@ public class CActivity extends Activity implements
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (SystemUtils.isInstallByread(Constants.AMAP_PACKAGENAME)) {
-                    SystemUtils.openGaoDeMap(CActivity.this, "aa", "40.047669", "116.313082");
-                } else if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
-                    SystemUtils.openBaiduMap(CActivity.this, "aa", "aa", "40.047669", "ss");
-                } else {
-                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=北京市海淀区上地信息路9号奎科科技大厦&output=html&src=yourCompanyName|yourAppName");
-                    Intent it = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(it);
-                }
+
             }
         });
     }

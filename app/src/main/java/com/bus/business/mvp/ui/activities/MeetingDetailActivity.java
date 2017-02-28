@@ -29,6 +29,7 @@ import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.utils.ApplyUtils;
 import com.bus.business.utils.DateUtil;
 import com.bus.business.utils.SystemUtils;
+import com.bus.business.utils.UT;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -144,12 +145,17 @@ public class MeetingDetailActivity extends BaseActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (TextUtils.isEmpty(meetingBean.getMeetingLoc())) {
+                    UT.show("会议地点错误");
+                    return;
+                }
+
                 if (SystemUtils.isInstallByread(Constants.AMAP_PACKAGENAME)) {
-                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, "aa", "40.047669", "116.313082");
+                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
                 } else if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
-                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, "aa", "aa", "40.047669", "ss");
+                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
                 } else {
-                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=北京市海淀区上地信息路9号奎科科技大厦&output=html&src=yourCompanyName|yourAppName");
+                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + meetingBean.getMeetingLoc() + "&output=html&src=yourCompanyName|yourAppName");
                     Intent it = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(it);
                 }

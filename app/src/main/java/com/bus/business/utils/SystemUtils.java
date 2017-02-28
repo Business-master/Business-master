@@ -60,12 +60,12 @@ public class SystemUtils {
      * 现在使用的是高德地图是经纬度数据 火星坐标：gcj02
      * 百度地图的经纬度类型：默认为bd09经纬度坐标。允许的值为bd09ll、bd09mc、gcj02、wgs84。bd09ll表示百度经纬度坐标，gcj02表示经过国测局加密的坐标，wgs84表示gps获取的坐标。
      */
-    public static void openBaiduMap(Activity activity,String title, String content, String lat, String log){
+    public static void openBaiduMap(Activity activity,String title){
 
         if(isInstallByread(Constants.BAIDUMAP_PACKAGENAME)){
             Intent intent = new Intent();
              // 地址解析
-            intent.setData(Uri.parse("baidumap://map/geocoder?src=openApiDemo&address=北京市海淀区上地信息路9号奎科科技大厦"));
+            intent.setData(Uri.parse("baidumap://map/geocoder?src=openApiDemo&address="+title));
                     activity.startActivity(intent); //启动调用
             Log.e("GasStation", "百度地图客户端已经安装") ;
         }else{
@@ -78,15 +78,15 @@ public class SystemUtils {
      * 打开高德地图
      * @param activity
      * @param name 目的地名称
-     * @param lat 纬度
-     * @param log 经度
      */
-    public static void openGaoDeMap(Activity activity, String name, String lat, String log)
+    public static void openGaoDeMap(Activity activity, String name)
     {
         try
         {
             if(isInstallByread(Constants.AMAP_PACKAGENAME)) {
-                Intent intent = Intent.getIntent("androidamap://viewMap?sourceApplication=全球旅拍&poiname=" + name + "&lat=" + lat + "&lon=" + log + "&dev=0");
+//                Intent intent = Intent.getIntent("androidamap://keywordNavi?sourceApplication=工商联;keyword="+name);
+//                activity.startActivity(intent);
+                Intent intent = Intent.getIntent("androidamap://viewMap?sourceApplication=工商联&poiname="+name);
                 activity.startActivity(intent);
             }else {
                 UT.show("没有安装高德地图客户端");
