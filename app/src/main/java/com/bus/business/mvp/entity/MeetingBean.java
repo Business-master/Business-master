@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @version 1.0
  * @create_date 16/12/24
  */
-public class MeetingBean implements Serializable{
+public class MeetingBean implements Serializable {
     public static final String MEETINGBEAN = "meeting_bean";
     public static final String MEETINGPOS = "meeting_pos";
     /**
@@ -54,7 +54,7 @@ public class MeetingBean implements Serializable{
     private int areaId;
     private String checkType;// 签到状态 0未签到 1已签到
     private int joinType;// 参会状态  0未报名 1未签到 2已签到 3本人参加 4助理参加  5请假   6取消报名 7未参加 8已过期
-private String longitude;
+    private String longitude;
     private String latitude;
 
     public String getLongitude() {
@@ -85,11 +85,11 @@ private String longitude;
         this.joinType = joinType;
     }
 
-    public void intentToDetail(Context context, int pos){
-        Intent intent = new Intent(context,MeetingDetailActivity.class);
+    public void intentToDetail(Context context, int pos) {
+        Intent intent = new Intent(context, MeetingDetailActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(MEETINGBEAN,this);
-        bundle.putInt(MEETINGPOS,pos);
+        bundle.putSerializable(MEETINGBEAN, this);
+        bundle.putInt(MEETINGPOS, pos);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
