@@ -30,7 +30,7 @@ import com.bus.business.mvp.event.ChangeSearchStateEvent;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.event.ReadMeeting;
-import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
+import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.fragment.ExpertFragment;
 import com.bus.business.mvp.ui.fragment.MainPagerFragment;
 import com.bus.business.mvp.ui.fragment.MineFragment;
@@ -53,8 +53,8 @@ import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Subscriber;
 
-public class MainActivity extends CheckPermissionsActivity {
-    private static final int CAMERA_OK = 2;
+public class MainActivity extends BaseActivity {
+    public static final int CAMERA_OK = 2;
     public static final int CONTACTS_OK = 10000;
     private static int currIndex = 0;
     private int homeFragmentIndex = 0;

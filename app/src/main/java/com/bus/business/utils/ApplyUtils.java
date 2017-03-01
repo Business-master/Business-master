@@ -50,6 +50,9 @@ public  class ApplyUtils {
 
 
 
+
+
+
     //根据 JoinType 初始化会议列表----- 报名状态按钮的文字显示 --和-- 取消报名、报名、请假三个按钮的显示状态
     public  String initState_Hide(Button cancel,Button apply ,Button leave,int joinType){
         String stateStr="";

@@ -67,4 +67,8 @@ public class ApiConstants {
 
     public static final String Meeting_file_download = "/gsl-api/meetingFile/download";
 
+    public static final String GetAllNation = "/gsl-api/user/getAllNation";
+
+    public static final String GetAllPosition = "/gsl-api/user/getAllPosition";
+
 }

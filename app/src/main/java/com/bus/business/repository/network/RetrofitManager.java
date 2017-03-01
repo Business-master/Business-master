@@ -17,6 +17,7 @@ import com.bus.business.mvp.entity.response.RspBusinessBean;
 import com.bus.business.mvp.entity.response.RspDropBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
 import com.bus.business.mvp.entity.response.RspMeetingFileBean;
+import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
@@ -255,7 +256,10 @@ public class RetrofitManager {
     }
 
     //修改会议参加状态新接口
-    public Observable<BaseRspObj> joinMeeting(int meetingId, int joinType, int foodId, int stay, String userAssistantId, String carNo, int driver, String cause, String desp) {
+    public Observable<BaseRspObj> joinMeeting(int meetingId, int joinType, int foodId, int stay, String userAssistantId,
+                                              String carNo, int driver, String cause, String desp
+                                              ,String leadName,String nation,String sex,String companyName
+                                              ,String job) {
         Map<String, String> map = new HashMap<>();
         map.put("userId", UsrMgr.getUseId());
         map.put("meetingId", meetingId + "");
@@ -266,7 +270,11 @@ public class RetrofitManager {
         map.put("carNo", carNo);
         map.put("driver", String.valueOf(driver));
         map.put("cause", cause);
-        map.put("desp", desp);
+        map.put("leadName", leadName);
+        map.put("nation", nation);
+        map.put("sex", sex);
+        map.put("companyName", companyName);
+        map.put("job", job);
         KLog.a(map.toString());
         return mNewsService.joinMeeting(map);
     }
@@ -394,6 +402,14 @@ public class RetrofitManager {
         map.put("meetingfileId", meetingfileId);
         KLog.a(map.toString());
         return mNewsService.downloadMeetingFile(map);
+    }
+
+   public Observable<RspNationBean> getAllNation() {
+        return mNewsService.getAllNation();
+    }
+
+    public Observable<RspNationBean> getAllPosition() {
+        return mNewsService.getAllPosition();
     }
 
 

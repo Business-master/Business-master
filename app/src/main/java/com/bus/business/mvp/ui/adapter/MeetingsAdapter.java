@@ -57,15 +57,20 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
    private  Button cancel_apply;
    private   Button btn_apply;
    private   Button   btn_leave;
+   private  static  int mLayoutResId;
+    private static List<MeetingBean> mData;
+
 
 
 
     public MeetingsAdapter(int layoutResId, List<MeetingBean> data) {
         super(layoutResId, data);
+        mLayoutResId = layoutResId;
+        mData = data;
     }
 
-    public MeetingsAdapter(List<MeetingBean> data) {
-        super(data);
+    public static MeetingsAdapter getInstance(){
+        return new MeetingsAdapter(mLayoutResId,mData);
     }
 
 
@@ -250,7 +255,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
             leave.setTextColor(Color.parseColor("#fdae73"));
             leave.setBackgroundResource(R.drawable.leaven_rectange);
         }else if (likeBean.getJoinType()==5){
-            leave.setText("取消请假");
+            leave.setText("已请假");
             leave.setTextColor(Color.parseColor("#f11212"));
             leave.setBackgroundResource(R.drawable.applyn_rectange);
 
@@ -274,7 +279,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         leave.setOnClickListener(new MyClick(likeBean));
     }
 
-    public  class  MyClick implements View.OnClickListener
+    public   class  MyClick implements View.OnClickListener
     {
 
         private MeetingBean meetingBean;
@@ -283,10 +288,6 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         public MyClick(MeetingBean likeBean) {
             this.meetingBean = likeBean;
         }
-
-
-
-
 
 
         @Override
@@ -304,16 +305,12 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                                 mContext.startActivity(intent);
                             }
                     }else {
-                        createDialog(6,"请输入取消报名的原因");
+                        createDialog(0,"请输入取消报名的原因");
                     }
                     break;
                 case R.id.leave:
                     if (meetingBean.getJoinType()==0){
                         createDialog(5,"请输入请假的原因");
-                    }else if (meetingBean.getJoinType()==5){
-                        UT.show("你想取消请假？");
-                    }else {
-                        UT.show("已报名，不能请假！");
                     }
                     break;
             }
@@ -366,7 +363,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                             if (responseBody.getHead().getRspCode().equals("0")) {
                                 if (joinType==5){
                                     EventBus.getDefault().post(new JoinToMeetingEvent(2));
-                                }else if (joinType==6){
+                                }else if (joinType==0){
                                     EventBus.getDefault().post(new JoinToMeetingEvent(3));
                                 }
                             }

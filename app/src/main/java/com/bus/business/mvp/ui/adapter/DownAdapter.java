@@ -6,16 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bus.business.App;
 import com.bus.business.R;
 import com.bus.business.mvp.entity.AreaBean;
+import com.bus.business.mvp.entity.MeetingFileBean;
 import com.bus.business.mvp.entity.WanBean;
 import com.bus.business.mvp.event.AreaCodeEvent;
 import com.bus.business.mvp.ui.activities.AreaActivity;
 import com.bus.business.utils.ApplyUtils;
+import com.bus.business.utils.UT;
 import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,25 +28,26 @@ import java.util.List;
 
 /**
  * Created by ATRSnail on 2017/2/16.
+ * 会议详情 附件下载适配器
  */
 
-public class CustomAdapter extends BaseAdapter{
+public class DownAdapter extends BaseAdapter{
 
     Context context ;
 
-    List<WanBean>  list=new ArrayList<>();
+    List<MeetingFileBean>  list=new ArrayList<>();
 
 
 
-    public CustomAdapter(Activity mActivity) {
+    public DownAdapter(Activity mActivity) {
          this.context = mActivity;
     }
 
-    public List<WanBean> getList() {
+    public List<MeetingFileBean> getList() {
         return list;
     }
 
-    public void setList(List<WanBean> list) {
+    public void setList(List<MeetingFileBean> list) {
         this.list.clear();
         this.list.addAll(list);
     }
@@ -68,22 +72,28 @@ public class CustomAdapter extends BaseAdapter{
        ViewHolder holder=null;
         if (convertView==null){
             holder=new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_qzyb,null,false);
-//            holder.textView = (TextView) convertView.findViewById(R.id.name_qzyb);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.img_qzyb);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_down,null,false);
+            holder.textView = (TextView) convertView.findViewById(R.id.name_fj);
+            holder.down_btn = (Button) convertView.findViewById(R.id.down_fj);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        WanBean wanBean = getList().get(position);
-//        holder.textView.setText(wanBean.getUrl());
-        holder.imageView.setImageResource(wanBean.getImgSrc());
+        MeetingFileBean meetingFileBean = getList().get(position);
+        holder.textView.setText(meetingFileBean.getShowFileName());
+        final int meetingFileId= meetingFileBean.getId();
+         holder.down_btn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 UT.show("下载" +meetingFileId);
+             }
+         });
         return convertView;
     }
 
     class  ViewHolder{
-        ImageView imageView;
-//        TextView textView;
+        Button down_btn;
+        TextView textView;
     }
 
 

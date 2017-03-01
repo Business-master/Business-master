@@ -39,28 +39,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-                <RadioButton
+                <TextView
                     android:id="@+id/apply_self"
                     android:layout_marginLeft="30dp"
-                    android:background="@drawable/apply_selector"
+                    android:background="@drawable/leave_rectange"
                     android:text="本人"
-                    android:button="@null"
                     android:gravity="center"
-                    android:textColor="@color/color_0dadd5"
+                    android:textColor="@color/color_cccccc"
                     android:layout_width="100dp"
                     android:layout_height="30dp" />
+            <LinearLayout
+                android:clickable="true"
+                android:id="@+id/ll_assis"
+                android:layout_marginLeft="30dp"
+                android:orientation="horizontal"
+                android:background="@drawable/leave_rectange"
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:layout_height="30dp">
                 <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/apply_assis"
-                    android:layout_marginLeft="30dp"
-                    android:background="@drawable/apply_selector"
                     android:text="助理"
-                    android:drawablePadding="0dp"
-                    android:drawableRight="@mipmap/icon_navigation"
                     android:gravity="center"
-                    android:textColor="@color/color_0dadd5"
-                     />
+                    android:textColor="@color/color_cccccc"
+                    />
+                <ImageView
+                    android:layout_marginLeft="6dp"
+                    android:id="@+id/drop_assis"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/icon_drop_gray"
+                    android:layout_width="10dp"
+                    android:layout_height="6dp" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -220,14 +233,15 @@
                 android:text="职务 : "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText
-                android:background="@null"
+            <TextView
+                android:clickable="true"
                 android:layout_marginRight="40dp"
                 android:drawableRight="@drawable/apply_xiabiao"
                 android:id="@+id/apply_duty"
                 android:layout_marginLeft="10dp"
                 android:textColorHint="@color/color_cccccc"
                 android:hint="请选择职务"
+                android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -258,12 +272,10 @@
                 android:text="手机号 : "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText
-                android:background="@null"
+            <TextView
                 android:id="@+id/apply_phone"
                 android:layout_marginLeft="10dp"
                 android:textColorHint="@color/color_cccccc"
-                android:hint="请输入手机号"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -280,6 +292,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <TextView
+                android:id="@+id/replace"
+                android:visibility="invisible"
                 android:textSize="14sp"
                 android:layout_marginLeft="15dp"
                 android:text="*"
@@ -430,7 +444,6 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:clickable="true"
-                android:background="@null"
                 android:layout_marginRight="40dp"
                 android:drawableRight="@drawable/apply_xiabiao"
                 android:id="@+id/apply_nation"
@@ -530,7 +543,7 @@
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_marginTop="17dp"
-            android:layout_height="130dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_marginLeft="15dp"
                 android:textColor="@color/color_333333"
@@ -549,9 +562,11 @@
                 android:textColorHint="@color/color_cccccc"
                 android:hint="请添加备注"
                 android:maxLength="200"
+                android:ellipsize="none"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
              <TextView
+                 android:layout_below="@id/remark_apply"
                  android:padding="15dp"
                  android:id="@+id/remark_num"
                  android:layout_alignParentRight="true"
