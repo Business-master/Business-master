@@ -16,6 +16,7 @@ import com.bus.business.mvp.entity.response.RspBusDetailBean;
 import com.bus.business.mvp.entity.response.RspBusinessBean;
 import com.bus.business.mvp.entity.response.RspDropBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
+import com.bus.business.mvp.entity.response.RspMeetingDetailBean;
 import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
@@ -410,6 +411,11 @@ public class RetrofitManager {
 
     public Observable<RspNationBean> getAllPosition() {
         return mNewsService.getAllPosition();
+    }
+
+   public Observable<RspMeetingDetailBean> getMeetingDetail(String  meetingId) {
+
+        return mNewsService.getMeetingDetail(UsrMgr.getUseId(),meetingId);
     }
 
 

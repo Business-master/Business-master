@@ -10,6 +10,7 @@ import com.bus.business.mvp.entity.response.RspBusDetailBean;
 import com.bus.business.mvp.entity.response.RspBusinessBean;
 import com.bus.business.mvp.entity.response.RspDropBean;
 import com.bus.business.mvp.entity.response.RspMeetingBean;
+import com.bus.business.mvp.entity.response.RspMeetingDetailBean;
 import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
@@ -23,10 +24,12 @@ import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 import rx.Observable;
 
@@ -157,6 +160,12 @@ public interface NewsService {
 
    @GET(ApiConstants.GetAllPosition)
     Observable<RspNationBean> getAllPosition();
+
+
+
+    @GET(ApiConstants.GetMeetingDetail)
+    Observable<RspMeetingDetailBean> getMeetingDetail(@Query("userId") String userId,
+                                                @Query("meetingId") String meetingId);
 
 
 }

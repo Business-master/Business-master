@@ -92,7 +92,6 @@ public class DownAdapter extends BaseAdapter{
              public void onClick(View v) {
                  String url = ApiConstants.NETEAST_HOST+ApiConstants.Meeting_file_download+"?meetingfileId="+meetingFileId;
                  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                 KLog.a("地址"+url);
                  context.startActivity(intent);
              }
          });

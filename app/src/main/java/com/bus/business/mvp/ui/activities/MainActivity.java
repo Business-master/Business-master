@@ -31,6 +31,7 @@ import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.event.ReadMeeting;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
+import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
 import com.bus.business.mvp.ui.fragment.ExpertFragment;
 import com.bus.business.mvp.ui.fragment.MainPagerFragment;
 import com.bus.business.mvp.ui.fragment.MineFragment;
@@ -53,7 +54,7 @@ import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Subscriber;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends CheckPermissionsActivity {
     public static final int CAMERA_OK = 2;
     public static final int CONTACTS_OK = 10000;
     private static int currIndex = 0;
@@ -505,6 +506,7 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onNext(BaseRspObj baseRspObj) {
+                        KLog.a("********"+baseRspObj.toString());
                         if (baseRspObj.getHead().getRspCode().equals("0"))
                             EventBus.getDefault().post(new CheckMeetingStateEvent());
                         UT.show(baseRspObj.getHead().getRspMsg());

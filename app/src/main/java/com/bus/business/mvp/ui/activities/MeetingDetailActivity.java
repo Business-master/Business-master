@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -41,12 +42,15 @@ import com.amap.api.maps2d.model.MarkerOptions;
 import com.bus.business.R;
 import com.bus.business.common.Constants;
 import com.bus.business.mvp.entity.MeetingBean;
+import com.bus.business.mvp.entity.MeetingDetailBean;
 import com.bus.business.mvp.entity.MeetingFileBean;
+import com.bus.business.mvp.entity.response.RspMeetingDetailBean;
 import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
+import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
 import com.bus.business.mvp.ui.adapter.DownAdapter;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.view.CustomGridView;
@@ -81,7 +85,7 @@ import static com.bus.business.mvp.entity.MeetingBean.MEETINGPOS;
  * @version 1.0
  * @create_date 17/1/10
  */
-public class MeetingDetailActivity extends BaseActivity{
+public class MeetingDetailActivity extends CheckPermissionsActivity {
 
     @Inject
     Activity mActivity;
@@ -127,18 +131,18 @@ public class MeetingDetailActivity extends BaseActivity{
 
 
 
-//    @BindView(R.id.scroll_view)
-//    NestedScrollView scrollView;
     @BindView(R.id.scroll_view)
-     ScrollView scrollView;
+    NestedScrollView scrollView;
+
 
     @BindView(R.id.map)
     MapView mapView;
+    @BindView(R.id.map_rl)
+    RelativeLayout map_rl;
 //    @BindView(R.id.btn)
 //    Button btn;
     private AMap aMap;
-    private double latitude = 39.906901;//纬度
-    private double longitude = 116.397972;//经度
+
 
     private MeetingBean meetingBean;
 
@@ -150,6 +154,8 @@ public class MeetingDetailActivity extends BaseActivity{
     private AMapLocationClientOption locationOption = new AMapLocationClientOption();
     private SweetAlertDialog pDialog;
 
+    private double latitude = 39.906901;//纬度
+    private double longitude = 116.397972;//经度
 
     @Override
     public int getLayoutId() {
@@ -166,24 +172,12 @@ public class MeetingDetailActivity extends BaseActivity{
     public void initViews() {
         EventBus.getDefault().register(this);
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
-        if (!TextUtils.isEmpty(meetingBean.getLatitude()) || !TextUtils.isEmpty(meetingBean.getLongitude())) {
-            latitude = Double.valueOf(meetingBean.getLatitude());
-            longitude = Double.valueOf(meetingBean.getLongitude());
-        }
 
 //        mProgressBar.setVisibility(View.GONE);
         setCustomTitle("会务详情");
         showOrGoneSearchRl(View.GONE);
+        initBottom_Map(meetingBean);
 
-        switch (Integer.valueOf(meetingBean.getStatus())){
-            case 0:
-            case 1:
-                initJoinType(meetingBean.getJoinType());
-                break;
-            case 2:
-                bottom_meeting_detail.setVisibility(View.GONE);
-                break;
-        }
 
 
 //        stateStr = ApplyUtils.getInstance().initHide(cancel_apply,btn_apply,btn_leave,meetingBean.getJoinType());
@@ -206,7 +200,7 @@ public class MeetingDetailActivity extends BaseActivity{
         mNewsDetailBodyTv.setText(meetingBean.getMeetingContent());
 
         mapView.onCreate(savedInstanceState);
-        init();
+
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -224,6 +218,9 @@ public class MeetingDetailActivity extends BaseActivity{
 //                }
 //            }
 //            }});
+        if (aMap == null) {
+            aMap = mapView.getMap();
+        }
         aMap.setOnMapTouchListener(new AMap.OnMapTouchListener() {
             @Override
             public void onTouch(MotionEvent motionEvent) {
@@ -243,6 +240,83 @@ public class MeetingDetailActivity extends BaseActivity{
         pDialog.setTitleText("正在定位...");
         pDialog.setCancelable(false);
         initLocation();
+    }
+
+
+    private void initBottom_Map(MeetingBean meet) {
+        if (meet.getJoinType()==2){
+            if (!TextUtils.isEmpty(meet.getLatitude()) || !TextUtils.isEmpty(meet.getLongitude())) {
+              double  latitude = Double.valueOf(meet.getLatitude());
+                double longitude = Double.valueOf(meet.getLongitude());
+                KLog.a("纬度"+Double.valueOf(meet.getLatitude())+"经度"+Double.valueOf(meet.getLongitude()));
+                init(latitude,longitude,meet.getMeetingLoc());
+                map_rl.setVisibility(View.VISIBLE);
+            }else {
+                map_rl.setVisibility(View.GONE);
+            }
+        }else {
+            map_rl.setVisibility(View.GONE);
+        }
+        switch (Integer.valueOf(meet.getStatus())){
+            case 0:
+                initJoinType(meet.getJoinType(),0);
+                break;
+            case 1:
+                initJoinType(meet.getJoinType(),1);
+                break;
+            case 2:
+                bottom_meeting_detail.setVisibility(View.GONE);
+                break;
+        }
+    }
+    private void initBottom_Map(MeetingDetailBean meet) {
+        if (Integer.valueOf(meet.getJoinType())==2){
+            if (!TextUtils.isEmpty(meet.getLatitude()) || !TextUtils.isEmpty(meet.getLongitude())) {
+                double  latitude = Double.valueOf(meet.getLatitude());
+                double longitude = Double.valueOf(meet.getLongitude());
+                KLog.a("纬度"+Double.valueOf(meet.getLatitude())+"经度"+Double.valueOf(meet.getLongitude()));
+                init(latitude,longitude,meet.getMeetingLoc());
+                map_rl.setVisibility(View.VISIBLE);
+            }else {
+                map_rl.setVisibility(View.GONE);
+            }
+        }else {
+            map_rl.setVisibility(View.GONE);
+        }
+        switch (Integer.valueOf(meet.getStatus())){
+            case 0:
+                initJoinType(Integer.valueOf(meet.getJoinType()),0);
+                break;
+            case 1:
+                initJoinType(Integer.valueOf(meet.getJoinType()),1);
+                break;
+            case 2:
+                bottom_meeting_detail.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    private void getJoinType() {
+        RetrofitManager.getInstance(1).getMeetingDetail(String.valueOf(meetingBean.getId()))
+                .compose(TransformUtils.<RspMeetingDetailBean>defaultSchedulers())
+                .subscribe(new Subscriber<RspMeetingDetailBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(RspMeetingDetailBean rspMeetingDetailBean) {
+                      KLog.a("****"+rspMeetingDetailBean.toString());
+                        MeetingDetailBean meetingDetailBean=rspMeetingDetailBean.getBody().getMeetingDatail().get(0);
+                        initBottom_Map(meetingDetailBean);
+                    }
+                });
     }
 
     private void initDown_fj() {
@@ -272,11 +346,16 @@ public class MeetingDetailActivity extends BaseActivity{
     }
 
 
-    private void initJoinType(int joinType) {
+    private void initJoinType(int joinType,int status) {
         switch (joinType){
             case 0 :
-                initBottom("签到","报名","请假",
-                        R.color.color_cccccc, R.color.color_0dadd5,R.color.color_0dadd5 ,false,true,true);
+                if (status==0){
+                    initBottom("签到","报名","请假",
+                            R.color.color_cccccc, R.color.color_0dadd5,R.color.color_0dadd5 ,false,true,true);
+                }else {
+                    initBottom("签到","报名","请假",
+                            R.color.color_cccccc, R.color.color_cccccc,R.color.color_cccccc ,false,false,false);
+                }
                 break;
             case 1 :
             case 3:
@@ -304,22 +383,26 @@ public class MeetingDetailActivity extends BaseActivity{
 
 
 
+
     /**
      * 初始化AMap对象
+     * @param location
+     * @param mLatitude
+     * @param mLongitude
      */
-    private void init() {
+    private void init( double mLatitude, double mLongitude,String location) {
         if (aMap == null) {
             aMap = mapView.getMap();
-
         }
+
         aMap.setMapType(AMap.MAP_TYPE_NORMAL);// 矢量地图模式
         aMap.setMapLanguage(AMap.CHINESE);
-        aMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(latitude, longitude), 14, 30, 0)));
+        aMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(mLatitude, mLongitude), 14, 30, 0)));
 
-        LatLng latLng = new LatLng(latitude, longitude);
+        LatLng latLng = new LatLng(mLatitude, mLongitude);
         MarkerOptions markerOption = new MarkerOptions();
         markerOption.position(latLng);
-        markerOption.title("北京市").snippet("DefaultMarker");
+        markerOption.title("北京市").snippet(location);
 
         markerOption.draggable(true);//设置Marker可拖动
         markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
@@ -373,16 +456,16 @@ public class MeetingDetailActivity extends BaseActivity{
                     UT.show("会议地点错误");
                     return;}
                 if (SystemUtils.isInstallByread(Constants.AMAP_PACKAGENAME)) {
-//                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
-                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, "天安门");
+                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
+//                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, "天安门");
                 } else
                 if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
-                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, "奎科大厦");
-//                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
+//                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, "奎科大厦");
+                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
                 }
                 else {
-//                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + meetingBean.getMeetingLoc() + "&output=html&src=yourCompanyName|yourAppName");
-                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + "奎科大厦" + "&output=html&src=yourCompanyName|yourAppName");
+                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + meetingBean.getMeetingLoc() + "&output=html&src=yourCompanyName|yourAppName");
+//                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + "奎科大厦" + "&output=html&src=yourCompanyName|yourAppName");
                     Intent it = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(it);
                 }
@@ -438,8 +521,8 @@ public class MeetingDetailActivity extends BaseActivity{
 //                  btn_leave.setVisibility(View.INVISIBLE);
                   break;
               case 4:
-                  initBottom("已签到","已报名","请假",
-                          R.color.color_cccccc, R.color.color_cccccc,R.color.color_cccccc ,false,false,false);
+                  getJoinType();
+
                   break;
           }
     }

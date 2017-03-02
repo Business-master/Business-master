@@ -256,14 +256,14 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
             leave.setBackgroundResource(R.drawable.leaven_rectange);
         }else if (likeBean.getJoinType()==5){
             leave.setText("已请假");
-            leave.setTextColor(Color.parseColor("#cccccc"));
-            leave.setBackgroundResource(R.drawable.leave_rectange);
+            leave.setTextColor(Color.parseColor("#fdae73"));
+            leave.setBackgroundResource(R.drawable.leaven_rectange);
 
             apply.setVisibility(View.INVISIBLE);
         }else if (likeBean.getJoinType()==2){
             leave.setText("已签到");
-            leave.setTextColor(Color.parseColor("#cccccc"));
-            leave.setBackgroundResource(R.drawable.leave_rectange);
+            leave.setTextColor(Color.parseColor("#4DC056"));
+            leave.setBackgroundResource(R.drawable.sign_rectange);
 
             apply.setVisibility(View.INVISIBLE);
         }else {

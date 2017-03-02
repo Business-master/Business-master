@@ -71,4 +71,6 @@ public class ApiConstants {
 
     public static final String GetAllPosition = "/gsl-api/user/getAllPosition";
 
+    public static final String GetMeetingDetail = "gsl-api/gsl/meeting/meetingDetail";
+
 }
