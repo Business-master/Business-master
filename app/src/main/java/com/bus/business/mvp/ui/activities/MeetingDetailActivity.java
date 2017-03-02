@@ -619,6 +619,17 @@ public class MeetingDetailActivity extends BaseActivity{
         locationClient.startLocation();
     }
 
+    /**
+     * 停止定位
+     *
+     * @since 2.8.0
+     * @author hongming.wang
+     *
+     */
+    private void stopLocation(){
+        // 停止定位
+        locationClient.stopLocation();
+    }
 
     // 根据控件的选择，重新设置定位参数
     private void resetOption() {

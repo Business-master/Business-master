@@ -122,7 +122,7 @@
             <com.bus.business.mvp.view.CustomGridView
                 android:layout_marginTop="20dp"
                 android:numColumns="1"
-                android:verticalSpacing="15dp"
+                android:verticalSpacing="5dp"
                 android:id="@+id/down_fj"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
