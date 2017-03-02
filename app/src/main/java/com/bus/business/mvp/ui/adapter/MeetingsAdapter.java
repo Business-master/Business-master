@@ -245,7 +245,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
             state.setCompoundDrawables(null,null,null,null);
             state.setCompoundDrawablePadding(0);
         }
-
+        apply.setVisibility(View.VISIBLE);
         if (likeBean.getJoinType()==0){
             apply.setText("报名");
             apply.setTextColor(Color.parseColor("#0dadd5"));
@@ -256,12 +256,16 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
             leave.setBackgroundResource(R.drawable.leaven_rectange);
         }else if (likeBean.getJoinType()==5){
             leave.setText("已请假");
-            leave.setTextColor(Color.parseColor("#f11212"));
-            leave.setBackgroundResource(R.drawable.applyn_rectange);
+            leave.setTextColor(Color.parseColor("#cccccc"));
+            leave.setBackgroundResource(R.drawable.leave_rectange);
 
-            apply.setText("报名");
-            apply.setTextColor(Color.parseColor("#cccccc"));
-            apply.setBackgroundResource(R.drawable.leave_rectange);
+            apply.setVisibility(View.INVISIBLE);
+        }else if (likeBean.getJoinType()==2){
+            leave.setText("已签到");
+            leave.setTextColor(Color.parseColor("#cccccc"));
+            leave.setBackgroundResource(R.drawable.leave_rectange);
+
+            apply.setVisibility(View.INVISIBLE);
         }else {
             apply.setText("取消报名");
             apply.setTextColor(Color.parseColor("#f11212"));

@@ -2,6 +2,8 @@ package com.bus.business.mvp.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.bus.business.App;
 import com.bus.business.R;
+import com.bus.business.common.ApiConstants;
 import com.bus.business.mvp.entity.AreaBean;
 import com.bus.business.mvp.entity.MeetingFileBean;
 import com.bus.business.mvp.entity.WanBean;
@@ -25,6 +28,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.http.Url;
 
 /**
  * Created by ATRSnail on 2017/2/16.
@@ -85,7 +90,10 @@ public class DownAdapter extends BaseAdapter{
          holder.down_btn.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 UT.show("下载" +meetingFileId);
+                 String url = ApiConstants.NETEAST_HOST+ApiConstants.Meeting_file_download+"?meetingfileId="+meetingFileId;
+                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                 KLog.a("地址"+url);
+                 context.startActivity(intent);
              }
          });
         return convertView;

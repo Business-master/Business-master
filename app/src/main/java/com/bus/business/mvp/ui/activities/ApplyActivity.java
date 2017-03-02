@@ -344,16 +344,16 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                 break;
             case R.id.ensure_apply:
                 getData();
-//                KLog.a("meetingBean.getId()  "+meetingBean.getId()+"\njoinType"+joinType+"\nfoodId" +foodId+"\n职务"+job+
-//                        " \nstay"+stay+"\nUserAssistantId"+userAssistantId
-//                        +"\nCarNo"+carNo
-//                        +"\ndriver"+driver
-//                        +"\ncause"+cause
-//                        +"\ndesp"+desp
-//                        +"\nleadName"+leadName
-//                        +"\nnation"+nation+
-//                        "\nsex"+sex
-//                        +"\ncompanyName"+companyName+"\njob"+job);
+                KLog.a("meetingBean.getId()  "+meetingBean.getId()+"\njoinType"+joinType+"\nfoodId" +foodId+"\n职务"+job+
+                        " \nstay"+stay+"\nUserAssistantId"+userAssistantId
+                        +"\nCarNo"+carNo
+                        +"\ndriver"+driver
+                        +"\ncause"+cause
+                        +"\ndesp"+desp
+                        +"\nleadName"+leadName
+                        +"\nnation"+nation+
+                        "\nsex"+sex
+                        +"\ncompanyName"+companyName+"\njob"+job);
                applyMetting();
                 break;
         }

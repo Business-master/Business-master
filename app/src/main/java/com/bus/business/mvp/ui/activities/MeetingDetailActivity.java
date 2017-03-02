@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -23,8 +24,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
@@ -38,6 +44,7 @@ import com.bus.business.mvp.entity.MeetingBean;
 import com.bus.business.mvp.entity.MeetingFileBean;
 import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
+import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.adapter.DownAdapter;
@@ -63,6 +70,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Subscriber;
 
 import static com.bus.business.mvp.entity.MeetingBean.MEETINGBEAN;
@@ -121,6 +129,8 @@ public class MeetingDetailActivity extends BaseActivity{
 
 //    @BindView(R.id.scroll_view)
 //    NestedScrollView scrollView;
+    @BindView(R.id.scroll_view)
+     ScrollView scrollView;
 
     @BindView(R.id.map)
     MapView mapView;
@@ -132,6 +142,13 @@ public class MeetingDetailActivity extends BaseActivity{
 
     private MeetingBean meetingBean;
 
+    /**
+     * 地图定位参数
+     */
+    protected AMapLocation location;
+    private AMapLocationClient locationClient = null;
+    private AMapLocationClientOption locationOption = new AMapLocationClientOption();
+    private SweetAlertDialog pDialog;
 
 
     @Override
@@ -207,18 +224,25 @@ public class MeetingDetailActivity extends BaseActivity{
 //                }
 //            }
 //            }});
-//        aMap.setOnMapTouchListener(new AMap.OnMapTouchListener() {
-//            @Override
-//            public void onTouch(MotionEvent motionEvent) {
-//                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-//                    scrollView.requestDisallowInterceptTouchEvent(false);
-//                } else {
-//                    scrollView.requestDisallowInterceptTouchEvent(true);
-//                }
-//            }
-//
-//        });
+        aMap.setOnMapTouchListener(new AMap.OnMapTouchListener() {
+            @Override
+            public void onTouch(MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    scrollView.requestDisallowInterceptTouchEvent(false);
+                } else {
+                    scrollView.requestDisallowInterceptTouchEvent(true);
+                }
+            }
+
+        });
        initDown_fj();
+
+
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("正在定位...");
+        pDialog.setCancelable(false);
+        initLocation();
     }
 
     private void initDown_fj() {
@@ -328,7 +352,7 @@ public class MeetingDetailActivity extends BaseActivity{
                      */
                     requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, MainActivity.CAMERA_OK);
                 } else {
-                    startActivity(new Intent(MeetingDetailActivity.this, CaptureActivity.class));
+                    startLocation();
                 }
                 break;
             case R.id.apply_meeting_detail :
@@ -351,12 +375,14 @@ public class MeetingDetailActivity extends BaseActivity{
                 if (SystemUtils.isInstallByread(Constants.AMAP_PACKAGENAME)) {
 //                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
                     SystemUtils.openGaoDeMap(MeetingDetailActivity.this, "天安门");
-                } else if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
-                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, "天安门");
+                } else
+                if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
+                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, "奎科大厦");
 //                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
-                } else {
+                }
+                else {
 //                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + meetingBean.getMeetingLoc() + "&output=html&src=yourCompanyName|yourAppName");
-                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + "天安门" + "&output=html&src=yourCompanyName|yourAppName");
+                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + "奎科大厦" + "&output=html&src=yourCompanyName|yourAppName");
                     Intent it = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(it);
                 }
@@ -373,7 +399,7 @@ public class MeetingDetailActivity extends BaseActivity{
             case MainActivity.CAMERA_OK:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //这里已经获取到了摄像头的权限，想干嘛干嘛了可以
-                    startActivityForResult(new Intent(MeetingDetailActivity.this, CaptureActivity.class), 0);
+                    startLocation();
                 } else {
                     //这里是拒绝给APP摄像头权限，给个提示什么的说明一下都可以。
                     UT.show("请手动打开相机权限");
@@ -421,6 +447,7 @@ public class MeetingDetailActivity extends BaseActivity{
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
+        destroyLocation();
         mapView.onDestroy();
         super.onDestroy();
 
@@ -505,6 +532,187 @@ public class MeetingDetailActivity extends BaseActivity{
                             }
                         }
                         UT.show(responseBody.getHead().getRspMsg());
+                    }
+                });
+    }
+
+
+
+
+    /**
+     * 初始化定位
+     *
+     * @since 2.8.0
+     * @author hongming.wang
+     *
+     */
+    private void initLocation(){
+        //初始化client
+        locationClient = new AMapLocationClient(this.getApplicationContext());
+        //设置定位参数
+        locationClient.setLocationOption(getDefaultOption());
+        // 设置定位监听
+        locationClient.setLocationListener(locationListener);
+    }
+
+
+    /**
+     * 默认的定位参数
+     * @since 2.8.0
+     * @author hongming.wang
+     *
+     */
+    private AMapLocationClientOption getDefaultOption(){
+        AMapLocationClientOption mOption = new AMapLocationClientOption();
+        mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
+        mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
+        mOption.setHttpTimeOut(30000);//可选，设置网络请求超时时间。默认为30秒。在仅设备模式下无效
+        mOption.setInterval(2000);//可选，设置定位间隔。默认为2秒
+        mOption.setNeedAddress(true);//可选，设置是否返回逆地理地址信息。默认是true
+        mOption.setOnceLocation(false);//可选，设置是否单次定位。默认是false
+        mOption.setOnceLocationLatest(false);//可选，设置是否等待wifi刷新，默认为false.如果设置为true,会自动变为单次定位，持续定位时不要使用
+        AMapLocationClientOption.setLocationProtocol(AMapLocationClientOption.AMapLocationProtocol.HTTP);//可选， 设置网络请求的协议。可选HTTP或者HTTPS。默认为HTTP
+        mOption.setSensorEnable(false);//可选，设置是否使用传感器。默认是false
+        mOption.setWifiScan(true); //可选，设置是否开启wifi扫描。默认为true，如果设置为false会同时停止主动刷新，停止以后完全依赖于系统刷新，定位位置可能存在误差
+        mOption.setLocationCacheEnable(true); //可选，设置是否使用缓存定位，默认为true
+        return mOption;
+    }
+
+    /**
+     * 定位监听
+     */
+    AMapLocationListener locationListener = new AMapLocationListener() {
+
+        @Override
+        public void onLocationChanged(AMapLocation loc) {
+            pDialog.dismiss();
+            if (null != loc) {
+                location = loc;
+                KLog.a("loc---->"+loc.toStr());
+                UT.show("loc--->"+loc.getAddress());
+                //解析定位结果
+                startActivityForResult(new Intent(MeetingDetailActivity.this, CaptureActivity.class), 0);
+//                String result = Utils.getLocationStr(loc);
+//                tvResult.setText(result);
+            } else {
+                UT.show("定位失败,请重新定位");
+                //tvResult.setText("定位失败，loc is null");
+            }
+        }
+    };
+
+
+    /**
+     * 开始定位
+     *
+     * @since 2.8.0
+     * @author hongming.wang
+     *
+     */
+    private void startLocation(){
+        pDialog.show();
+        //根据控件的选择，重新设置定位参数
+        resetOption();
+        // 设置定位参数
+        locationClient.setLocationOption(locationOption);
+        // 启动定位
+        locationClient.startLocation();
+    }
+
+
+    // 根据控件的选择，重新设置定位参数
+    private void resetOption() {
+        // 设置是否需要显示地址信息
+        locationOption.setNeedAddress(true);
+        /**
+         * 设置是否优先返回GPS定位结果，如果30秒内GPS没有返回定位结果则进行网络定位
+         * 注意：只有在高精度模式下的单次定位有效，其他方式无效
+         */
+        locationOption.setGpsFirst(true);
+        // 设置是否开启缓存
+        locationOption.setLocationCacheEnable(true);
+        // 设置是否单次定位
+        locationOption.setOnceLocation(true);
+        //设置是否等待设备wifi刷新，如果设置为true,会自动变为单次定位，持续定位时不要使用
+        locationOption.setOnceLocationLatest(true);
+        //设置是否使用传感器
+        locationOption.setSensorEnable(true);
+        //设置是否开启wifi扫描，如果设置为false时同时会停止主动刷新，停止以后完全依赖于系统刷新，定位位置可能存在误差
+        String strInterval = "2000";
+        if (!TextUtils.isEmpty(strInterval)) {
+            try{
+                // 设置发送定位请求的时间间隔,最小值为1000，如果小于1000，按照1000算
+                locationOption.setInterval(Long.valueOf(strInterval));
+            }catch(Throwable e){
+                e.printStackTrace();
+            }
+        }
+
+        String strTimeout = "5000";
+        if(!TextUtils.isEmpty(strTimeout)){
+            try{
+                // 设置网络请求超时时间
+                locationOption.setHttpTimeOut(Long.valueOf(strTimeout));
+            }catch(Throwable e){
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    /**
+     * 销毁定位
+     *
+     * @since 2.8.0
+     * @author hongming.wang
+     *
+     */
+    private void destroyLocation(){
+        if (null != locationClient) {
+            /**
+             * 如果AMapLocationClient是在当前Activity实例化的，
+             * 在Activity的onDestroy中一定要执行AMapLocationClient的onDestroy
+             */
+            locationClient.onDestroy();
+            locationClient = null;
+            locationOption = null;
+        }
+    }
+
+    //扫描二维码，返回的结果
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString("result");
+//            UT.show(scanResult);
+            signInMeeting(scanResult);
+        }
+
+    }
+
+    private void signInMeeting(String meetingId) {
+        KLog.a("location--->"+location.toStr());
+        RetrofitManager.getInstance(1).signInMeeting(meetingId,location.getLongitude(),location.getLatitude())
+                .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
+                .subscribe(new Subscriber<BaseRspObj>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseRspObj baseRspObj) {
+                        if (baseRspObj.getHead().getRspCode().equals("0"))
+                            EventBus.getDefault().post(new CheckMeetingStateEvent());
+                            EventBus.getDefault().post(new JoinToMeetingEvent(4));
+                        UT.show(baseRspObj.getHead().getRspMsg());
                     }
                 });
     }

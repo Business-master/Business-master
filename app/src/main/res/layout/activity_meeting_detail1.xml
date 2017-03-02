@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:id="@+id/scroll_view"
     xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
     android:scrollbars="none">
@@ -84,7 +85,9 @@
                     android:clickable="true"
                     android:id="@+id/map_loc"
                     android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:layout_height="wrap_content">
                     <ImageView
                         android:adjustViewBounds="true"
