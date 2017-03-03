@@ -280,7 +280,11 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-
+    <LinearLayout
+        android:id="@+id/replace"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <View
             android:background="@color/color_f4f4f4"
             android:layout_width="match_parent"
@@ -292,8 +296,6 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <TextView
-                android:id="@+id/replace"
-                android:visibility="invisible"
                 android:textSize="14sp"
                 android:layout_marginLeft="15dp"
                 android:text="*"
@@ -320,6 +322,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+    </LinearLayout>
+
 
 
         <View

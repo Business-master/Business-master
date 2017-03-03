@@ -249,13 +249,13 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Subscribe
     public void onEventMainThread(JoinToMeetingEvent event) {
-
+        if (event.getPos()>0){
             onRefresh();
+        }
 
 //        mNewsListAdapter.notifyDataSetChanged();
 //        KLog.d("harvic", mNewsListAdapter.getData().get(event.getPos()).getJoinType());
 //        mNewsListAdapter.getData().get(event.getPos()).setJoinType(true);
-
     }
 
     //扫描二维码签到之后刷新会议列表以改变状态
@@ -264,11 +264,11 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
         onRefresh();
     }
 
-    @Override
-    public void onResume() {
-        onRefresh();
-        super.onResume();
-    }
+//    @Override
+//    public void onResume() {
+//        onRefresh();
+//        super.onResume();
+//    }
 
     @Override
     public void onDestroyView() {

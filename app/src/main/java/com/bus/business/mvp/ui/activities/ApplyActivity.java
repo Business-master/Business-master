@@ -129,7 +129,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
   @BindView(R.id.remark_num)
     TextView remark_num;
     @BindView(R.id.replace)
-    TextView replace;
+    LinearLayout replace;
 
 
     int[] meetings= new  int[]{R.drawable.apply_self,R.drawable.apply_assis};
@@ -295,7 +295,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                 apply_assis.setTextColor(getResources().getColor(R.color.color_cccccc));
                 ll_assis.setBackgroundResource(R.drawable.leave_rectange);
                 drop_assis.setImageResource(R.mipmap.icon_drop_gray);
-                replace.setVisibility(INVISIBLE);
+                replace.setVisibility(GONE);
                 break;
             case R.id.ll_assis:
                 if (assistantNames.length>0)
