@@ -304,6 +304,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                             Intent intent = new Intent(mContext,ApplyActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable(MeetingBean.MEETINGBEAN,meetingBean);
+                            bundle.putInt("index",0);
                             intent.putExtras(bundle);
                             if(meetingBean!=null){
                                 mContext.startActivity(intent);

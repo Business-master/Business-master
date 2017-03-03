@@ -48,7 +48,7 @@ import com.bus.business.mvp.entity.response.RspMeetingDetailBean;
 import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
-import com.bus.business.mvp.event.JoinToMeetingEvent;
+import com.bus.business.mvp.event.MeetingDetailEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
 import com.bus.business.mvp.ui.adapter.DownAdapter;
@@ -193,7 +193,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 //        btn_leave.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
 
         mTitle.setText(meetingBean.getMeetingName());
-        mJoinDate.setText("持续时间:     "+DateUtil.getCurGroupDay(meetingBean.getDuration()));
+        mJoinDate.setText("持续时间:     "+meetingBean.getDuration()+"天");
         mPubDate.setText("开始时间:     "+DateUtil.getCurGroupDay(meetingBean.getMeetingTime()));
         tv_publish_address.setText("会议来源:     "+meetingBean.getUserOrganization());
         mJoinAddress.setText("地        址:      "+meetingBean.getMeetingLoc());
@@ -386,11 +386,11 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
     /**
      * 初始化AMap对象
-     * @param location
+     * @param location1
      * @param mLatitude
      * @param mLongitude
      */
-    private void init( double mLatitude, double mLongitude,String location) {
+    private void init( double mLatitude, double mLongitude,String location1) {
         if (aMap == null) {
             aMap = mapView.getMap();
         }
@@ -402,7 +402,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         LatLng latLng = new LatLng(mLatitude, mLongitude);
         MarkerOptions markerOption = new MarkerOptions();
         markerOption.position(latLng);
-        markerOption.title("北京市").snippet(location);
+//        markerOption.title("北京市").snippet(location);
 
         markerOption.draggable(true);//设置Marker可拖动
         markerOption.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
@@ -442,6 +442,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                 Intent intent = new Intent(this,ApplyActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(MeetingBean.MEETINGBEAN,meetingBean);
+                bundle.putInt("index",1);
                 intent.putExtras(bundle);
                 if(meetingBean!=null){
                     startActivity(intent);
@@ -462,8 +463,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                 if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
 //                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, "奎科大厦");
                     SystemUtils.openBaiduMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
-                }
-                else {
+                } else {
                     Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + meetingBean.getMeetingLoc() + "&output=html&src=yourCompanyName|yourAppName");
 //                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + "奎科大厦" + "&output=html&src=yourCompanyName|yourAppName");
                     Intent it = new Intent(Intent.ACTION_VIEW, uri);
@@ -494,7 +494,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
     }
 
     @Subscribe
-    public void onEventMainThread(JoinToMeetingEvent event){
+    public void onEventMainThread(MeetingDetailEvent event){
         /**
          *1 报名 2请假 3取消报名
          */
@@ -519,10 +519,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 //                  btn_apply.setVisibility(View.VISIBLE);
 //                  cancel_apply.setVisibility(View.INVISIBLE);
 //                  btn_leave.setVisibility(View.INVISIBLE);
-                  break;
-              case 4:
                   getJoinType();
-
                   break;
           }
     }
@@ -609,9 +606,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                     public void onNext(BaseRspObj responseBody) {
                         if (responseBody.getHead().getRspCode().equals("0")) {
                             if (joinType==5){
-                                EventBus.getDefault().post(new JoinToMeetingEvent(2));
-                            }else if (joinType==0){
-                                EventBus.getDefault().post(new JoinToMeetingEvent(3));
+                                EventBus.getDefault().post(new MeetingDetailEvent(2));
                             }
                         }
                         UT.show(responseBody.getHead().getRspMsg());
@@ -805,7 +800,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                     public void onNext(BaseRspObj baseRspObj) {
                         if (baseRspObj.getHead().getRspCode().equals("0"))
                             EventBus.getDefault().post(new CheckMeetingStateEvent());
-                            EventBus.getDefault().post(new JoinToMeetingEvent(4));
+                            EventBus.getDefault().post(new MeetingDetailEvent(3));
                         UT.show(baseRspObj.getHead().getRspMsg());
                     }
                 });

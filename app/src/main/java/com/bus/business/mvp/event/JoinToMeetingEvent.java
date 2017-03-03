@@ -7,7 +7,7 @@ package com.bus.business.mvp.event;
  */
 public class JoinToMeetingEvent {
     /**
-     *1 报名成功 2请假成功 3取消报名成功  4签到成功
+     *1 报名成功 2请假成功 3取消报名成功
      */
     private int pos;
     public JoinToMeetingEvent(int pos){

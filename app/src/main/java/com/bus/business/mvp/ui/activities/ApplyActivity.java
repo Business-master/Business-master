@@ -34,6 +34,7 @@ import com.bus.business.mvp.entity.NationBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
+import com.bus.business.mvp.event.MeetingDetailEvent;
 import com.bus.business.mvp.presenter.impl.AssisPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.view.AssisView;
@@ -66,6 +67,7 @@ import static android.widget.LinearLayout.*;
 public class ApplyActivity extends BaseActivity implements AssisView{
 
     private MeetingBean meetingBean;
+    private  int index=-1;
     private static final String[] MINZU = new String[56];
     private static final String[] ZHIWU = new String[]{"董事长", "总裁", "总经理", "副总经理",
             "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
@@ -141,11 +143,11 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     String[] driverNames= new  String[]{"需要提供","自理"};
 
     private int joinType=-1;//参加会议的状态
-    private int foodId=2;//饮食的状态
-    private int stay=2;//住宿的状态
+    private int foodId=-1;//饮食的状态
+    private int stay=-1;//住宿的状态
     private String userAssistantId="";//代理当前用户的助理id
     private String carNo="";//车牌号
-    private int driver=1;//司机的状态
+    private int driver=-1;//司机的状态
     private String cause="";//拒绝或者请假原因
     private String desp="";//备注
     private String leadName="";//领导名称
@@ -175,6 +177,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     @Override
     public void initViews() {
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
+        index = getIntent().getIntExtra("index",-1);
 
         scroll_apply.setFocusable(true);
         scroll_apply.setFocusableInTouchMode(true);
@@ -394,7 +397,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     private void applyMetting() {
 
-        if (joinType ==-1 ||"".equals(leadName) || "".equals(sex)
+        if (joinType ==-1 ||foodId ==-1 ||stay ==-1 ||driver ==-1 ||"".equals(leadName) || "".equals(sex)
                 || "".equals(companyName) || "".equals(job)
                 || "".equals(nation)){
             UT.show("请完善报名信息");
@@ -432,7 +435,11 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                     @Override
                     public void onNext(BaseRspObj responseBody) {
                         if (responseBody.getHead().getRspCode().equals("0")) {
-                            EventBus.getDefault().post(new JoinToMeetingEvent(1));
+                            if (index==0){
+                                EventBus.getDefault().post(new JoinToMeetingEvent(1));
+                            }else if (index==1){
+                                EventBus.getDefault().post(new MeetingDetailEvent(1));
+                            }
                             finish();
                         }
                         UT.show(responseBody.getHead().getRspMsg());

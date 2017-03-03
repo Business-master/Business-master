@@ -436,8 +436,18 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Subscribe
     public void onEventMainThread(JoinToMeetingEvent event) {
+        //会务--搜索 会出现正在召开的会议，有报名请假按钮，用到 JoinToMeetingEvent
 //        ((MeetingBean)mNewsListAdapter.getData().get(event.getPos())).setJoinType(true);
+        if (event.getPos()>0){
+            onRefresh();
+        }
         mNewsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        onRefresh();
+        super.onResume();
     }
 
     @Override

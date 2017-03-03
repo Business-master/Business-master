@@ -264,11 +264,11 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
         onRefresh();
     }
 
-//    @Override
-//    public void onResume() {
-//        onRefresh();
-//        super.onResume();
-//    }
+    @Override
+    public void onResume() {
+        onRefresh();
+        super.onResume();
+    }
 
     @Override
     public void onDestroyView() {

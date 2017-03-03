@@ -28,7 +28,6 @@ import com.bus.business.mvp.entity.NotReadBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.ChangeSearchStateEvent;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
-import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.event.ReadMeeting;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
@@ -308,13 +307,15 @@ public class MainActivity extends CheckPermissionsActivity {
     }
 
     private void chageIndex(int index) {
-        setCustomTitle(index == 0 || index == 1 ? "" : setTabSelection(index));
-        showOrGoneSearchRl(index == 0 || index == 1 ? View.VISIBLE : View.GONE);
-        showOrGoneLogo(index == 2 ? View.VISIBLE : View.GONE);
+//        setCustomTitle(index == 0 || index == 1 ? "" : setTabSelection(index));
+        setCustomTitle(index == 0  ? "" : setTabSelection(index));
+//        showOrGoneSearchRl(index == 0 || index == 1 ? View.VISIBLE : View.GONE);
+        showOrGoneSearchRl(index == 0  ? View.VISIBLE : View.GONE);
+//        showOrGoneLogo(index == 2 ? View.VISIBLE : View.GONE);
         if (index == 1) {
             hasPush = false;
 //            textUnreadLabel.setVisibility(View.GONE);
-            EventBus.getDefault().post(new JoinToMeetingEvent());
+
         }
 
         currIndex = index;
@@ -375,6 +376,8 @@ public class MainActivity extends CheckPermissionsActivity {
 
     private String setTabSelection(int index) {
         switch (index) {
+            case 1:
+                return "会务";
             case 2:
 //                return "万花筒";
                 return "百宝箱";
