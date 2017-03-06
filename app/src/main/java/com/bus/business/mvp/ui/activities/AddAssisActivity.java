@@ -10,10 +10,13 @@ import android.widget.TextView;
 import com.bus.business.R;
 import com.bus.business.mvp.entity.response.RspAssisBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
+import com.bus.business.mvp.event.AddAssisEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.repository.network.RetrofitManager;
 import com.bus.business.utils.TransformUtils;
 import com.bus.business.utils.UT;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -71,6 +74,7 @@ public class AddAssisActivity extends BaseActivity {
                         @Override
                         public void onNext(BaseRspObj baseRspObj) {
                             if (baseRspObj.getHead().getRspCode().equals("0")){
+                                EventBus.getDefault().post(new AddAssisEvent(1));
                                 UT.show("保存成功");
                                 finish();
                             }

@@ -367,6 +367,10 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                 initBottom("已签到","已报名","请假",
                         R.color.color_cccccc, R.color.color_cccccc,R.color.color_cccccc ,false,false,false);
                 break;
+            case 9 :
+                initBottom("助理签到","已报名","请假",
+                        R.color.color_cccccc, R.color.color_cccccc,R.color.color_cccccc ,false,false,false);
+                break;
             case 5 :
                 initBottom("签到","报名","已请假",
                         R.color.color_cccccc, R.color.color_cccccc,R.color.color_cccccc ,false,false,false);

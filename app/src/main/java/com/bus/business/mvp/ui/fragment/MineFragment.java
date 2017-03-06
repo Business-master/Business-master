@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bus.business.App;
@@ -51,6 +52,9 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.tv_position)
     TextView tv_position;
 
+    @BindView(R.id.isAssis_ll)
+    LinearLayout isAssis_ll;
+
 
     private UserBean userBean;
 
@@ -72,6 +76,11 @@ public class MineFragment extends BaseFragment {
         tv_qgslPosition.setText(userBean.getQgslPosition());
         tv_position.setText(userBean.getPosition());
         caculateCacheSize();
+        if (userBean.getIsAssistant()==1){
+            isAssis_ll.setVisibility(View.VISIBLE);
+        }else {
+            isAssis_ll.setVisibility(View.GONE);
+        }
     }
 
 

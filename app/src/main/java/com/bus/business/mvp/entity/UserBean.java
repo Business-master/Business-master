@@ -35,7 +35,7 @@ public class UserBean implements Serializable{
      * phoneNo : 18500241615
      * systemeType : 2  // //用户手机系统 1是IOS 2是安卓
      * userName : xuchunhui-android  //用户名
-     * isAssistant : 1
+     * isAssistant : 1  本人 2 助理  3助理被选取
      * organizationType : null  //组织类型
      */
 

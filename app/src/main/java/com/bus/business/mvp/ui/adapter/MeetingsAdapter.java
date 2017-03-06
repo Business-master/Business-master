@@ -23,7 +23,9 @@ import android.widget.TextView;
 
 import com.bus.business.App;
 import com.bus.business.R;
+import com.bus.business.common.UsrMgr;
 import com.bus.business.mvp.entity.MeetingBean;
+import com.bus.business.mvp.entity.UserBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.ui.activities.ApplyActivity;
@@ -266,6 +268,12 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
             leave.setBackgroundResource(R.drawable.sign_rectange);
 
             apply.setVisibility(View.INVISIBLE);
+        }else if (likeBean.getJoinType()==9){
+            leave.setText("助理签到");
+            leave.setTextColor(Color.parseColor("#4DC056"));
+            leave.setBackgroundResource(R.drawable.sign_rectange);
+
+            apply.setVisibility(View.INVISIBLE);
         }else {
             apply.setText("取消报名");
             apply.setTextColor(Color.parseColor("#f11212"));
@@ -309,7 +317,8 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                             if(meetingBean!=null){
                                 mContext.startActivity(intent);
                             }
-                    }else {
+                    }else{
+                        if(UsrMgr.getUseInfo().getIsAssistant()==1)
                         createDialog(0,"请输入取消报名的原因");
                     }
                     break;
@@ -368,6 +377,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                             if (responseBody.getHead().getRspCode().equals("0")) {
                                 if (joinType==5){
                                     EventBus.getDefault().post(new JoinToMeetingEvent(2));
+
                                 }else if (joinType==0){
                                     EventBus.getDefault().post(new JoinToMeetingEvent(3));
                                 }

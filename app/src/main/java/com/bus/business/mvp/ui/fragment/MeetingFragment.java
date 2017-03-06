@@ -250,10 +250,10 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     @Subscribe
     public void onEventMainThread(JoinToMeetingEvent event) {
         if (event.getPos()>0){
-            onRefresh();
+            mNewsPresenter.refreshData();
         }
 
-//        mNewsListAdapter.notifyDataSetChanged();
+        mNewsListAdapter.notifyDataSetChanged();
 //        KLog.d("harvic", mNewsListAdapter.getData().get(event.getPos()).getJoinType());
 //        mNewsListAdapter.getData().get(event.getPos()).setJoinType(true);
     }

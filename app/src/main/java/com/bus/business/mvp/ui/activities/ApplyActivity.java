@@ -33,7 +33,6 @@ import com.bus.business.mvp.entity.MeetingBean;
 import com.bus.business.mvp.entity.NationBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
-import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.event.MeetingDetailEvent;
 import com.bus.business.mvp.presenter.impl.AssisPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
@@ -296,6 +295,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                 apply_self.setTextColor(getResources().getColor(R.color.color_0dadd5));
                 apply_self.setBackgroundResource(R.drawable.apply_rectange);
                 apply_assis.setTextColor(getResources().getColor(R.color.color_cccccc));
+                apply_assis.setText("助理");
                 ll_assis.setBackgroundResource(R.drawable.leave_rectange);
                 drop_assis.setImageResource(R.mipmap.icon_drop_gray);
                 replace.setVisibility(GONE);
@@ -365,7 +365,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     private void initWheelView(final String title, String[] planets) {
         final String[] selecItem = {""};
         View outerView = LayoutInflater.from(this).inflate(R.layout.wheel_view, null);
-        WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
+        final WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
         wv.setOffset(2);
         wv.setItems(Arrays.asList(planets));
         wv.setSeletion(0);
@@ -383,9 +383,14 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                 .setPositiveButton("确定",new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //如果没有选择，默认选择第一个
+                        if ("".equals(selecItem[0])){
+                            selecItem[0]= wv.getSeletedItem();
+                        }
                         if ("请选择民族".equals(title)){
                             apply_nation.setText( selecItem[0]);
                         }else  if ("请选择助理".equals(title)){
+                            apply_assis.setText(selecItem[0]);
                            initApplyData( selecItem[0]);
                         }else  if ("请选择职务".equals(title)){
                             apply_duty.setText( selecItem[0]);
@@ -435,9 +440,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                     @Override
                     public void onNext(BaseRspObj responseBody) {
                         if (responseBody.getHead().getRspCode().equals("0")) {
-                            if (index==0){
-                                EventBus.getDefault().post(new JoinToMeetingEvent(1));
-                            }else if (index==1){
+                          if (index==1){
                                 EventBus.getDefault().post(new MeetingDetailEvent(1));
                             }
                             finish();

@@ -301,7 +301,7 @@ public class RetrofitManager {
     public Observable<BaseRspObj> getAddAssisListObservable(String name, String pass, String phone) {
         Map<String, String> map = new HashMap<>();
         map.put("assistantedId", UsrMgr.getUseId());
-        map.put("userName", phone);
+        map.put("userName", name);
         map.put("password", pass);
         map.put("phoneNo", phone);
         map.put("niceName", name);

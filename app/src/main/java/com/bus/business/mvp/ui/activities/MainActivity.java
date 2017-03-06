@@ -382,7 +382,7 @@ public class MainActivity extends CheckPermissionsActivity {
 //                return "万花筒";
                 return "百宝箱";
             case 3:
-                return "金融";
+                return "专家";
             case 4:
                 return "我的";
         }

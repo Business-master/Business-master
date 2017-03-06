@@ -21,6 +21,7 @@ import com.bus.business.common.LoadNewsType;
 import com.bus.business.mvp.entity.AssisBean;
 import com.bus.business.mvp.entity.response.RspAssisBean;
 import com.bus.business.mvp.entity.response.base.BaseNewBean;
+import com.bus.business.mvp.event.AddAssisEvent;
 import com.bus.business.mvp.presenter.impl.AssisPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.adapter.AssisAdapter;
@@ -32,6 +33,10 @@ import com.bus.business.utils.TransformUtils;
 import com.bus.business.utils.UT;
 import com.bus.business.widget.RecyclerViewDivider;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.socks.library.KLog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +82,7 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     public void initViews() {
+        EventBus.getDefault().register(this);
         setCustomTitle("助理管理");
         showOrGoneSearchRl(View.GONE);
         initSwipeRefreshLayout();
@@ -112,7 +118,7 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
         assisAdapter = new AssisAdapter(R.layout.layout_assis_item,assisBeanList);
         assisAdapter.setOnLoadMoreListener(this);
         assisAdapter.setOnRecyclerViewItemClickListener(this);
-        assisAdapter.openLoadMore(Constants.numPerPage,true);
+
 
         rv_assis.setAdapter(assisAdapter);
     }
@@ -143,9 +149,8 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
                 if (assissList == null){
                     return;
                 }
-                if (assissList.size() == Constants.numPerPage){
-                    assisAdapter.notifyDataChangedAfterLoadMore(assissList, true);
-                }else {
+
+                {
                     assisAdapter.notifyDataChangedAfterLoadMore(assissList, false);
                     Snackbar.make(rv_assis, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
                 }
@@ -191,10 +196,18 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
         }
     }
 
+    @Subscribe
+    public void onEventMainThread(AddAssisEvent event){
+        if (event.getAddAssis()==1){
+            onRefresh();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         assisPresenterImpl.onDestory();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override

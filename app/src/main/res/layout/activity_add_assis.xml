@@ -25,6 +25,7 @@
             android:id="@+id/name_add_assis"
             style="@style/font_text"
             android:maxLines="1"
+            android:maxLength="8"
             android:hint="@string/assis_name_hint"/>
     </LinearLayout>
     <LinearLayout
@@ -39,6 +40,7 @@
             android:id="@+id/phone_add_assis"
             style="@style/font_text"
             android:maxLines="1"
+            android:maxLength="11"
             android:inputType="number"
             android:hint="@string/assis_phone_hint"/>
     </LinearLayout>
@@ -54,6 +56,7 @@
             android:id="@+id/pass_add_assis"
             style="@style/font_text"
             android:maxLines="1"
+            android:maxLength="20"
             android:inputType="textPassword"
             android:hint="@string/assis_pass_hint"/>
     </LinearLayout>
@@ -69,6 +72,7 @@
             android:id="@+id/firm_add_assis"
             style="@style/font_text"
             android:maxLines="1"
+            android:maxLength="20"
             android:inputType="textPassword"
             android:hint="@string/assis_affirm_hint"/>
     </LinearLayout>
