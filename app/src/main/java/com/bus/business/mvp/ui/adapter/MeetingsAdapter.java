@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.bus.business.App;
 import com.bus.business.R;
 import com.bus.business.common.UsrMgr;
+import com.bus.business.listener.JoinMeetingCallBack;
 import com.bus.business.mvp.entity.MeetingBean;
 import com.bus.business.mvp.entity.UserBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
@@ -59,21 +60,21 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
    private  Button cancel_apply;
    private   Button btn_apply;
    private   Button   btn_leave;
-   private  static  int mLayoutResId;
-    private static List<MeetingBean> mData;
 
 
 
+    public JoinMeetingCallBack joinMeetingCallBack;
+
+    public void setJoinMeetingCallBack(JoinMeetingCallBack joinMeetingCallBack) {
+        this.joinMeetingCallBack = joinMeetingCallBack;
+    }
 
     public MeetingsAdapter(int layoutResId, List<MeetingBean> data) {
         super(layoutResId, data);
-        mLayoutResId = layoutResId;
-        mData = data;
+
     }
 
-    public static MeetingsAdapter getInstance(){
-        return new MeetingsAdapter(mLayoutResId,mData);
-    }
+
 
 
     @Override
@@ -183,6 +184,10 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                 stateStr="已过期";
                 draw=R.drawable.absent_banover;
                 break;
+            case 9:
+                stateStr="助理签到";
+                draw=R.drawable.join_banover;
+                break;
         }
         state.setText(stateStr);
         state.setBackgroundResource(draw);
@@ -225,6 +230,10 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
             case 8:
                 stateStr="已过期";
                 color=mContext.getResources().getColor(R.color.color_cccccc);
+                break;
+            case 9:
+                stateStr="助理签到";
+                color=mContext.getResources().getColor(R.color.color_0dadd5);
                 break;
         }
         state.setText(stateStr);
@@ -376,13 +385,15 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                         public void onNext(BaseRspObj responseBody) {
                             if (responseBody.getHead().getRspCode().equals("0")) {
                                 if (joinType==5){
-                                    EventBus.getDefault().post(new JoinToMeetingEvent(2));
+//                                    EventBus.getDefault().post(new JoinToMeetingEvent(2));
 
-                                }else if (joinType==0){
-                                    EventBus.getDefault().post(new JoinToMeetingEvent(3));
+                                }else if (joinType==6){
+//                                    EventBus.getDefault().post(new JoinToMeetingEvent(3));
                                 }
+                                joinMeetingCallBack.getJoinResult(true);
+                                UT.show(responseBody.getHead().getRspMsg());
                             }
-                            UT.show(responseBody.getHead().getRspMsg());
+
                         }
                     });
         }

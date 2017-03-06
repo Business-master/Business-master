@@ -27,7 +27,7 @@
     <string name="assis_affirm_pass">请确认密码 ：</string>
     <string name="assis_affirm_hint">请再次输入密码</string>
     <string name="assis_pass_hint">6-20为字符，不可用纯数字</string>
-    <string name="assis_name_hint">请输入用户名，3-8字符</string>
+    <string name="assis_name_hint">请输入用户名，2-8字符</string>
     <string name="assis_phone_hint">请输入11位手机号码</string>
     <string name="assis_manager">助理管理</string>
     <string name="account_safe">账号安全</string>

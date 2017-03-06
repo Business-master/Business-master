@@ -14,6 +14,7 @@ import com.bus.business.R;
 import com.bus.business.common.Constants;
 import com.bus.business.common.LoadNewsType;
 import com.bus.business.common.UsrMgr;
+import com.bus.business.listener.JoinMeetingCallBack;
 import com.bus.business.mvp.entity.MeetingBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.CheckMeetingStateEvent;
@@ -47,7 +48,7 @@ import rx.Subscriber;
  * @create_date 16/12/23
  */
 public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener
-        , MeetingView, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnRecyclerViewItemClickListener {
+        , MeetingView, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnRecyclerViewItemClickListener,JoinMeetingCallBack {
 
     @BindView(R.id.news_rv)
     RecyclerView mNewsRV;
@@ -64,7 +65,8 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     Activity mActivity;
     @Inject
     MeetingPresenterImpl mNewsPresenter;
-    private BaseQuickAdapter<MeetingBean> mNewsListAdapter;
+//    private BaseQuickAdapter<MeetingBean> mNewsListAdapter;
+    private MeetingsAdapter mNewsListAdapter;
     private List<MeetingBean> likeBeanList;
     private MeetingBean meetingBean;
 
@@ -129,6 +131,8 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
         mNewsListAdapter.setOnLoadMoreListener(this);
         mNewsListAdapter.openLoadMore(Constants.numPerPage, true);
         mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
+
+        mNewsListAdapter.setJoinMeetingCallBack(this);//给设置接口赋值
         mNewsRV.setAdapter(mNewsListAdapter);
 
     }
@@ -247,16 +251,16 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     }
 
 
-    @Subscribe
-    public void onEventMainThread(JoinToMeetingEvent event) {
-        if (event.getPos()>0){
-            mNewsPresenter.refreshData();
-        }
-
-        mNewsListAdapter.notifyDataSetChanged();
-//        KLog.d("harvic", mNewsListAdapter.getData().get(event.getPos()).getJoinType());
-//        mNewsListAdapter.getData().get(event.getPos()).setJoinType(true);
-    }
+//    @Subscribe
+//    public void onEventMainThread(JoinToMeetingEvent event) {
+//        if (event.getPos()>0){
+//            onRefresh();
+//            KLog.a("********"+"刷新了");
+//        }
+//        mNewsListAdapter.notifyDataSetChanged();
+////        KLog.d("harvic", mNewsListAdapter.getData().get(event.getPos()).getJoinType());
+////        mNewsListAdapter.getData().get(event.getPos()).setJoinType(true);
+//    }
 
     //扫描二维码签到之后刷新会议列表以改变状态
     @Subscribe
@@ -274,5 +278,13 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     public void onDestroyView() {
         EventBus.getDefault().unregister(this);
         super.onDestroyView();
+    }
+
+    @Override
+    public void getJoinResult(boolean flag) {
+        if (flag){
+            KLog.a("********"+"刷新了");
+            onRefresh();
+        }
     }
 }

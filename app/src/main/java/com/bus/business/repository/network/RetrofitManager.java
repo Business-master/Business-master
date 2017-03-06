@@ -302,7 +302,7 @@ public class RetrofitManager {
         Map<String, String> map = new HashMap<>();
         map.put("assistantedId", UsrMgr.getUseId());
         map.put("userName", name);
-        map.put("password", pass);
+        map.put("passWord", pass);
         map.put("phoneNo", phone);
         map.put("niceName", name);
         KLog.a(map.toString());

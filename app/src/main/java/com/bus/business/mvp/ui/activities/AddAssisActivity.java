@@ -75,10 +75,9 @@ public class AddAssisActivity extends BaseActivity {
                         public void onNext(BaseRspObj baseRspObj) {
                             if (baseRspObj.getHead().getRspCode().equals("0")){
                                 EventBus.getDefault().post(new AddAssisEvent(1));
-                                UT.show("保存成功");
                                 finish();
                             }
-
+                            UT.show(baseRspObj.getHead().getRspMsg());
                         }
                     });
         }
@@ -96,7 +95,7 @@ public class AddAssisActivity extends BaseActivity {
             UT.show("输入不能为空");
            right=false;
         }else {
-            if (nameStr.length()>2&nameStr.length()<9
+            if (nameStr.length()>1&nameStr.length()<9
                     &phoneStr.length()==11&!passStr.matches("[0-9]+")&
                     passStr.length()>5 &passStr.length()<21
                     &passStr.equals(firmStr)){
