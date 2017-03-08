@@ -35,6 +35,7 @@ import com.bus.business.mvp.ui.fragment.ExpertFragment;
 import com.bus.business.mvp.ui.fragment.MainPagerFragment;
 import com.bus.business.mvp.ui.fragment.MineFragment;
 import com.bus.business.mvp.ui.fragment.NewMeetingFragment;
+import com.bus.business.mvp.ui.fragment.SzhwFragment;
 import com.bus.business.mvp.ui.fragment.WanFragment2;
 import com.bus.business.repository.network.RetrofitManager;
 import com.bus.business.utils.TransformUtils;
@@ -110,9 +111,9 @@ public class MainActivity extends CheckPermissionsActivity {
                     case R.id.foot_bar_im:
                         chageIndex(1);
                         break;
-                    case R.id.foot_bar_wan:
-                        chageIndex(2);
-                        break;
+//                    case R.id.foot_bar_wan:
+//                        chageIndex(2);//暂时去掉百宝箱的点击事件
+//                        break;
                     case R.id.foot_bar_financial:
                         chageIndex(3);
                         break;
@@ -378,11 +379,11 @@ public class MainActivity extends CheckPermissionsActivity {
         switch (index) {
             case 1:
                 return "会务";
-            case 2:
-//                return "万花筒";
-                return "百宝箱";
+//            case 2:
+//                return "百宝箱";
             case 3:
-                return "专家";
+//                return "专家";
+                return "金融政策";
             case 4:
                 return "我的";
         }
@@ -421,7 +422,8 @@ public class MainActivity extends CheckPermissionsActivity {
 //                return new WanFragment();
                 return new WanFragment2();
             case 3:
-                return new ExpertFragment();
+//                return new ExpertFragment();
+                return SzhwFragment.getIntance(3);
             case 4:
                 return new MineFragment();
             default:

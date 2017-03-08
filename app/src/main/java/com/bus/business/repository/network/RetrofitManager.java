@@ -21,6 +21,7 @@ import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
+import com.bus.business.mvp.entity.response.RspOrganBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
 import com.bus.business.mvp.entity.response.RspTopicsBean;
 import com.bus.business.mvp.entity.response.RspUserBean;
@@ -298,13 +299,27 @@ public class RetrofitManager {
         return mNewsService.getAssissList(map);
     }
 
-    public Observable<BaseRspObj> getAddAssisListObservable(String name, String pass, String phone) {
+    //添加助理
+    public Observable<BaseRspObj> getAddAssisListObservable(String name, String pass, String phone ,String sex, String company, String duty,String nation) {
         Map<String, String> map = new HashMap<>();
         map.put("assistantedId", UsrMgr.getUseId());
         map.put("userName", name);
         map.put("passWord", pass);
         map.put("phoneNo", phone);
         map.put("niceName", name);
+        map.put("sex", sex);
+        map.put("position", duty);
+        map.put("organizationCode", company);
+        map.put("nation", nation);
+        KLog.a(map.toString());
+        return mNewsService.getAddAssis(map);
+    }
+
+    //修改职位
+    public Observable<BaseRspObj> getChangeAssisObservable(String duty) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", UsrMgr.getUseId());
+        map.put("position", duty);
         KLog.a(map.toString());
         return mNewsService.getAddAssis(map);
     }
@@ -411,6 +426,14 @@ public class RetrofitManager {
 
     public Observable<RspNationBean> getAllPosition() {
         return mNewsService.getAllPosition();
+    }
+
+    public Observable<RspNationBean> getAllSex() {
+        return mNewsService.getAllSex();
+    }
+
+    public Observable<RspOrganBean> getAllCompany() {
+        return mNewsService.getAllCompany();
     }
 
    public Observable<RspMeetingDetailBean> getMeetingDetail(String  meetingId) {

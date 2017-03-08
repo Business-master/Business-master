@@ -90,15 +90,15 @@
                         android:clickable="true"
                         android:id="@+id/map_loc"
                         android:layout_alignParentRight="true"
-                        android:layout_width="30dp"
+                        android:layout_width="wrap_content"
                         android:orientation="vertical"
                         android:gravity="center"
                         android:layout_height="wrap_content">
                         <ImageView
                             android:adjustViewBounds="true"
-                            android:src="@mipmap/icon_navigation"
-                            android:layout_width="13dp"
-                            android:layout_height="12dp" />
+                            android:src="@mipmap/icon_navigation2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                 </RelativeLayout>
 

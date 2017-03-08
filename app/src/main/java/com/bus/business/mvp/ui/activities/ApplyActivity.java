@@ -31,6 +31,7 @@ import com.bus.business.mvp.entity.AssisBean;
 import com.bus.business.mvp.entity.MeetingBean;
 
 import com.bus.business.mvp.entity.NationBean;
+import com.bus.business.mvp.entity.UserBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.MeetingDetailEvent;
@@ -159,6 +160,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     private List<NationBean> nation_List;
     private AssisBean assisBean ;
     private List<AssisBean> list;
+    private UserBean userBean=null;
 
     @Override
     public int getLayoutId() {
@@ -175,6 +177,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     @Override
     public void initViews() {
+        userBean  =UsrMgr.getUseInfo();
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
         index = getIntent().getIntExtra("index",-1);
 
@@ -227,16 +230,55 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 //        sleep_rg.setOnCheckedChangeListener(this);
 //        driver_rg.setOnCheckedChangeListener(this);
 
-        initView();
+        initSelfView();//初始化选择本人
 
     }
 
-    private void initView() {
-        apply_name.setText(UsrMgr.getUseInfo().getNiceName());
-        apply_company.setText(UsrMgr.getUseInfo().getCompanyName());
-        apply_duty.setText(UsrMgr.getUseInfo().getPosition());
-        apply_phone.setText(UsrMgr.getUseInfo().getPhoneNo());
-        apply_nation.setText(UsrMgr.getUseInfo().getNation());
+    private void initSelfView() {
+
+
+        joinType = 3;
+        apply_self.setTextColor(getResources().getColor(R.color.color_0dadd5));
+        apply_self.setBackgroundResource(R.drawable.apply_rectange);
+        apply_assis.setTextColor(getResources().getColor(R.color.color_cccccc));
+        apply_assis.setText("助理");
+        ll_assis.setBackgroundResource(R.drawable.leave_rectange);
+        drop_assis.setImageResource(R.mipmap.icon_drop_gray);
+        replace.setVisibility(GONE);
+
+
+        //报名页面自动加载 本人信息
+        if (userBean==null){
+            return;
+        }
+        apply_name.setText(userBean.getNiceName());
+         if ("男".equals(userBean.getSex())){
+             apply_man.setChecked(true);
+         }else   if ("女".equals(userBean.getSex())){
+             apply_woman.setChecked(true);
+         }
+        apply_company.setText(userBean.getCompanyName());
+        apply_duty.setText(userBean.getPosition());
+        apply_phone.setText(userBean.getPhoneNo());
+        apply_nation.setText(userBean.getNation());
+    }
+
+
+    private void initAssisView(AssisBean assisBean) {
+        //报名页面自动加载 所选助理信息
+        if (assisBean==null){
+            return;
+        }
+        apply_name.setText(assisBean.getNiceName());
+        if ("男".equals(assisBean.getSex())){
+            apply_man.setChecked(true);
+        }else   if ("女".equals(assisBean.getSex())){
+            apply_woman.setChecked(true);
+        }
+        apply_company.setText(assisBean.getCompanyName());
+        apply_duty.setText(assisBean.getPosition());
+        apply_phone.setText(assisBean.getPhoneNo());
+        apply_nation.setText(assisBean.getNation());
     }
 
 
@@ -291,14 +333,8 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.apply_self:
-                joinType = 3;
-                apply_self.setTextColor(getResources().getColor(R.color.color_0dadd5));
-                apply_self.setBackgroundResource(R.drawable.apply_rectange);
-                apply_assis.setTextColor(getResources().getColor(R.color.color_cccccc));
-                apply_assis.setText("助理");
-                ll_assis.setBackgroundResource(R.drawable.leave_rectange);
-                drop_assis.setImageResource(R.mipmap.icon_drop_gray);
-                replace.setVisibility(GONE);
+                initSelfView();
+
                 break;
             case R.id.ll_assis:
                 if (assistantNames.length>0)
@@ -500,6 +536,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                     AssisBean  assisBean = list.get(i);
                     if (name.equals(assisBean.getUserName())){
                         userAssistantId = assisBean.getId();
+                        initAssisView(assisBean);
                         break;
                     }
                 }

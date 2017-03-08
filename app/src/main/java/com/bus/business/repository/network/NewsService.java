@@ -15,6 +15,7 @@ import com.bus.business.mvp.entity.response.RspMeetingFileBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.RspNewDetailBean;
 import com.bus.business.mvp.entity.response.RspNewsBean;
+import com.bus.business.mvp.entity.response.RspOrganBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
 import com.bus.business.mvp.entity.response.RspTopicsBean;
 import com.bus.business.mvp.entity.response.RspUserBean;
@@ -24,7 +25,6 @@ import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -160,6 +160,12 @@ public interface NewsService {
 
    @GET(ApiConstants.GetAllPosition)
     Observable<RspNationBean> getAllPosition();
+
+    @GET(ApiConstants.GetAllSex)
+    Observable<RspNationBean> getAllSex();
+
+    @GET(ApiConstants.GetAllCompany)
+    Observable<RspOrganBean> getAllCompany();
 
 
 

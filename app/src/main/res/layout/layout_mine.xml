@@ -139,10 +139,13 @@
                 android:text="单位职位" />
 
             <TextView
+                android:clickable="true"
                 android:id="@+id/tv_position"
                 style="@style/mine_text"
-                android:drawableRight="@null"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:drawableRight="@drawable/apply_xiabiao"
                 android:gravity="right|center_vertical"
                 android:maxLines="1"
                 android:text="单位名称" />

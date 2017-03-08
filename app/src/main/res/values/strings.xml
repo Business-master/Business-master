@@ -5,7 +5,7 @@
     <string name="main_navigation_home">首页</string>
     <string name="main_navigation_im">会务</string>
     <string name="main_navigation_interest">百宝箱</string>
-    <string name="main_navigation_expert">专家</string>
+    <string name="main_navigation_expert">政策</string>
     <string name="main_navigation_user">我的</string>
 
     <string name="internet_error">网络异常,请检查网络设置</string>
@@ -482,5 +482,57 @@
         <item>门巴族</item>
         <item>珞巴族</item>
         <item>基诺族</item>
+    </string-array>
+    <string-array name="policy_images">
+        <item>@mipmap/policy_1</item>
+        <item>@mipmap/policy_2</item>
+        <item>@mipmap/policy_3</item>
+        <item>@mipmap/policy_4</item>
+        <item>@mipmap/policy_5</item>
+        <item>@mipmap/policy_6</item>
+        <item>@mipmap/policy_7</item>
+        <item>@mipmap/policy_8</item>
+        <item>@mipmap/policy_9</item>
+        <item>@mipmap/policy_10</item>
+        <item>@mipmap/policy_11</item>
+    </string-array>
+    <string-array name="policy_titles">
+        <item>金融的本质是什么？</item>
+        <item>金融人士如何建立自己的人脉？</item>
+        <item>当前国内最值钱的十张“金融牌照”！ </item>
+        <item>金融人士的自我救赎：如何不被人工智能取代</item>
+        <item>【观察】金融业与实业的优势及劣势？</item>
+        <item>防不胜防的金融骗局，为什么你总是轻易上当？</item>
+        <item>金融业工作压力岗位排行榜 </item>
+        <item>金融圈近来发生的这三件大事，有何联系？ </item>
+        <item>世界上最高超的思维—金融思维！ </item>
+        <item>每日金融要闻速览 </item>
+        <item>科技金融是新经济的催化剂 </item>
+    </string-array>
+    <string-array name="policy_details">
+        <item>金融搞好了，全盘皆活。</item>
+        <item>金融人士如何建立自己的人脉？</item>
+        <item>一直以来，企业持有的金融牌照数量已然与实力划上了等号。随着近年来互联网金融的发展，行业内也涌现出一批实力雄厚的企业，在混业经营的趋势面前，他们对于金融牌照的“野心”也伴随着实力的增长日益强烈。</item>
+        <item>去年阿尔法狗（AlphaGo）横空出世，打得超一流韩国棋手李世石灰头土面的，它的增强版MASTER更横扫世界上最强的六十位职业围棋手，无一败绩。</item>
+        <item>实战锦囊做实业就像是押宝，只能押在一个地方。而金融行业是哪个行业挣钱，便会选择哪个行业，并且只会选择朝阳行业。</item>
+        <item>今天3月3日，根据媒体报道，万众瞩目的某租宝案件一审在合肥宣判了，让大家的思绪又都回到了当年那个百亿巨骗的时代，借着这个超级金融骗局，我们来说说金融骗局到底是如何忽悠人上当的？</item>
+        <item>点击金融行业网，金融大拿、业内人士都在这里今日微信号力荐 理财头条licaitt (长按红色字复制）金融业压力“爆表”工作岗位排行榜，如果你在投行部门（IBD）工作，或其他任何金融服务类部门工作，你可能花大量的时间来应对工作相关的压力。工作时间、工作职责，以及持续实现出色业绩的外部压力等，不一而足。不过，哪些工作岗位压力更大呢？</item>
+        <item>金融城热点关注：最近几天，金融圈大事不断。证监会、保监会同时开出史上最严的处罚；原山东省省长郭树清接任银监会主席……这些事意味着什么？背后有何联系？</item>
+        <item>作者：水木然  微信号：smr669我们应该抛弃一切人性和杂念，去练习自己的“金融思维”。那么什么是金融思维？如果要给“文艺青年”找个反义词，最恰当的就是“金融青年”。</item>
+        <item>2017年3月6日十二届全国人大五次会议在京开幕第十二届全国人民代表大会第五次会议5日上午在人民大会堂开幕。国务院总理李克强向大会作政府工作报告时指出，使命重在担当，实干铸就辉煌。我们要更加紧密地团结在以习近平同志为核心的党中央周围，同心同德，开拓进取，努力完成今年经济社会发展目标任务，为实现“两个一百年”宏伟目标、建设富强民主文明和谐的社会主义现代化国家、实现中华民族伟大复兴的中国梦而不懈奋斗。</item>
+        <item>在创新全球化的新经济时代，围绕科技创新的各类金融服务创新非常活跃，“科技金融”作为一个独特的金融创新领域而备受关注。近十几年来，从创业投资、科技信贷、科技保险到科技担保、风险补偿机制、新三板等，科技金融不但是金融市场的创新热点，也成为了我国政府实施创新驱动发展战略的重要抓手。</item>
+    </string-array>
+    <string-array name="policy_urls">
+        <item>http://url.cn/45hYw48</item>
+        <item>http://url.cn/45hZDqO</item>
+        <item>http://url.cn/45hiQGY</item>
+        <item>http://url.cn/45hfh1Y</item>
+        <item>http://url.cn/45hiYp0</item>
+        <item>http://url.cn/45hiZzK</item>
+        <item>http://url.cn/45hiamI</item>
+        <item>http://url.cn/45hibYh</item>
+        <item>http://url.cn/45hfkvX</item>
+        <item>http://url.cn/45hid5m</item>
+        <item>http://url.cn/45hfmEX</item>
     </string-array>
 </resources>

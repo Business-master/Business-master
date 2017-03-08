@@ -3,7 +3,6 @@ package com.bus.business.mvp.ui.fragment;
 import android.app.Activity;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import com.bus.business.R;
 import com.bus.business.mvp.entity.WanBean;
 import com.bus.business.mvp.ui.adapter.SzhwAdapter;
-import com.bus.business.mvp.ui.adapter.WanAdapter;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 import com.bus.business.widget.DividerGridItemDecoration;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -81,10 +79,15 @@ public class SzhwFragment extends BaseFragment implements BaseQuickAdapter.OnRec
         wanList = new ArrayList<>();
          int [] a ;
 
+        /***
+         * inderx 百宝箱 1 山珍海味  2 翡翠玛瑙  3 金融政策
+         */
         if (index==1){
             a = new int[]{R.array.wan1_images,R.array.wan1_urls,R.array.wan1_titles,R.array.wan1_details};
-        }else {
+        }else if (index==2){
             a = new int[]{R.array.wan2_images,R.array.wan2_urls,R.array.wan2_titles,R.array.wan2_details};
+        }else {
+            a = new int[]{R.array.policy_images,R.array.policy_urls,R.array.policy_titles,R.array.policy_details};
         }
         TypedArray imgAr = mActivity.getResources().obtainTypedArray(a[0]);
         TypedArray imgUrl = mActivity.getResources().obtainTypedArray(a[1]);
@@ -116,7 +119,12 @@ public class SzhwFragment extends BaseFragment implements BaseQuickAdapter.OnRec
         mNewsRV.setLayoutManager(new GridLayoutManager(mActivity, 1));
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
 
-        adapter = new SzhwAdapter(R.layout.item_szhw2, wanList);
+        if (index==3){
+            adapter = new SzhwAdapter(R.layout.item_policy, wanList);
+        }else {
+            adapter = new SzhwAdapter(R.layout.item_szhw, wanList);
+        }
+
         adapter.setOnRecyclerViewItemClickListener(this);
         mNewsRV.setAdapter(adapter);
         mProgressBar.setVisibility(View.GONE);
