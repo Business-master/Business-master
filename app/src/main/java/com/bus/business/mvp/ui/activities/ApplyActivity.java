@@ -148,7 +148,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     private String userAssistantId="";//代理当前用户的助理id
     private String carNo="";//车牌号
     private int driver=-1;//司机的状态
-    private String cause="";//拒绝或者请假原因
+    private String cause="";//拒绝或者请假原因//替会
     private String desp="";//备注
     private String leadName="";//领导名称
     private String nation="";//民族
@@ -252,6 +252,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
             return;
         }
         apply_name.setText(userBean.getNiceName());
+        sex = userBean.getSex();
          if ("男".equals(userBean.getSex())){
              apply_man.setChecked(true);
          }else   if ("女".equals(userBean.getSex())){
@@ -270,6 +271,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
             return;
         }
         apply_name.setText(assisBean.getNiceName());
+        sex = assisBean.getSex();
         if ("男".equals(assisBean.getSex())){
             apply_man.setChecked(true);
         }else   if ("女".equals(assisBean.getSex())){
@@ -446,9 +448,10 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         }
 
         if (assistantNames.length>0){
-            if (joinType==4 & "".equals(userAssistantId) & "".equals(cause)){
-                UT.show("请完善报名信息");
-                return;
+            if (joinType==4){
+                if ("".equals(userAssistantId) || "".equals(cause))
+                {UT.show("请完善报名信息");
+                   return;}
             }
         }else {
             if (joinType!=3){
@@ -580,6 +583,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         nation =apply_nation.getText().toString().trim();
         carNo = car_num.getText().toString().trim();
         desp = remark_apply.getText().toString().trim();
+        cause = apply_cause.getText().toString().trim();
     }
 
 

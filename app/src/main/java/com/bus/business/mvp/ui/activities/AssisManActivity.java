@@ -47,7 +47,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 助手助理页面
+ * 助手管理页面
  */
 public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener
         , AssisView, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnRecyclerViewItemClickListener {
@@ -223,8 +223,7 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     public void onItemClick(View view, int i) {
-//         UT.show("点击了");
-
+        assisAdapter.getData().get(i).intoAlterAssis(mActivity);
     }
 
 

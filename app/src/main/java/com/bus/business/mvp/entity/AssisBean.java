@@ -1,11 +1,19 @@
 package com.bus.business.mvp.entity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.bus.business.mvp.ui.activities.AddAssisActivity;
+
+import java.io.Serializable;
+
 /**
  * Created by ATRSnail on 2017/1/19.
  * * isAssistant : 2  1不是助理，2:助理，3:开始代理
  */
 
-public class AssisBean {
+public class AssisBean implements Serializable{
     /**
      * position : 副总经理
      * niceName : 456
@@ -55,6 +63,16 @@ public class AssisBean {
     private String userName;
     private int isAssistant;
     private String organizationType;
+
+    //跳转到添加助理页面修改助理信息
+    public void intoAlterAssis(Context context){
+        Intent intent = new Intent(context,AddAssisActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("AssisBean",this);
+        bundle.putInt("index",2);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
 
     public String getPosition() {
         return position;

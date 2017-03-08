@@ -303,13 +303,29 @@ public class RetrofitManager {
     public Observable<BaseRspObj> getAddAssisListObservable(String name, String pass, String phone ,String sex, String company, String duty,String nation) {
         Map<String, String> map = new HashMap<>();
         map.put("assistantedId", UsrMgr.getUseId());
+        if (!TextUtils.isEmpty(name))
         map.put("userName", name);
+
+        if (!TextUtils.isEmpty(pass))
         map.put("passWord", pass);
-        map.put("phoneNo", phone);
+
+        if(!"号码相同".equals(phone)){
+            map.put("phoneNo", phone);
+        }
+
+        if (!TextUtils.isEmpty(name))
         map.put("niceName", name);
+
+        if (!TextUtils.isEmpty(sex))
         map.put("sex", sex);
+
+        if (!TextUtils.isEmpty(duty))
         map.put("position", duty);
+
+        if (!TextUtils.isEmpty(company))
         map.put("organizationCode", company);
+
+        if (!TextUtils.isEmpty(nation))
         map.put("nation", nation);
         KLog.a(map.toString());
         return mNewsService.getAddAssis(map);

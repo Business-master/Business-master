@@ -4,6 +4,8 @@ package com.bus.business.mvp.ui.activities;
 
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,10 @@ import android.widget.TextView;
 
 import com.bus.business.R;
 import com.bus.business.common.UsrMgr;
+import com.bus.business.mvp.entity.AssisBean;
 import com.bus.business.mvp.entity.NationBean;
 import com.bus.business.mvp.entity.OrganBean;
+import com.bus.business.mvp.entity.UserBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.RspOrganBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
@@ -67,9 +71,14 @@ public class AddAssisActivity extends BaseActivity {
             "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
             "干部","其他职务"};
     private static final String[] MINZU = new String[56];
+    private String [] companyNames;
 
     @BindView(R.id.sex_add_assis)
     RadioGroup sex_add_assis;
+    @BindView(R.id.apply_man)
+    RadioButton apply_man;
+    @BindView(R.id.apply_woman)
+    RadioButton apply_woman;
     @BindView(R.id.company_add_assis)
     TextView  company_add_assis;
     @BindView(R.id.duty_add_assis)
@@ -83,6 +92,13 @@ public class AddAssisActivity extends BaseActivity {
     List<NationBean> nationList=new ArrayList<>();
 
     boolean right=true;
+
+    private AssisBean assisBean;
+    private int index=1;
+
+    private UserBean userBean;
+
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_add_assis;
@@ -95,12 +111,52 @@ public class AddAssisActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        setCustomTitle("添加助理");
-        showOrGoneSearchRl(View.GONE);
-        if (!TextUtils.isEmpty(UsrMgr.getUseInfo().getCompanyName()))
-        company_add_assis.setText(UsrMgr.getUseInfo().getCompanyName());
+        userBean = UsrMgr.getUseInfo();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle!=null){
+            index = bundle.getInt("index");
+            assisBean = (AssisBean) bundle.getSerializable("AssisBean");
+        }
+
+        if (index==2){
+
+            setCustomTitle("修改助理信息");
+            showOrGoneSearchRl(View.GONE);
+            initAssisView(assisBean);
+        }else {
+            setCustomTitle("添加助理");
+            showOrGoneSearchRl(View.GONE);
+            if (!TextUtils.isEmpty(userBean.getCompanyName()))
+                company_add_assis.setText(userBean.getCompanyName());
+//            company_add_assis.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
+//            company_add_assis.setClickable(false);
+        }
         initData();
 
+    }
+
+    private void initAssisView(AssisBean assisBean) {
+        //修改助理信息自动加载 所选助理信息
+        if (assisBean==null){
+            return;
+        }
+        name.setText(assisBean.getUserName());
+        phone.setText(assisBean.getPhoneNo());
+        sex = assisBean.getSex();
+        if ("男".equals(assisBean.getSex())){
+            apply_man.setChecked(true);
+        }else   if ("女".equals(assisBean.getSex())){
+            apply_woman.setChecked(true);
+        }
+
+//        Drawable dra = getResources().getDrawable(R.drawable.apply_xiabiao);
+//        company_add_assis.setCompoundDrawablesWithIntrinsicBounds(null,null,dra,null);
+//        company_add_assis.setClickable(true);
+        company_add_assis.setText(assisBean.getCompanyName());
+
+        duty_add_assis.setText(assisBean.getPosition());
+        nation_add_assis.setText(assisBean.getNation());
     }
 
     private void initData() {
@@ -150,6 +206,10 @@ public class AddAssisActivity extends BaseActivity {
                         KLog.d(rspOriganBean.toString());
                         if ("0".equals(rspOriganBean.getHead().getRspCode())){
                             origanList = (List<OrganBean>) rspOriganBean.getBody().getList();
+//                            companyNames = new String[origanList.size()];
+//                            for (int i = 0; i <origanList.size() ; i++) {
+//                                companyNames[i]=origanList.get(i).getOrganizationName();
+//                            }
                         }
                     }
                 });
@@ -203,7 +263,7 @@ public class AddAssisActivity extends BaseActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_add_assis:
-                addAssis();
+                    addAssis();
                 break;
             case R.id.duty_add_assis:
                 initWheelView("请选择职务",ZHIWU);
@@ -211,9 +271,14 @@ public class AddAssisActivity extends BaseActivity {
             case R.id.nation_add_assis:
                 initWheelView("请选择民族",MINZU);
                 break;
+//            case R.id.company_add_assis:
+//                initWheelView("请选择单位",companyNames);
+//                break;
         }
 
     }
+
+
 
     private void initWheelView(final String title, String[] planets) {
         final String[] selecItem = {""};
@@ -245,6 +310,9 @@ public class AddAssisActivity extends BaseActivity {
                         }else if ("请选择民族".equals(title)){
                            nation_add_assis.setText( selecItem[0]);
                        }
+//                       else if ("请选择单位".equals(title)){
+//                           company_add_assis.setText( selecItem[0]);
+//                       }
                         dialog.dismiss();
                     }
                 }).create().show();
@@ -254,6 +322,8 @@ public class AddAssisActivity extends BaseActivity {
     private void addAssis() {
         if (judgement()){
 //            UT.show("正确"+sexCode+companyCode+dutyCode);
+              KLog.a("**********"+nameStr+"00000000000"+assisBean.getUserName());
+              KLog.a("**********"+sexCode+"00000000000"+assisBean.getSex());
             RetrofitManager.getInstance(1).getAddAssisListObservable(nameStr,passStr,phoneStr,sexCode,companyCode,dutyCode,nationCode)
                     .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                     .subscribe(new Subscriber<BaseRspObj>() {
@@ -279,6 +349,8 @@ public class AddAssisActivity extends BaseActivity {
                     });
         }
     }
+
+
 
     private boolean judgement() {
 
@@ -337,30 +409,57 @@ public class AddAssisActivity extends BaseActivity {
             }
         }
 
+          if (index==2){
+              if (!TextUtils.isEmpty(passStr)||!TextUtils.isEmpty(firmStr)){
+                  if (!(passStr.length()>5 &passStr.length()<21&passStr.equals(firmStr))){
+                      UT.show("请输入正确的信息");
+                      right=false;
+                  }
+              }
 
-         if (TextUtils.isEmpty(nameStr)
-                ||TextUtils.isEmpty(phoneStr)
-                ||TextUtils.isEmpty(passStr)
-                ||TextUtils.isEmpty(sexCode)
-                ||TextUtils.isEmpty(companyCode)
-                ||TextUtils.isEmpty(nationCode)
-                ||TextUtils.isEmpty(dutyCode)
-                ||TextUtils.isEmpty(firmStr)){
-            UT.show("输入不能为空");
-            right=false;
-        }else {
+              if (!TextUtils.isEmpty(nameStr)){
+                  if (!(nameStr.length()>1&nameStr.length()<9)){
+                      UT.show("请输入正确的信息");
+                      right=false;
+                  }
+              }
 
-            if (nameStr.length()>1&nameStr.length()<9
-                    &phoneStr.length()==11&!passStr.matches("[0-9]+")&
-                    passStr.length()>5 &passStr.length()<21
-                    &passStr.equals(firmStr) & ("男".equals(sex)||"女".equals(sex))){
-                right=true;
-            } else {
-                UT.show("请输入正确的信息");
-                right=false;
-            }
-        }
+              if (!TextUtils.isEmpty(phoneStr)){
+                  if (phoneStr.length()==11&!passStr.matches("[0-9]+")){
+                      if(phoneStr.equals(assisBean.getPhoneNo())){
+                          phoneStr="号码相同";
+                      }
+                  }else {
+                      UT.show("请输入正确的信息");
+                      right=false;
+                  }
+              }
 
+
+          }else {
+              if (TextUtils.isEmpty(nameStr)
+                      ||TextUtils.isEmpty(phoneStr)
+                      ||TextUtils.isEmpty(passStr)
+                      ||TextUtils.isEmpty(sexCode)
+                      ||TextUtils.isEmpty(companyCode)
+                      ||TextUtils.isEmpty(nationCode)
+                      ||TextUtils.isEmpty(dutyCode)
+                      ||TextUtils.isEmpty(firmStr)){
+                  UT.show("输入不能为空");
+                  right=false;
+              }else {
+
+                  if (nameStr.length()>1&nameStr.length()<9
+                          &phoneStr.length()==11&!passStr.matches("[0-9]+")&
+                          passStr.length()>5 &passStr.length()<21
+                          &passStr.equals(firmStr)){
+                      right=true;
+                  } else {
+                      UT.show("请输入正确的信息");
+                      right=false;
+                  }
+              }
+          }
        return  right;
     }
 

@@ -190,7 +190,7 @@ public class MainActivity extends CheckPermissionsActivity {
             if (null != loc) {
                 location = loc;
                 KLog.a("loc---->"+loc.toStr());
-                UT.show("loc--->"+loc.getAddress());
+                UT.show("所在地--->"+loc.getAddress());
                 //解析定位结果
                 startActivityForResult(new Intent(MainActivity.this, CaptureActivity.class), 0);
 //                String result = Utils.getLocationStr(loc);
