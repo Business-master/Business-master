@@ -77,4 +77,6 @@ public class ApiConstants {
 
     public static final String GetAllSex = "gsl-api/user/getAllSex";
 
+    public static final String GetUserById = "gsl-api/user/getUserById";
+
 }

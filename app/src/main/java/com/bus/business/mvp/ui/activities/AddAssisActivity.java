@@ -66,6 +66,7 @@ public class AddAssisActivity extends BaseActivity {
     String companyCode ;
     String dutyCode ;
     String nationCode;
+    String assisId;//修改助理的ID
 
     private static final String[] ZHIWU = new String[]{"董事长", "总裁", "总经理", "副总经理",
             "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
@@ -141,8 +142,16 @@ public class AddAssisActivity extends BaseActivity {
         if (assisBean==null){
             return;
         }
+
+        assisId = assisBean.getId();
+
+        if (!TextUtils.isEmpty(assisBean.getUserName()))
         name.setText(assisBean.getUserName());
+
+        if (!TextUtils.isEmpty(assisBean.getPhoneNo()))
         phone.setText(assisBean.getPhoneNo());
+
+        if (!TextUtils.isEmpty(assisBean.getSex()))
         sex = assisBean.getSex();
         if ("男".equals(assisBean.getSex())){
             apply_man.setChecked(true);
@@ -153,9 +162,13 @@ public class AddAssisActivity extends BaseActivity {
 //        Drawable dra = getResources().getDrawable(R.drawable.apply_xiabiao);
 //        company_add_assis.setCompoundDrawablesWithIntrinsicBounds(null,null,dra,null);
 //        company_add_assis.setClickable(true);
+        if (!TextUtils.isEmpty(assisBean.getCompanyName()))
         company_add_assis.setText(assisBean.getCompanyName());
 
+        if (!TextUtils.isEmpty(assisBean.getPosition()))
         duty_add_assis.setText(assisBean.getPosition());
+
+        if (!TextUtils.isEmpty(assisBean.getNation()))
         nation_add_assis.setText(assisBean.getNation());
     }
 
@@ -321,10 +334,7 @@ public class AddAssisActivity extends BaseActivity {
 
     private void addAssis() {
         if (judgement()){
-//            UT.show("正确"+sexCode+companyCode+dutyCode);
-              KLog.a("**********"+nameStr+"00000000000"+assisBean.getUserName());
-              KLog.a("**********"+sexCode+"00000000000"+assisBean.getSex());
-            RetrofitManager.getInstance(1).getAddAssisListObservable(nameStr,passStr,phoneStr,sexCode,companyCode,dutyCode,nationCode)
+            RetrofitManager.getInstance(1).getAddAssisListObservable(nameStr,passStr,phoneStr,sexCode,companyCode,dutyCode,nationCode,assisId)
                     .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                     .subscribe(new Subscriber<BaseRspObj>() {
                         @Override

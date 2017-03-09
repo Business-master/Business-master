@@ -111,10 +111,14 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     @BindView(R.id.ll_assis)
     LinearLayout ll_assis;
 
+    @BindView(R.id.apply_rg)
+     RadioGroup apply_rg;
     @BindView(R.id.apply_man)
      RadioButton apply_man;
     @BindView(R.id.apply_woman)
      RadioButton apply_woman;
+    @BindView(R.id.NO_sex)
+     RadioButton NO_sex;//性别为空
 
     @BindView(R.id.apply_name)
      EditText apply_name;
@@ -252,12 +256,17 @@ public class ApplyActivity extends BaseActivity implements AssisView{
             return;
         }
         apply_name.setText(userBean.getNiceName());
+
+
         sex = userBean.getSex();
          if ("男".equals(userBean.getSex())){
-             apply_man.setChecked(true);
+            apply_man.setChecked(true);
          }else   if ("女".equals(userBean.getSex())){
              apply_woman.setChecked(true);
+         }else {
+             NO_sex.setChecked(true);//后台数据性别为空
          }
+
         apply_company.setText(userBean.getCompanyName());
         apply_duty.setText(userBean.getPosition());
         apply_phone.setText(userBean.getPhoneNo());
@@ -271,12 +280,18 @@ public class ApplyActivity extends BaseActivity implements AssisView{
             return;
         }
         apply_name.setText(assisBean.getNiceName());
-        sex = assisBean.getSex();
-        if ("男".equals(assisBean.getSex())){
-            apply_man.setChecked(true);
-        }else   if ("女".equals(assisBean.getSex())){
-            apply_woman.setChecked(true);
-        }
+
+
+            sex = assisBean.getSex();
+            if ("男".equals(assisBean.getSex())){
+                apply_man.setChecked(true);
+            }else   if ("女".equals(assisBean.getSex())){
+                apply_woman.setChecked(true);
+            }else {
+                NO_sex.setChecked(true);//后台数据性别为空
+            }
+
+
         apply_company.setText(assisBean.getCompanyName());
         apply_duty.setText(assisBean.getPosition());
         apply_phone.setText(assisBean.getPhoneNo());
@@ -336,10 +351,9 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         switch (view.getId()) {
             case R.id.apply_self:
                 initSelfView();
-
                 break;
             case R.id.ll_assis:
-                if (assistantNames.length>0)
+                if (assistantNames!=null&&assistantNames.length>0)
                 {
                     joinType = 4;
                     drop_assis.setImageResource(R.mipmap.icon_drop);
@@ -447,7 +461,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
             return;
         }
 
-        if (assistantNames.length>0){
+        if (assistantNames!=null&&assistantNames.length>0){
             if (joinType==4){
                 if ("".equals(userAssistantId) || "".equals(cause))
                 {UT.show("请完善报名信息");
@@ -534,7 +548,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 //
         if (joinType==4){
             //判断选取哪一个助理
-            if (assistantNames.length>0&list!=null&list.size()>0){
+            if (assistantNames!=null&assistantNames.length>0&list!=null&list.size()>0){
                 for (int i = 0; i <list.size() ; i++) {
                     AssisBean  assisBean = list.get(i);
                     if (name.equals(assisBean.getUserName())){

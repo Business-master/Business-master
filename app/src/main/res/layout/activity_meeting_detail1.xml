@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
     xmlns:tools="http://schemas.android.com/tools">
     <include layout="@layout/layout_main_header" />
     <android.support.v4.widget.NestedScrollView
-        android:fillViewport="true"
         android:scrollbars="none"
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"

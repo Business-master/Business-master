@@ -19,6 +19,7 @@ import com.bus.business.mvp.entity.response.RspOrganBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
 import com.bus.business.mvp.entity.response.RspTopicsBean;
 import com.bus.business.mvp.entity.response.RspUserBean;
+import com.bus.business.mvp.entity.response.RspUserInfoBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 
@@ -153,6 +154,10 @@ public interface NewsService {
     @FormUrlEncoded
     @POST(ApiConstants.Meeting_file_download)
     Observable<BaseRspObj> downloadMeetingFile(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.GetUserById)
+    Observable<RspUserInfoBean> GetUserById(@FieldMap Map<String, String> map);
 
 
     @GET(ApiConstants.GetAllNation)

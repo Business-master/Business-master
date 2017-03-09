@@ -170,6 +170,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
     @Override
     public void initViews() {
+
         EventBus.getDefault().register(this);
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
 

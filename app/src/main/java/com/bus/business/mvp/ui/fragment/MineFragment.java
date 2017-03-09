@@ -109,16 +109,17 @@ public class MineFragment extends BaseFragment {
             isAssis_ll.setVisibility(View.GONE);
         }
 
-        Drawable dra = getResources().getDrawable(R.drawable.apply_xiabiao);
-        if(userBean.getIsAssistant()==1){
-            tv_position.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
-            tv_position.setClickable(false);
-        }else {
-            tv_position.setCompoundDrawablesWithIntrinsicBounds(null,null,dra,null);
-            tv_position.setClickable(true);
-            initData();
-        }
+//        Drawable dra = getResources().getDrawable(R.drawable.apply_xiabiao);
+//        if(userBean.getIsAssistant()==1){
+//            tv_position.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
+//            tv_position.setClickable(false);
+//        }else {
+//            tv_position.setCompoundDrawablesWithIntrinsicBounds(null,null,dra,null);
+//            tv_position.setClickable(true);
+//            initData();
+//        }
 
+        initData();
     }
 
     private void initData() {
@@ -258,7 +259,8 @@ public class MineFragment extends BaseFragment {
             }
         }
 
-         if (!TextUtils.isEmpty(dutyCode)&!(userBean.getIsAssistant()==1)){
+//         if (!TextUtils.isEmpty(dutyCode)&!(userBean.getIsAssistant()==1)){
+         if (!TextUtils.isEmpty(dutyCode)){
             //改变职务
             RetrofitManager.getInstance(1).getChangeAssisObservable(dutyCode)
                     .compose(TransformUtils.<BaseRspObj>defaultSchedulers())

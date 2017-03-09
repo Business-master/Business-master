@@ -25,6 +25,7 @@ import com.bus.business.mvp.entity.response.RspOrganBean;
 import com.bus.business.mvp.entity.response.RspPhoneBookbean;
 import com.bus.business.mvp.entity.response.RspTopicsBean;
 import com.bus.business.mvp.entity.response.RspUserBean;
+import com.bus.business.mvp.entity.response.RspUserInfoBean;
 import com.bus.business.mvp.entity.response.RspWeatherBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.utils.NetUtil;
@@ -300,9 +301,14 @@ public class RetrofitManager {
     }
 
     //添加助理
-    public Observable<BaseRspObj> getAddAssisListObservable(String name, String pass, String phone ,String sex, String company, String duty,String nation) {
+    public Observable<BaseRspObj> getAddAssisListObservable(String name, String pass, String phone ,String sex, String company, String duty,String nation,String assisId) {
         Map<String, String> map = new HashMap<>();
-        map.put("assistantedId", UsrMgr.getUseId());
+
+        if (!TextUtils.isEmpty(assisId))
+        {map.put("userId", assisId);}else {
+            map.put("assistantedId", UsrMgr.getUseId());
+        }
+
         if (!TextUtils.isEmpty(name))
         map.put("userName", name);
 
@@ -455,6 +461,14 @@ public class RetrofitManager {
    public Observable<RspMeetingDetailBean> getMeetingDetail(String  meetingId) {
 
         return mNewsService.getMeetingDetail(UsrMgr.getUseId(),meetingId);
+    }
+
+
+    public Observable<RspUserInfoBean> GetUserById(String  userId) {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", userId);
+        KLog.a(map.toString());
+        return mNewsService.GetUserById(map);
     }
 
 

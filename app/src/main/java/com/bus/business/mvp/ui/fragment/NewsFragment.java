@@ -73,7 +73,8 @@ import static android.view.View.VISIBLE;
  * @version 1.0
  * @create_date 16/12/23
  */
-public class NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
+public class
+NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
         , NewsView<List<BaseNewBean>>
         , BusinessView
         , BaseQuickAdapter.RequestLoadMoreListener
