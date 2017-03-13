@@ -119,6 +119,65 @@
                 android:text="单位名称" />
         </LinearLayout>
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/list_view_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/mine_text"
+                android:layout_width="wrap_content"
+                android:drawableRight="@null"
+                android:text="市商会职务" />
+
+            <TextView
+                android:id="@+id/tv_sShPosition"
+                style="@style/mine_text"
+                android:drawableRight="@null"
+                android:ellipsize="end"
+                android:gravity="right|center_vertical"
+                android:maxLines="1"
+                android:text="单位名称" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/list_view_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/mine_text"
+                android:layout_width="wrap_content"
+                android:drawableRight="@null"
+                android:text="区商会职务" />
+
+            <TextView
+                android:id="@+id/tv_qShPosition"
+                style="@style/mine_text"
+                android:drawableRight="@null"
+                android:ellipsize="end"
+                android:gravity="right|center_vertical"
+                android:maxLines="1"
+                android:text="单位名称" />
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"

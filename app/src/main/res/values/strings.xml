@@ -4,7 +4,7 @@
     <!-- 页面名称 -->
     <string name="main_navigation_home">首页</string>
     <string name="main_navigation_im">会务</string>
-    <string name="main_navigation_interest">百宝箱</string>
+    <string name="main_navigation_interest">专家</string>
     <string name="main_navigation_expert">政策</string>
     <string name="main_navigation_user">我的</string>
 

@@ -14,30 +14,7 @@ import java.io.Serializable;
  * @create_date 16/12/28
  */
 public class UserBean implements Serializable{
-    /**
-     * position : 董事长  //职位
-     * niceName : 我是android
-     * utime : 1486628868000
-     * sex : 男
-     * assistantedId :  //助理id
-     * imei : 1234567  //手机串码
-     * state : 1    //状态0停用1启用
-     * hasAssiistant : null
-     * userEmail : 123@qq.com  //用户邮箱
-     * companyName : 测试公司 //公司名称
-     * qgslPosition : null //区工商联职位
-     * ctime : 1484281713000
-     * sgslPosition : null //市工商联职位
-     * nation : 汉族
-     * phoneModel : 1234567      //手机型号
-     * organizationCode : null
-     * id : SSETJtMrdYRNmhkTLnFDBIRqXwwplVCa
-     * phoneNo : 18500241615
-     * systemeType : 2  // //用户手机系统 1是IOS 2是安卓
-     * userName : xuchunhui-android  //用户名
-     * isAssistant : 1  本人 2 助理  3助理被选取
-     * organizationType : null  //组织类型
-     */
+
 
     private String position;
     private String niceName;
@@ -46,7 +23,7 @@ public class UserBean implements Serializable{
     private String assistantedId;
     private String imei;
     private String state;
-    private String hasAssiistant;
+    private Object hasAssiistant;
     private String userEmail;
     private String companyName;
     private String qgslPosition;
@@ -54,26 +31,15 @@ public class UserBean implements Serializable{
     private String sgslPosition;
     private String nation;
     private String phoneModel;
-    private String organizationCode;
+    private Object organizationCode;
     private String id;
     private String phoneNo;
     private String systemeType;
+    private Object qShPosition;//区商会职务
+    private Object sShPosition;//市商会职务
     private String userName;
     private int isAssistant;
-    private String organizationType;
-
-    public static final String USER_BEAN = "user_bean";
-
-
-    public void intentToClass(Context context){
-        Intent intent = new Intent(context,ManagerActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(USER_BEAN,this);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-    }
-
-
+    private Object organizationType;
 
     public String getPosition() {
         return position;
@@ -131,11 +97,11 @@ public class UserBean implements Serializable{
         this.state = state;
     }
 
-    public String getHasAssiistant() {
+    public Object getHasAssiistant() {
         return hasAssiistant;
     }
 
-    public void setHasAssiistant(String hasAssiistant) {
+    public void setHasAssiistant(Object hasAssiistant) {
         this.hasAssiistant = hasAssiistant;
     }
 
@@ -195,11 +161,11 @@ public class UserBean implements Serializable{
         this.phoneModel = phoneModel;
     }
 
-    public String getOrganizationCode() {
+    public Object getOrganizationCode() {
         return organizationCode;
     }
 
-    public void setOrganizationCode(String organizationCode) {
+    public void setOrganizationCode(Object organizationCode) {
         this.organizationCode = organizationCode;
     }
 
@@ -227,6 +193,22 @@ public class UserBean implements Serializable{
         this.systemeType = systemeType;
     }
 
+    public Object getQShPosition() {
+        return qShPosition;
+    }
+
+    public void setQShPosition(Object qShPosition) {
+        this.qShPosition = qShPosition;
+    }
+
+    public Object getSShPosition() {
+        return sShPosition;
+    }
+
+    public void setSShPosition(Object sShPosition) {
+        this.sShPosition = sShPosition;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -243,39 +225,51 @@ public class UserBean implements Serializable{
         this.isAssistant = isAssistant;
     }
 
-    public String getOrganizationType() {
+    public Object getOrganizationType() {
         return organizationType;
     }
 
-    public void setOrganizationType(String organizationType) {
+    public void setOrganizationType(Object organizationType) {
         this.organizationType = organizationType;
     }
 
-    @Override
-    public String toString() {
-        return "UserBean{" +
-                "position='" + position + '\'' +
-                ", niceName='" + niceName + '\'' +
-                ", utime=" + utime +
-                ", sex='" + sex + '\'' +
-                ", assistantedId='" + assistantedId + '\'' +
-                ", imei='" + imei + '\'' +
-                ", state='" + state + '\'' +
-                ", hasAssiistant='" + hasAssiistant + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", qgslPosition='" + qgslPosition + '\'' +
-                ", ctime=" + ctime +
-                ", sgslPosition='" + sgslPosition + '\'' +
-                ", nation='" + nation + '\'' +
-                ", phoneModel='" + phoneModel + '\'' +
-                ", organizationCode='" + organizationCode + '\'' +
-                ", id='" + id + '\'' +
-                ", phoneNo='" + phoneNo + '\'' +
-                ", systemeType='" + systemeType + '\'' +
-                ", userName='" + userName + '\'' +
-                ", isAssistant=" + isAssistant +
-                ", organizationType='" + organizationType + '\'' +
-                '}';
+    /**
+     * position : 董事长  //职位
+     * niceName : 我是android
+     * utime : 1486628868000
+     * sex : 男
+     * assistantedId :  //助理id
+     * imei : 1234567  //手机串码
+     * state : 1    //状态0停用1启用
+     * hasAssiistant : null
+     * userEmail : 123@qq.com  //用户邮箱
+     * companyName : 测试公司 //公司名称
+     * qgslPosition : null //区工商联职位
+     * ctime : 1484281713000
+     * sgslPosition : null //市工商联职位
+     * nation : 汉族
+     * phoneModel : 1234567      //手机型号
+     * organizationCode : null
+     * id : SSETJtMrdYRNmhkTLnFDBIRqXwwplVCa
+     * phoneNo : 18500241615
+     * systemeType : 2  // //用户手机系统 1是IOS 2是安卓
+     * userName : xuchunhui-android  //用户名
+     * isAssistant : 1  本人 2 助理  3助理被选取
+     * organizationType : null  //组织类型
+     */
+//
+//
+//
+    public static final String USER_BEAN = "user_bean";
+
+
+    public void intentToClass(Context context){
+        Intent intent = new Intent(context,ManagerActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(USER_BEAN,this);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
+
+
 }

@@ -111,9 +111,9 @@ public class MainActivity extends CheckPermissionsActivity {
                     case R.id.foot_bar_im:
                         chageIndex(1);
                         break;
-//                    case R.id.foot_bar_wan:
-//                        chageIndex(2);//暂时去掉百宝箱的点击事件
-//                        break;
+                    case R.id.foot_bar_wan:
+                        chageIndex(2);//暂时去掉百宝箱的点击事件
+                        break;
                     case R.id.foot_bar_financial:
                         chageIndex(3);
                         break;
@@ -379,8 +379,9 @@ public class MainActivity extends CheckPermissionsActivity {
         switch (index) {
             case 1:
                 return "会务";
-//            case 2:
+            case 2:
 //                return "百宝箱";
+                return "金融专家";
             case 3:
 //                return "专家";
                 return "金融政策";
@@ -420,7 +421,8 @@ public class MainActivity extends CheckPermissionsActivity {
                 return new NewMeetingFragment();
             case 2:
 //                return new WanFragment();
-                return new WanFragment2();
+//                return new WanFragment2();
+                return new ExpertFragment();
             case 3:
 //                return new ExpertFragment();
                 return SzhwFragment.getIntance(3);
@@ -437,7 +439,7 @@ public class MainActivity extends CheckPermissionsActivity {
         if (event1.getMsg() == 3) {
             hasPush = true;
 //            textUnreadLabel.setVisibility(View.VISIBLE);
-
+             getNotReadCount();//有消息推送，重新请求未读会议
             return;
         }
         homeFragmentIndex = event1.getMsg();

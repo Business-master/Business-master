@@ -117,8 +117,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
      RadioButton apply_man;
     @BindView(R.id.apply_woman)
      RadioButton apply_woman;
-    @BindView(R.id.NO_sex)
-     RadioButton NO_sex;//性别为空
+
 
     @BindView(R.id.apply_name)
      EditText apply_name;
@@ -264,7 +263,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
          }else   if ("女".equals(userBean.getSex())){
              apply_woman.setChecked(true);
          }else {
-             NO_sex.setChecked(true);//后台数据性别为空
+             apply_rg.clearCheck();//后台数据性别为空
          }
 
         apply_company.setText(userBean.getCompanyName());
@@ -288,8 +287,9 @@ public class ApplyActivity extends BaseActivity implements AssisView{
             }else   if ("女".equals(assisBean.getSex())){
                 apply_woman.setChecked(true);
             }else {
-                NO_sex.setChecked(true);//后台数据性别为空
+                apply_rg.clearCheck();//后台数据性别为空
             }
+
 
 
         apply_company.setText(assisBean.getCompanyName());

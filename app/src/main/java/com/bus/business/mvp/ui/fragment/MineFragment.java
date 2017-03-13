@@ -72,6 +72,11 @@ public class MineFragment extends BaseFragment {
     TextView tv_qgslPosition;
     @BindView(R.id.tv_position)
     TextView tv_position;
+    @BindView(R.id.tv_qShPosition)
+    TextView tv_qShPosition;
+    @BindView(R.id.tv_sShPosition)
+    TextView tv_sShPosition;
+
 
     @BindView(R.id.isAssis_ll)
     LinearLayout isAssis_ll;
@@ -101,6 +106,8 @@ public class MineFragment extends BaseFragment {
         tv_companyName.setText(userBean.getCompanyName());
         tv_sgslPosition.setText(userBean.getSgslPosition());
         tv_qgslPosition.setText(userBean.getQgslPosition());
+        tv_sShPosition.setText(String.valueOf(userBean.getSShPosition()));
+        tv_qShPosition.setText(String.valueOf(userBean.getQShPosition()));
         tv_position.setText(userBean.getPosition());
         caculateCacheSize();
         if (userBean.getIsAssistant()==1){

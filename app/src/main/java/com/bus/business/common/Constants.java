@@ -24,5 +24,7 @@ public class Constants {
     public static final String AMAP_PACKAGENAME = "com.autonavi.minimap";
     //百度地图应用包名
     public static final String BAIDUMAP_PACKAGENAME = "com.baidu.BaiduMap";
+    //腾讯地图应用包名
+    public static final String TencentMAP_PACKAGENAME = "com.tencent.map";
 
 }

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.method.KeyListener;
 import android.view.MotionEvent;
@@ -51,6 +53,7 @@ import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.MeetingDetailEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
+import com.bus.business.mvp.ui.activities.base.LocationActivity;
 import com.bus.business.mvp.ui.adapter.DownAdapter;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.view.CustomGridView;
@@ -60,6 +63,7 @@ import com.bus.business.utils.DateUtil;
 import com.bus.business.utils.SystemUtils;
 import com.bus.business.utils.TransformUtils;
 import com.bus.business.utils.UT;
+import com.bus.business.widget.URLImageGetter;
 import com.bus.libzxing.activity.CaptureActivity;
 import com.socks.library.KLog;
 import com.bus.business.utils.SystemUtils;
@@ -129,6 +133,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
     @BindView(R.id.map_loc)
     LinearLayout map_loc;//地图导航--提供地点,跳转APP或网页
 
+    public static final int Location_OK = 3;//定位权限的请求标志
 
 
     @BindView(R.id.scroll_view)
@@ -154,8 +159,9 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
     private AMapLocationClientOption locationOption = new AMapLocationClientOption();
     private SweetAlertDialog pDialog;
 
-    private double latitude = 39.906901;//纬度
-    private double longitude = 116.397972;//经度
+
+
+    private URLImageGetter mUrlImageGetter;//会议详情内容的图片
 
     @Override
     public int getLayoutId() {
@@ -198,7 +204,10 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         mPubDate.setText("开始时间:     "+DateUtil.getCurGroupDay(meetingBean.getMeetingTime()));
         tv_publish_address.setText("会议来源:     "+meetingBean.getUserOrganization());
         mJoinAddress.setText("地        址:      "+meetingBean.getMeetingLoc());
-        mNewsDetailBodyTv.setText(meetingBean.getMeetingContent());
+
+        mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, meetingBean.getMeetingContent(), 2);
+        mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(), mUrlImageGetter, null));
+//        mNewsDetailBodyTv.setText(meetingBean.getMeetingContent());
 
         mapView.onCreate(savedInstanceState);
 
@@ -461,23 +470,37 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                 if (TextUtils.isEmpty(meetingBean.getMeetingLoc())) {
                     UT.show("会议地点错误");
                     return;}
-                if (SystemUtils.isInstallByread(Constants.AMAP_PACKAGENAME)) {
-                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
-//                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, "天安门");
-                } else
-                if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
-//                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, "奎科大厦");
-                    SystemUtils.openBaiduMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
-                } else {
-                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + meetingBean.getMeetingLoc() + "&output=html&src=yourCompanyName|yourAppName");
-//                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + "奎科大厦" + "&output=html&src=yourCompanyName|yourAppName");
-                    Intent it = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(it);
-                }
+                openMap();
                 break;
         }
     }
 
+    private void openMap() {
+
+        if (SystemUtils.isInstallByread(Constants.AMAP_PACKAGENAME)) {
+                    SystemUtils.openGaoDeMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
+//            SystemUtils.openGaoDeMap(MeetingDetailActivity.this, "奥林匹克森林公园");
+        }
+        else
+                if (SystemUtils.isInstallByread(Constants.BAIDUMAP_PACKAGENAME)) {
+//                    SystemUtils.openBaiduMap("奎科大厦",MeetingDetailActivity.this);
+                    SystemUtils.openBaiduMap(meetingBean.getMeetingLoc(),MeetingDetailActivity.this);
+                }
+        else
+       if (SystemUtils.isInstallByread(Constants.TencentMAP_PACKAGENAME)) {
+                    SystemUtils.openTencentMap(MeetingDetailActivity.this, meetingBean.getMeetingLoc());
+//            SystemUtils.openTencentMap(MeetingDetailActivity.this, "奥林匹克森林公园");
+        }
+
+             else
+                 {
+                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + meetingBean.getMeetingLoc() + "&output=html&src=yourCompanyName|yourAppName");
+//                    Uri uri = Uri.parse("http://api.map.baidu.com/geocoder?address=" + "奎科大厦" + "&output=html&src=yourCompanyName|yourAppName");
+//                    Uri uri = Uri.parse("http://api.map.baidu.com/direction?origin=latlng:34.264642646862,108.95108518068|name:我家&destination=大雁塔&mode=driving&region=西安&output=html&src=yourCompanyName|yourAppName");
+                    Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(it);
+                }
+    }
 
 
     @Override
@@ -810,5 +833,9 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                     }
                 });
     }
+
+
+
+
 
 }
