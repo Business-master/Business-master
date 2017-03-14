@@ -73,8 +73,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
             "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
             "干部","其他职务"};
 
-   @BindView(R.id.scroll_apply)
-    ScrollView scroll_apply;
+
 
 
 //    @BindView(R.id.assis_ll)
@@ -184,9 +183,6 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
         index = getIntent().getIntExtra("index",-1);
 
-        scroll_apply.setFocusable(true);
-        scroll_apply.setFocusableInTouchMode(true);
-        scroll_apply.requestFocus();
 
         setCustomTitle("会务报名");
         showOrGoneSearchRl(View.GONE);

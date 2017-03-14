@@ -1,14 +1,19 @@
 package com.bus.business.widget;
 
+import android.annotation.TargetApi;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import com.bus.business.App;
 import com.bus.business.R;
+import com.bus.business.mvp.entity.WanBean;
 import com.bus.business.repository.network.RetrofitManager;
 import com.socks.library.KLog;
 
@@ -31,15 +36,22 @@ import rx.schedulers.Schedulers;
  */
 public class URLImageGetter implements Html.ImageGetter {
     private TextView mTextView;
-    private int mPicWidth;
+    private static int  mPicWidth;
     private String mNewsBody;
     private int mPicCount;
     private int mPicTotal;
     private static final String mFilePath = App.getAppContext().getCacheDir().getAbsolutePath();
     public Subscription mSubscription;
 
+
+
+    public  void setmPicWidth(int mWidth) {
+       this.mPicWidth = mWidth;
+    }
+
     public URLImageGetter(TextView textView, String newsBody, int picTotal) {
         mTextView = textView;
+        if (mTextView.getWidth()!=0)
         mPicWidth = mTextView.getWidth();
         mNewsBody = newsBody;
         mPicTotal = picTotal;
@@ -153,4 +165,7 @@ public class URLImageGetter implements Html.ImageGetter {
         drawable.setBounds(0, 0, mPicWidth, mPicWidth / 3);
         return drawable;
     }
+
+
+
 }

@@ -1,6 +1,7 @@
 package com.bus.business.mvp.ui.activities;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ import android.text.method.KeyListener;
 import android.view.MotionEvent;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -205,8 +207,18 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         tv_publish_address.setText("会议来源:     "+meetingBean.getUserOrganization());
         mJoinAddress.setText("地        址:      "+meetingBean.getMeetingLoc());
 
-        mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, meetingBean.getMeetingContent(), 2);
-        mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(), mUrlImageGetter, null));
+        mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, meetingBean.getMeetingContent(), 1);
+        ViewTreeObserver viewTreeObserver = mNewsDetailBodyTv.getViewTreeObserver();
+        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                           int width = mNewsDetailBodyTv.getWidth();
+                mUrlImageGetter.setmPicWidth(width);
+                mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(), mUrlImageGetter, null));
+            }
+        });
+
+
 //        mNewsDetailBodyTv.setText(meetingBean.getMeetingContent());
 
         mapView.onCreate(savedInstanceState);
