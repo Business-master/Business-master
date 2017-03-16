@@ -24,24 +24,47 @@
                 android:textColor="?android:textColorPrimary"
                 tools:text="习近平绿色发展理念引领中国环境治理新实践" />
 
-            <TextView
-                android:id="@+id/news_detail_fund_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/news_detail_title_tv"
-                android:gravity="bottom"
-                android:paddingTop="15dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/red"
-                android:textSize="@dimen/text_size_20"
-                android:textStyle="bold"
-                tools:text="项目总投资5亿" />
-
+            <!--<TextView-->
+                <!--android:id="@+id/news_detail_fund_tv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@id/news_detail_title_tv"-->
+                <!--android:gravity="bottom"-->
+                <!--android:paddingTop="15dp"-->
+                <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
+                <!--android:textColor="@color/red"-->
+                <!--android:textSize="@dimen/text_size_20"-->
+                <!--android:textStyle="bold"-->
+                <!--tools:text="项目总投资5亿" />-->
+             <LinearLayout
+                 android:id="@+id/ll_detail_fund_tv"
+                 android:layout_marginTop="15dp"
+                 android:layout_below="@id/news_detail_title_tv"
+                 android:orientation="horizontal"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content">
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                     android:textColor="@color/secondary_text"
+                     android:textSize="@dimen/text_size_14"
+                     android:text="项目总投资 ：" />
+                 <TextView
+                     android:id="@+id/news_detail_fund_tv"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:gravity="bottom"
+                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                     android:textColor="@color/secondary_text"
+                     android:textSize="@dimen/text_size_14"
+                     tools:text="项目总投资5亿" />
+             </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/news_detail_fund_tv"
+                android:layout_below="@id/ll_detail_fund_tv"
                 android:orientation="vertical">
 
                 <TextView

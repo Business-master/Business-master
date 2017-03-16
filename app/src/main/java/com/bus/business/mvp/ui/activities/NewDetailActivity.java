@@ -175,8 +175,12 @@ public class NewDetailActivity extends BaseActivity {
     private void fillData(BusDetailBean bean) {
         mTitle.setText(bean.getTitle());
         mDateTv.setText("发表时间 : " + DateUtil.getCurGroupDay(bean.getCtime()));
-        mFrom.setText(bean.getAreaCode());
-        mFundTv.setText("项目总投资" + formAmount(bean.getInAmount()) + "元");
+        mFrom.setText("来源 : "+bean.getAreaCode());
+//        mFundTv.setText("项目总投资" + formAmount(bean.getInAmount()) + "元");
+//        String str= "<font color='#999999'>项目总投资：</font>" + formMoney(bean.getInAmount()) + "元";
+//        mFundTv.setText(Html.fromHtml(str));
+
+        mFundTv.setText(formMoney(bean.getInAmount()) + "元");
         mPhone.setText("联系电话 : " + bean.getPhoneNo());
         mZPhone.setText("座机电话 : "+bean.getPlane());
         mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, bean.getContentS(), 2);
@@ -187,5 +191,20 @@ public class NewDetailActivity extends BaseActivity {
         DecimalFormat myformat = new DecimalFormat();
         myformat.applyPattern("##,###");
         return myformat.format(num);
+    }
+
+    private String formMoney(double num){
+        DecimalFormat df = new DecimalFormat(".00");
+        String str;
+        if (num>=Math.pow(10,8)){
+            num=num/Math.pow(10,8);
+            str = df.format(num)+"亿";
+        }else if (num>Math.pow(10,4)){
+            num=num/Math.pow(10,4);
+            str =df.format(num)+"万";
+        }else {
+            str =""+formAmount(num);
+        }
+        return str;
     }
 }

@@ -35,8 +35,8 @@ public class UserBean implements Serializable{
     private String id;
     private String phoneNo;
     private String systemeType;
-    private Object qShPosition;//区商会职务
-    private Object sShPosition;//市商会职务
+    private String qShPosition;//区商会职务
+    private String sShPosition;//市商会职务
     private String userName;
     private int isAssistant;
     private Object organizationType;
@@ -193,19 +193,19 @@ public class UserBean implements Serializable{
         this.systemeType = systemeType;
     }
 
-    public Object getQShPosition() {
+    public String getQShPosition() {
         return qShPosition;
     }
 
-    public void setQShPosition(Object qShPosition) {
+    public void setQShPosition(String qShPosition) {
         this.qShPosition = qShPosition;
     }
 
-    public Object getSShPosition() {
+    public String getSShPosition() {
         return sShPosition;
     }
 
-    public void setSShPosition(Object sShPosition) {
+    public void setSShPosition(String sShPosition) {
         this.sShPosition = sShPosition;
     }
 

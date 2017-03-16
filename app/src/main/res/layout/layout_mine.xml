@@ -146,7 +146,7 @@
                 android:ellipsize="end"
                 android:gravity="right|center_vertical"
                 android:maxLines="1"
-                android:text="单位名称" />
+                android:text="" />
         </LinearLayout>
 
         <View
@@ -175,7 +175,7 @@
                 android:ellipsize="end"
                 android:gravity="right|center_vertical"
                 android:maxLines="1"
-                android:text="单位名称" />
+                android:text="" />
         </LinearLayout>
 
         <View

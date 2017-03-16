@@ -106,8 +106,11 @@ public class MineFragment extends BaseFragment {
         tv_companyName.setText(userBean.getCompanyName());
         tv_sgslPosition.setText(userBean.getSgslPosition());
         tv_qgslPosition.setText(userBean.getQgslPosition());
-        tv_sShPosition.setText(String.valueOf(userBean.getSShPosition()));
-        tv_qShPosition.setText(String.valueOf(userBean.getQShPosition()));
+
+        if(!TextUtils.isEmpty(userBean.getSShPosition()))
+        tv_sShPosition.setText(userBean.getSShPosition());
+        if(!TextUtils.isEmpty(userBean.getQShPosition()))
+        tv_qShPosition.setText(userBean.getQShPosition());
         tv_position.setText(userBean.getPosition());
         caculateCacheSize();
         if (userBean.getIsAssistant()==1){

@@ -104,7 +104,7 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
     private TextView tv_no_date;
     private TextView tv_week;
     private ImageView img_weather;
-    private ImageView mImgAct;
+    private ImageView mImgAct;//调查问卷点击图标
 
     private WeatherBean weatherBean;
     @Inject
@@ -181,6 +181,8 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
                 mActivity.startActivity(intent);
             }
         });
+
+        mImgAct.setVisibility(View.GONE);
     }
 
     @Override
