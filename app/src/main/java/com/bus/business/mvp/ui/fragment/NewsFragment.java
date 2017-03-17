@@ -182,7 +182,7 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
             }
         });
 
-        mImgAct.setVisibility(View.GONE);
+
     }
 
     @Override

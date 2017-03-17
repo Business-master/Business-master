@@ -38,8 +38,10 @@
                 android:text="单位名称:" />
 
             <TextView
+                android:layout_marginLeft="5dp"
                 style="@style/about_text"
-                android:text="北京市工商联合会北京市商会" />
+                android:textSize="15sp"
+                android:text="北京市工商业联合会  北京市商会" />
         </LinearLayout>
 
         <View
@@ -58,6 +60,8 @@
                 android:text="联系邮箱:" />
 
             <TextView
+                android:textSize="15sp"
+                android:layout_marginLeft="6dp"
                 style="@style/about_text"
                 android:text="xuanjiaochu@bjglsl.org.cn" />
         </LinearLayout>
@@ -78,9 +82,11 @@
                 android:text="单位地址:" />
 
             <TextView
+                android:textSize="15sp"
+                android:layout_marginLeft="5dp"
                 style="@style/about_text"
                 android:layout_height="60dp"
-                android:text="北京市崇文区白桥大街22号,广渠门桥西200米" />
+                android:text="北京市东城区广渠门内白桥大街22号工商联大厦" />
         </LinearLayout>
     </LinearLayout>
     

@@ -10,7 +10,7 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_about;
+        return R.layout.activity_about1;
     }
 
     @Override

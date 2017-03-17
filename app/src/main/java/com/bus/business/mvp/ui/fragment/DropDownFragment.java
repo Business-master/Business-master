@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.bus.business.R;
@@ -237,7 +238,8 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         KLog.a("value--->" + view.current.getValue());
         subStr(view.current.getValue());
         mNewsPresenter.dropData(cashBean);
-        UT.show(cashBean.toString());
+//        UT.show(cashBean.toString());
+
     }
 
     @Override
@@ -343,6 +345,9 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         switch (loadType) {
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
 //                mSwipeRefreshLayout.setRefreshing(false);
+                if (newsBean.size()<=0){
+                    UT.show("暂无数据");
+                }
                 mNewsListAdapter.setNewData(newsBean);
 //                checkIsEmpty(newsBean);
                 break;

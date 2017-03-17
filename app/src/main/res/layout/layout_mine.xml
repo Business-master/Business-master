@@ -211,6 +211,8 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
+            android:clickable="false"
             android:id="@+id/tv_address_list"
             style="@style/mine_text"
             android:layout_marginTop="10dp"
