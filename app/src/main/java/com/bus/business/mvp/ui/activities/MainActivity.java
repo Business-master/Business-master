@@ -289,6 +289,7 @@ public class MainActivity extends CheckPermissionsActivity {
                         if ("0".equals(notReadBean.getHead().getRspCode())){
 
                             notReadCounnt = notReadBean.getBody().getNotReaded();
+                            KLog.a("新的会议数据：--------"+notReadCounnt);
                             if (notReadCounnt>0){
                                 //未读会议
                                 textUnreadLabel.setVisibility(View.VISIBLE);
@@ -439,6 +440,7 @@ public class MainActivity extends CheckPermissionsActivity {
         if (event1.getMsg() == 3) {
             hasPush = true;
 //            textUnreadLabel.setVisibility(View.VISIBLE);
+            KLog.a("新的会议，重新请求未读会议------------");
              getNotReadCount();//有消息推送，重新请求未读会议
             return;
         }

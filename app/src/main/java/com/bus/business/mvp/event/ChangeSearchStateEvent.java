@@ -1,5 +1,7 @@
 package com.bus.business.mvp.event;
 
+import com.socks.library.KLog;
+
 /**
  * @author xch
  * @version 1.0
@@ -10,6 +12,7 @@ public class ChangeSearchStateEvent {
     public ChangeSearchStateEvent(int msg) {
         // TODO Auto-generated constructor stub
         mMsg = msg;
+        KLog.a("有消息推送------------");
     }
     public int getMsg(){
         return mMsg;
