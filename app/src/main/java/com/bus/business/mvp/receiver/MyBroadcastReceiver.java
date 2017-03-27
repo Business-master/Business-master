@@ -1,16 +1,22 @@
 package com.bus.business.mvp.receiver;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
+import com.bus.business.R;
 import com.bus.business.common.Constants;
 import com.bus.business.mvp.event.ChangeSearchStateEvent;
 import com.bus.business.mvp.ui.activities.MainActivity;
 import com.bus.business.utils.SystemUtils;
+import com.bus.business.utils.UT;
 import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -42,7 +48,9 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
             Log.d(TAG, "JPush用户注册成功");
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "接受到推送下来的自定义消�?");
+            Log.d(TAG, "接受到推送下来的自定义消息");
+//            receiveMessage(context, bundle);
+
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "接受到推送下来的通知");
@@ -98,10 +106,38 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
+    private void openHintDialog(Context context,String message) {
+       //提示会议改动弹窗
+                        View view = LayoutInflater.from(context).inflate(R.layout.main_hint_dialog,null);
+                        TextView textView = (TextView) view.findViewById(R.id.ensure_mhd);
+                        TextView msg = (TextView) view.findViewById(R.id.msg_mhd);
+                        msg.setText(message);
+                        final AlertDialog dialog=  new AlertDialog.Builder(context)
+                                .setView(view)
+                                .setCancelable(false)
+                                .create();
+                        dialog.show();
+                        textView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                UT.show("关闭");
+                            }
+                        });
+    }
+
+    private void receiveMessage(Context context, Bundle bundle) {
+        String title = bundle.getString(JPushInterface.EXTRA_TITLE);
+        String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        Log.d(TAG, "推送自定义信息 title : " + title+ "message : " + message+"extras : " + extras);
+        openHintDialog(context,message);
+    }
+
     private void receivingNotification(Context context, Bundle bundle) {
         String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
         Log.d(TAG, " title : " + title);
-        String message = bundle.getString(JPushInterface.EXTRA_ALERT);
+        String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
         Log.d(TAG, "message : " + message);
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
         Log.d(TAG, "extras : " + extras);

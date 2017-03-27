@@ -12,7 +12,7 @@ import com.bus.business.mvp.entity.AreaBean;
 import com.bus.business.mvp.event.AreaCodeEvent;
 import com.bus.business.mvp.event.ChangeSearchStateEvent;
 import com.bus.business.mvp.ui.activities.AreaActivity;
-import com.bus.business.utils.ApplyUtils;
+
 
 import org.greenrobot.eventbus.EventBus;
 

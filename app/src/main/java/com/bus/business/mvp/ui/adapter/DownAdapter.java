@@ -18,9 +18,9 @@ import com.bus.business.common.ApiConstants;
 import com.bus.business.mvp.entity.AreaBean;
 import com.bus.business.mvp.entity.MeetingFileBean;
 import com.bus.business.mvp.entity.WanBean;
-import com.bus.business.mvp.event.AreaCodeEvent;
+
 import com.bus.business.mvp.ui.activities.AreaActivity;
-import com.bus.business.utils.ApplyUtils;
+
 import com.bus.business.utils.UT;
 import com.socks.library.KLog;
 

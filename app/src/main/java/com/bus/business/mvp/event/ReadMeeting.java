@@ -2,6 +2,7 @@ package com.bus.business.mvp.event;
 
 /**
  * Created by ATRSnail on 2017/2/22.
+ * 会议是否 读取 （查看详情）
  */
 
 public class ReadMeeting {

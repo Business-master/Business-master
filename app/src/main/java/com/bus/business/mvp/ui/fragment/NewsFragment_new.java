@@ -3,7 +3,6 @@ package com.bus.business.mvp.ui.fragment;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -72,7 +71,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import rx.Subscriber;
 
 import static android.view.View.VISIBLE;
@@ -83,12 +81,17 @@ import static android.view.View.VISIBLE;
  * @create_date 16/12/23
  * 首页碎片 模板
  */
-public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
-        , NewsView<List<BaseNewBean>>
-        , BusinessView,AreaSeaView
+//public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
+//        , NewsView<List<BaseNewBean>>
+//        , BusinessView,AreaSeaView
+//        , BaseQuickAdapter.RequestLoadMoreListener
+//        , BaseQuickAdapter.OnRecyclerViewItemClickListener
+//        , BaseSliderView.OnSliderClickListener {
+
+    public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
+        ,AreaSeaView
         , BaseQuickAdapter.RequestLoadMoreListener
-        , BaseQuickAdapter.OnRecyclerViewItemClickListener
-        , BaseSliderView.OnSliderClickListener {
+        , BaseQuickAdapter.OnRecyclerViewItemClickListener {
 
     public static final String NEW_TYPE = "new_type";
     @BindView(R.id.news_rv)
@@ -103,6 +106,7 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     private View weatherView;
     private View areaView;//区域
     private TextView area_tv;//区域选择按钮
+    private TextView area_show;//区域展示按钮
     private View mTitleHeader;
     private View mSlideHeader;
     private SliderLayout sliderLayout;
@@ -135,8 +139,11 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
 //    private boolean isXunFrg;//true是讯息页,false是协会页
     private int  isXunFrg;//1是讯息页,2是协会页,4区域选择
 
-    private  String code="0001";
+//    private  String code="0001";
+    private  String code="";
     private String chamCode="";
+//    String area="";
+    String area="所有地区";
     public static NewsFragment_new getInstance(@NewsType.checker int checker) {
         NewsFragment_new newsFragment = new NewsFragment_new();
         Bundle bundle = new Bundle();
@@ -164,6 +171,9 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
         initIntentData();
         areaView = View.inflate(mActivity, R.layout.activity_area, null);
         area_tv = (TextView) areaView.findViewById(R.id.area_ch);
+        area_show = (TextView) areaView.findViewById(R.id.area_show);
+//        area_tv.setText(area);
+        area_show.setText(area);
 
         area_tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,13 +181,13 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
                 startActivity(new Intent(mActivity, AreaActivity.class));
             }
         });
-        initHeadView();
-        initSlider();
+//        initHeadView();
+//        initSlider();
         initSwipeRefreshLayout();
         initRecyclerView();
         initPresenter(code, chamCode);
-        loadBannerData();
-        loadWeather();
+//        loadBannerData();
+//        loadWeather();
     }
 
     @Subscribe
@@ -191,31 +201,34 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
             chamCode = event.getAreaBean().getCode();
             code="";
         }
+         area= event.getAreaBean().getName();
+        KLog.a("选择的区域***************"+area);
+//        area_tv.setText(area+" >>");
+        area_show.setText(area);
 
-         area_tv.setText(event.getAreaBean().getName()+" >>");
         initPresenter(code,chamCode);
     }
 
-    boolean flag = true;
-    @Subscribe
-    public void onEventMainThread(AreaFirstEvent event){
-        if (flag){
-            area_tv.setText(event.getAreaSeaBean().getAreaCode()+" >>");
-            flag=false;
-        }
+//    boolean flag = true;
+//    @Subscribe
+//    public void onEventMainThread(AreaFirstEvent event){
+//        //基层组织 页面 获得---初始化地区---第一个地区名
+//        area = event.getAreaSeaBean().getAreaCode()+" >>";
+//        if (flag){
+//            area_tv.setText(area);
+//            flag=false;
+//        }
+//
+//    }
 
-    }
 
-    @Override
-    public void onDestroyView() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroyView();
-    }
+
+
+
 
     private void initIntentData() {
-//        isXunFrg = getArguments() == null || getArguments().getInt(NEW_TYPE) == 1;
         if (getArguments() == null){
-            isXunFrg=1;
+            isXunFrg=4;
         }else {
             isXunFrg=getArguments().getInt(NEW_TYPE);
         }
@@ -223,23 +236,23 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     }
 
 
-    private void initHeadView() {
-//        if (!isXunFrg) return;
-        if (isXunFrg!=1)return;
-        weatherView = View.inflate(mActivity, R.layout.layout_weather, null);
-        mTitleHeader = View.inflate(mActivity, R.layout.layout_head_text, null);
-        mSlideHeader = View.inflate(mActivity, R.layout.layout_autoloop_viewpage, null);
-        sliderLayout = (SliderLayout) mSlideHeader.findViewById(R.id.slider);
-        pagerIndicator = (PagerIndicator) mSlideHeader.findViewById(R.id.custom_indicator);
-        tv_maxW = (AutofitTextView) weatherView.findViewById(R.id.tv_maxW);
-        tv_dayTxt = (TextView) weatherView.findViewById(R.id.tv_dayTxt);
-        tv_carNoLimit = (TextView) weatherView.findViewById(R.id.tv_carNoLimit);
-        tv_pmten = (TextView) weatherView.findViewById(R.id.tv_pmten);
-        tv_times = (TextView) weatherView.findViewById(R.id.tv_times);
-        tv_no_date = (TextView) weatherView.findViewById(R.id.tv_no_date);
-        tv_week = (TextView) weatherView.findViewById(R.id.tv_week);
-        img_weather = (ImageView) weatherView.findViewById(R.id.img_weather);
-    }
+//    private void initHeadView() {
+////        if (!isXunFrg) return;
+//        if (isXunFrg!=1)return;
+//        weatherView = View.inflate(mActivity, R.layout.layout_weather, null);
+//        mTitleHeader = View.inflate(mActivity, R.layout.layout_head_text, null);
+//        mSlideHeader = View.inflate(mActivity, R.layout.layout_autoloop_viewpage, null);
+//        sliderLayout = (SliderLayout) mSlideHeader.findViewById(R.id.slider);
+//        pagerIndicator = (PagerIndicator) mSlideHeader.findViewById(R.id.custom_indicator);
+//        tv_maxW = (AutofitTextView) weatherView.findViewById(R.id.tv_maxW);
+//        tv_dayTxt = (TextView) weatherView.findViewById(R.id.tv_dayTxt);
+//        tv_carNoLimit = (TextView) weatherView.findViewById(R.id.tv_carNoLimit);
+//        tv_pmten = (TextView) weatherView.findViewById(R.id.tv_pmten);
+//        tv_times = (TextView) weatherView.findViewById(R.id.tv_times);
+//        tv_no_date = (TextView) weatherView.findViewById(R.id.tv_no_date);
+//        tv_week = (TextView) weatherView.findViewById(R.id.tv_week);
+//        img_weather = (ImageView) weatherView.findViewById(R.id.img_weather);
+//    }
 
     @Override
     public int getLayoutId() {
@@ -252,17 +265,19 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     }
 
     private void initPresenter(String code, String chamCode) {
-        if (isXunFrg==1) {
-            mNewsPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",-1);
-            mNewsPresenter.attachView(this);
-            mPresenter = mNewsPresenter;
-            mPresenter.onCreate();
-        } else  if (isXunFrg==2){
-            mBusinessPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",-1);
-            mBusinessPresenter.attachView(this);
-            mPresenter = mBusinessPresenter;
-            mPresenter.onCreate();
-        }else  if (isXunFrg==4){
+//        if (isXunFrg==1) {
+//            mNewsPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",-1);
+//            mNewsPresenter.attachView(this);
+//            mPresenter = mNewsPresenter;
+//            mPresenter.onCreate();
+//        } else  if (isXunFrg==2){
+//            mBusinessPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",-1);
+//            mBusinessPresenter.attachView(this);
+//            mPresenter = mBusinessPresenter;
+//            mPresenter.onCreate();
+//        }else
+
+        if (isXunFrg==4){
             mAreaSeaPresenterImpl.setNewsTypeAndId(pageNum, Constants.numPerPage, "", code, chamCode);
             mAreaSeaPresenterImpl.attachView(this);
             mPresenter = mAreaSeaPresenterImpl;
@@ -279,19 +294,19 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
                 LinearLayoutManager.VERTICAL, false));
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
 
-        likeBeanList = new ArrayList<>();
-        mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
-        mNewsListAdapter.setOnLoadMoreListener(this);
-        if (isXunFrg==1) {
-            mNewsListAdapter.addHeaderView(weatherView);
-            mNewsListAdapter.addHeaderView(mSlideHeader);
-            mNewsListAdapter.addHeaderView(mTitleHeader);
-        }
-        mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
-        mNewsListAdapter.openLoadMore(Constants.numPerPage, true);
-        mNewsRV.setAdapter(mNewsListAdapter);
+//        likeBeanList = new ArrayList<>();
+//        mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
+//        mNewsListAdapter.setOnLoadMoreListener(this);
+//        if (isXunFrg==1) {
+//            mNewsListAdapter.addHeaderView(weatherView);
+//            mNewsListAdapter.addHeaderView(mSlideHeader);
+//            mNewsListAdapter.addHeaderView(mTitleHeader);
+//        }
+//        mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
+//        mNewsListAdapter.openLoadMore(Constants.numPerPage, true);
+//        mNewsRV.setAdapter(mNewsListAdapter);
 
-
+        areaSeaBeanList = new ArrayList<>();
         //区域适配器
         if (isXunFrg==4){
             mAreaAdapter = new AreaAdapter(R.layout.item_news, areaSeaBeanList);
@@ -307,147 +322,147 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
 
     }
 
-    /**
-     * 初始化导航图
-     */
-    private void initSlider() {
-        if (isXunFrg!=1 || sliderLayout == null || pagerIndicator == null) return;
-        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
-        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        sliderLayout.setDuration(4000);
-        sliderLayout.setCustomIndicator(pagerIndicator);
-    }
+//    /**
+//     * 初始化导航图
+//     */
+//    private void initSlider() {
+//        if (isXunFrg!=1 || sliderLayout == null || pagerIndicator == null) return;
+//        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
+//        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+//        sliderLayout.setDuration(4000);
+//        sliderLayout.setCustomIndicator(pagerIndicator);
+//    }
 
-    /**
-     * 初始化轮播图
-     *
-     * @param mList
-     */
-    private void initSlider(List<BannerBean> mList) {
-        if (isXunFrg!=1) return;
-        if (mList!=null&&mList.size()>0){
-            mSlideHeader.setVisibility(VISIBLE);
-        }else {
-            mSlideHeader.setVisibility(View.GONE);
-            return;
-        }
+//    /**
+//     * 初始化轮播图
+//     *
+//     * @param mList
+//     */
+//    private void initSlider(List<BannerBean> mList) {
+//        if (isXunFrg!=1) return;
+//        if (mList!=null&&mList.size()>0){
+//            mSlideHeader.setVisibility(VISIBLE);
+//        }else {
+//            mSlideHeader.setVisibility(View.GONE);
+//            return;
+//        }
+//
+//        for (BannerBean pageIconBean : mList) {
+////            AutoSliderView textSliderView = new AutoSliderView(this.getActivity(), pageIconBean);
+//            TextSliderView textSliderView = new TextSliderView(this.getActivity());
+//            // initialize a SliderLayout
+//            textSliderView
+//                    .description(pageIconBean.getTitle())
+//                    .image(ApiConstants.NETEAST_HOST + pageIconBean.getFmImg())
+//                    .setScaleType(BaseSliderView.ScaleType.Fit)
+//                    .setOnSliderClickListener(this);
+//
+//            //add your extra information
+//            Bundle bundle = new Bundle();
+//            bundle.putString("id", pageIconBean.getId() + "");
+//            textSliderView.bundle(bundle);
+//            sliderLayout.addSlider(textSliderView);
+//        }
+//    }
 
-        for (BannerBean pageIconBean : mList) {
-//            AutoSliderView textSliderView = new AutoSliderView(this.getActivity(), pageIconBean);
-            TextSliderView textSliderView = new TextSliderView(this.getActivity());
-            // initialize a SliderLayout
-            textSliderView
-                    .description(pageIconBean.getTitle())
-                    .image(ApiConstants.NETEAST_HOST + pageIconBean.getFmImg())
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
+//    private void initWeatherData(WeathersBean weathersBean) {
+//        weatherBean = weathersBean.getWeather();
+//        tv_maxW.setText(weatherBean.getMaxW());
+//        tv_dayTxt.setText(weatherBean.getDayTxt() + weatherBean.getMinW() + "/" + weatherBean.getMaxW() + "℃");
+//
+//        String singleStr = weathersBean.getType() ? judgeSingle() ? "单号" : "双号" : weathersBean.getCarNoLimit();
+//
+//        tv_carNoLimit.setText(singleStr);
+//        tv_pmten.setText(weatherBean.getPmten());
+//        tv_times.setText(weatherBean.getTimes());
+//        tv_no_date.setText(DateUtil.getLunarMonth() + DateUtil.getLunarDay());
+//        tv_week.setText(DateUtil.getWeek());
+//        Glide.with(App.getAppContext()).load(String.format(ApiConstants.NETEAST_IMG_HOST, weatherBean.getCode())).asBitmap() // gif格式有时会导致整体图片不显示，貌似有冲突
+//                .format(DecodeFormat.PREFER_ARGB_8888)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .placeholder(R.color.image_place_holder)
+//                .error(R.drawable.ic_load_fail)
+//                .into(img_weather);
+//    }
 
-            //add your extra information
-            Bundle bundle = new Bundle();
-            bundle.putString("id", pageIconBean.getId() + "");
-            textSliderView.bundle(bundle);
-            sliderLayout.addSlider(textSliderView);
-        }
-    }
+//    private boolean judgeSingle() {
+//        SimpleDateFormat sDateFormat = new SimpleDateFormat("dd");
+//        String date = sDateFormat.format(new java.util.Date());
+//        KLog.a("date--->" + date);
+//        return (Integer.parseInt(date) % 2) == 1;
+//    }
 
-    private void initWeatherData(WeathersBean weathersBean) {
-        weatherBean = weathersBean.getWeather();
-        tv_maxW.setText(weatherBean.getMaxW());
-        tv_dayTxt.setText(weatherBean.getDayTxt() + weatherBean.getMinW() + "/" + weatherBean.getMaxW() + "℃");
+//    private void loadBannerData() {
+//        if (isXunFrg!=1) return;
+//        RetrofitManager.getInstance(1).getBannersObservable()
+//                .compose(TransformUtils.<RspBannerBean>defaultSchedulers())
+//                .subscribe(new Subscriber<RspBannerBean>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(RspBannerBean rspBannerBean) {
+//                        initSlider(rspBannerBean.getBody().getNewsBannerList());
+//                    }
+//                });
+//    }
 
-        String singleStr = weathersBean.getType() ? judgeSingle() ? "单号" : "双号" : weathersBean.getCarNoLimit();
-
-        tv_carNoLimit.setText(singleStr);
-        tv_pmten.setText(weatherBean.getPmten());
-        tv_times.setText(weatherBean.getTimes());
-        tv_no_date.setText(DateUtil.getLunarMonth() + DateUtil.getLunarDay());
-        tv_week.setText(DateUtil.getWeek());
-        Glide.with(App.getAppContext()).load(String.format(ApiConstants.NETEAST_IMG_HOST, weatherBean.getCode())).asBitmap() // gif格式有时会导致整体图片不显示，貌似有冲突
-                .format(DecodeFormat.PREFER_ARGB_8888)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.color.image_place_holder)
-                .error(R.drawable.ic_load_fail)
-                .into(img_weather);
-    }
-
-    private boolean judgeSingle() {
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("dd");
-        String date = sDateFormat.format(new java.util.Date());
-        KLog.a("date--->" + date);
-        return (Integer.parseInt(date) % 2) == 1;
-    }
-
-    private void loadBannerData() {
-        if (isXunFrg!=1) return;
-        RetrofitManager.getInstance(1).getBannersObservable()
-                .compose(TransformUtils.<RspBannerBean>defaultSchedulers())
-                .subscribe(new Subscriber<RspBannerBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(RspBannerBean rspBannerBean) {
-                        initSlider(rspBannerBean.getBody().getNewsBannerList());
-                    }
-                });
-    }
-
-    private void loadWeather() {
-        if (isXunFrg!=1) return;
-        RetrofitManager.getInstance(1).getWeatherObservable()
-                .compose(TransformUtils.<RspWeatherBean>defaultSchedulers())
-                .subscribe(new Subscriber<RspWeatherBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(RspWeatherBean rspBannerBean) {
-                        if (rspBannerBean.getHead().getRspCode().equals("0"))
-                            initWeatherData(rspBannerBean.getBody());
-                    }
-                });
-    }
+//    private void loadWeather() {
+//        if (isXunFrg!=1) return;
+//        RetrofitManager.getInstance(1).getWeatherObservable()
+//                .compose(TransformUtils.<RspWeatherBean>defaultSchedulers())
+//                .subscribe(new Subscriber<RspWeatherBean>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(RspWeatherBean rspBannerBean) {
+//                        if (rspBannerBean.getHead().getRspCode().equals("0"))
+//                            initWeatherData(rspBannerBean.getBody());
+//                    }
+//                });
+//    }
 
 
-    @Override
-    public void setNewsList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
-//        checkIsEmpty(newsBean.getLikeList());
-        switch (loadType) {
-            case LoadNewsType.TYPE_REFRESH_SUCCESS:
-                mSwipeRefreshLayout.setRefreshing(false);
-                mNewsListAdapter.setNewData(newsBean);
-                checkIsEmpty(newsBean);
-                break;
-            case LoadNewsType.TYPE_REFRESH_ERROR:
-                mSwipeRefreshLayout.setRefreshing(false);
-                checkIsEmpty(newsBean);
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (newsBean == null || newsBean.size() == 0) {
-                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
-                } else {
-                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
-                }
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
-
-                break;
-        }
-    }
+//    @Override
+//    public void setNewsList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
+////        checkIsEmpty(newsBean.getLikeList());
+//        switch (loadType) {
+//            case LoadNewsType.TYPE_REFRESH_SUCCESS:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                mNewsListAdapter.setNewData(newsBean);
+//                checkIsEmpty(newsBean);
+//                break;
+//            case LoadNewsType.TYPE_REFRESH_ERROR:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                checkIsEmpty(newsBean);
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
+//                if (newsBean == null || newsBean.size() == 0) {
+//                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+//                } else {
+//                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
+//                }
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
+//
+//                break;
+//        }
+//    }
 
     @Override
     public void showProgress() {
@@ -470,11 +485,13 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
 
     @Override
     public void onRefresh() {
-        if (isXunFrg==1) {
-            mNewsPresenter.refreshData();
-        } else  if (isXunFrg==2){
-            mBusinessPresenter.refreshData();
-        }else if (isXunFrg==4){
+//        if (isXunFrg==1) {
+//            mNewsPresenter.refreshData();
+//        } else  if (isXunFrg==2){
+//            mBusinessPresenter.refreshData();
+//        }else
+
+        if (isXunFrg==4){
             mAreaSeaPresenterImpl.refreshData();
         }
 
@@ -484,11 +501,14 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (isXunFrg==1) {
-            mNewsPresenter.onDestory();
-        } else   if (isXunFrg==2){
-            mBusinessPresenter.onDestory();
-        } else   if (isXunFrg==4){
+//        if (isXunFrg==1) {
+//            mNewsPresenter.onDestory();
+//        } else   if (isXunFrg==2){
+//            mBusinessPresenter.onDestory();
+//        } else
+
+        if (isXunFrg==4){
+            EventBus.getDefault().unregister(this);
             mAreaSeaPresenterImpl.onDestory();
         }
 
@@ -496,25 +516,27 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
 
     @Override
     public void onLoadMoreRequested() {
-        if (isXunFrg==1) {
-            mNewsPresenter.loadMore();
-        } else  if (isXunFrg==2) {
-            mBusinessPresenter.loadMore();
-        } else  if (isXunFrg==4) {
+//        if (isXunFrg==1) {
+//            mNewsPresenter.loadMore();
+//        } else  if (isXunFrg==2) {
+//            mBusinessPresenter.loadMore();
+//        } else
+
+        if (isXunFrg==4) {
             mAreaSeaPresenterImpl.loadMore();
         }
 
     }
 
-    private void checkIsEmpty(List<BaseNewBean> newsSummary) {
-        if (newsSummary != null && mNewsListAdapter.getData().size()>0 ) {
-            mNewsRV.setVisibility(View.VISIBLE);
-            mEmptyView.setVisibility(View.GONE);
-        } else {
-            mNewsRV.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
-        }
-    }
+//    private void checkIsEmpty(List<BaseNewBean> newsSummary) {
+//        if (newsSummary != null && mNewsListAdapter.getData().size()>0 ) {
+//            mNewsRV.setVisibility(View.VISIBLE);
+//            mEmptyView.setVisibility(View.GONE);
+//        } else {
+//            mNewsRV.setVisibility(View.GONE);
+//            mEmptyView.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     private void checkEmpty(List<AreaSeaBean> newsSummary) {
         if (newsSummary != null && mAreaAdapter.getData().size()>0) {
@@ -541,11 +563,13 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
     @NonNull
     private Intent setIntent(int position) {
         Intent intent = new Intent(mActivity, NewDetailActivity.class);
-        if (isXunFrg==1||isXunFrg==2){
-            List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
-            intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
-            intent.putExtra(Constants.NEWS_TYPE, isXunFrg);
-        }else if (isXunFrg==4){
+//        if (isXunFrg==1||isXunFrg==2){
+//            List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
+//            intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
+//            intent.putExtra(Constants.NEWS_TYPE, isXunFrg);
+//        }else
+
+        if (isXunFrg==4){
             List<AreaSeaBean> newsSummaryList = mAreaAdapter.getData();
             intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
             String type = newsSummaryList.get(position).getType();
@@ -575,43 +599,43 @@ public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLa
         }
     }
 
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-        Bundle bundle = slider.getBundle();
-        if (bundle == null) {
-            return;
-        }
-        Intent intent = new Intent(mActivity, NewDetailActivity.class);
-        intent.putExtra(Constants.NEWS_POST_ID, bundle.getString("id"));
-        intent.putExtra(Constants.NEWS_TYPE, "1");
-        startActivity(sliderLayout, intent);
+//    @Override
+//    public void onSliderClick(BaseSliderView slider) {
+//        Bundle bundle = slider.getBundle();
+//        if (bundle == null) {
+//            return;
+//        }
+//        Intent intent = new Intent(mActivity, NewDetailActivity.class);
+//        intent.putExtra(Constants.NEWS_POST_ID, bundle.getString("id"));
+//        intent.putExtra(Constants.NEWS_TYPE, "1");
+//        startActivity(sliderLayout, intent);
+//
+//    }
 
-    }
-
-    @Override
-    public void setBusinessList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
-        switch (loadType) {
-            case LoadNewsType.TYPE_REFRESH_SUCCESS:
-                mSwipeRefreshLayout.setRefreshing(false);
-                mNewsListAdapter.setNewData(newsBean);
-                checkIsEmpty(newsBean);
-                break;
-            case LoadNewsType.TYPE_REFRESH_ERROR:
-                mSwipeRefreshLayout.setRefreshing(false);
-                checkIsEmpty(newsBean);
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (newsBean == null || newsBean.size() == 0) {
-                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
-                } else {
-                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
-                }
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
-
-                break;
-        }
-    }
+//    @Override
+//    public void setBusinessList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
+//        switch (loadType) {
+//            case LoadNewsType.TYPE_REFRESH_SUCCESS:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                mNewsListAdapter.setNewData(newsBean);
+//                checkIsEmpty(newsBean);
+//                break;
+//            case LoadNewsType.TYPE_REFRESH_ERROR:
+//                mSwipeRefreshLayout.setRefreshing(false);
+//                checkIsEmpty(newsBean);
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
+//                if (newsBean == null || newsBean.size() == 0) {
+//                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+//                } else {
+//                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
+//                }
+//                break;
+//            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
+//
+//                break;
+//        }
+//    }
 
     @Override
     public void setAreaSeaBeanList(List<AreaSeaBean> areaSeaBeanList, @LoadNewsType.checker int loadType) {

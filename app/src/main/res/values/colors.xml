@@ -105,6 +105,7 @@
 	<color name="item_alpha_back">#43000000</color>
 
 	<color name="font_black_content">#222222</color>
+	<color name="color_fffffff">#ffffff</color>
 
 
 </resources>

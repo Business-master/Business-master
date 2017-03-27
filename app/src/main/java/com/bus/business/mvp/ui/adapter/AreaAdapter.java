@@ -11,19 +11,17 @@ import com.bus.business.App;
 import com.bus.business.R;
 import com.bus.business.common.ApiConstants;
 import com.bus.business.mvp.entity.AreaSeaBean;
-import com.bus.business.mvp.entity.response.base.BaseNewBean;
 import com.bus.business.mvp.event.AreaFirstEvent;
 import com.bus.business.utils.DateUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 /**
- * Created by xuchunhui on 16/8/12.
+ *首页--基层组织适配器
  */
 public class AreaAdapter extends BaseQuickAdapter<AreaSeaBean> {
 
@@ -33,9 +31,10 @@ public class AreaAdapter extends BaseQuickAdapter<AreaSeaBean> {
 
     @Override
     protected void convert(BaseViewHolder baseViewHolder, AreaSeaBean likeModel) {
-        if (baseViewHolder.getAdapterPosition()==1){
-            EventBus.getDefault().post(new AreaFirstEvent(likeModel));
-        }
+        //将 地区传送给 基层组织
+//        if (baseViewHolder.getAdapterPosition()==1){
+//            EventBus.getDefault().post(new AreaFirstEvent(likeModel));
+//        }
 
 
         baseViewHolder.setText(R.id.item_title, likeModel.getTitle());

@@ -31,7 +31,7 @@ import com.bus.business.mvp.entity.response.base.BaseRspObj;
 import com.bus.business.mvp.event.JoinToMeetingEvent;
 import com.bus.business.mvp.ui.activities.ApplyActivity;
 import com.bus.business.repository.network.RetrofitManager;
-import com.bus.business.utils.ApplyUtils;
+
 import com.bus.business.utils.DateUtil;
 import com.bus.business.utils.DensityUtil;
 import com.bus.business.utils.TransformUtils;
@@ -245,6 +245,8 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
 
     private void init0(View view0, MeetingBean likeBean) {
         TextView state = (TextView) view0.findViewById(R.id.tv_name);
+        TextView date = (TextView) view0.findViewById(R.id.tv_date);
+        TextView address = (TextView) view0.findViewById(R.id.tv_address);
         TextView leave = (TextView) view0.findViewById(R.id.leave);
         TextView apply = (TextView) view0.findViewById(R.id.apply);
         if (likeBean.getHasReaded()==1){

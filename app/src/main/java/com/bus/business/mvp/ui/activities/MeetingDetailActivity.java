@@ -60,7 +60,7 @@ import com.bus.business.mvp.ui.adapter.DownAdapter;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.view.CustomGridView;
 import com.bus.business.repository.network.RetrofitManager;
-import com.bus.business.utils.ApplyUtils;
+
 import com.bus.business.utils.DateUtil;
 import com.bus.business.utils.SystemUtils;
 import com.bus.business.utils.TransformUtils;

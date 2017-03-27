@@ -8,7 +8,7 @@ import com.bus.business.mvp.entity.AreaBean;
 
 public class AreaCodeEvent {
     AreaBean areaBean;
-    boolean Area;
+    boolean Area;//true 代表选择的是工商联  false商协会
 
     public boolean getArea() {
         return Area;
