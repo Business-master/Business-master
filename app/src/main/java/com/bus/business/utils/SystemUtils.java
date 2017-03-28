@@ -110,7 +110,7 @@ public class SystemUtils {
 
         Address address=  getJWD(activity,name);
         if (address==null){
-            UT.show("查询出错！");
+            UT.show("查询地址出错！");
             return;
         }
 
@@ -136,14 +136,20 @@ public class SystemUtils {
         Geocoder  geo = new Geocoder(activity, Locale.CHINA);
         List<Address> addressList=null;
         try {
-            addressList = geo.getFromLocationName(name,1);
+            addressList = geo.getFromLocationName(name,5);
             if (addressList==null||addressList.size()==0){
                 return null;
             }else {
-                Address  address = addressList.get(0);
-                String str = "纬度："+ address.getLatitude()+"经度："+address.getLongitude();
-                KLog.a(str);
-                return    address;
+                for (int i = 0; i <addressList.size() ; i++) {
+                    Address  address = addressList.get(i);
+                    if (address!=null){
+                        String str = "纬度："+ address.getLatitude()+"经度："+address.getLongitude();
+                        KLog.a(str);
+                        return    address;
+                    }
+
+                }
+
             }
 
 

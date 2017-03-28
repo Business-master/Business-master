@@ -186,7 +186,7 @@ public  class ApplyUtils {
                     createDialog(6,"请输入取消报名的原因");
                     break;
                 case R.id.btn_apply:
-                    if (meetingBean.getJoinType()!=0){
+                    if (Integer.valueOf(meetingBean.getJoinType())!=0){
                         return;
                     }
                     Intent intent = new Intent(mContext,ApplyActivity.class);

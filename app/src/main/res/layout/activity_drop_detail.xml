@@ -229,6 +229,7 @@
     </LinearLayout>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/btnSure"
         android:layout_width="fill_parent"
         android:layout_height="40.0dip"

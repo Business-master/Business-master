@@ -49,11 +49,11 @@ public class ExpertFragment extends BaseFragment{
 
     private void ininData() {
         titles.add("银行类");
-        titles.add("非银行类");
+//        titles.add("非银行类");
 //        titles.add("优化专家");
 
         list.add(DropDownFragment.getInstance(TYPE_BANK));
-        list.add(DropDownFragment.getInstance(TYPE_NO_BANK));
+//        list.add(DropDownFragment.getInstance(TYPE_NO_BANK));
 //        list.add(new SubmitLoanFragment());
 
     }

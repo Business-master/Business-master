@@ -185,6 +185,12 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 //        mProgressBar.setVisibility(View.GONE);
         setCustomTitle("会务详情");
         showOrGoneSearchRl(View.GONE);
+
+        if (!"0001".equals(meetingBean.getModiType())){
+            map_loc.setVisibility(View.INVISIBLE);
+        }else {
+            map_loc.setVisibility(View.VISIBLE);
+        }
         initBottom_Map(meetingBean);
 
 
@@ -266,7 +272,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
 
     private void initBottom_Map(MeetingBean meet) {
-        if (meet.getJoinType()==2){
+        if (Integer.valueOf(meet.getJoinType())==2){
             if (!TextUtils.isEmpty(meet.getLatitude()) || !TextUtils.isEmpty(meet.getLongitude())) {
               double  latitude = Double.valueOf(meet.getLatitude());
                 double longitude = Double.valueOf(meet.getLongitude());
@@ -281,10 +287,14 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         }
         switch (Integer.valueOf(meet.getStatus())){
             case 0:
-                initJoinType(meet.getJoinType(),0);
+                if ("0001".equals(meet.getModiType())){
+                    initJoinType(Integer.valueOf(meet.getJoinType()),0);
+                }else {
+                    bottom_meeting_detail.setVisibility(View.GONE);
+                }
                 break;
             case 1:
-                initJoinType(meet.getJoinType(),1);
+                initJoinType(Integer.valueOf(meet.getJoinType()),1);
                 break;
             case 2:
                 bottom_meeting_detail.setVisibility(View.GONE);
@@ -307,7 +317,11 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         }
         switch (Integer.valueOf(meet.getStatus())){
             case 0:
-                initJoinType(Integer.valueOf(meet.getJoinType()),0);
+                if ("0001".equals(meet.getModiType())){
+                    initJoinType(Integer.valueOf(meet.getJoinType()),0);
+                }else {
+                    bottom_meeting_detail.setVisibility(View.GONE);
+                }
                 break;
             case 1:
                 initJoinType(Integer.valueOf(meet.getJoinType()),1);
@@ -536,7 +550,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
     @Subscribe
     public void onEventMainThread(MeetingDetailEvent event){
         /**
-         *1 报名 2请假 3取消报名
+         *1 报名 2请假 3签到
          */
           switch (event.getPos()){
               case 1:

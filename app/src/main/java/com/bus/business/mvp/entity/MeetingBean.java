@@ -16,6 +16,33 @@ import java.io.Serializable;
 public class MeetingBean implements Serializable{
     public static final String MEETINGBEAN = "meeting_bean";
     public static final String MEETINGPOS = "meeting_pos";
+
+
+    private long utime;
+    private int foodId;
+    private String stay;
+    private String status;
+    private String areaCode;
+    private int hasReaded;
+    private String userOrganization;
+    private String qrImg;
+    private Object pid;
+    private long checkTime;
+    private String meetingContent;
+    private long ctime;
+    private String modiType;
+    private int id;
+    private String meetingLoc;
+    private String isLate;
+    private int duration;
+    private String meetingName;
+    private long meetingTime;
+    private String longitude;
+    private String joinType;
+    private String latitude;
+    private String checkType;
+    private Object roomTypeId;
+
     /**
      * utime : 1488254887000
      * foodId : null
@@ -39,30 +66,19 @@ public class MeetingBean implements Serializable{
      * latitude : 39.993432
      * checkType : 0  // 签到状态 0未签到 1已签到
      * roomTypeId : null
+     * pid:12
+     * modi_type: "0001",修改类型：0001:没有修改，0002修改时间，0003修改地点，0004修改时间／地点，0005结束
      */
 
-    private long utime;
-    private Object foodId;
-    private String stay;
-    private String status;
-    private int hasReaded;
-    private String userOrganization;
-    private String qrImg;
-    private long checkTime;
-    private String meetingContent;
-    private long ctime;
-    private int areaId;
-    private int id;
-    private String meetingLoc;
-    private String isLate;
-    private int duration;
-    private String meetingName;
-    private long meetingTime;
-    private String longitude;
-    private int joinType;
-    private String latitude;
-    private String checkType;
-    private Object roomTypeId;
+    public void intentToDetail(Context context, int pos){
+        Intent intent = new Intent(context,MeetingDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(MEETINGBEAN,this);
+        bundle.putInt(MEETINGPOS,pos);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
 
     public long getUtime() {
         return utime;
@@ -72,11 +88,11 @@ public class MeetingBean implements Serializable{
         this.utime = utime;
     }
 
-    public String getMeetingLoc() {
-        return meetingLoc;
+    public int getFoodId() {
+        return foodId;
     }
 
-    public void setFoodId(Object foodId) {
+    public void setFoodId(int foodId) {
         this.foodId = foodId;
     }
 
@@ -94,6 +110,14 @@ public class MeetingBean implements Serializable{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
     }
 
     public int getHasReaded() {
@@ -120,6 +144,14 @@ public class MeetingBean implements Serializable{
         this.qrImg = qrImg;
     }
 
+    public Object getPid() {
+        return pid;
+    }
+
+    public void setPid(Object pid) {
+        this.pid = pid;
+    }
+
     public long getCheckTime() {
         return checkTime;
     }
@@ -144,14 +176,13 @@ public class MeetingBean implements Serializable{
         this.ctime = ctime;
     }
 
-    public int getAreaId() {
-        return areaId;
+    public String getModiType() {
+        return modiType;
     }
 
-    public void setAreaId(int areaId) {
-        this.areaId = areaId;
+    public void setModiType(String modiType) {
+        this.modiType = modiType;
     }
-
 
     public int getId() {
         return id;
@@ -161,7 +192,9 @@ public class MeetingBean implements Serializable{
         this.id = id;
     }
 
-
+    public String getMeetingLoc() {
+        return meetingLoc;
+    }
 
     public void setMeetingLoc(String meetingLoc) {
         this.meetingLoc = meetingLoc;
@@ -207,11 +240,11 @@ public class MeetingBean implements Serializable{
         this.longitude = longitude;
     }
 
-    public int getJoinType() {
+    public String getJoinType() {
         return joinType;
     }
 
-    public void setJoinType(int joinType) {
+    public void setJoinType(String joinType) {
         this.joinType = joinType;
     }
 
@@ -239,16 +272,33 @@ public class MeetingBean implements Serializable{
         this.roomTypeId = roomTypeId;
     }
 
-
-
-    public void intentToDetail(Context context, int pos){
-        Intent intent = new Intent(context,MeetingDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(MEETINGBEAN,this);
-        bundle.putInt(MEETINGPOS,pos);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
+    @Override
+    public String toString() {
+        return "MeetingBean{" +
+                "utime=" + utime +
+                ", foodId=" + foodId +
+                ", stay='" + stay + '\'' +
+                ", status='" + status + '\'' +
+                ", areaCode='" + areaCode + '\'' +
+                ", hasReaded=" + hasReaded +
+                ", userOrganization='" + userOrganization + '\'' +
+                ", qrImg='" + qrImg + '\'' +
+                ", pid=" + pid +
+                ", checkTime=" + checkTime +
+                ", meetingContent='" + meetingContent + '\'' +
+                ", ctime=" + ctime +
+                ", modiType='" + modiType + '\'' +
+                ", id=" + id +
+                ", meetingLoc='" + meetingLoc + '\'' +
+                ", isLate='" + isLate + '\'' +
+                ", duration=" + duration +
+                ", meetingName='" + meetingName + '\'' +
+                ", meetingTime=" + meetingTime +
+                ", longitude='" + longitude + '\'' +
+                ", joinType='" + joinType + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", checkType='" + checkType + '\'' +
+                ", roomTypeId=" + roomTypeId +
+                '}';
     }
-
-
 }

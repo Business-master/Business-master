@@ -27,6 +27,7 @@ import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.view.DialogUtils;
 import com.bus.business.mvp.view.WheelView;
 import com.bus.business.repository.network.RetrofitManager;
+import com.bus.business.utils.PhoneUtils;
 import com.bus.business.utils.TransformUtils;
 import com.bus.business.utils.UT;
 import com.socks.library.KLog;
@@ -92,7 +93,7 @@ public class AddAssisActivity extends BaseActivity {
     List<OrganBean> origanList=new ArrayList<>();
     List<NationBean> nationList=new ArrayList<>();
 
-    boolean right=true;
+
 
     private AssisBean assisBean;
     private int index=1;
@@ -363,8 +364,8 @@ public class AddAssisActivity extends BaseActivity {
 
 
     private boolean judgement() {
-
-         nameStr = name.getText().toString().trim();
+        boolean right=true;
+        nameStr = name.getText().toString().trim();
          phoneStr = phone.getText().toString().trim();
          passStr = pass.getText().toString().trim();
          firmStr = firm.getText().toString().trim();
@@ -420,27 +421,32 @@ public class AddAssisActivity extends BaseActivity {
         }
 
           if (index==2){
-              if (!TextUtils.isEmpty(passStr)||!TextUtils.isEmpty(firmStr)){
-                  if (!(passStr.length()>5 &passStr.length()<21&passStr.equals(firmStr))){
-                      UT.show("请输入正确的信息");
-                      right=false;
-                  }
-              }
-
               if (!TextUtils.isEmpty(nameStr)){
                   if (!(nameStr.length()>1&nameStr.length()<9)){
-                      UT.show("请输入正确的信息");
+                      UT.show("请输入正确的用户名");
                       right=false;
                   }
               }
 
               if (!TextUtils.isEmpty(phoneStr)){
-                  if (phoneStr.length()==11&!passStr.matches("[0-9]+")){
+                  if (phoneStr.length()==11& PhoneUtils.isPhoneNum(phoneStr)){
                       if(phoneStr.equals(assisBean.getPhoneNo())){
                           phoneStr="号码相同";
                       }
                   }else {
-                      UT.show("请输入正确的信息");
+                      UT.show("请输入正确的手机号");
+                      right=false;
+                  }
+              }
+
+              if (!TextUtils.isEmpty(passStr)||!TextUtils.isEmpty(firmStr)){
+                  if (!(passStr.length()>5 &passStr.length()<21)){
+                      UT.show("请输入正确的密码");
+                      right=false;
+                  }
+
+                  if (!(passStr.equals(firmStr))){
+                      UT.show("两次密码不一致");
                       right=false;
                   }
               }
@@ -459,15 +465,37 @@ public class AddAssisActivity extends BaseActivity {
                   right=false;
               }else {
 
-                  if (nameStr.length()>1&nameStr.length()<9
-                          &phoneStr.length()==11&!passStr.matches("[0-9]+")&
-                          passStr.length()>5 &passStr.length()<21
-                          &passStr.equals(firmStr)){
-                      right=true;
-                  } else {
-                      UT.show("请输入正确的信息");
+                  if (!(nameStr.length()>1&nameStr.length()<9)){
+                      UT.show("请输入正确的用户名");
                       right=false;
                   }
+
+
+                  if (!(phoneStr.length()==11&PhoneUtils.isPhoneNum(phoneStr))){
+                      UT.show("请输入正确的手机号");
+                      right=false;
+                  }
+
+                  if (!(passStr.length()>5 &passStr.length()<21)){
+                      UT.show("请输入正确的密码");
+                      right=false;
+                  }
+
+                  if (!passStr.equals(firmStr)){
+                      UT.show("两次密码不一致");
+                      right=false;
+                  }
+
+
+//                  if (nameStr.length()>1&nameStr.length()<9
+//                          &phoneStr.length()==11&!passStr.matches("[0-9]+")&
+//                          passStr.length()>5 &passStr.length()<21
+//                          &passStr.equals(firmStr)){
+//                      right=true;
+//                  } else {
+//                      UT.show("请输入正确的信息");
+//                      right=false;
+//                  }
               }
           }
        return  right;

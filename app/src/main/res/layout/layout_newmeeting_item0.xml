@@ -1,102 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--即将召开会议布局 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@color/color_f4f4f4">
 
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:padding="15dp"
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:drawableLeft="@drawable/blue_circle"
-            android:drawablePadding="10dp"
-            android:id="@+id/tv_name"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:lineSpacingExtra="6dp"
-            android:gravity="center"
-            android:text="会议名称"
-            android:textSize="@dimen/text_size_16"
-            android:textColor="@color/color_333333"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"/>
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:drawableLeft="@drawable/blue_circle"
+                android:drawablePadding="10dp"
+                android:id="@+id/tv_name"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:lineSpacingExtra="6dp"
+                android:gravity="center"
+                android:text="会议名称"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/color_333333"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
 
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_marginTop="12dp"
-            android:layout_alignLeft="@id/tv_name"
-            android:layout_below="@id/tv_name"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:gravity="center"
-            android:textColor="@color/color_999999"
-            android:textSize="@dimen/text_size_12"
-            android:text="会议地址"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"/>
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_marginTop="12dp"
+                android:layout_alignLeft="@id/tv_name"
+                android:layout_below="@id/tv_name"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:gravity="center"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_size_12"
+                android:text="会议地址"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
 
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_alignTop="@id/tv_address"
-            android:layout_toRightOf="@id/tv_address"
-            android:layout_toEndOf="@id/tv_address"
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_alignTop="@id/tv_address"
+                android:layout_toRightOf="@id/tv_address"
+                android:layout_toEndOf="@id/tv_address"
+                android:layout_marginLeft="15dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:gravity="center"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_size_12"
+                android:text="会议时间"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+        </RelativeLayout>
+        <View
             android:layout_marginLeft="15dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:gravity="center"
-            android:textColor="@color/color_999999"
-            android:textSize="@dimen/text_size_12"
-            android:text="会议时间"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"/>
-    </RelativeLayout>
-    <View
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@color/split_color"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-    <RelativeLayout
-        android:background="@color/white"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:clickable="true"
-            android:id="@+id/leave"
-            android:layout_alignParentRight="true"
-            android:text="@string/leave"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:textColor="@color/color_fdae73"
-            android:background="@drawable/leaven_rectange"
-            android:layout_width="90dp"
-            android:layout_height="25dp" />
-
-        <TextView
-            android:clickable="true"
-            android:id="@+id/apply"
-            android:layout_alignTop="@id/leave"
-            android:layout_toLeftOf="@id/leave"
             android:layout_marginRight="15dp"
-            android:text="@string/apply_ensure"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:textColor="@color/color_0dadd5"
-            android:background="@drawable/apply_rectange"
-            android:layout_width="90dp"
-            android:layout_height="25dp" />
-    </RelativeLayout>
-</LinearLayout>
+            android:background="@color/split_color"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <RelativeLayout
+            android:background="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:clickable="true"
+                android:id="@+id/leave"
+                android:layout_alignParentRight="true"
+                android:text="@string/leave"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/color_fdae73"
+                android:background="@drawable/leaven_rectange"
+                android:layout_width="90dp"
+                android:layout_height="25dp" />
+
+            <TextView
+                android:clickable="true"
+                android:id="@+id/apply"
+                android:layout_alignTop="@id/leave"
+                android:layout_toLeftOf="@id/leave"
+                android:layout_marginRight="15dp"
+                android:text="@string/apply_ensure"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/color_0dadd5"
+                android:background="@drawable/apply_rectange"
+                android:layout_width="90dp"
+                android:layout_height="25dp" />
+        </RelativeLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/chan_ic_meet"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_15"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/img_change"
+        android:adjustViewBounds="true"
+        android:layout_width="104dp"
+        android:layout_height="81dp" />
+
+</RelativeLayout>

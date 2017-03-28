@@ -54,6 +54,24 @@ public class MeetingDetailBean {
     private String latitude;
     private String checkType;
     private Object roomTypeId;
+    private int pid;
+    private String modiType;
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
+    public String getModiType() {
+        return modiType;
+    }
+
+    public void setModiType(String modiType) {
+        this.modiType = modiType;
+    }
 
     public long getUtime() {
         return utime;
@@ -229,5 +247,35 @@ public class MeetingDetailBean {
 
     public void setRoomTypeId(Object roomTypeId) {
         this.roomTypeId = roomTypeId;
+    }
+
+    @Override
+    public String toString() {
+        return "MeetingDetailBean{" +
+                "utime=" + utime +
+                ", foodId=" + foodId +
+                ", stay='" + stay + '\'' +
+                ", status='" + status + '\'' +
+                ", hasReaded=" + hasReaded +
+                ", userOrganization='" + userOrganization + '\'' +
+                ", qrImg='" + qrImg + '\'' +
+                ", checkTime=" + checkTime +
+                ", meetingContent='" + meetingContent + '\'' +
+                ", ctime=" + ctime +
+                ", areaId=" + areaId +
+                ", id=" + id +
+                ", meetingLoc='" + meetingLoc + '\'' +
+                ", isLate='" + isLate + '\'' +
+                ", duration=" + duration +
+                ", meetingName='" + meetingName + '\'' +
+                ", meetingTime=" + meetingTime +
+                ", longitude='" + longitude + '\'' +
+                ", joinType='" + joinType + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", checkType='" + checkType + '\'' +
+                ", roomTypeId=" + roomTypeId +
+                ", pid=" + pid +
+                ", modiType='" + modiType + '\'' +
+                '}';
     }
 }

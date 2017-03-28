@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.bus.business.R;
@@ -20,6 +21,7 @@ import com.bus.business.utils.UT;
 import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.jpush.android.api.JPushInterface;
@@ -49,14 +51,14 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "接受到推送下来的自定义消息");
-//            receiveMessage(context, bundle);
+
 
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "接受到推送下来的通知");
 
             receivingNotification(context, bundle);
-
+            receiveMessage(context, bundle);
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "用户点击打开了�?�知");
 
@@ -116,12 +118,12 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                                 .setView(view)
                                 .setCancelable(false)
                                 .create();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);
                         dialog.show();
                         textView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 dialog.dismiss();
-                                UT.show("关闭");
                             }
                         });
     }
@@ -130,8 +132,15 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         String title = bundle.getString(JPushInterface.EXTRA_TITLE);
         String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
         String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-        Log.d(TAG, "推送自定义信息 title : " + title+ "message : " + message+"extras : " + extras);
-        openHintDialog(context,message);
+        String msg="";
+        try {
+            JSONObject jsonObject = new JSONObject(extras);
+            msg = jsonObject.optString("msg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, "推送自定义信息 title : " + title+ "message : " + message+"extras : " + extras+"msg:"+msg);
+        openHintDialog(context,msg);
     }
 
     private void receivingNotification(Context context, Bundle bundle) {

@@ -25,6 +25,10 @@ import butterknife.OnClick;
 
 import static com.bus.business.mvp.entity.DropBean.DROP_BEAN;
 
+/**
+ * 贷款详情页面
+ */
+
 public class DropDetailActivity extends BaseActivity {
 
     private DropBean dropBean;

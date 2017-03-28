@@ -150,7 +150,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         String stateStr="";
         TextView state = (TextView) view2.findViewById(R.id.tv_state);
         int draw=R.drawable.join_banover;
-        switch (likeBean.getJoinType()){
+        switch (Integer.valueOf(likeBean.getJoinType())){
             case 0:
                 stateStr="未报名";
                 draw=R.drawable.absent_banover;
@@ -197,7 +197,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         String stateStr="";
         TextView state = (TextView) view1.findViewById(R.id.tv_state);
         int color=mContext.getResources().getColor(R.color.color_0dadd5);
-        switch (likeBean.getJoinType()){
+        switch (Integer.valueOf(likeBean.getJoinType())){
             case 0:
                 stateStr="未报名";
                 color=mContext.getResources().getColor(R.color.color_cccccc);
@@ -242,13 +242,20 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
 
 
 
-
+//即将召开
     private void init0(View view0, MeetingBean likeBean) {
         TextView state = (TextView) view0.findViewById(R.id.tv_name);
         TextView date = (TextView) view0.findViewById(R.id.tv_date);
         TextView address = (TextView) view0.findViewById(R.id.tv_address);
         TextView leave = (TextView) view0.findViewById(R.id.leave);
         TextView apply = (TextView) view0.findViewById(R.id.apply);
+        ImageView imageView = (ImageView) view0.findViewById(R.id.chan_ic_meet);
+
+        apply.setEnabled(true);
+        leave.setEnabled(true);
+
+
+        //会议是否读取
         if (likeBean.getHasReaded()==1){
             Drawable dra = mContext.getResources().getDrawable(R.drawable.blue_circle);
             dra.setBounds(0,0,dra.getMinimumWidth(),dra.getMinimumHeight());
@@ -258,49 +265,79 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
             state.setCompoundDrawables(null,null,null,null);
             state.setCompoundDrawablePadding(0);
         }
+
+
+
+
         apply.setVisibility(View.VISIBLE);
-        if (likeBean.getJoinType()==0){
-            apply.setText("报名");
-            apply.setTextColor(Color.parseColor("#0dadd5"));
-            apply.setBackgroundResource(R.drawable.apply_rectange);
-
-            leave.setText("请假");
-            leave.setTextColor(Color.parseColor("#fdae73"));
-            leave.setBackgroundResource(R.drawable.leaven_rectange);
-        }else if (likeBean.getJoinType()==5){
-            leave.setText("已请假");
-            leave.setTextColor(Color.parseColor("#fdae73"));
-            leave.setBackgroundResource(R.drawable.leaven_rectange);
-
-            apply.setVisibility(View.INVISIBLE);
-        }else if (likeBean.getJoinType()==2){
-            leave.setText("已签到");
-            leave.setTextColor(Color.parseColor("#4DC056"));
-            leave.setBackgroundResource(R.drawable.sign_rectange);
-
-            apply.setVisibility(View.INVISIBLE);
-        }else if (likeBean.getJoinType()==9){
-            leave.setText("助理签到");
-            leave.setTextColor(Color.parseColor("#4DC056"));
-            leave.setBackgroundResource(R.drawable.sign_rectange);
-
-            apply.setVisibility(View.INVISIBLE);
-        }else {
-            apply.setText("取消报名");
-            apply.setTextColor(Color.parseColor("#f11212"));
-            apply.setBackgroundResource(R.drawable.applyn_rectange);
-
-            leave.setText("请假");
-            leave.setTextColor(Color.parseColor("#cccccc"));
-            leave.setBackgroundResource(R.drawable.leave_rectange);
+        int  jointype=0;
+        if (!TextUtils.isEmpty(likeBean.getJoinType())){
+            jointype=Integer.valueOf(likeBean.getJoinType());
         }
 
+            if (jointype==0){
+                apply.setText("报名");
+                apply.setTextColor(Color.parseColor("#0dadd5"));
+                apply.setBackgroundResource(R.drawable.apply_rectange);
 
+                leave.setText("请假");
+                leave.setTextColor(Color.parseColor("#fdae73"));
+                leave.setBackgroundResource(R.drawable.leaven_rectange);
+            }else if ( jointype==5){
+                leave.setText("已请假");
+                leave.setTextColor(Color.parseColor("#fdae73"));
+                leave.setBackgroundResource(R.drawable.leaven_rectange);
+
+                apply.setVisibility(View.INVISIBLE);
+            }else if ( jointype==2){
+                leave.setText("已签到");
+                leave.setTextColor(Color.parseColor("#4DC056"));
+                leave.setBackgroundResource(R.drawable.sign_rectange);
+
+                apply.setVisibility(View.INVISIBLE);
+            }else if ( jointype==9){
+                leave.setText("助理签到");
+                leave.setTextColor(Color.parseColor("#4DC056"));
+                leave.setBackgroundResource(R.drawable.sign_rectange);
+
+                apply.setVisibility(View.INVISIBLE);
+            }else {
+                apply.setText("取消报名");
+                apply.setTextColor(Color.parseColor("#f11212"));
+                apply.setBackgroundResource(R.drawable.applyn_rectange);
+
+                leave.setText("请假");
+                leave.setTextColor(Color.parseColor("#cccccc"));
+                leave.setBackgroundResource(R.drawable.leave_rectange);
+            }
+
+
+
+
+        //会议是否变更
+        if (!"0001".equals(likeBean.getModiType())){
+            state.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+            date.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+            address.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+            leave.setTextColor(Color.parseColor("#cccccc"));
+            apply.setTextColor(Color.parseColor("#cccccc"));
+            leave.setBackgroundResource(R.drawable.leave_rectange);
+            apply.setBackgroundResource(R.drawable.leave_rectange);
+            apply.setEnabled(false);
+            leave.setEnabled(false);
+            imageView.setVisibility(View.VISIBLE);
+        }else {
+            imageView.setVisibility(View.GONE);
+            state.setTextColor(mContext.getResources().getColor(R.color.color_333333));
+            date.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+            address.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+        }
 
 
         apply.setOnClickListener(new MyClick(likeBean));
         leave.setOnClickListener(new MyClick(likeBean));
     }
+
 
     public   class  MyClick implements View.OnClickListener
     {
@@ -317,9 +354,9 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.apply:
-                    if (meetingBean.getJoinType()==5){
+                    if (Integer.valueOf(meetingBean.getJoinType())==5){
                         UT.show("已请假，不能报名！");
-                    }else if (meetingBean.getJoinType()==0){
+                    }else if (Integer.valueOf(meetingBean.getJoinType())==0){
                             Intent intent = new Intent(mContext,ApplyActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable(MeetingBean.MEETINGBEAN,meetingBean);
@@ -334,7 +371,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                     }
                     break;
                 case R.id.leave:
-                    if (meetingBean.getJoinType()==0){
+                    if (Integer.valueOf(meetingBean.getJoinType())==0){
                         createDialog(5,"请输入请假的原因");
                     }
                     break;
