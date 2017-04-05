@@ -54,7 +54,7 @@ public class MeetingBean implements Serializable{
      * checkTime : 1488254927000
      * meetingContent : 333
      * ctime : 1488254887000
-     * areaId : null
+     *  areaCode: "东城区",//会议发布区域
      * id : 78
      * meetingLoc : 33
      * isLate : 0

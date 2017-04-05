@@ -22,5 +22,9 @@ public class CustomListView extends ListView{
         super(context, attrs, defStyleAttr);
     }
 
-
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int expendSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2,MeasureSpec.AT_MOST);
+        super.onMeasure(widthMeasureSpec, expendSpec);
+    }
 }

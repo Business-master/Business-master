@@ -49,6 +49,7 @@ import com.bus.business.mvp.view.AreaSeaView;
 import com.bus.business.mvp.view.BusinessView;
 import com.bus.business.mvp.view.NewsView;
 import com.bus.business.repository.network.RetrofitManager;
+import com.bus.business.utils.CustomUtils;
 import com.bus.business.utils.DateUtil;
 import com.bus.business.utils.NetUtil;
 import com.bus.business.utils.TransformUtils;
@@ -657,7 +658,8 @@ import static android.view.View.VISIBLE;
                     mAreaAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, true);
                 }else {
                     mAreaAdapter.notifyDataChangedAfterLoadMore(areaSeaBeanList, false);
-                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+                    new CustomUtils(mActivity).showNoMore(mNewsRV);
+//                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
                 }
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:

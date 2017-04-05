@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +62,8 @@ public class MainActivity extends CheckPermissionsActivity {
     private int homeFragmentIndex = 0;
     @BindView(R.id.group)
     RadioGroup group;
+ @BindView(R.id.foot_bar_im)
+    RadioButton foot_bar_im;
 
     @BindView(R.id.textUnreadLabel)
     TextView textUnreadLabel;
@@ -305,7 +308,15 @@ public class MainActivity extends CheckPermissionsActivity {
 
     private void initData() {
         currIndex = 0;
+
+
+
         fragmentTags = new ArrayList<>(Arrays.asList("HomeFragment", "ImFragment", "InterestFragment", "FinancialFragment", "MemberFragment"));
+
+        //点击通知----跳转到主页面的会务页面
+//        currIndex = 1;
+//        foot_bar_im.setChecked(true);
+//        chageIndex(1);
     }
 
     private void chageIndex(int index) {

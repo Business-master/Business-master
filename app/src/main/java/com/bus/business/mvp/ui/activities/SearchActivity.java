@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -13,13 +14,24 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bus.business.R;
 import com.bus.business.common.Constants;
@@ -38,8 +50,10 @@ import com.bus.business.mvp.ui.adapter.AreaAdapter;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.view.AreaSeaView;
 import com.bus.business.mvp.view.BusinessView;
+import com.bus.business.mvp.view.CustomListView;
 import com.bus.business.mvp.view.MeetingView;
 import com.bus.business.mvp.view.NewsView;
+import com.bus.business.utils.DBUtils;
 import com.bus.business.utils.NetUtil;
 import com.bus.business.utils.UT;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -71,8 +85,23 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     RecyclerView mNewsRV;
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
+
+    /*搜索界面--UI组件*/
     @BindView(R.id.search_edit)
     EditText mSearchEdit;
+    @BindView(R.id.tv_clear)
+     TextView tv_clear;
+    @BindView(R.id.tv_tip)
+     TextView tv_tip;
+    @BindView(R.id.search_history)
+    ScrollView search_history;
+    /*列表及其适配器*/
+    @BindView(R.id.listView)
+    CustomListView listView;
+    private BaseAdapter adapter;
+    /*数据库工具*/
+    private DBUtils dbUtils;
+
 
     private int searchIndex;
     private BaseQuickAdapter mNewsListAdapter;
@@ -111,6 +140,106 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
         initSwipeRefreshLayout();
         initRecyclerView();
         initEdittext();
+        initSearchBox();
+    }
+
+    /*初始化搜索框*/
+    private void initSearchBox(){
+        //实例化数据库
+        dbUtils = new DBUtils(mActivity);
+
+        // 第一次进入时查询所有的历史记录
+        showData(dbUtils.queryData(""));
+
+
+        //"清空搜索历史"按钮
+        tv_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //清空数据库
+                dbUtils.deleteData();
+                showData(dbUtils.queryData(""));
+            }
+        });
+
+        //搜索框的文本变化实时监听
+        mSearchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            //输入后调用该方法
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s.toString().trim().length() == 0) {
+                    //若搜索框为空,则模糊搜索空字符,即显示所有的搜索历史
+                    tv_tip.setText("搜索历史");
+                } else {
+                    tv_tip.setText("搜索结果");
+                }
+
+                //每次输入后都查询数据库并显示
+                //根据输入的值去模糊查询数据库中有没有数据
+                String tempName = mSearchEdit.getText().toString();
+                showData(dbUtils.queryData(tempName));
+
+            }
+        });
+
+        //列表监听
+        //即当用户点击搜索历史里的字段后,会直接将结果当作搜索字段进行搜索
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //获取到用户点击列表里的文字,并自动填充到搜索框内
+                TextView textView = (TextView) view;
+                String name = textView.getText().toString();
+                mSearchEdit.setText(name);
+
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                        getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+
+                // 当用户点击搜索历史里的字段后,立即查询关键字
+                switch (searchIndex) {
+                    case NewsType.TYPE_REFRESH_XUNXI:
+//                    initNewsPresenter();
+//                    break;
+                    case NewsType.TYPE_REFRESH_XIEHUI:
+//                    initBusPresenter();
+                        initAreaSeaPresenter();
+                        break;
+                    case NewsType.TYPE_REFRESH_HUIWU:
+                        initMeetPresenter();
+                        break;
+                }
+            }
+        });
+
+        mSearchEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search_history.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
+
+    private void showData(Cursor cursor) {
+        // 创建adapter适配器对象,装入模糊搜索的结果,展示搜索历史
+        adapter = new SimpleCursorAdapter(mActivity, android.R.layout.simple_list_item_1, cursor, new String[] { "name" },
+                new int[] { android.R.id.text1 }, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        // 设置适配器
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void initEdittext() {
@@ -197,9 +326,14 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
 
-    @OnClick(R.id.search_cancel)
+    @OnClick({R.id.search_cancel})
     public void touchSearch(View v) {
-        this.finish();
+        switch (v.getId()){
+            case R.id.search_cancel :
+                this.finish();
+                break;
+        }
+
     }
 
     @Override
@@ -300,10 +434,11 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
                 KLog.a(newsBean.toString());
-                if (mNewsListAdapter.getData().size() == 0 && (newsBean==null||newsBean.size() == 0)){
+                if (newsBean==null||newsBean.size() == 0){
                     UT.show("暂无数据");
-                    return;
+                    if (mNewsListAdapter.getData().size() == 0) return;
                 }
+                search_history.setVisibility(View.GONE);
                 mNewsListAdapter.setNewData(newsBean);
                 break;
             case LoadNewsType.TYPE_REFRESH_ERROR:
@@ -356,10 +491,11 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
                 KLog.a(areaSeaBeanList.toString());
-                if (mNewsListAdapter.getData().size() == 0 && (areaSeaBeanList==null||areaSeaBeanList.size() == 0)){
+                if ( areaSeaBeanList==null||areaSeaBeanList.size() == 0){
                     UT.show("暂无数据");
-                    return;
+                    if (mNewsListAdapter.getData().size() == 0) return;
                 }
+                search_history.setVisibility(View.GONE);
                 mNewsListAdapter.setNewData(areaSeaBeanList);
                 break;
             case LoadNewsType.TYPE_REFRESH_ERROR:
@@ -415,6 +551,22 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
         if (actionId==EditorInfo.IME_ACTION_SEARCH ||(keyEvent!=null&&keyEvent.getKeyCode()== KeyEvent.KEYCODE_ENTER))
         {
+            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
+                    getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+            String tempName=mSearchEdit.getText().toString().trim();
+            if (TextUtils.isEmpty(tempName)&"".equals(tempName)){
+                UT.show("请输入关键字");
+                return false;
+            }
+
+            // 按完搜索键后将当前查询的关键字保存起来,如果该关键字已经存在就不执行保存
+            boolean hasData = dbUtils.hasData(tempName);
+            if (!hasData) {
+                dbUtils.insertData(tempName);
+                showData(dbUtils.queryData(""));
+            }
+
+
            //TODO do something;
             switch (searchIndex) {
                 case NewsType.TYPE_REFRESH_XUNXI:

@@ -25,6 +25,7 @@ import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.ui.fragment.base.BaseFragment;
 import com.bus.business.mvp.view.MeetingView;
 import com.bus.business.repository.network.RetrofitManager;
+import com.bus.business.utils.CustomUtils;
 import com.bus.business.utils.NetUtil;
 import com.bus.business.utils.TransformUtils;
 import com.bus.business.widget.RecyclerViewDivider;
@@ -185,7 +186,7 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     }
 
     @Override
-    public void setMeetingList(List<MeetingBean> newsBean, @LoadNewsType.checker int loadType) {
+    public void setMeetingList(final List<MeetingBean> newsBean, @LoadNewsType.checker int loadType) {
 
         switch (loadType) {
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
@@ -201,12 +202,15 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
                 if (newsBean == null){
                     return;
                 }
+
+
                 if (newsBean.size() == Constants.numPerPage){
                     mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
                 }else {
                     mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, false);
-                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+                    new CustomUtils(mActivity).showNoMore(mNewsRV);//展示没有更多
                 }
+
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:
 

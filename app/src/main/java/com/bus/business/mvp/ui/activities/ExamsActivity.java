@@ -14,6 +14,9 @@ import butterknife.OnClick;
 
 import static com.bus.business.mvp.entity.WanBean.WEBURL;
 
+/**
+ * 调查问卷
+ */
 public class ExamsActivity extends BaseActivity {
 
     @BindView(R.id.img_act)
@@ -44,15 +47,16 @@ public class ExamsActivity extends BaseActivity {
         mTv.setText("调查问卷");
     }
 
-    @OnClick({R.id.rl_1, R.id.rl_2})
+//    @OnClick({R.id.rl_1, R.id.rl_2})
+    @OnClick({R.id.rl_1})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_1:
                 url = ApiConstants.NETEAST_HOST+"dcwj-admin/dcwj/backSubject";
                 break;
-            case R.id.rl_2:
-                url = ApiConstants.NETEAST_HOST+"dcwj-admin/dcwj/backYDYLSubject";
-                break;
+//            case R.id.rl_2:
+//                url = ApiConstants.NETEAST_HOST+"dcwj-admin/dcwj/backYDYLSubject";
+//                break;
         }
         Intent intent = new Intent(ExamsActivity.this, WebActivity.class);
         intent.putExtra(WEBURL, url);

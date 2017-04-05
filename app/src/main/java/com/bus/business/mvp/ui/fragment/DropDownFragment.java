@@ -26,6 +26,7 @@ import com.bus.business.mvp.view.DropdownButton;
 import com.bus.business.mvp.view.DropdownItemObject;
 import com.bus.business.mvp.view.DropdownListView;
 import com.bus.business.mvp.view.NewsView;
+import com.bus.business.utils.CustomUtils;
 import com.bus.business.utils.NetUtil;
 import com.bus.business.utils.UT;
 import com.bus.business.widget.RecyclerViewDivider;
@@ -364,7 +365,8 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
                     mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
                 } else {
                     mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, false);
-                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
+                    new CustomUtils(mActivity).showNoMore(mNewsRV);
+//                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
                 }
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_ERROR:

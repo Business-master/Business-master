@@ -210,7 +210,8 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         mTitle.setText(meetingBean.getMeetingName());
         mJoinDate.setText("持续时间:     "+meetingBean.getDuration()+"天");
         mPubDate.setText("开始时间:     "+DateUtil.getCurGroupDay(meetingBean.getMeetingTime()));
-        tv_publish_address.setText("会议来源:     "+meetingBean.getUserOrganization());
+//        tv_publish_address.setText("会议来源:     "+meetingBean.getUserOrganization());
+        tv_publish_address.setText("会议来源:     "+meetingBean.getAreaCode());
         mJoinAddress.setText("地        址:      "+meetingBean.getMeetingLoc());
 
         mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, meetingBean.getMeetingContent(), 1);
