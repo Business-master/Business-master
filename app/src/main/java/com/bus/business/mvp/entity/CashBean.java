@@ -12,6 +12,15 @@ public class CashBean {
     private String pledgeCode;
     private String replayCode;
     private String loanCode;
+    private String loanLimit;
+
+    public String getLoanLimit() {
+        return loanLimit;
+    }
+
+    public void setLoanLimit(String loanLimit) {
+        this.loanLimit = loanLimit;
+    }
 
     public String getCashType() {
         return cashType;

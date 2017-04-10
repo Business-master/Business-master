@@ -21,7 +21,7 @@ public class CustomUtils {
     }
 
     public  void showNoMore(final RecyclerView mNewsRV) {
-        mNewsRV.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        mNewsRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             //用来标记是否正在向最后一个滑动
             boolean isSlidingToLast = false;
 

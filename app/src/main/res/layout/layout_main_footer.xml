@@ -32,10 +32,17 @@
             android:text="@string/main_navigation_im" />
 
         <RadioButton
+            android:enabled="false"
+            android:layout_marginTop="10dp"
         android:id="@+id/foot_bar_wan"
         style="@style/main_footer_bar_radio"
         android:drawableTop="@drawable/widget_bar_wan_bg"
-        android:text="@string/main_navigation_interest" />
+        android:text="" />
+        <!--<RadioButton-->
+        <!--android:id="@+id/foot_bar_wan"-->
+        <!--style="@style/main_footer_bar_radio"-->
+        <!--android:drawableTop="@drawable/widget_bar_wan_bg"-->
+        <!--android:text="@string/main_navigation_interest" />-->
         <!--<RadioButton-->
             <!--android:id="@+id/foot_bar_wan"-->
             <!--style="@style/main_footer_bar_radio"-->

@@ -34,7 +34,7 @@
             android:layout_toRightOf="@+id/img_icon_logo"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="俏江南"
+            android:text=""
             android:textColor="@color/color_333333"
             android:textSize="@dimen/text_size_16" />
 
@@ -48,7 +48,7 @@
             android:layout_toRightOf="@+id/img_icon_logo"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="7"
+            android:text=""
             android:textColor="@color/color_f11212"
             android:textSize="@dimen/text_size_16" />
 
@@ -81,7 +81,7 @@
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="2dp"
-            android:text="车抵押贷款"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_14" />
 
@@ -117,7 +117,7 @@
                 android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:text="贷款详情"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -143,7 +143,7 @@
                 android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:text="贷款详情"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -169,11 +169,10 @@
                 android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:text="贷款详情"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -184,7 +183,32 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="利 率 : "
+                android:text="贷款额度 : "
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_lend_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/color_333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="月利率 : "
                 android:textColor="@color/color_999999"
                 android:textSize="@dimen/sp_14" />
 
@@ -195,7 +219,7 @@
                 android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:text="贷款详情"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -222,7 +246,7 @@
                 android:ellipsize="end"
                 android:gravity="right"
                 android:maxLines="1"
-                android:text="贷款详情"
+                android:text=""
                 android:textColor="@color/color_333333"
                 android:textSize="14sp" />
         </LinearLayout>

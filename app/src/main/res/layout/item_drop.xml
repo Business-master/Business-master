@@ -69,7 +69,7 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="利  率 : "
+                android:text="月利率 : "
                 android:textColor="@color/gray"
                 android:textSize="@dimen/text_size_14" />
 

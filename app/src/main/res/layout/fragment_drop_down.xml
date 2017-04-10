@@ -8,13 +8,30 @@
     <include layout="@layout/item_down_header" />
 
     <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mRecyclerView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/call_drop_down"
+            android:layout_gravity="bottom|right"
+            android:src="@mipmap/img_call"
+            android:adjustViewBounds="true"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <View
             android:id="@+id/mask"
@@ -45,7 +62,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
+            <com.bus.business.mvp.view.DropdownListView
+                android:id="@+id/dropdownLimit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
         </LinearLayout>
+
+
     </FrameLayout>
 
 

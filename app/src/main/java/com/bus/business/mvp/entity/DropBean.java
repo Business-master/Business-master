@@ -48,6 +48,15 @@ public class DropBean implements Serializable{
     private String productDesp;
     private String productName;
     private String cashRate;
+    private String lendingMoney;
+
+    public String getLendingMoney() {
+        return lendingMoney;
+    }
+
+    public void setLendingMoney(String lendingMoney) {
+        this.lendingMoney = lendingMoney;
+    }
 
     public void intentToDetail(Context context){
         Intent intent = new Intent(context, DropDetailActivity.class);

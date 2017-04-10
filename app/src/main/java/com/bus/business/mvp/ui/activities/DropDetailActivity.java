@@ -2,6 +2,7 @@ package com.bus.business.mvp.ui.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,6 +41,8 @@ public class DropDetailActivity extends BaseActivity {
     TextView name;
     @BindView(R.id.tv_loanCode)
     TextView tv_loanCode;
+    @BindView(R.id.tv_lend_money)
+    TextView tv_lend_money;
     @BindView(R.id.tv_loanIntroduction)
     TextView tv_loanIntroduction;
     @BindView(R.id.tv_cashRate)
@@ -78,7 +81,9 @@ public class DropDetailActivity extends BaseActivity {
         tv_pledgeCode.setText(dropBean.getPledgeCode());
         tv_load.setText(dropBean.getPledgeCode());
         address.setText(dropBean.getLendingTime()+"");
-        tv_loanCode.setText(dropBean.getLoanCode());
+        tv_loanCode.setText(dropBean.getLoanCode()+"年");
+        if(!TextUtils.isEmpty(dropBean.getLendingMoney()))
+        tv_lend_money.setText(dropBean.getLendingMoney()+"万元");
         tv_loanIntroduction.setText(dropBean.getReplayCode());
         tv_cashRate.setText(dropBean.getCashRate()+"%");
         tv_productDesp.setText(dropBean.getLoanIntroduction());

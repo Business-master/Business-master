@@ -231,6 +231,9 @@ public class RetrofitManager {
             map.put("replayCode", cashBean.getReplayCode());
         if (!TextUtils.isEmpty(cashBean.getLoanCode()))
             map.put("loanCode", cashBean.getLoanCode());
+        if (!TextUtils.isEmpty(cashBean.getLoanLimit()))
+            map.put("lendingMoney", cashBean.getLoanLimit());
+
         map.put("page", pageNum + "");
         map.put("size", numPerPage + "");
         KLog.a(map.toString());

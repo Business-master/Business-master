@@ -69,7 +69,7 @@ public class DropdownListView extends ScrollView {
     private String subStr(String str) {
         String result = str.substring(0, str.indexOf("@")) + "@";
         KLog.a("result--->" + result);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i <4; i++) {
             if (result.equals(TYPE_NAME[i])) {
                 switch (i) {
                     case 0:
@@ -81,6 +81,10 @@ public class DropdownListView extends ScrollView {
                     case 2:
                         result = "贷款期限";
                         break;
+                    case 3:
+                        result = "贷款额度";
+                        break;
+
                 }
                 break;
             }
