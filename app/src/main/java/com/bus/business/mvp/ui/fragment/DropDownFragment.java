@@ -180,7 +180,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
         initPresenter();
     }
 
-
+    //点击咨询详情 拨打电话
     @OnClick({R.id.call_drop_down})
     public void onClick(View v){
          switch (v.getId()){
@@ -191,7 +191,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
                          // 不需要解释为何需要该权限，直接请求授权
                          requestPermissions(new String[]{Manifest.permission.CALL_PHONE},CALL_OK);
                  }else {
-                     //点击咨询详情 拨打电话
+
                      startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:15810864710")));
                  }
                  break;

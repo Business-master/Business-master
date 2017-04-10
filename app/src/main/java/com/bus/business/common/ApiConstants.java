@@ -4,6 +4,7 @@ package com.bus.business.common;
  * @author xch
  * @version 1.0
  * @create_date 16/12/22
+ * 接口类
  */
 public class ApiConstants {
 

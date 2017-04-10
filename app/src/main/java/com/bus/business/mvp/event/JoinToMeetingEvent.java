@@ -4,6 +4,7 @@ package com.bus.business.mvp.event;
  * @author xch
  * @version 1.0
  * @create_date 17/1/10
+ * 参加会议事件
  */
 public class JoinToMeetingEvent {
     /**

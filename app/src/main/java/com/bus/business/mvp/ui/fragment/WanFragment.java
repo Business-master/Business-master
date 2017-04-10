@@ -28,6 +28,7 @@ import butterknife.BindView;
  * @author xch
  * @version 1.0
  * @create_date 17/1/6
+ * 万花筒
  */
 public class WanFragment extends BaseFragment implements BaseQuickAdapter.OnRecyclerViewItemClickListener {
 

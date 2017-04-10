@@ -77,10 +77,7 @@ import rx.Subscriber;
 import static android.view.View.VISIBLE;
 
 /**
- * @author xch
- * @version 1.0
- * @create_date 16/12/23
- * 首页碎片 模板
+ * 首页  基层-组织   碎片
  */
 //public class NewsFragment_new extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
 //        , NewsView<List<BaseNewBean>>

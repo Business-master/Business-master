@@ -26,9 +26,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 /**
- * @author xch
- * @version 1.0
- * @create_date 17/1/6
+ * 山珍海味  碎片
  */
 public class SzhwFragment extends BaseFragment implements BaseQuickAdapter.OnRecyclerViewItemClickListener {
 

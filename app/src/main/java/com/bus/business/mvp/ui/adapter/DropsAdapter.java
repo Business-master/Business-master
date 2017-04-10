@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by xuchunhui on 16/8/12.
+ * 专家列表适配器
  */
 public class DropsAdapter extends BaseQuickAdapter<DropBean> {
 

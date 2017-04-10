@@ -14,6 +14,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 账号管理 页面
+ */
 public class ManagerActivity extends BaseActivity {
 
     @BindView(R.id.tv_phone)

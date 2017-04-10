@@ -42,6 +42,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Subscriber;
 
+/**
+ * 添加助理 页面
+ */
 
 public class AddAssisActivity extends BaseActivity {
 
@@ -362,7 +365,7 @@ public class AddAssisActivity extends BaseActivity {
     }
 
 
-
+  //添加助理时判断是否符合条件
     private boolean judgement() {
         boolean right=true;
         nameStr = name.getText().toString().trim();

@@ -55,7 +55,6 @@ import com.bus.business.mvp.event.CheckMeetingStateEvent;
 import com.bus.business.mvp.event.MeetingDetailEvent;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 import com.bus.business.mvp.ui.activities.base.CheckPermissionsActivity;
-import com.bus.business.mvp.ui.activities.base.LocationActivity;
 import com.bus.business.mvp.ui.adapter.DownAdapter;
 import com.bus.business.mvp.ui.adapter.MeetingsAdapter;
 import com.bus.business.mvp.view.CustomGridView;
@@ -195,22 +194,10 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
 
 
-//        stateStr = ApplyUtils.getInstance().initHide(cancel_apply,btn_apply,btn_leave,meetingBean.getJoinType());
-//        if(meetingBean.getJoinType()==0){
-//            btn_apply.setTextColor(getResources().getColor(R.color.text_color_rectange));
-//            btn_apply.setBackgroundResource(R.drawable.btn_rectange);
-//        }
-//        btn_apply.setText(stateStr);
-//
-//
-//        cancel_apply.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
-//        btn_apply.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
-//        btn_leave.setOnClickListener(new ApplyUtils.MyClick(meetingBean,this));
 
         mTitle.setText(meetingBean.getMeetingName());
         mJoinDate.setText("持续时间:     "+meetingBean.getDuration()+"天");
         mPubDate.setText("开始时间:     "+DateUtil.getCurGroupDay(meetingBean.getMeetingTime()));
-//        tv_publish_address.setText("会议来源:     "+meetingBean.getUserOrganization());
         tv_publish_address.setText("会议来源:     "+meetingBean.getAreaCode());
         mJoinAddress.setText("地        址:      "+meetingBean.getMeetingLoc());
 
@@ -356,6 +343,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                 });
     }
 
+    //获取文档附件数据
     private void initDown_fj() {
         downAdapter = new DownAdapter(mActivity);
         down_fj.setAdapter(downAdapter);

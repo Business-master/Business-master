@@ -14,6 +14,7 @@ import com.bus.business.R;
 
 /**
  * Created by ATRSnail on 2017/2/27.
+ * 对话框工具类
  */
 
 public class DialogUtils extends Dialog{

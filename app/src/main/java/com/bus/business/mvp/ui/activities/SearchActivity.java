@@ -70,6 +70,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 首页搜索页
+ */
 public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener
         , NewsView<List<BaseNewBean>>
         , MeetingView

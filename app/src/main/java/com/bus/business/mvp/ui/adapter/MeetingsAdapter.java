@@ -53,6 +53,7 @@ import rx.Subscriber;
  * @author xch
  * @version 1.0
  * @create_date 16/12/24
+ * 会议列表适配器
  */
 public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
 
@@ -81,9 +82,9 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
     protected void convert(final BaseViewHolder baseViewHolder, final MeetingBean likeBean) {
         int status = Integer.valueOf(likeBean.getStatus());
 
-        View view0 = baseViewHolder.getView(R.id.item_0);
-        View view1 = baseViewHolder.getView(R.id.item_1);
-        View view2= baseViewHolder.getView(R.id.item_2);
+        View view0 = baseViewHolder.getView(R.id.item_0);//即将召开会议
+        View view1 = baseViewHolder.getView(R.id.item_1);//正在召开会议
+        View view2= baseViewHolder.getView(R.id.item_2);//历史召开会议
         view0.setVisibility(View.GONE);
         view1.setVisibility(View.GONE);
         view2.setVisibility(View.GONE);
@@ -109,31 +110,6 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
 
 
 
-//  TextView new_meeting = baseViewHolder.getView(R.id.new_meeting);
-//        if (likeBean.getHasReaded()==1){
-//            new_meeting.setVisibility(View.VISIBLE);
-//        }else {
-//            new_meeting.setVisibility(View.GONE);
-//        }
-//
-//        Button jointype_tv = baseViewHolder.getView(R.id.jointype_tv);
-//        ApplyUtils.MyClick myClick = new ApplyUtils.MyClick(likeBean,mContext);
-//
-//         cancel_apply = baseViewHolder.getView(R.id.cancel_apply);
-//         btn_apply = baseViewHolder.getView(R.id.btn_apply);
-//         btn_leave = baseViewHolder.getView(R.id.btn_leave);
-//         cancel_apply.setOnClickListener(myClick);
-//         btn_apply.setOnClickListener(myClick);
-//         btn_leave.setOnClickListener(myClick);
-//        String str =   ApplyUtils.getInstance().initState_Hide(cancel_apply,btn_apply,btn_leave,likeBean.getJoinType());
-//        jointype_tv.setText(str);
-//
-//        int status = Integer.valueOf(likeBean.getStatus());
-//      if (status!=0){
-//            cancel_apply.setVisibility(View.INVISIBLE);
-//            btn_apply.setVisibility(View.INVISIBLE);
-//            btn_leave.setVisibility(View.INVISIBLE);
-//        }
     }
 
     private void initView(View view, MeetingBean likeBean) {
@@ -141,7 +117,6 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         TextView address = (TextView) view.findViewById(R.id.tv_address);
         TextView date = (TextView) view.findViewById(R.id.tv_date);
         name.setText(likeBean.getMeetingName());
-//        address.setText(likeBean.getUserOrganization());
         address.setText(likeBean.getAreaCode());
         date.setText(DateUtil.getCurGroupDay(likeBean.getMeetingTime()));
     }

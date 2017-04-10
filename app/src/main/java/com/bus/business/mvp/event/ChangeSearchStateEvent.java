@@ -6,6 +6,7 @@ import com.socks.library.KLog;
  * @author xch
  * @version 1.0
  * @create_date 16/12/29
+ * 消息推送事件
  */
 public class ChangeSearchStateEvent {
     private int mMsg;

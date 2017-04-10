@@ -357,13 +357,14 @@ public class RetrofitManager {
         return mNewsService.getSelectAssis(map);
     }
 
-
+        //获得首页地区.组织列表
     public Observable<RspAreaBean> getAreaListObservable() {
         Map<String, String> map = new HashMap<>();
         KLog.a(map.toString());
         return mNewsService.getAreaList(map);
     }
 
+    //根据区域 请求的 商讯、新闻
     public Observable<RspAreaSeaBean> getAreaSeaListObservable(int pageNum, int numPerPage, String areaCode, String chambreCode, String title) {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
@@ -415,6 +416,7 @@ public class RetrofitManager {
         return mNewsService.getTopicDetail(map);
     }
 
+    //获得未读的会议数目
     public Observable<NotReadBean> getNotReadCount() {
         Map<String, String> map = new HashMap<>();
         map.put("userId", UsrMgr.getUseId());

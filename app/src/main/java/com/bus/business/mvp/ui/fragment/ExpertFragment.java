@@ -21,6 +21,7 @@ import static com.bus.business.common.DropsType.TYPE_NO_BANK;
  * @author xch
  * @version 1.0
  * @create_date 17/1/13
+ * 金融专家   碎片
  */
 
 public class ExpertFragment extends BaseFragment{

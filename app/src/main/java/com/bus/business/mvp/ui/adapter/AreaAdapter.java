@@ -11,7 +11,6 @@ import com.bus.business.App;
 import com.bus.business.R;
 import com.bus.business.common.ApiConstants;
 import com.bus.business.mvp.entity.AreaSeaBean;
-import com.bus.business.mvp.event.AreaFirstEvent;
 import com.bus.business.utils.DateUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -21,7 +20,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 
 /**
- *首页--基层组织适配器
+ *首页--基层组织 新闻.商讯 适配器
  */
 public class AreaAdapter extends BaseQuickAdapter<AreaSeaBean> {
 

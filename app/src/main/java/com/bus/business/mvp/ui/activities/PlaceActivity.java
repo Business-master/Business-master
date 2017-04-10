@@ -19,6 +19,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
+/**
+ * 地区页面
+ */
 public class PlaceActivity extends BaseActivity {
 
     @BindView(R.id.city_list)

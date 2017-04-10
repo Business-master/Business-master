@@ -6,5 +6,5 @@ package com.bus.business.listener;
  */
 
 public interface JoinMeetingCallBack {
-     void getJoinResult(boolean flag);
+     void getJoinResult(boolean flag);//获得是否参加会议--返回的数据
 }

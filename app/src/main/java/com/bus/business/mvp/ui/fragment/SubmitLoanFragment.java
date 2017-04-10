@@ -12,6 +12,7 @@ import butterknife.OnClick;
  * @author xch
  * @version 1.0
  * @create_date 17/2/19
+ * 贷款优化专家  碎片
  */
 
 public class SubmitLoanFragment extends BaseLazyFragment {

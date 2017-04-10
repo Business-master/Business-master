@@ -4,13 +4,14 @@ package com.bus.business.common;
  * @author xch
  * @version 1.0
  * @create_date 16/12/24
+ * 常量类
  */
 public class Constants {
 
-    public static final int numPerPage = 6;
-    public static final int DETAIL_XUN_TYPE = 1;
-    public static final int DETAIL_XIE_TYPE = 2;
-    public static final int DETAIL_TOP_TYPE = 3;
+    public static final int numPerPage = 6;//数据展示时，一页的数目
+    public static final int DETAIL_XUN_TYPE = 1;//首页讯息
+    public static final int DETAIL_XIE_TYPE = 2;//首页协会
+    public static final int DETAIL_TOP_TYPE = 3;//首页专题
 
     public static final String NEWS_IMG = "news_img";
     public static final String NEWS_POST_ID = "news_post_id";

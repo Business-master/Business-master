@@ -16,6 +16,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import rx.Subscriber;
 
+/**
+ * 修改密码 页面
+ */
 public class RetPasswordActivity extends BaseActivity {
 
     @BindView(R.id.old_phone)

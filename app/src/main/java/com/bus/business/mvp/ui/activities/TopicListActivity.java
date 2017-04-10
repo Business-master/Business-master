@@ -44,6 +44,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
+/**
+ * 专题列表 页面
+ */
 public class TopicListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener
         , BaseQuickAdapter.RequestLoadMoreListener
         , NewsView<List<TopicBean>>

@@ -9,7 +9,7 @@ import com.bus.business.R;
 
 /**
  * Created by ATRSnail on 2017/3/31.
- * 常用的  公共类
+ * 数据请求常用的  公共类
  */
 
 public class CustomUtils {
@@ -20,6 +20,7 @@ public class CustomUtils {
         this.context = context;
     }
 
+    //数据请求完，提示--没有更多了
     public  void showNoMore(final RecyclerView mNewsRV) {
         mNewsRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             //用来标记是否正在向最后一个滑动

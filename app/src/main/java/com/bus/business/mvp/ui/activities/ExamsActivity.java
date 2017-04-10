@@ -15,7 +15,7 @@ import butterknife.OnClick;
 import static com.bus.business.mvp.entity.WanBean.WEBURL;
 
 /**
- * 调查问卷
+ * 调查问卷页面
  */
 public class ExamsActivity extends BaseActivity {
 

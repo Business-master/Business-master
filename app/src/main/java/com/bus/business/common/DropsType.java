@@ -9,6 +9,7 @@ import java.lang.annotation.RetentionPolicy;
  * @author xch
  * @version 1.0
  * @create_date 16/12/27
+ * 专家页面的常量
  */
 public class DropsType {
 

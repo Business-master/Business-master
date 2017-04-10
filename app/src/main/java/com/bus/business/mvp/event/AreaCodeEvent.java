@@ -4,6 +4,7 @@ import com.bus.business.mvp.entity.AreaBean;
 
 /**
  * Created by ATRSnail on 2017/2/16.
+ * 选择区域时，回传 数据
  */
 
 public class AreaCodeEvent {

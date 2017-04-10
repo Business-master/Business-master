@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
 
 /**
- *
+ *山珍海味适配器
  */
 
 public class SzhwAdapter extends BaseQuickAdapter<WanBean>{

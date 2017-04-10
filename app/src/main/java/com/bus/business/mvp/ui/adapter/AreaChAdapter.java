@@ -21,6 +21,7 @@ import java.util.List;
 
 /**
  * Created by ATRSnail on 2017/2/16.
+ * 选择区域---区域列表适配器
  */
 
 public class AreaChAdapter extends BaseAdapter{

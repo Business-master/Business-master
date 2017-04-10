@@ -22,6 +22,7 @@ import java.util.Locale;
  * @author xch
  * @version 1.0
  * @create_date 17/2/15
+ * 地图工具类
  */
 
 public class SystemUtils {
@@ -132,6 +133,7 @@ public class SystemUtils {
 
     }
 
+    //根据地址获得经纬度
     private static Address getJWD(Activity activity, String name) {
         Geocoder  geo = new Geocoder(activity, Locale.CHINA);
         List<Address> addressList=null;

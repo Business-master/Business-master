@@ -30,6 +30,7 @@ import cn.jpush.android.api.JPushInterface;
  * @author xch
  * @version 1.0
  * @create_date 17/1/4
+ * 极光推送广播
  */
 public class MyBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = "MyReceiver";

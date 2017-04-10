@@ -12,6 +12,9 @@ import com.bus.business.utils.UT;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 新闻管理 页面
+ */
 public class NewsManActivity extends BaseActivity {
 
 

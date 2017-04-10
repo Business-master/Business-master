@@ -5,6 +5,9 @@ import android.view.View;
 import com.bus.business.R;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
 
+/**
+ * 我的-----关于页面
+ */
 public class AboutActivity extends BaseActivity {
 
 
@@ -21,6 +24,6 @@ public class AboutActivity extends BaseActivity {
     @Override
     public void initViews() {
         setCustomTitle("关于我们");
-        showOrGoneSearchRl(View.GONE);
+        showOrGoneSearchRl(View.GONE);//去掉搜索
     }
 }

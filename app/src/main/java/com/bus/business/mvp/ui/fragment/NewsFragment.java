@@ -73,6 +73,7 @@ import static android.view.View.VISIBLE;
  * @author xch
  * @version 1.0
  * @create_date 16/12/23
+ * 首页  新闻----商情   碎片
  */
 public class
 NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener

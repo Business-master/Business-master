@@ -4,9 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author leonardo
- * @version 1.0
- * @create_date 16/7/17
+ * 手机号验证类
  */
 public class PhoneUtils {
     /** 电话格式验证 **/

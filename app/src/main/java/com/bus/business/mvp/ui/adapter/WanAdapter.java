@@ -14,6 +14,7 @@ import java.util.List;
  * @author xch
  * @version 1.0
  * @create_date 17/1/11
+ * 万花筒适配器
  */
 
 public class WanAdapter extends BaseQuickAdapter<WanBean>{

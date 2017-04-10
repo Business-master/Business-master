@@ -199,7 +199,7 @@ public class AssisManActivity extends BaseActivity implements SwipeRefreshLayout
     @Subscribe
     public void onEventMainThread(AddAssisEvent event){
         if (event.getAddAssis()==1){
-            onRefresh();
+            onRefresh();//刷新页面
         }
     }
 

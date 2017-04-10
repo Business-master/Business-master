@@ -4,6 +4,7 @@ import android.content.Context;
 
 /**
  * Created by ATRSnail on 2017/2/9.
+ * dp -- px 转换类
  */
 
 public class DensityUtil {

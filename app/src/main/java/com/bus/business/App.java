@@ -16,6 +16,7 @@ import cn.jpush.android.api.JPushInterface;
  * @author xch
  * @version 1.0
  * @create_date 16/12/22
+ * 应用类
  */
 public class App extends Application{
 

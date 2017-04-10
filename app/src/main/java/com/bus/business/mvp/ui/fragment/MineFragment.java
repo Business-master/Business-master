@@ -55,6 +55,7 @@ import static com.bus.business.mvp.ui.activities.MainActivity.CONTACTS_OK;
  * @author xch
  * @version 1.0
  * @create_date 16/12/24
+ * 我的   碎片
  */
 public class MineFragment extends BaseFragment {
 

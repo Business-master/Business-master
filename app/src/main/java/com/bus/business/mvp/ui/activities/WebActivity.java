@@ -10,6 +10,9 @@ import com.bus.business.widget.ProgressWebView;
 
 import butterknife.BindView;
 
+/**
+ * 应用webView 的活动
+ */
 public class WebActivity extends BaseActivity implements WebPageFinishCallBack,View.OnClickListener {
 
 

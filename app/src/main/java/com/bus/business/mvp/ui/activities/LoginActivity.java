@@ -27,6 +27,7 @@ import rx.Subscriber;
  * @author xch
  * @version 1.0
  * @create_date 16/12/27
+ * 登录页面
  */
 public class LoginActivity extends BaseActivity {
 
