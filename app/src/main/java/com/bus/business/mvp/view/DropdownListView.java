@@ -16,6 +16,9 @@ import java.util.List;
 
 import static com.bus.business.mvp.ui.fragment.DropDownFragment.TYPE_NAME;
 
+/**
+ * 专家 -- 筛选框列表
+ */
 public class DropdownListView extends ScrollView {
     public LinearLayout linearLayout;
 

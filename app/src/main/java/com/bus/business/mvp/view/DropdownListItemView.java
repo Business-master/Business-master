@@ -20,6 +20,7 @@ public class DropdownListItemView extends TextView {
         super(context, attrs, defStyleAttr);
     }
 
+    //专家 ---筛选框添加 蓝色√
     public void bind(CharSequence text, boolean checked){
         setText(text);
         if (checked){
