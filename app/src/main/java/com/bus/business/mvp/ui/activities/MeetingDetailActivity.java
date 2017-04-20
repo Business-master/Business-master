@@ -275,14 +275,10 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         }
         switch (Integer.valueOf(meet.getStatus())){
             case 0:
-                if ("0001".equals(meet.getModiType())){
-                    initJoinType(Integer.valueOf(meet.getJoinType()),0);
-                }else {
-                    bottom_meeting_detail.setVisibility(View.GONE);
-                }
+                initJoinType(Integer.valueOf(meet.getJoinType()),0,meet.getModiType());
                 break;
             case 1:
-                initJoinType(Integer.valueOf(meet.getJoinType()),1);
+                initJoinType(Integer.valueOf(meet.getJoinType()),1,meet.getModiType());
                 break;
             case 2:
                 bottom_meeting_detail.setVisibility(View.GONE);
@@ -305,14 +301,10 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         }
         switch (Integer.valueOf(meet.getStatus())){
             case 0:
-                if ("0001".equals(meet.getModiType())){
-                    initJoinType(Integer.valueOf(meet.getJoinType()),0);
-                }else {
-                    bottom_meeting_detail.setVisibility(View.GONE);
-                }
+                initJoinType(Integer.valueOf(meet.getJoinType()),0,meet.getModiType());
                 break;
             case 1:
-                initJoinType(Integer.valueOf(meet.getJoinType()),1);
+                initJoinType(Integer.valueOf(meet.getJoinType()),1,meet.getModiType());
                 break;
             case 2:
                 bottom_meeting_detail.setVisibility(View.GONE);
@@ -370,8 +362,13 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
     }
 
-
-    private void initJoinType(int joinType,int status) {
+    /**
+     *
+     * @param joinType  每一条会议的状态   签到报名请假
+     * @param status     会议种类  即将  历史
+     * @param modiType   会议是否变更
+     */
+    private void initJoinType(int joinType,int status,String modiType) {
         switch (joinType){
             case 0 :
                 if (status==0){
@@ -406,6 +403,12 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                         R.color.color_cccccc, R.color.color_cccccc,R.color.color_cccccc ,false,false,false);
                 break;
             }
+
+        if (!"0001".equals(modiType)){
+            //会议变更时   报名、请假、签到  置灰去掉点击事件
+            initBottom(R.color.color_cccccc, R.color.color_cccccc,R.color.color_cccccc ,false,false,false);
+        }
+
         }
 
 
@@ -444,6 +447,19 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         sign_meeting_detail.setText(sign);
         apply_meeting_detail.setText(apply);
         leave_meeting_detail.setText(leave);
+
+        sign_meeting_detail.setTextColor(getResources().getColor(color1));
+        apply_meeting_detail.setTextColor(getResources().getColor(color2));
+        leave_meeting_detail.setTextColor(getResources().getColor(color13));
+
+        sign_meeting_detail.setClickable(sign_use);
+        apply_meeting_detail.setClickable(apply_use);
+        leave_meeting_detail.setClickable(leave_use);
+    }
+
+    private void initBottom( int color1, int color2, int color13
+    ,boolean sign_use,boolean apply_use,boolean leave_use) {
+        //会议变更时   报名、请假、签到  置灰去掉点击事件
 
         sign_meeting_detail.setTextColor(getResources().getColor(color1));
         apply_meeting_detail.setTextColor(getResources().getColor(color2));

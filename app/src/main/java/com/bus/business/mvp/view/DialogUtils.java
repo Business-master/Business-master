@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bus.business.R;
+import com.bus.business.mvp.event.AssisApplyEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by ATRSnail on 2017/2/27.
@@ -172,6 +175,7 @@ public class DialogUtils extends Dialog{
              imageView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
+                     EventBus.getDefault().post(new AssisApplyEvent(true));
                      dialog.dismiss();
                  }
              });

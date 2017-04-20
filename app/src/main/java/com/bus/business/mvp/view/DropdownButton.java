@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.bus.business.R;
 
-
+/**
+ * 专家 -- 筛选框按钮
+ */
 public class DropdownButton extends RelativeLayout {
     TextView textView;
     View bottomLine;

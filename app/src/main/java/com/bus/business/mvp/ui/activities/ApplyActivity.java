@@ -9,6 +9,8 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,6 +36,7 @@ import com.bus.business.mvp.entity.NationBean;
 import com.bus.business.mvp.entity.UserBean;
 import com.bus.business.mvp.entity.response.RspNationBean;
 import com.bus.business.mvp.entity.response.base.BaseRspObj;
+import com.bus.business.mvp.event.AssisApplyEvent;
 import com.bus.business.mvp.event.MeetingDetailEvent;
 import com.bus.business.mvp.presenter.impl.AssisPresenterImpl;
 import com.bus.business.mvp.ui.activities.base.BaseActivity;
@@ -48,6 +51,7 @@ import com.socks.library.KLog;
 
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -179,6 +183,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     @Override
     public void initViews() {
+        EventBus.getDefault().register(this);
         userBean  =UsrMgr.getUseInfo();
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
         index = getIntent().getIntExtra("index",-1);
@@ -307,6 +312,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     protected void onDestroy() {
         super.onDestroy();
         assisPresenterImpl.onDestory();
+        EventBus.getDefault().unregister(this);
     }
 
 
@@ -338,6 +344,13 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     }
 
 
+    //助理弹出框，点击了 x（取消） 通知跳转 到本人（参会人）
+    @Subscribe
+    public void onEventMainThread(AssisApplyEvent event){
+        if (event.isFlag()){
+            initSelfView();
+        }
+    }
 
 
     @OnClick({R.id.apply_self,R.id.ll_assis,R.id.apply_man,R.id.apply_woman,
@@ -450,12 +463,22 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     private void applyMetting() {
 
-        if (joinType ==-1 ||foodId ==-1 ||stay ==-1 ||driver ==-1 ||"".equals(leadName) || "".equals(sex)
+        if (joinType ==-1 ||foodId ==-1 ||stay ==-1 ||driver ==-1  || "".equals(sex)
                 || "".equals(companyName) || "".equals(job)
                 || "".equals(nation)){
             UT.show("请完善报名信息");
             return;
         }
+
+
+        if (joinType==4){//助理报名时，leadName不能为空
+            if ("".equals(leadName))
+            {UT.show("请完善报名信息");
+                return;}
+        }else {
+               leadName="";//本人报名时，不传leadName值
+        }
+
 
         if (assistantNames!=null&&assistantNames.length>0){
             if (joinType==4){
@@ -586,14 +609,20 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 //        }
     }
 
+
+
     private void getData() {
-        leadName=apply_name.getText().toString().trim();
+
+        leadName=userBean.getNiceName();
         companyName=apply_company.getText().toString().trim();
         job=apply_duty.getText().toString().trim();
         nation =apply_nation.getText().toString().trim();
         carNo = car_num.getText().toString().trim();
         desp = remark_apply.getText().toString().trim();
         cause = apply_cause.getText().toString().trim();
+
+
+
     }
 
 

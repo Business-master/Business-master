@@ -125,6 +125,9 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
     private void init2(View view2, MeetingBean likeBean) {
         String stateStr="";
         TextView state = (TextView) view2.findViewById(R.id.tv_state);
+        TextView name = (TextView) view2.findViewById(R.id.tv_name);
+        TextView date = (TextView) view2.findViewById(R.id.tv_date);
+        TextView address = (TextView) view2.findViewById(R.id.tv_address);
         int draw=R.drawable.join_banover;
         switch (Integer.valueOf(likeBean.getJoinType())){
             case 0:
@@ -162,9 +165,25 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                 break;
             case 9:
                 stateStr="助理签到";
-                draw=R.drawable.join_banover;
+                draw=R.drawable.absent_banover;
                 break;
         }
+
+
+        //会议是否变更
+        if (!"0001".equals(likeBean.getModiType())){
+            //会议变更 都布置成 灰色状态
+            draw=R.drawable.absent_banover;
+
+            name.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+            date.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+            address.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+        }else {
+            name.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+            date.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+            address.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+        }
+
         state.setText(stateStr);
         state.setBackgroundResource(draw);
     }
@@ -172,6 +191,9 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
     private void init1(View view1, MeetingBean likeBean) {
         String stateStr="";
         TextView state = (TextView) view1.findViewById(R.id.tv_state);
+        TextView name = (TextView) view1.findViewById(R.id.tv_name);
+        TextView date = (TextView) view1.findViewById(R.id.tv_date);
+        TextView address = (TextView) view1.findViewById(R.id.tv_address);
         int color=mContext.getResources().getColor(R.color.color_0dadd5);
         switch (Integer.valueOf(likeBean.getJoinType())){
             case 0:
@@ -209,11 +231,28 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                 break;
             case 9:
                 stateStr="助理签到";
-                color=mContext.getResources().getColor(R.color.color_0dadd5);
+                color=mContext.getResources().getColor(R.color.color_cccccc);
                 break;
         }
+
+
+        //会议是否变更
+        if (!"0001".equals(likeBean.getModiType())){
+            //会议变更 都布置成 灰色状态
+            color=mContext.getResources().getColor(R.color.color_cccccc);
+
+            name.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+            date.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+            address.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
+        }else {
+            name.setTextColor(mContext.getResources().getColor(R.color.color_333333));
+            date.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+            address.setTextColor(mContext.getResources().getColor(R.color.color_999999));
+        }
+
         state.setText(stateStr);
         state.setTextColor(color);
+
     }
 
 
@@ -292,6 +331,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
 
         //会议是否变更
         if (!"0001".equals(likeBean.getModiType())){
+            //会议变更 都布置成 灰色状态
             state.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
             date.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
             address.setTextColor(mContext.getResources().getColor(R.color.color_cccccc));
@@ -343,7 +383,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                             }
                     }else{
                         if(UsrMgr.getUseInfo().getIsAssistant()==1)
-                        createDialog(0,"请输入取消报名的原因");
+                        createDialog(6,"请输入取消报名的原因");
                     }
                     break;
                 case R.id.leave:
@@ -388,23 +428,18 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                     .subscribe(new Subscriber<BaseRspObj>() {
                         @Override
                         public void onCompleted() {
-
+                            KLog.d();
                         }
 
                         @Override
                         public void onError(Throwable e) {
-
+                            KLog.e(e.toString());
                         }
 
                         @Override
                         public void onNext(BaseRspObj responseBody) {
+                            KLog.d(responseBody.toString());
                             if (responseBody.getHead().getRspCode().equals("0")) {
-                                if (joinType==5){
-//                                    EventBus.getDefault().post(new JoinToMeetingEvent(2));
-
-                                }else if (joinType==6){
-//                                    EventBus.getDefault().post(new JoinToMeetingEvent(3));
-                                }
                                 joinMeetingCallBack.getJoinResult(true);
                                 UT.show(responseBody.getHead().getRspMsg());
                             }

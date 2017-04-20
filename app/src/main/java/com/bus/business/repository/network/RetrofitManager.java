@@ -276,7 +276,10 @@ public class RetrofitManager {
         map.put("carNo", carNo);
         map.put("driver", String.valueOf(driver));
         map.put("cause", cause);
+
+        if(!(TextUtils.isEmpty(leadName)&&"".equals(leadName)))
         map.put("leadName", leadName);
+
         map.put("nation", nation);
         map.put("sex", sex);
         map.put("companyName", companyName);

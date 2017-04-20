@@ -12,6 +12,7 @@ import com.google.gson.Gson;
  * @author xch
  * @version 1.0
  * @create_date 16/12/28
+ * 用户信息管理
  */
 public class UsrMgr {
 

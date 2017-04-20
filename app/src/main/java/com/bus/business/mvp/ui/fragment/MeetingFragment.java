@@ -287,7 +287,6 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     @Override
     public void getJoinResult(boolean flag) {
         if (flag){
-            KLog.a("********"+"刷新了");
             onRefresh();
         }
     }
