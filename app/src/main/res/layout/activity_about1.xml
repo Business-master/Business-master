@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.bus.business.mvp.ui.activities.AboutActivity">
+    tools:context="com.ristone.businessasso.mvp.ui.activities.AboutActivity">
 
     <include layout="@layout/layout_main_header" />
 

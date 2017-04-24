@@ -13,7 +13,7 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
-        <com.bus.business.mvp.view.ClearEditText
+        <com.ristone.businessasso.mvp.view.ClearEditText
             android:id="@+id/filter_edit"
             android:layout_marginTop="5dip"
             android:layout_width="fill_parent"
@@ -47,7 +47,7 @@
                 android:textSize="30.0dip"
                 android:visibility="invisible" />
 
-            <com.bus.business.mvp.view.SideBar
+            <com.ristone.businessasso.mvp.view.SideBar
                 android:id="@+id/sidrbar"
                 android:layout_width="30.0dip"
                 android:layout_height="fill_parent"

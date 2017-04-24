@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bus.business">
+    package="com.ristone.businessasso">
 
     <!-- Required -->
     <permission
-        android:name="com.bus.business.permission.JPUSH_MESSAGE"
+        android:name="com.ristone.businessasso.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
     <!-- Required -->
     <uses-permission android:name="com.bus.business.permission.JPUSH_MESSAGE" />
@@ -62,7 +62,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
-        android:name=".App"
+        android:name="com.ristone.businessasso.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -70,7 +70,7 @@
         android:theme="@style/BaseAppTheme"
         tools:replace="icon">
         <activity
-            android:name=".mvp.ui.activities.SplashActivity"
+            android:name="com.ristone.businessasso.mvp.ui.activities.SplashActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -82,16 +82,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mvp.ui.activities.MainActivity"
+            android:name="com.ristone.businessasso.mvp.ui.activities.MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".mvp.ui.activities.NewDetailActivity" />
-        <activity android:name=".mvp.ui.activities.SearchActivity" />
-        <activity android:name=".mvp.ui.activities.PlaceActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.NewDetailActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.SearchActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.PlaceActivity" />
         <activity
-            android:name=".mvp.ui.activities.LoginActivity"
+            android:name="com.ristone.businessasso.mvp.ui.activities.LoginActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".mvp.ui.activities.RetPasswordActivity" />
-        <activity android:name=".mvp.ui.activities.MeetingDetailActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.RetPasswordActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.MeetingDetailActivity" />
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
@@ -154,7 +154,7 @@
 
         <!-- User defined. 用户自定义的广播接收器 -->
         <receiver
-            android:name=".mvp.receiver.MyBroadcastReceiver"
+            android:name="com.ristone.businessasso.mvp.receiver.MyBroadcastReceiver"
             android:enabled="true">
             <intent-filter>
 
@@ -187,20 +187,20 @@
             android:name="JPUSH_APPKEY"
             android:value="${JPUSH_APPKEY}" />
 
-        <activity android:name=".mvp.ui.activities.WebActivity" />
-        <activity android:name=".mvp.ui.activities.AboutActivity" />
-        <activity android:name=".mvp.ui.activities.ManagerActivity" />
-        <activity android:name=".mvp.ui.activities.AssisManActivity" />
-        <activity android:name=".mvp.ui.activities.NewsManActivity" />
-        <activity android:name=".mvp.ui.activities.AddAssisActivity" />
-        <activity android:name=".mvp.ui.activities.ApplyActivity" />
-        <activity android:name=".mvp.ui.activities.AddressListActivity" />
-        <activity android:name=".mvp.ui.activities.PhoneDetailActivity" />
-        <activity android:name=".mvp.ui.activities.AreaActivity" />
-        <activity android:name=".mvp.ui.activities.TopicListActivity" />
-        <activity android:name=".mvp.ui.activities.ExamsActivity" />
-        <activity android:name=".mvp.ui.activities.DropDetailActivity" />
-        <activity android:name=".mvp.ui.activities.QzybActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.WebActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.AboutActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.ManagerActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.AssisManActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.NewsManActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.AddAssisActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.ApplyActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.AddressListActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.PhoneDetailActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.AreaActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.TopicListActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.ExamsActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.DropDetailActivity" />
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.QzybActivity" />
 
         <!-- 设置key -->
         <meta-data
@@ -209,7 +209,7 @@
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"/>
 
-        <activity android:name=".mvp.ui.activities.CActivity"
+        <activity android:name="com.ristone.businessasso.mvp.ui.activities.CActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
     </application>

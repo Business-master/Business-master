@@ -43,7 +43,7 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content">-->
     <!--</com.bus.business.mvp.view.CustomGridView>-->
-    <com.bus.business.mvp.view.CustomRecyclerView
+    <com.ristone.businessasso.mvp.view.CustomRecyclerView
         android:id="@+id/details_custom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

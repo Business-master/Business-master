@@ -45,24 +45,24 @@
             android:layout_marginBottom="50dp"
             android:orientation="vertical">
 
-            <com.bus.business.mvp.view.DropdownListView
+            <com.ristone.businessasso.mvp.view.DropdownListView
                 android:id="@+id/dropdownType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
-            <com.bus.business.mvp.view.DropdownListView
+            <com.ristone.businessasso.mvp.view.DropdownListView
                 android:id="@+id/dropdownLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
-            <com.bus.business.mvp.view.DropdownListView
+            <com.ristone.businessasso.mvp.view.DropdownListView
                 android:id="@+id/dropdownDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
-            <com.bus.business.mvp.view.DropdownListView
+            <com.ristone.businessasso.mvp.view.DropdownListView
                 android:id="@+id/dropdownLimit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"
         android:src="@mipmap/icon_thermometer" />
 
-    <com.bus.business.widget.autofittextview.AutofitTextView
+    <com.ristone.businessasso.widget.autofittextview.AutofitTextView
         android:id="@+id/tv_maxW"
         android:layout_width="30dp"
         android:layout_height="wrap_content"

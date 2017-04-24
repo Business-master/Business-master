@@ -126,7 +126,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </RelativeLayout>
-                <com.bus.business.mvp.view.CustomGridView
+                <com.ristone.businessasso.mvp.view.CustomGridView
                     android:numColumns="1"
                     android:id="@+id/down_fj"
                     android:layout_width="match_parent"

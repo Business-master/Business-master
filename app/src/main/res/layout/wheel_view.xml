@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <com.bus.business.mvp.view.WheelView
+    <com.ristone.businessasso.mvp.view.WheelView
         android:id="@+id/wheel_view_wv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

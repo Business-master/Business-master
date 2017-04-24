@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.bus.business.mvp.ui.activities.WebActivity">
+    tools:context="com.ristone.businessasso.mvp.ui.activities.WebActivity">
 
     <include layout="@layout/layout_main_header" />
 
-    <com.bus.business.widget.ProgressWebView
+    <com.ristone.businessasso.widget.ProgressWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

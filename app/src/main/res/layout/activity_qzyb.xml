@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:fitsSystemWindows="true"
-    tools:context="com.bus.business.mvp.ui.activities.QzybActivity">
+    tools:context="com.ristone.businessasso.mvp.ui.activities.QzybActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"

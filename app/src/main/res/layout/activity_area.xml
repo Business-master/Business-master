@@ -4,7 +4,7 @@
     android:id="@+id/activity_area"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.bus.business.mvp.ui.activities.AboutActivity">
+    tools:context="com.ristone.businessasso.mvp.ui.activities.AboutActivity">
         <TextView
             android:layout_marginLeft="5dp"
             android:padding="10dp"

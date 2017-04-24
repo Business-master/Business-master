@@ -88,7 +88,7 @@
                     android:layout_height="1dp"
                     android:background="#EEEEEE"/>
 
-                <com.bus.business.mvp.view.CustomListView
+                <com.ristone.businessasso.mvp.view.CustomListView
                     android:id="@+id/listView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
