@@ -115,7 +115,7 @@ public class MainActivity extends CheckPermissionsActivity {
                         chageIndex(1);
                         break;
                     case R.id.foot_bar_wan:
-//                        chageIndex(2);//暂时去掉专家的点击事件
+                        chageIndex(2);//暂时去掉专家的点击事件
                         break;
                     case R.id.foot_bar_financial:
                         chageIndex(3);

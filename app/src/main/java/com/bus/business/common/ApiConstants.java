@@ -10,6 +10,7 @@ public class ApiConstants {
 
     //线下
     public static final String NETEAST_HOST = "http://172.16.10.15:9300/";
+//    public static final String NETEAST_HOST = "http://43.254.24.113:9100/";//新的外网地址
     public static final String NETEAST_IMG_HOST = "http://files.heweather.com/cond_icon/%s.png";
 
     //线上
