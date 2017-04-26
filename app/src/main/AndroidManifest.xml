@@ -206,6 +206,7 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="d637bf0f1c14e709b6f3c759dd783513" />
+            <!--android:value="d637bf0f1c14e709b6f3c759dd783513" />-->//旧包key
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"/>
 

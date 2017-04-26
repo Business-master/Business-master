@@ -1,11 +1,15 @@
 package com.ristone.businessasso.mvp.receiver;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +27,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.inject.Inject;
+
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -35,6 +41,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = "MyReceiver";
     private NotificationManager nm;
     private String myValue = "";
+
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -64,7 +72,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
             openNotification(context, bundle);
             //判断app进程是否存活
-            if (SystemUtils.isAppAlive(context, "com.bus.business")) {
+//            if (SystemUtils.isAppAlive(context, "com.bus.business")) {
+            if (SystemUtils.isAppAlive(context, "com.ristone.businessasso")) {
                 //如果存活的话，就直接启动DetailActivity，但要考虑一种情况，就是app的进程虽然仍然在
                 //但Task栈已经空了，比如用户点击Back键退出应用，但进程还没有被系统回收，如果直接启动
                 //DetailActivity,再按Back键就不会返回MainActivity了。所以在启动
@@ -93,8 +102,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 //如果app进程已经被杀死，先重新启动app，将DetailActivity的启动参数传入Intent中，参数经过
                 //SplashActivity传入MainActivity，此时app的初始化已经完成，在MainActivity中就可以根据传入             //参数跳转到DetailActivity中去了
                 Log.i("NotificationReceiver", "the app process is dead");
-                Intent launchIntent = context.getPackageManager().
-                        getLaunchIntentForPackage("com.bus.business");
+                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.ristone.businessasso");
+//                Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.bus.business");
                 launchIntent.setFlags(
                         Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                 Bundle args = new Bundle();
@@ -110,22 +119,40 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
     private void openHintDialog(Context context,String message) {
        //提示会议改动弹窗
-                        View view = LayoutInflater.from(context).inflate(R.layout.main_hint_dialog,null);
+                        final View view = LayoutInflater.from(context).inflate(R.layout.main_hint_dialog,null);
                         TextView textView = (TextView) view.findViewById(R.id.ensure_mhd);
                         TextView msg = (TextView) view.findViewById(R.id.msg_mhd);
                         msg.setText(message);
-                        final AlertDialog dialog=  new AlertDialog.Builder(context)
-                                .setView(view)
-                                .setCancelable(false)
-                                .create();
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);
-                        dialog.show();
-                        textView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
+//                        final AlertDialog dialog=  new AlertDialog.Builder(context)
+//                                .setView(view)
+//                                .setCancelable(false)
+//                                .create();
+////        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);
+//        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+//                        dialog.show();
+//                        textView.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+
+
+        final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams para = new WindowManager.LayoutParams();
+        para.height = -1;
+        para.width = -1;
+        para.format = 1;
+        para.dimAmount=0.8f;
+        para.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+//        para.type = WindowManager.LayoutParams.TYPE_TOAST;
+        para.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        wm.addView(view, para);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wm.removeView(view);
+            }});
     }
 
     private void receiveMessage(Context context, Bundle bundle) {
@@ -140,7 +167,19 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
             e.printStackTrace();
         }
         Log.d(TAG, "推送自定义信息 title : " + title+ "message : " + message+"extras : " + extras+"msg:"+msg);
-        openHintDialog(context,msg);
+
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            if (Settings.canDrawOverlays(context)){
+                openHintDialog(context,msg);
+            }else {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        }else {
+            openHintDialog(context,msg);
+        }
+//        openHintDialog(context,msg);
     }
 
     private void receivingNotification(Context context, Bundle bundle) {

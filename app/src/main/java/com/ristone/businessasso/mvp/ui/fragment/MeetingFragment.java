@@ -18,6 +18,7 @@ import com.ristone.businessasso.listener.JoinMeetingCallBack;
 import com.ristone.businessasso.mvp.entity.MeetingBean;
 import com.ristone.businessasso.mvp.entity.response.base.BaseRspObj;
 import com.ristone.businessasso.mvp.event.CheckMeetingStateEvent;
+import com.ristone.businessasso.mvp.event.MeetingDetailEvent;
 import com.ristone.businessasso.mvp.event.ReadMeeting;
 import com.ristone.businessasso.mvp.presenter.impl.MeetingPresenterImpl;
 import com.ristone.businessasso.mvp.ui.adapter.MeetingsAdapter;
@@ -166,6 +167,7 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     public void onDestroy() {
         super.onDestroy();
         mNewsPresenter.onDestory();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -271,17 +273,22 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
         onRefresh();
     }
 
-    @Override
-    public void onResume() {
-        onRefresh();
-        super.onResume();
+    @Subscribe
+    public void onEventMainThread(MeetingDetailEvent event){
+        /**
+         *1 报名 2请假 3签到
+         */
+
+        if(event.getPos()>0){
+            onRefresh();
+        }
     }
 
-    @Override
-    public void onDestroyView() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroyView();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        onRefresh();
+//    }
 
     @Override
     public void getJoinResult(boolean flag) {

@@ -61,7 +61,7 @@ import static android.widget.LinearLayout.*;
 public class ApplyActivity extends BaseActivity implements AssisView{
 
     private MeetingBean meetingBean;
-    private  int index=-1;
+//    private  int index=-1;
     private static final String[] MINZU = new String[56];
     private static final String[] ZHIWU = new String[]{"董事长", "总裁", "总经理", "副总经理",
             "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
@@ -176,7 +176,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         EventBus.getDefault().register(this);
         userBean  =UsrMgr.getUseInfo();
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
-        index = getIntent().getIntExtra("index",-1);
+//        index = getIntent().getIntExtra("index",-1);
 
 
         setCustomTitle("会务报名");
@@ -502,9 +502,9 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                     @Override
                     public void onNext(BaseRspObj responseBody) {
                         if (responseBody.getHead().getRspCode().equals("0")) {
-                          if (index==1){
+//                          if (index==1){
                                 EventBus.getDefault().post(new MeetingDetailEvent(1));
-                            }
+//                            }
                             finish();
                         }
                         UT.show(responseBody.getHead().getRspMsg());

@@ -41,7 +41,7 @@ public abstract class CheckPermissionsActivity extends BaseActivity
 			Manifest.permission.ACCESS_FINE_LOCATION,
 			Manifest.permission.WRITE_EXTERNAL_STORAGE,
 			Manifest.permission.READ_EXTERNAL_STORAGE,
-			Manifest.permission.READ_PHONE_STATE,Manifest.permission.CALL_PHONE
+			Manifest.permission.READ_PHONE_STATE
 			};
 	
 	private static final int PERMISSON_REQUESTCODE = 0;

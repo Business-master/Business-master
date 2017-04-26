@@ -359,7 +359,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                             Intent intent = new Intent(mContext,ApplyActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putSerializable(MeetingBean.MEETINGBEAN,meetingBean);
-                            bundle.putInt("index",0);
+//                            bundle.putInt("index",0);
                             intent.putExtras(bundle);
                             if(meetingBean!=null){
                                 mContext.startActivity(intent);
@@ -424,9 +424,8 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
                             KLog.d(responseBody.toString());
                             if (responseBody.getHead().getRspCode().equals("0")) {
                                 joinMeetingCallBack.getJoinResult(true);
-                                UT.show(responseBody.getHead().getRspMsg());
                             }
-
+                            UT.show(responseBody.getHead().getRspMsg());
                         }
                     });
         }

@@ -187,8 +187,8 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
         KLog.a("详情内容：-----"+meetingBean.getMeetingContent());
         if(!TextUtils.isEmpty( meetingBean.getMeetingContent())){
-            mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, meetingBean.getMeetingContent(), 2);
-            mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(), mUrlImageGetter, null));
+            mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv,meetingBean.getMeetingContent(), 2);
+            mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(),mUrlImageGetter, null));
         }
 
 //        ViewTreeObserver viewTreeObserver = mNewsDetailBodyTv.getViewTreeObserver();
@@ -476,7 +476,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
                 Intent intent = new Intent(this,ApplyActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(MeetingBean.MEETINGBEAN,meetingBean);
-                bundle.putInt("index",1);
+//                bundle.putInt("index",1);
                 intent.putExtras(bundle);
                 if(meetingBean!=null){
                     startActivity(intent);
@@ -525,7 +525,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        KLog.e("requestCode--->" + requestCode);
+//        KLog.e("requestCode--->" + requestCode);
         switch (requestCode) {
             case MainActivity.CAMERA_OK:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

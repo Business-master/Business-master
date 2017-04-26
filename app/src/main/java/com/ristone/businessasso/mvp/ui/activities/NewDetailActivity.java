@@ -54,6 +54,8 @@ public class NewDetailActivity extends BaseActivity {
     LinearLayout ll;
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
+    @BindView(R.id.ll_detail_fund_tv)
+    LinearLayout ll_detail_fund_tv;
 
     private URLImageGetter mUrlImageGetter;
 
@@ -73,12 +75,25 @@ public class NewDetailActivity extends BaseActivity {
         newsType = getIntent().getIntExtra(Constants.NEWS_TYPE,0);
 
         setCustomTitle(setTitle());
+        switch (newsType){
+            case Constants.DETAIL_XUN_TYPE:
+                ll_detail_fund_tv.setVisibility(View.GONE);
+                break;
+            case Constants.DETAIL_XIE_TYPE:
+                ll_detail_fund_tv.setVisibility(View.VISIBLE);
+                break;
+            case Constants.DETAIL_TOP_TYPE:
+                ll_detail_fund_tv.setVisibility(View.GONE);
+                break;
+
+        }
         showOrGoneSearchRl(View.GONE);
         mFundTv.setVisibility(setContentTitleVisible() ? View.GONE : View.VISIBLE);
         mPhone.setVisibility(setContentTitleVisible() ? View.GONE : View.VISIBLE);
         mTag.setVisibility(setContentTitleVisible() ? View.GONE : View.VISIBLE);
         mZPhone.setVisibility(setContentTitleVisible() ? View.GONE : View.VISIBLE);
         loadNewDetail();
+
     }
 
     private String setTitle(){
@@ -176,11 +191,16 @@ public class NewDetailActivity extends BaseActivity {
         mTitle.setText(bean.getTitle());
         mDateTv.setText("发表时间 : " + DateUtil.getCurGroupDay(bean.getCtime()));
         mFrom.setText("来源 : "+bean.getAreaCode());
-//        mFundTv.setText("项目总投资" + formAmount(bean.getInAmount()) + "元");
+
+
+
+//        mFundTv.setText("项目总投资 : " + formAmount(bean.getInAmount()) + "元");
 //        String str= "<font color='#999999'>项目总投资：</font>" + formMoney(bean.getInAmount()) + "元";
 //        mFundTv.setText(Html.fromHtml(str));
 
         mFundTv.setText(formMoney(bean.getInAmount()) + "元");
+        KLog.a("项目投资----------"+formMoney(bean.getInAmount())+"实际数据"+bean.getInAmount());
+//        mFundTv.setText("项目总投资 : " +formMoney(bean.getInAmount()) + "元");
         mPhone.setText("联系电话 : " + bean.getPhoneNo());
         mZPhone.setText("座机电话 : "+bean.getPlane());
         mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, bean.getContentS(), 2);
@@ -194,7 +214,7 @@ public class NewDetailActivity extends BaseActivity {
     }
 
     private String formMoney(double num){
-        DecimalFormat df = new DecimalFormat(".00");
+        DecimalFormat df = new DecimalFormat("#.00");
         String str;
         if (num>=Math.pow(10,8)){
             num=num/Math.pow(10,8);
@@ -203,7 +223,7 @@ public class NewDetailActivity extends BaseActivity {
             num=num/Math.pow(10,4);
             str =df.format(num)+"万";
         }else {
-            str =""+formAmount(num);
+            str =""+df.format(num);
         }
         return str;
     }
