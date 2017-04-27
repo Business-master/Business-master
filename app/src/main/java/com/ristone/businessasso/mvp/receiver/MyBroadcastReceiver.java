@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -44,6 +45,9 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
 
 
+    public static final  int REQUEST_CODE=0X123;
+
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (null == nm) {
@@ -64,7 +68,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "接受到推送下来的通知");
-
+            EventBus.getDefault().post(new ChangeSearchStateEvent(3));
             receivingNotification(context, bundle);
             receiveMessage(context, bundle);
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
@@ -127,8 +131,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 //                                .setView(view)
 //                                .setCancelable(false)
 //                                .create();
-////        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);
-//        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+//        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_TOAST);
+////        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
 //                        dialog.show();
 //                        textView.setOnClickListener(new View.OnClickListener() {
 //                            @Override
@@ -145,8 +149,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         para.format = 1;
         para.dimAmount=0.8f;
         para.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
-//        para.type = WindowManager.LayoutParams.TYPE_TOAST;
-        para.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        para.type = WindowManager.LayoutParams.TYPE_TOAST;
+//        para.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         wm.addView(view, para);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,18 +172,20 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         }
         Log.d(TAG, "推送自定义信息 title : " + title+ "message : " + message+"extras : " + extras+"msg:"+msg);
 
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            if (Settings.canDrawOverlays(context)){
-                openHintDialog(context,msg);
-            }else {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        }else {
-            openHintDialog(context,msg);
-        }
-//        openHintDialog(context,msg);
+//        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+//            if (Settings.canDrawOverlays(context)){
+//                openHintDialog(context,msg);
+//            }else {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                context.startActivity(intent);
+////                intent.setData(Uri.parse("package:"+context.getPackageName()));
+////                new MainActivity().startActivityForResult(intent,REQUEST_CODE);
+//            }
+//        }else {
+//            openHintDialog(context,msg);
+//        }
+        openHintDialog(context,msg);
     }
 
     private void receivingNotification(Context context, Bundle bundle) {

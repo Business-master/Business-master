@@ -1,18 +1,22 @@
 package com.ristone.businessasso.mvp.ui.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -52,6 +56,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Subscriber;
+
+import static com.ristone.businessasso.mvp.receiver.MyBroadcastReceiver.REQUEST_CODE;
 
 public class MainActivity extends CheckPermissionsActivity {
     public static final int CAMERA_OK = 2;
@@ -112,9 +118,9 @@ public class MainActivity extends CheckPermissionsActivity {
                     case R.id.foot_bar_im:
                         chageIndex(1);
                         break;
-                    case R.id.foot_bar_wan:
-                        chageIndex(2);//暂时去掉专家的点击事件
-                        break;
+//                    case R.id.foot_bar_wan:
+//                        chageIndex(2);//暂时去掉专家的点击事件
+//                        break;
                     case R.id.foot_bar_financial:
                         chageIndex(3);
                         break;
@@ -503,9 +509,14 @@ public class MainActivity extends CheckPermissionsActivity {
             String scanResult = bundle.getString("result");
 //            UT.show(scanResult);
             signInMeeting(scanResult);
+
         }
 
     }
+
+
+
+
 
     private void signInMeeting(String meetingId) {
         KLog.a("location--->"+location.toStr());
