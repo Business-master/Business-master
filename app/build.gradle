@@ -7,11 +7,11 @@ android {
     buildToolsVersion "24.0.2"
 
     defaultConfig {
-        applicationId "com.bus.business"
+        applicationId "com.ristone.businessasso"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "2.3.5"
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -21,7 +21,9 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "b83445fc11a8ca010756b05d",//JPush上注册包的名对应的appkey.
+//                JPUSH_APPKEY : "b83445fc11a8ca010756b05d",//JPush上注册包的名对应的appkey.旧包旧key
+                JPUSH_APPKEY : "b28f8f54177f655ad18d9199",//JPush上注册包的名对应的appkey.新包公共key
+//                JPUSH_APPKEY : "5c8394e003a8f963e4a4d6e4",//JPush上注册包的名对应的appkey.新包自定义key
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
