@@ -33,6 +33,7 @@ import com.ristone.businessasso.utils.UT;
 import com.socks.library.KLog;
 
 import java.io.File;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,9 +84,7 @@ public class MineFragment extends BaseFragment {
     @Inject
     Activity mActivity;
 
-    private static final String[] ZHIWU = new String[]{"董事长", "总裁", "总经理", "副总经理",
-            "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
-            "干部","其他职务"};
+    private   String[] ZHIWU ;
     private  List<NationBean> dutyList=new ArrayList<>();
     private String dutyCode;
 
@@ -147,6 +146,11 @@ public class MineFragment extends BaseFragment {
                         KLog.d(rspNationBean.toString());
                         if ("0".equals(rspNationBean.getHead().getRspCode())){
                             dutyList = (List<NationBean>) rspNationBean.getBody().getList();
+                            ZHIWU = new String[dutyList.size()];
+                            for (int i = 0; i <dutyList.size() ; i++) {
+                                NationBean nationBean = dutyList.get(i);
+                               ZHIWU[i]=nationBean.getName();
+                            }
                         }
                     }
                 });
@@ -210,6 +214,7 @@ public class MineFragment extends BaseFragment {
                         startActivity(new Intent(mActivity, AssisManActivity.class));
                 break;
             case R.id.tv_position:
+                if (ZHIWU!=null&&ZHIWU.length>0)
                 initWheelView("请选择职务",ZHIWU);
                 break;
         }

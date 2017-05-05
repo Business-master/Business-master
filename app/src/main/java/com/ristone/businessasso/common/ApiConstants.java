@@ -72,7 +72,7 @@ public class ApiConstants {
 
     public static final String GetAllNation = "/gsl-api/user/getAllNation";
 
-    public static final String GetAllPosition = "/gsl-api/user/getAllPosition";
+    public static final String GetAllPosition = "/gsl-api/user/getAllPosition";//获取所有的职务
 
     public static final String GetMeetingDetail = "gsl-api/gsl/meeting/meetingDetail";
 

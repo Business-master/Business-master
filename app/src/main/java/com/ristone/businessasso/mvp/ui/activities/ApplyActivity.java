@@ -26,6 +26,7 @@ import com.ristone.businessasso.mvp.entity.MeetingBean;
 
 import com.ristone.businessasso.mvp.entity.NationBean;
 import com.ristone.businessasso.mvp.entity.UserBean;
+import com.ristone.businessasso.mvp.entity.response.RspNationBean;
 import com.ristone.businessasso.mvp.entity.response.base.BaseRspObj;
 import com.ristone.businessasso.mvp.event.AssisApplyEvent;
 import com.ristone.businessasso.mvp.event.MeetingDetailEvent;
@@ -63,9 +64,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     private MeetingBean meetingBean;
 //    private  int index=-1;
     private static final String[] MINZU = new String[56];
-    private static final String[] ZHIWU = new String[]{"董事长", "总裁", "总经理", "副总经理",
-            "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
-            "干部","其他职务"};
+    private  String[] ZHIWU ;
 
 
 
@@ -154,6 +153,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
 
     private List<NationBean> nation_List;
+    private  List<NationBean> dutyList=new ArrayList<>();//职务列表
     private AssisBean assisBean ;
     private List<AssisBean> list;
     private UserBean userBean=null;
@@ -182,7 +182,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         setCustomTitle("会务报名");
         showOrGoneSearchRl(View.GONE);
         initPresenter();
-
+        initJobData();
         TypedArray minzu = getResources().obtainTypedArray(R.array.minzu);
         for (int i = 0; i <minzu.length() ; i++) {
             MINZU[i]=minzu.getString(i);
@@ -226,6 +226,36 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
         initSelfView();//初始化选择本人
 
+    }
+
+
+    private void initJobData() {
+        RetrofitManager.getInstance(1).getAllPosition()
+                .compose(TransformUtils.<RspNationBean>defaultSchedulers())
+                .subscribe(new Subscriber<RspNationBean>() {
+                    @Override
+                    public void onCompleted() {
+                        KLog.d();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        KLog.e(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(RspNationBean rspNationBean) {
+                        KLog.d(rspNationBean.toString());
+                        if ("0".equals(rspNationBean.getHead().getRspCode())){
+                            dutyList = (List<NationBean>) rspNationBean.getBody().getList();
+                            ZHIWU = new String[dutyList.size()];
+                            for (int i = 0; i <dutyList.size() ; i++) {
+                                NationBean nationBean = dutyList.get(i);
+                                ZHIWU[i]=nationBean.getName();
+                            }
+                        }
+                    }
+                });
     }
 
     private void initSelfView() {
@@ -373,6 +403,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                 sex="女";
                 break;
             case R.id.apply_duty:
+                if (ZHIWU!=null&&ZHIWU.length>0)
                 initWheelView("请选择职务",ZHIWU);
                 break;
             case R.id.sleep_zl:

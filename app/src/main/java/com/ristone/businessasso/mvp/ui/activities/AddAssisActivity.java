@@ -71,9 +71,7 @@ public class AddAssisActivity extends BaseActivity {
     String nationCode;
     String assisId;//修改助理的ID
 
-    private static final String[] ZHIWU = new String[]{"董事长", "总裁", "总经理", "副总经理",
-            "经理", "秘书", "助理", "主席", "副主席","常务副主席","党组书记","秘书长","处长","副处长","调研员","副调研员",
-            "干部","其他职务"};
+    private  String[] ZHIWU ;
     private static final String[] MINZU = new String[56];
     private String [] companyNames;
 
@@ -248,6 +246,11 @@ public class AddAssisActivity extends BaseActivity {
                         KLog.d(rspNationBean.toString());
                         if ("0".equals(rspNationBean.getHead().getRspCode())){
                             dutyList = (List<NationBean>) rspNationBean.getBody().getList();
+                            ZHIWU = new String[dutyList.size()];
+                            for (int i = 0; i <dutyList.size() ; i++) {
+                                NationBean nationBean = dutyList.get(i);
+                                ZHIWU[i]=nationBean.getName();
+                            }
                         }
                     }
                 });
@@ -282,6 +285,7 @@ public class AddAssisActivity extends BaseActivity {
                     addAssis();
                 break;
             case R.id.duty_add_assis:
+                if (ZHIWU!=null&&ZHIWU.length>0)
                 initWheelView("请选择职务",ZHIWU);
                 break;
             case R.id.nation_add_assis:
