@@ -85,6 +85,9 @@ public class NewDetailActivity extends BaseActivity {
             case Constants.DETAIL_TOP_TYPE:
                 ll_detail_fund_tv.setVisibility(View.GONE);
                 break;
+            case Constants.DETAIL_POLICY_TYPE:
+                ll_detail_fund_tv.setVisibility(View.GONE);
+                break;
 
         }
         showOrGoneSearchRl(View.GONE);
@@ -104,6 +107,8 @@ public class NewDetailActivity extends BaseActivity {
                 return "商讯详情";
             case Constants.DETAIL_TOP_TYPE:
                 return "专题详情";
+            case Constants.DETAIL_POLICY_TYPE:
+                return "金融政策详情";
 
         }
         return "";
@@ -111,12 +116,13 @@ public class NewDetailActivity extends BaseActivity {
 
     private boolean setContentTitleVisible(){
         return newsType == Constants.DETAIL_XUN_TYPE||
-                newsType == Constants.DETAIL_TOP_TYPE;
+                newsType == Constants.DETAIL_TOP_TYPE||newsType == Constants.DETAIL_POLICY_TYPE;
     }
 
     private void loadNewDetail() {
         switch (newsType){
             case Constants.DETAIL_XUN_TYPE:
+            case Constants.DETAIL_POLICY_TYPE:
                 RetrofitManager.getInstance(1).getNewDetailObservable(newsId)
                         .compose(TransformUtils.<RspNewDetailBean>defaultSchedulers())
                         .subscribe(new Subscriber<RspNewDetailBean>() {

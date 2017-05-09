@@ -4,8 +4,10 @@ import com.ristone.businessasso.common.LoadNewsType;
 import com.ristone.businessasso.mvp.entity.response.RspNewsBean;
 import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
 import com.ristone.businessasso.mvp.interactor.NewsInteractor;
+import com.ristone.businessasso.mvp.interactor.PolicyInteractor;
 import com.ristone.businessasso.mvp.interactor.impl.NewsInteractorImpl;
 import com.ristone.businessasso.mvp.presenter.NewsPresenter;
+import com.ristone.businessasso.mvp.presenter.PolicyPresenter;
 import com.ristone.businessasso.mvp.presenter.base.BasePresenterImpl;
 import com.ristone.businessasso.mvp.view.NewsView;
 import com.socks.library.KLog;
@@ -20,13 +22,13 @@ import javax.inject.Inject;
  * @create_date 16/12/22
  */
 public class NewsPresenterImpl extends BasePresenterImpl<NewsView<List<BaseNewBean>>, RspNewsBean>
-        implements NewsPresenter {
+        implements PolicyPresenter {
 
-    private NewsInteractor<RspNewsBean> mNewsInteractor;
+    private PolicyInteractor<RspNewsBean> mNewsInteractor;
     private int pageNum;
     private int numPerPage;
     private String title;
-    private String typeId;
+    private String types;
     private boolean mIsRefresh = true;
     private boolean misFirstLoad;
 
@@ -73,16 +75,13 @@ public class NewsPresenterImpl extends BasePresenterImpl<NewsView<List<BaseNewBe
     }
 
     @Override
-    public void setNewsTypeAndId(int pageNum, int numPerPage,String title,int status) {
+    public void setNewsTypeAndId(int pageNum, int numPerPage,String title,String types) {
         this.pageNum = pageNum;
         this.numPerPage = numPerPage;
         this.title = title;
+        this.types = types;
     }
 
-    @Override
-    public void setNewsTypeAndId(int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
-
-    }
 
     @Override
     public void refreshData() {
@@ -98,6 +97,6 @@ public class NewsPresenterImpl extends BasePresenterImpl<NewsView<List<BaseNewBe
     }
 
     private void loadNewsData() {
-        mSubscription = mNewsInteractor.loadNews(this, pageNum, numPerPage,title,-1);
+        mSubscription = mNewsInteractor.loadNews(this, pageNum, numPerPage,title,types);
     }
 }

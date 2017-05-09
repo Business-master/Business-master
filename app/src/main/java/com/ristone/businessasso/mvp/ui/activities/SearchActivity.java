@@ -51,6 +51,7 @@ import com.ristone.businessasso.mvp.view.BusinessView;
 import com.ristone.businessasso.mvp.view.CustomListView;
 import com.ristone.businessasso.mvp.view.MeetingView;
 import com.ristone.businessasso.mvp.view.NewsView;
+import com.ristone.businessasso.utils.Const;
 import com.ristone.businessasso.utils.DBUtils;
 import com.ristone.businessasso.utils.NetUtil;
 import com.ristone.businessasso.utils.UT;
@@ -267,7 +268,7 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     }
 
     private void initNewsPresenter() {
-        mNewsPresenter.setNewsTypeAndId(pageNum, numPerPage, mSearchEdit.getText().toString().trim(),-1);
+        mNewsPresenter.setNewsTypeAndId(pageNum, numPerPage, mSearchEdit.getText().toString().trim(), Constants.new_types);
         mNewsPresenter.attachView(this);
         mPresenter = mNewsPresenter;
         mPresenter.onCreate();

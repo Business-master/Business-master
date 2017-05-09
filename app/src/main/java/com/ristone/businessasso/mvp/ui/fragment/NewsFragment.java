@@ -199,7 +199,7 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
 
     private void initPresenter() {
         if (isXunFrg) {
-            mNewsPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",0);
+            mNewsPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",Constants.new_types);
             mNewsPresenter.attachView(this);
             mPresenter = mNewsPresenter;
             mPresenter.onCreate();

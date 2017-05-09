@@ -39,6 +39,7 @@ import com.ristone.businessasso.mvp.ui.fragment.ExpertFragment;
 import com.ristone.businessasso.mvp.ui.fragment.MainPagerFragment;
 import com.ristone.businessasso.mvp.ui.fragment.MineFragment;
 import com.ristone.businessasso.mvp.ui.fragment.NewMeetingFragment;
+import com.ristone.businessasso.mvp.ui.fragment.PolicyFragment;
 import com.ristone.businessasso.mvp.ui.fragment.SzhwFragment;
 import com.ristone.businessasso.repository.network.RetrofitManager;
 import com.ristone.businessasso.utils.TransformUtils;
@@ -441,7 +442,8 @@ public class MainActivity extends CheckPermissionsActivity {
                 return new ExpertFragment();
             case 3:
 //                return new ExpertFragment();
-                return SzhwFragment.getIntance(3);
+                return SzhwFragment.getIntance(3);//金融政策 死数据
+//                return new PolicyFragment();
             case 4:
                 return new MineFragment();
             default:

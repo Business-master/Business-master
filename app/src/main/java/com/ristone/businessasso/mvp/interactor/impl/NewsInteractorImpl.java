@@ -3,6 +3,7 @@ package com.ristone.businessasso.mvp.interactor.impl;
 import com.ristone.businessasso.listener.RequestCallBack;
 import com.ristone.businessasso.mvp.entity.response.RspNewsBean;
 import com.ristone.businessasso.mvp.interactor.NewsInteractor;
+import com.ristone.businessasso.mvp.interactor.PolicyInteractor;
 import com.ristone.businessasso.repository.network.RetrofitManager;
 import com.ristone.businessasso.utils.MyUtils;
 import com.ristone.businessasso.utils.TransformUtils;
@@ -18,7 +19,7 @@ import rx.Subscription;
  * @version 1.0
  * @create_date 16/12/22
  */
-public class NewsInteractorImpl implements NewsInteractor<RspNewsBean> {
+public class NewsInteractorImpl implements PolicyInteractor<RspNewsBean> {
 
     @Inject
     public NewsInteractorImpl() {
@@ -26,9 +27,9 @@ public class NewsInteractorImpl implements NewsInteractor<RspNewsBean> {
     }
 
     @Override
-    public Subscription loadNews(final RequestCallBack<RspNewsBean> listener, int pageNum, int numPerPage,String title,int status) {
+    public Subscription loadNews(final RequestCallBack<RspNewsBean> listener, int pageNum, int numPerPage,String title,String types) {
 
-        return RetrofitManager.getInstance(1).getNewsListObservable(pageNum, numPerPage,title)
+        return RetrofitManager.getInstance(1).getNewsListObservable(pageNum, numPerPage,title,types)
                 .compose(TransformUtils.<RspNewsBean>defaultSchedulers())
                 .subscribe(new Subscriber<RspNewsBean>() {
                     @Override
@@ -49,16 +50,5 @@ public class NewsInteractorImpl implements NewsInteractor<RspNewsBean> {
                     }
                 });
     }
-
-    @Override
-    public Subscription loadNews(RequestCallBack<RspNewsBean> listener) {
-        return null;
-    }
-
-    @Override
-    public Subscription loadNews(RequestCallBack<RspNewsBean> listener, int pageNum, int numPerPage, String title, String areaCode, String chambreCode) {
-        return null;
-    }
-
 
 }

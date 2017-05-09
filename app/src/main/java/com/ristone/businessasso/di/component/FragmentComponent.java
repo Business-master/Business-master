@@ -14,6 +14,7 @@ import com.ristone.businessasso.mvp.ui.fragment.MineFragment;
 import com.ristone.businessasso.mvp.ui.fragment.NewMeetingFragment;
 import com.ristone.businessasso.mvp.ui.fragment.NewsFragment;
 import com.ristone.businessasso.mvp.ui.fragment.NewsFragment_new;
+import com.ristone.businessasso.mvp.ui.fragment.PolicyFragment;
 import com.ristone.businessasso.mvp.ui.fragment.QzybFragment;
 import com.ristone.businessasso.mvp.ui.fragment.SzhwFragment;
 import com.ristone.businessasso.mvp.ui.fragment.WanFragment;
@@ -57,4 +58,6 @@ public interface FragmentComponent {
     void inject(ExpertFragment expertFragment);
 
     void inject(DropDownFragment dropDownFragment);
+
+    void inject(PolicyFragment policyFragment);
 }
