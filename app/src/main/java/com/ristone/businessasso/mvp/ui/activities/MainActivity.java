@@ -442,8 +442,8 @@ public class MainActivity extends CheckPermissionsActivity {
                 return new ExpertFragment();
             case 3:
 //                return new ExpertFragment();
-                return SzhwFragment.getIntance(3);//金融政策 死数据
-//                return new PolicyFragment();
+//                return SzhwFragment.getIntance(3);//金融政策 死数据
+                return new PolicyFragment();
             case 4:
                 return new MineFragment();
             default:

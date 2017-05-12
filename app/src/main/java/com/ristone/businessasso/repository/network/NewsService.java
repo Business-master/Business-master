@@ -17,6 +17,7 @@ import com.ristone.businessasso.mvp.entity.response.RspNewDetailBean;
 import com.ristone.businessasso.mvp.entity.response.RspNewsBean;
 import com.ristone.businessasso.mvp.entity.response.RspOrganBean;
 import com.ristone.businessasso.mvp.entity.response.RspPhoneBookbean;
+import com.ristone.businessasso.mvp.entity.response.RspQuestionnaireBean;
 import com.ristone.businessasso.mvp.entity.response.RspTopicsBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserInfoBean;
@@ -178,5 +179,8 @@ public interface NewsService {
     Observable<RspMeetingDetailBean> getMeetingDetail(@Query("userId") String userId,
                                                 @Query("meetingId") String meetingId);
 
+    @FormUrlEncoded
+    @POST(ApiConstants.Questionnaire)
+    Observable<RspQuestionnaireBean> getAllQuestionnaire(@FieldMap Map<String, String> map);
 
 }

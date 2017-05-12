@@ -23,6 +23,7 @@ import com.ristone.businessasso.mvp.entity.response.RspNewDetailBean;
 import com.ristone.businessasso.mvp.entity.response.RspNewsBean;
 import com.ristone.businessasso.mvp.entity.response.RspOrganBean;
 import com.ristone.businessasso.mvp.entity.response.RspPhoneBookbean;
+import com.ristone.businessasso.mvp.entity.response.RspQuestionnaireBean;
 import com.ristone.businessasso.mvp.entity.response.RspTopicsBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserInfoBean;
@@ -148,12 +149,14 @@ public class RetrofitManager {
         }
     };
 
-    public Observable<RspNewsBean> getNewsListObservable(int pageNum, int numPerPage, String title) {
+    public Observable<RspNewsBean> getNewsListObservable(int pageNum, int numPerPage, String title,String types) {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
         map.put("numPerPage", numPerPage + "");
         if (!TextUtils.isEmpty(title))
             map.put("title", title);
+        if (!TextUtils.isEmpty(types))
+            map.put("types", types);
         KLog.a(map.toString());
         return mNewsService.getNewsList(map);
     }
@@ -477,6 +480,14 @@ public class RetrofitManager {
         map.put("userId", userId);
         KLog.a(map.toString());
         return mNewsService.GetUserById(map);
+    }
+
+    public Observable<RspQuestionnaireBean> getAllQuestionnaire(int  pageNum,int numPerPage) {
+        Map<String, String> map = new HashMap<>();
+        map.put("pageNum", String.valueOf(pageNum));
+        map.put("numPerPage",  String.valueOf(numPerPage));
+        KLog.a(map.toString());
+        return mNewsService.getAllQuestionnaire(map);
     }
 
 

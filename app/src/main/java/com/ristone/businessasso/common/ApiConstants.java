@@ -83,4 +83,6 @@ public class ApiConstants {
 
     public static final String GetUserById = "gsl-api/user/getUserById";
 
+    public static final String Questionnaire = "gsl-api/questionnaire/list";//调查问卷
+
 }

@@ -10,6 +10,7 @@ import com.ristone.businessasso.mvp.ui.activities.AddressListActivity;
 import com.ristone.businessasso.mvp.ui.activities.ApplyActivity;
 import com.ristone.businessasso.mvp.ui.activities.AreaActivity;
 import com.ristone.businessasso.mvp.ui.activities.AssisManActivity;
+import com.ristone.businessasso.mvp.ui.activities.ExamsActivity;
 import com.ristone.businessasso.mvp.ui.activities.ManagerActivity;
 import com.ristone.businessasso.mvp.ui.activities.MeetingDetailActivity;
 import com.ristone.businessasso.mvp.ui.activities.NewDetailActivity;
@@ -54,4 +55,6 @@ public interface ActivityComponent {
     void inject(TopicListActivity topicListActivity);
 
     void inject(QzybActivity qzybActivity);
+
+    void inject(ExamsActivity examsActivity);
 }
