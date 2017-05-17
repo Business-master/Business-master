@@ -80,6 +80,17 @@
                 android:drawableRight="@null"
                 android:text="单位职务" />
 
+            <!--<TextView-->
+                <!--android:clickable="true"-->
+                <!--android:id="@+id/tv_position"-->
+                <!--style="@style/mine_text"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:ellipsize="end"-->
+                <!--android:drawableRight="@drawable/apply_xiabiao"-->
+                <!--android:gravity="right|center_vertical"-->
+                <!--android:maxLines="1"-->
+                <!--android:text="请选择职务" /> -->
             <TextView
                 android:clickable="true"
                 android:id="@+id/tv_position"
@@ -87,10 +98,10 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:drawableRight="@drawable/apply_xiabiao"
+                android:drawableRight="@mipmap/icon_credit"
                 android:gravity="right|center_vertical"
                 android:maxLines="1"
-                android:text="请选择职务" />
+                tools:text="董事长" />
         </LinearLayout>
 
 

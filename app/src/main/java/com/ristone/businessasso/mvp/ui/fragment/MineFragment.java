@@ -2,12 +2,14 @@ package com.ristone.businessasso.mvp.ui.fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -164,24 +166,25 @@ public class MineFragment extends BaseFragment {
 
 
     @OnClick({R.id.tv_account_manager, R.id.about_us, R.id.rl_clear_cache
-            , R.id.tv_logout, R.id.tv_address_list,R.id.tv_assis_manager,R.id.tv_position})
+            , R.id.tv_logout,R.id.tv_assis_manager,R.id.tv_position})
+//            , R.id.tv_logout, R.id.tv_address_list,R.id.tv_assis_manager,R.id.tv_position})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_account_manager:
                 userBean.intentToClass(mActivity);
                 break;
-            case R.id.tv_address_list:
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    /**
-                     * 请求权限是一个异步任务  不是立即请求就能得到结果 在结果回调中返回
-                     */
-                    mActivity.requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, CONTACTS_OK);
-                } else {
-                    startActivity(new Intent(mActivity, AddressListActivity.class));
-                }
-
-                break;
+//            case R.id.tv_address_list:
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    /**
+//                     * 请求权限是一个异步任务  不是立即请求就能得到结果 在结果回调中返回
+//                     */
+//                    mActivity.requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, CONTACTS_OK);
+//                } else {
+//                    startActivity(new Intent(mActivity, AddressListActivity.class));
+//                }
+//
+//                break;
             case R.id.about_us:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
@@ -214,66 +217,47 @@ public class MineFragment extends BaseFragment {
                         startActivity(new Intent(mActivity, AssisManActivity.class));
                 break;
             case R.id.tv_position:
-                if (ZHIWU!=null&&ZHIWU.length>0)
-                initWheelView("请选择职务",ZHIWU);
+//                if (ZHIWU!=null&&ZHIWU.length>0)
+//                initWheelView("请选择职务",ZHIWU);
+                 choiceDutyDialog();
                 break;
         }
     }
 
-
-    private void initWheelView(final String title, String[] planets) {
-        final String[] selecItem = {""};
-        View outerView = LayoutInflater.from(mActivity).inflate(R.layout.wheel_view, null);
-        final WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
-        wv.setOffset(2);
-        wv.setItems(Arrays.asList(planets));
-        wv.setSeletion(0);
-        wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-            @Override
-            public void onSelected(int selectedIndex, String item) {
-                selecItem[0] =item;
-            }
-        });
-
-        new DialogUtils.Builder(mActivity)
-                .setTitle(title)
-                .setContentView(outerView)
-                .setCancelable(false)
-                .setPositiveButton("确定",new DialogInterface.OnClickListener(){
+    private void choiceDutyDialog() {
+        final EditText editText = new EditText(mActivity);
+        final  AlertDialog dialog = new AlertDialog.Builder(mActivity)
+                .setTitle("修改职务")
+                .setView(editText)
+                .setPositiveButton("确定",null)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //如果没有选择，默认选择第一个
-                        if ("".equals(selecItem[0])){
-                            selecItem[0]= wv.getSeletedItem();
-                        }
-
-                            if ("请选择职务".equals(title)){
-                                changePosition(selecItem[0],dialog);
-                            }
-
-
-
+                        dialog.dismiss();
                     }
-                }).create().show();
+                })
+                .create();
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String duty = editText.getText().toString().trim();
+                if (TextUtils.isEmpty(duty)){
+                    UT.show("输入不能为空");
+                    return;
+                }
+                changePosition2(dialog,duty);
+            }
+        });
     }
 
-    private void changePosition(final String duty, final DialogInterface dialog) {
 
-        //遍历 根据 中文 职务 查找 code
-        if (!TextUtils.isEmpty(duty)& dutyList!=null &dutyList.size()>0){
-            for (int i = 0; i <dutyList.size() ; i++) {
-                NationBean nationBean = dutyList.get(i);
-                if (duty.equals(nationBean.getName())){
-                    dutyCode = nationBean.getCode();
-                    break;
-                }
-            }
-        }
+    private void changePosition2(final DialogInterface dialog, final String duty) {
 
-//         if (!TextUtils.isEmpty(dutyCode)&!(userBean.getIsAssistant()==1)){
-         if (!TextUtils.isEmpty(dutyCode)){
+        if (!TextUtils.isEmpty(duty)){
             //改变职务
-            RetrofitManager.getInstance(1).getChangeAssisObservable(dutyCode)
+            RetrofitManager.getInstance(1).getChangeAssisObservable(duty)
                     .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                     .subscribe(new Subscriber<BaseRspObj>() {
                         @Override
@@ -299,6 +283,86 @@ public class MineFragment extends BaseFragment {
 
         }
     }
+
+
+//    private void initWheelView(final String title, String[] planets) {
+//        final String[] selecItem = {""};
+//        View outerView = LayoutInflater.from(mActivity).inflate(R.layout.wheel_view, null);
+//        final WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
+//        wv.setOffset(2);
+//        wv.setItems(Arrays.asList(planets));
+//        wv.setSeletion(0);
+//        wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+//            @Override
+//            public void onSelected(int selectedIndex, String item) {
+//                selecItem[0] =item;
+//            }
+//        });
+//
+//        new DialogUtils.Builder(mActivity)
+//                .setTitle(title)
+//                .setContentView(outerView)
+//                .setCancelable(false)
+//                .setPositiveButton("确定",new DialogInterface.OnClickListener(){
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        //如果没有选择，默认选择第一个
+//                        if ("".equals(selecItem[0])){
+//                            selecItem[0]= wv.getSeletedItem();
+//                        }
+//
+//                            if ("请选择职务".equals(title)){
+//                                changePosition(selecItem[0],dialog);
+//                            }
+//
+//
+//
+//                    }
+//                }).create().show();
+//    }
+
+//    private void changePosition(final String duty, final DialogInterface dialog) {
+//
+//        //遍历 根据 中文 职务 查找 code
+//        if (!TextUtils.isEmpty(duty)& dutyList!=null &dutyList.size()>0){
+//            for (int i = 0; i <dutyList.size() ; i++) {
+//                NationBean nationBean = dutyList.get(i);
+//                if (duty.equals(nationBean.getName())){
+//                    dutyCode = nationBean.getCode();
+//                    break;
+//                }
+//            }
+//        }
+//
+////         if (!TextUtils.isEmpty(dutyCode)&!(userBean.getIsAssistant()==1)){
+//         if (!TextUtils.isEmpty(dutyCode)){
+//            //改变职务
+//            RetrofitManager.getInstance(1).getChangeAssisObservable(dutyCode)
+//                    .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
+//                    .subscribe(new Subscriber<BaseRspObj>() {
+//                        @Override
+//                        public void onCompleted() {
+//                            KLog.d();
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            KLog.e(e.toString());
+//                        }
+//
+//                        @Override
+//                        public void onNext(BaseRspObj baseRspObj) {
+//                            KLog.d(baseRspObj.toString());
+//                            if (baseRspObj.getHead().getRspCode().equals("0")){
+//                                tv_position.setText(duty);
+//                                dialog.dismiss();
+//                            }
+//                            UT.show(baseRspObj.getHead().getRspMsg());
+//                        }
+//                    });
+//
+//        }
+//    }
 
     /**
      * 计算缓存的大小
