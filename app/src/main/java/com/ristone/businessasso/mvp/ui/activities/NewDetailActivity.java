@@ -209,6 +209,7 @@ public class NewDetailActivity extends BaseActivity {
 //        mFundTv.setText("项目总投资 : " +formMoney(bean.getInAmount()) + "元");
         mPhone.setText("联系电话 : " + bean.getPhoneNo());
         mZPhone.setText("座机电话 : "+bean.getPlane());
+        KLog.a("详情内容：-----"+bean.getContentS());
         mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, bean.getContentS(), 2);
         mNewsDetailBodyTv.setText(Html.fromHtml(bean.getContentS(), mUrlImageGetter, null));
     }

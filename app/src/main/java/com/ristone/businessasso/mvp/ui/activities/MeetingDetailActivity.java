@@ -188,18 +188,20 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         KLog.a("详情内容：-----"+meetingBean.getMeetingContent());
         if(!TextUtils.isEmpty( meetingBean.getMeetingContent())){
             mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv,meetingBean.getMeetingContent(), 2);
-            mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(),mUrlImageGetter, null));
+//            mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(),mUrlImageGetter, null));
+
+            ViewTreeObserver viewTreeObserver = mNewsDetailBodyTv.getViewTreeObserver();
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    int width = mNewsDetailBodyTv.getWidth();
+                    mUrlImageGetter.setmPicWidth(width);
+                    mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(), mUrlImageGetter, null));
+                }
+            });
         }
 
-//        ViewTreeObserver viewTreeObserver = mNewsDetailBodyTv.getViewTreeObserver();
-//        viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                           int width = mNewsDetailBodyTv.getWidth();
-//                mUrlImageGetter.setmPicWidth(width);
-//                mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(), mUrlImageGetter, null));
-//            }
-//        });
+
 
 
 

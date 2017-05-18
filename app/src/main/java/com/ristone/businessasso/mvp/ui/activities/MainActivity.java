@@ -44,6 +44,7 @@ import com.ristone.businessasso.mvp.ui.fragment.SzhwFragment;
 import com.ristone.businessasso.repository.network.RetrofitManager;
 import com.ristone.businessasso.utils.TransformUtils;
 import com.ristone.businessasso.utils.UT;
+import com.ristone.businessasso.utils.UpdateUtils;
 import com.ristone.libzxing.activity.CaptureActivity;
 import com.socks.library.KLog;
 
@@ -59,6 +60,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 import rx.Subscriber;
 
 import static com.ristone.businessasso.mvp.receiver.MyBroadcastReceiver.REQUEST_CODE;
+import static com.ristone.businessasso.utils.UpdateUtils.checkUpdate;
 
 public class MainActivity extends CheckPermissionsActivity {
     public static final int CAMERA_OK = 2;
@@ -146,6 +148,9 @@ public class MainActivity extends CheckPermissionsActivity {
 //        textUnreadLabel.setVisibility(hasPush ? View.VISIBLE : View.GONE);
         getNotReadCount();
         initLocation();
+
+        //检查版本更新
+        checkUpdate(MainActivity.this);
     }
 
     /**

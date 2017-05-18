@@ -21,6 +21,7 @@ import com.ristone.businessasso.mvp.entity.response.RspQuestionnaireBean;
 import com.ristone.businessasso.mvp.entity.response.RspTopicsBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserInfoBean;
+import com.ristone.businessasso.mvp.entity.response.RspVersion;
 import com.ristone.businessasso.mvp.entity.response.RspWeatherBean;
 import com.ristone.businessasso.mvp.entity.response.base.BaseRspObj;
 
@@ -182,5 +183,9 @@ public interface NewsService {
     @FormUrlEncoded
     @POST(ApiConstants.Questionnaire)
     Observable<RspQuestionnaireBean> getAllQuestionnaire(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(ApiConstants.VersionInfo)
+    Observable<RspVersion> getVersionInfo(@FieldMap Map<String, String> map);
 
 }

@@ -85,4 +85,8 @@ public class ApiConstants {
 
     public static final String Questionnaire = "gsl-api/questionnaire/list";//调查问卷
 
+    public static final String VersionInfo = "gsl-api/mblVersion/getVersionInfo";//版本信息
+
+    public static final String DownVersion = "gsl-api/mblVersion/download";//下载版本
+
 }

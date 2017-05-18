@@ -27,6 +27,7 @@ import com.ristone.businessasso.mvp.entity.response.RspQuestionnaireBean;
 import com.ristone.businessasso.mvp.entity.response.RspTopicsBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserBean;
 import com.ristone.businessasso.mvp.entity.response.RspUserInfoBean;
+import com.ristone.businessasso.mvp.entity.response.RspVersion;
 import com.ristone.businessasso.mvp.entity.response.RspWeatherBean;
 import com.ristone.businessasso.mvp.entity.response.base.BaseRspObj;
 import com.ristone.businessasso.utils.NetUtil;
@@ -489,6 +490,16 @@ public class RetrofitManager {
         KLog.a(map.toString());
         return mNewsService.getAllQuestionnaire(map);
     }
+
+    public Observable<RspVersion> getVersionInfo(String  nowVersion, String platform) {
+        Map<String, String> map = new HashMap<>();
+        map.put("nowVersion", String.valueOf(nowVersion));
+        map.put("platform",  String.valueOf(platform));
+        KLog.a(map.toString());
+        return mNewsService.getVersionInfo(map);
+    }
+
+
 
 
 }
