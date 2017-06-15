@@ -45,6 +45,7 @@ import com.ristone.businessasso.mvp.ui.fragment.PolicyFragment;
 import com.ristone.businessasso.mvp.ui.fragment.SzhwFragment;
 import com.ristone.businessasso.repository.network.RetrofitManager;
 
+import com.ristone.businessasso.utils.MarkUtils;
 import com.ristone.businessasso.utils.TransformUtils;
 import com.ristone.businessasso.utils.UT;
 import com.ristone.businessasso.utils.UpdateUtils;
@@ -294,6 +295,8 @@ public class MainActivity extends CheckPermissionsActivity {
 
                             notReadCounnt = notReadBean.getBody().getNotReaded();
                             KLog.a("新的会议数据：--------"+notReadCounnt);
+                            //添加桌面角标
+                            MarkUtils.getInstance(MainActivity.this).setMark(notReadCounnt);
                             if (notReadCounnt>0){
                                 //未读会议
                                 textUnreadLabel.setVisibility(View.VISIBLE);

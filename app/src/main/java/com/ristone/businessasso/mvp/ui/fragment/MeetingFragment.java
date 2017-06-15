@@ -223,6 +223,7 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
     public void onItemClick(View view, int i) {
         MeetingBean meetingBean1 =  mNewsListAdapter.getData().get(i);
         mNewsListAdapter.getData().get(i).intentToDetail(mActivity,i);
+            // * hasReaded :1 会议信息未读 2 已读
         if (meetingBean1.getHasReaded()==1){
             changeReadState(meetingBean1);
         }
@@ -247,6 +248,8 @@ public class MeetingFragment extends BaseFragment implements SwipeRefreshLayout.
                         if ("0".equals(responseBody.getHead().getRspCode())){
                             KLog.d(responseBody.toString());
                             onRefresh();//跳转会议详情，刷新页面
+
+                            // status : 0  状态 0未召开 1正在召开 2会议结束
                             if ("0".equals(meetingBean1.getStatus())){
                                 EventBus.getDefault().post(new ReadMeeting(true));
                             }

@@ -27,8 +27,7 @@ public class SplashActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        //添加角标
-        MarkUtils.getInstance(this).setMark(5);
+
         initLaunchLogo();
     }
 
