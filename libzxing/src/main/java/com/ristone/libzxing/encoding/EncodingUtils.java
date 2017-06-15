@@ -1,4 +1,4 @@
-package com.bus.libzxing.encoding;
+package com.ristone.libzxing.encoding;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

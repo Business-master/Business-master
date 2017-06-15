@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.decode;
+package com.ristone.libzxing.decode;
 
 import com.google.zxing.BarcodeFormat;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.decode;
+package com.ristone.libzxing.decode;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -24,8 +24,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
-import com.bus.libzxing.R;
-import com.bus.libzxing.activity.CaptureActivity;
+import com.ristone.libzxing.R;
+import com.ristone.libzxing.activity.CaptureActivity;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.bus.libzxing.activity;
+package com.ristone.libzxing.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,12 +32,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.bus.libzxing.R;
-import com.bus.libzxing.camera.CameraManager;
-import com.bus.libzxing.decode.DecodeThread;
-import com.bus.libzxing.utils.BeepManager;
-import com.bus.libzxing.utils.CaptureActivityHandler;
-import com.bus.libzxing.utils.InactivityTimer;
+import com.ristone.libzxing.R;
+import com.ristone.libzxing.camera.CameraManager;
+import com.ristone.libzxing.decode.DecodeThread;
+import com.ristone.libzxing.utils.BeepManager;
+import com.ristone.libzxing.utils.CaptureActivityHandler;
+import com.ristone.libzxing.utils.InactivityTimer;
 import com.google.zxing.Result;
 
 import java.io.IOException;

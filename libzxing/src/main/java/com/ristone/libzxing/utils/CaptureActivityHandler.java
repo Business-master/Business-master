@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.utils;
+package com.ristone.libzxing.utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,10 +22,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.bus.libzxing.R;
-import com.bus.libzxing.activity.CaptureActivity;
-import com.bus.libzxing.camera.CameraManager;
-import com.bus.libzxing.decode.DecodeThread;
+import com.ristone.libzxing.R;
+import com.ristone.libzxing.activity.CaptureActivity;
+import com.ristone.libzxing.camera.CameraManager;
+import com.ristone.libzxing.decode.DecodeThread;
 import com.google.zxing.Result;
 
 /**

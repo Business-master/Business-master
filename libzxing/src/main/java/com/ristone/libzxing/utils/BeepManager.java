@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.utils;
+package com.ristone.libzxing.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,7 +26,7 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.bus.libzxing.R;
+import com.ristone.libzxing.R;
 
 import java.io.Closeable;
 import java.io.IOException;

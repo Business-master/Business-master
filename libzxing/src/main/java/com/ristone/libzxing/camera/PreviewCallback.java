@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.camera;
+package com.ristone.libzxing.camera;
 
 import android.graphics.Point;
 import android.hardware.Camera;

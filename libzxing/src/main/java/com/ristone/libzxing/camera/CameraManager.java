@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.camera;
+package com.ristone.libzxing.camera;
 
 import android.content.Context;
 import android.graphics.Point;
@@ -24,7 +24,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-import com.bus.libzxing.camera.open.OpenCameraInterface;
+import com.ristone.libzxing.camera.open.OpenCameraInterface;
 
 import java.io.IOException;
 

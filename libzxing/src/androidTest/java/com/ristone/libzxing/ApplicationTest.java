@@ -1,4 +1,4 @@
-package com.bus.libzxing;
+package com.ristone.libzxing;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

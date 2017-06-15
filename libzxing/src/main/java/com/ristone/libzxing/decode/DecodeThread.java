@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.decode;
+package com.ristone.libzxing.decode;
 
 import android.os.Handler;
 import android.os.Looper;
 
-import com.bus.libzxing.activity.CaptureActivity;
+import com.ristone.libzxing.activity.CaptureActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.bus.libzxing.camera.open;
+package com.ristone.libzxing.camera.open;
 
 import android.hardware.Camera;
 import android.util.Log;

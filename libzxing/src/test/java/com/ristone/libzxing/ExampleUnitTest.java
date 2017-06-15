@@ -1,4 +1,4 @@
-package com.bus.libzxing;
+package com.ristone.libzxing;
 
 import org.junit.Test;
 
