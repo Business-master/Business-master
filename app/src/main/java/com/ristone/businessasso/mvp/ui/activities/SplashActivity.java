@@ -1,5 +1,6 @@
 package com.ristone.businessasso.mvp.ui.activities;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,9 @@ import android.support.v4.app.FragmentActivity;
 import com.ristone.businessasso.R;
 import com.ristone.businessasso.common.Constants;
 import com.ristone.businessasso.common.UsrMgr;
+import com.ristone.businessasso.utils.MarkUtils;
+
+
 
 /**
  * @author xch
@@ -18,11 +22,13 @@ public class SplashActivity extends FragmentActivity {
 
     private Class cls;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        //添加角标
+//        MarkUtils.getInstance(this).setMark(5);
         initLaunchLogo();
     }
 

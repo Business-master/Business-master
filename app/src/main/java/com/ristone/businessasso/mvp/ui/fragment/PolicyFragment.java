@@ -32,15 +32,17 @@ import com.ristone.businessasso.common.NewsType;
 import com.ristone.businessasso.mvp.entity.BannerBean;
 import com.ristone.businessasso.mvp.entity.WeatherBean;
 import com.ristone.businessasso.mvp.entity.WeathersBean;
+import com.ristone.businessasso.mvp.entity.XinWenBean;
 import com.ristone.businessasso.mvp.entity.response.RspBannerBean;
 import com.ristone.businessasso.mvp.entity.response.RspWeatherBean;
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
+
 import com.ristone.businessasso.mvp.presenter.impl.BusinessPresenterImpl;
 import com.ristone.businessasso.mvp.presenter.impl.NewsPresenterImpl;
 import com.ristone.businessasso.mvp.ui.activities.ExamsActivity;
 import com.ristone.businessasso.mvp.ui.activities.NewDetailActivity;
 import com.ristone.businessasso.mvp.ui.activities.TopicListActivity;
-import com.ristone.businessasso.mvp.ui.adapter.NewsAdapter;
+
+import com.ristone.businessasso.mvp.ui.adapter.PolicyAdapter;
 import com.ristone.businessasso.mvp.ui.fragment.base.BaseFragment;
 import com.ristone.businessasso.mvp.ui.fragment.base.BaseLazyFragment;
 import com.ristone.businessasso.mvp.view.BusinessView;
@@ -69,7 +71,7 @@ import butterknife.BindView;
  * 金融政策   碎片
  */
 public class PolicyFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener
-        , NewsView<List<BaseNewBean>>
+        , NewsView<List<XinWenBean>>
         , BaseQuickAdapter.RequestLoadMoreListener
         , BaseQuickAdapter.OnRecyclerViewItemClickListener{
 
@@ -89,7 +91,7 @@ public class PolicyFragment extends BaseFragment implements SwipeRefreshLayout.O
     NewsPresenterImpl mNewsPresenter;
 
     private BaseQuickAdapter mNewsListAdapter;
-    private List<BaseNewBean> likeBeanList;
+    private List<XinWenBean> likeBeanList;
 
     private int pageNum = 1;
 
@@ -143,7 +145,7 @@ public class PolicyFragment extends BaseFragment implements SwipeRefreshLayout.O
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
 
         likeBeanList = new ArrayList<>();
-        mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
+        mNewsListAdapter = new PolicyAdapter(R.layout.item_news, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);
 
         mNewsListAdapter.setOnRecyclerViewItemClickListener(this);
@@ -154,7 +156,7 @@ public class PolicyFragment extends BaseFragment implements SwipeRefreshLayout.O
 
 
     @Override
-    public void setNewsList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
+    public void setNewsList(List<XinWenBean> newsBean, @LoadNewsType.checker int loadType) {
         switch (loadType) {
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -222,7 +224,7 @@ public class PolicyFragment extends BaseFragment implements SwipeRefreshLayout.O
             mNewsPresenter.loadMore();
     }
 
-    private void checkIsEmpty(List<BaseNewBean> newsSummary) {
+    private void checkIsEmpty(List<XinWenBean> newsSummary) {
         if (newsSummary == null && mNewsListAdapter.getData() == null) {
             mNewsRV.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
@@ -245,7 +247,7 @@ public class PolicyFragment extends BaseFragment implements SwipeRefreshLayout.O
 
     @NonNull
     private Intent setIntent(int position) {
-        List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
+        List<XinWenBean> newsSummaryList = mNewsListAdapter.getData();
         Intent intent = new Intent(mActivity, NewDetailActivity.class);
         intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
         intent.putExtra(Constants.NEWS_TYPE,Constants.DETAIL_POLICY_TYPE);

@@ -3,6 +3,7 @@ package com.ristone.businessasso.mvp.ui.activities.base;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.ristone.businessasso.App;
 import com.ristone.businessasso.R;
+import com.ristone.businessasso.common.UsrMgr;
 import com.ristone.businessasso.di.component.ActivityComponent;
 import com.ristone.businessasso.di.component.DaggerActivityComponent;
 import com.ristone.businessasso.di.module.ActivityModule;
@@ -36,6 +38,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends ActionBarAct
     TextView mToolbarTitle;
     @BindView(R.id.img_logo)
     ImageView img_logo;
+    @BindView(R.id.title_logo)
+    TextView title_logo;
 
     protected ActivityComponent mActivityComponent;
 
@@ -76,6 +80,14 @@ public abstract class BaseActivity<T extends BasePresenter> extends ActionBarAct
                     finish();
                 }
             });
+
+            if (UsrMgr.getUseInfo()!=null){
+                if (!TextUtils.isEmpty(UsrMgr.getUseInfo().getAreaName()))
+                {
+                    title_logo.setText(UsrMgr.getUseInfo().getAreaName());
+                }
+            }
+
         }
         initViews();
     }

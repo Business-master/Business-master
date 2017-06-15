@@ -8,12 +8,9 @@ import android.view.View;
 
 import com.ristone.businessasso.R;
 import com.ristone.businessasso.common.NewsType;
-import com.ristone.businessasso.mvp.event.ChangeSearchStateEvent;
 import com.ristone.businessasso.mvp.ui.adapter.ViewPageAdapter;
 import com.ristone.businessasso.mvp.ui.fragment.base.BaseFragment;
 import com.socks.library.KLog;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +64,8 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
         mTitles.add(TITLE[2]);
 
         mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XUNXI));
-        mFragments.add(NewsFragment.getInstance(NewsType.TYPE_REFRESH_XIEHUI));
-        mFragments.add(NewsFragment_new.getInstance(NewsType.TYPE_REFRESH_AREA));
+        mFragments.add(BusinessFragment.getInstance(NewsType.TYPE_REFRESH_XIEHUI));
+        mFragments.add(OrganizationFragment.getInstance(NewsType.TYPE_REFRESH_AREA));
 
         mViewPageAdapter = new ViewPageAdapter(getActivity().getSupportFragmentManager(), mTitles, mFragments);
 
@@ -110,7 +107,7 @@ public class MainPagerFragment extends BaseFragment implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
         KLog.a("position--->"+position);
-        EventBus.getDefault().post(new ChangeSearchStateEvent(position));
+//        EventBus.getDefault().post(new ChangeSearchStateEvent(position));
     }
 
     @Override

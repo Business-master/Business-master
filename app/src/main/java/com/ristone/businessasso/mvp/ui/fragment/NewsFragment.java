@@ -23,6 +23,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.daimajia.slider.library.Indicators.PagerIndicator;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.ristone.businessasso.App;
 import com.ristone.businessasso.R;
 import com.ristone.businessasso.common.ApiConstants;
@@ -32,31 +37,30 @@ import com.ristone.businessasso.common.NewsType;
 import com.ristone.businessasso.mvp.entity.BannerBean;
 import com.ristone.businessasso.mvp.entity.WeatherBean;
 import com.ristone.businessasso.mvp.entity.WeathersBean;
+import com.ristone.businessasso.mvp.entity.XinWenBean;
 import com.ristone.businessasso.mvp.entity.response.RspBannerBean;
 import com.ristone.businessasso.mvp.entity.response.RspWeatherBean;
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
-import com.ristone.businessasso.mvp.presenter.impl.BusinessPresenterImpl;
+
 import com.ristone.businessasso.mvp.presenter.impl.NewsPresenterImpl;
 import com.ristone.businessasso.mvp.ui.activities.ExamsActivity;
 import com.ristone.businessasso.mvp.ui.activities.NewDetailActivity;
 import com.ristone.businessasso.mvp.ui.activities.TopicListActivity;
+
 import com.ristone.businessasso.mvp.ui.adapter.NewsAdapter;
 import com.ristone.businessasso.mvp.ui.fragment.base.BaseLazyFragment;
-import com.ristone.businessasso.mvp.view.BusinessView;
 import com.ristone.businessasso.mvp.view.NewsView;
 import com.ristone.businessasso.repository.network.RetrofitManager;
 import com.ristone.businessasso.utils.CustomUtils;
 import com.ristone.businessasso.utils.DateUtil;
 import com.ristone.businessasso.utils.NetUtil;
 import com.ristone.businessasso.utils.TransformUtils;
+import com.ristone.businessasso.utils.VideoVisibleUtils;
 import com.ristone.businessasso.widget.RecyclerViewDivider;
 import com.ristone.businessasso.widget.autofittextview.AutofitTextView;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.daimajia.slider.library.Indicators.PagerIndicator;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.socks.library.KLog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,6 +69,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import fm.jiecao.jcvideoplayer_lib.VideoEvent;
 import rx.Subscriber;
 
 import static android.view.View.VISIBLE;
@@ -73,12 +79,11 @@ import static android.view.View.VISIBLE;
  * @author xch
  * @version 1.0
  * @create_date 16/12/23
- * 首页  新闻----商情   碎片
+ * 首页  新闻(含有视频)   碎片
  */
 public class
 NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshListener
-        , NewsView<List<BaseNewBean>>
-        , BusinessView
+        , NewsView<List<XinWenBean>>
         , BaseQuickAdapter.RequestLoadMoreListener
         , BaseQuickAdapter.OnRecyclerViewItemClickListener
         , BaseSliderView.OnSliderClickListener {
@@ -109,17 +114,21 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
     private ImageView mImgAct;//调查问卷点击图标
 
     private WeatherBean weatherBean;
+
+    boolean flag = false;//是否为视频新闻
+
     @Inject
     Activity mActivity;
     @Inject
     NewsPresenterImpl mNewsPresenter;
-    @Inject
-    BusinessPresenterImpl mBusinessPresenter;
+
     private BaseQuickAdapter mNewsListAdapter;
-    private List<BaseNewBean> likeBeanList;
+    private List<XinWenBean> likeBeanList;
 
     private int pageNum = 1;
     private boolean isXunFrg;//true是讯息页,false是协会页
+    int videoposition =Integer.MAX_VALUE;//视频新闻的位置
+    VideoVisibleUtils videoVisibleUtils;
 
     public static NewsFragment getInstance(@NewsType.checker int checker) {
         NewsFragment newsFragment = new NewsFragment();
@@ -136,8 +145,10 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
 
     @Override
     public void initViews(View view) {
-
+        EventBus.getDefault().register(this);
     }
+
+
 
     @Override
     public void onFirstUserVisible() {
@@ -153,6 +164,8 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
         initPresenter();
         loadBannerData();
         loadWeather();
+        videoVisibleUtils =    new VideoVisibleUtils(mActivity);
+        videoVisibleUtils.judgeVisible(mNewsRV);
     }
 
     private void initIntentData() {
@@ -188,6 +201,13 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
+
+
+    @Override
     public int getLayoutId() {
         return R.layout.fragment_news;
     }
@@ -203,11 +223,6 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
             mNewsPresenter.attachView(this);
             mPresenter = mNewsPresenter;
             mPresenter.onCreate();
-        } else {
-            mBusinessPresenter.setNewsTypeAndId(pageNum, Constants.numPerPage, "",0);
-            mBusinessPresenter.attachView(this);
-            mPresenter = mBusinessPresenter;
-            mPresenter.onCreate();
         }
 
     }
@@ -220,10 +235,9 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
                 LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
         mNewsRV.setLayoutManager(mLayoutManager);
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
-//        mLayoutManager.scrollToPositionWithOffset(3, 0);
-//        mLayoutManager.setStackFromEnd(true);
         likeBeanList = new ArrayList<>();
-        mNewsListAdapter = new NewsAdapter(R.layout.item_news, likeBeanList);
+
+        mNewsListAdapter = new NewsAdapter(R.layout.layout_new, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);
         if (isXunFrg) {
             mNewsListAdapter.addHeaderView(weatherView);
@@ -349,8 +363,7 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
 
 
     @Override
-    public void setNewsList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
-//        checkIsEmpty(newsBean.getLikeList());
+    public void setNewsList(List<XinWenBean> newsBean, @LoadNewsType.checker int loadType) {
         switch (loadType) {
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
@@ -407,8 +420,8 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
     public void onRefresh() {
         if (isXunFrg) {
             mNewsPresenter.refreshData();
-        } else {
-            mBusinessPresenter.refreshData();
+            loadBannerData();
+            loadWeather();
         }
 
     }
@@ -419,23 +432,19 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
         super.onDestroy();
         if (isXunFrg) {
             mNewsPresenter.onDestory();
-        } else {
-            mBusinessPresenter.onDestory();
         }
-
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void onLoadMoreRequested() {
         if (isXunFrg) {
             mNewsPresenter.loadMore();
-        } else {
-            mBusinessPresenter.loadMore();
         }
 
     }
 
-    private void checkIsEmpty(List<BaseNewBean> newsSummary) {
+    private void checkIsEmpty(List<XinWenBean> newsSummary) {
         if (newsSummary == null && mNewsListAdapter.getData() == null) {
             mNewsRV.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
@@ -445,9 +454,34 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
         }
     }
 
+
+    @Subscribe
+    public void onEventMainThread(final VideoEvent event){
+        videoVisibleUtils.setPostion(event.getPosition());
+    }
+
     @Override
     public void onItemClick(View view, int position) {
-        goToNewsDetailActivity(view, position);
+
+       List<XinWenBean>  xinWenBeanList = mNewsListAdapter.getData();
+        if (xinWenBeanList!=null&&xinWenBeanList.size()>0){
+            XinWenBean xinWenBean=  xinWenBeanList.get(position);
+            if (xinWenBean!=null&&!TextUtils.isEmpty(xinWenBean.getTypes())){
+                  if (Constants.video_new.equals(xinWenBean.getTypes())){
+                      flag = true;
+                      videoposition = position;
+                  }else {
+                      flag = false;
+                  }
+            }
+        }
+
+
+
+        if(!flag){
+            goToNewsDetailActivity(view, position);
+        }
+
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -458,10 +492,10 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
 
     @NonNull
     private Intent setIntent(int position) {
-        List<BaseNewBean> newsSummaryList = mNewsListAdapter.getData();
+        List<XinWenBean> newsSummaryList = mNewsListAdapter.getData();
         Intent intent = new Intent(mActivity, NewDetailActivity.class);
         intent.putExtra(Constants.NEWS_POST_ID, newsSummaryList.get(position).getId() + "");
-        intent.putExtra(Constants.NEWS_TYPE, isXunFrg ? Constants.DETAIL_XUN_TYPE : Constants.DETAIL_XIE_TYPE);
+        intent.putExtra(Constants.NEWS_TYPE,  Constants.DETAIL_XUN_TYPE );
         return intent;
     }
 
@@ -495,33 +529,4 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
 
     }
 
-    @Override
-    public void setBusinessList(List<BaseNewBean> newsBean, @LoadNewsType.checker int loadType) {
-        switch (loadType) {
-            case LoadNewsType.TYPE_REFRESH_SUCCESS:
-                mSwipeRefreshLayout.setRefreshing(false);
-                mNewsListAdapter.setNewData(newsBean);
-                checkIsEmpty(newsBean);
-                break;
-            case LoadNewsType.TYPE_REFRESH_ERROR:
-                mSwipeRefreshLayout.setRefreshing(false);
-                checkIsEmpty(newsBean);
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
-                if (newsBean == null){
-                    return;
-                }
-                if (newsBean.size() == Constants.numPerPage){
-                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, true);
-                }else {
-                    mNewsListAdapter.notifyDataChangedAfterLoadMore(newsBean, false);
-                    new CustomUtils(mActivity).showNoMore(mNewsRV);
-//                    Snackbar.make(mNewsRV, getString(R.string.no_more), Snackbar.LENGTH_SHORT).show();
-                }
-                break;
-            case LoadNewsType.TYPE_LOAD_MORE_ERROR:
-
-                break;
-        }
-    }
 }

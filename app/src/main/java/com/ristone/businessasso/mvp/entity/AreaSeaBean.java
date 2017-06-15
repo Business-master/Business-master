@@ -12,8 +12,9 @@ public class AreaSeaBean {
      * title : 习近平：各级领导干部要学网、懂网、用网
      * areaCode : 东城区工商联
      * fmImg : /news/40dff87b1710425da98447e7a614078a.jpg
-     * type : 1 新闻 2商讯
+     * type :  //2：新闻；1：商讯 5:视频
      * ctime : 1486629049000
+     *  "videoUrl":""/vedio/a0c29b1aa6f24454865951af93f48536.mp4"",  //视频新闻 中有视频地址  其他为空
      */
 
     private int id;
@@ -22,6 +23,8 @@ public class AreaSeaBean {
     private String fmImg;
     private String type;
     private long ctime;
+    private String videoUrl;
+
 
     public int getId() {
         return id;
@@ -80,6 +83,15 @@ public class AreaSeaBean {
                 ", fmImg='" + fmImg + '\'' +
                 ", type='" + type + '\'' +
                 ", ctime=" + ctime +
+                ", videoUrl='" + videoUrl + '\'' +
                 '}';
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 }

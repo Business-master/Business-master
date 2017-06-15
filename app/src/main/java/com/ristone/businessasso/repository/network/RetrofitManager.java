@@ -5,6 +5,7 @@ import android.util.SparseArray;
 
 import com.ristone.businessasso.App;
 import com.ristone.businessasso.common.ApiConstants;
+import com.ristone.businessasso.common.Constants;
 import com.ristone.businessasso.common.UsrMgr;
 import com.ristone.businessasso.mvp.entity.CashBean;
 import com.ristone.businessasso.mvp.entity.NotReadBean;
@@ -154,6 +155,13 @@ public class RetrofitManager {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
         map.put("numPerPage", numPerPage + "");
+        if(Constants.new_types.equals(types)){
+            if (UsrMgr.getUseInfo()!=null){
+                if (!TextUtils.isEmpty(UsrMgr.getUseInfo().getOrganizationArea()))
+                    map.put("organizationArea", UsrMgr.getUseInfo().getOrganizationArea());
+            }
+        }
+
         if (!TextUtils.isEmpty(title))
             map.put("title", title);
         if (!TextUtils.isEmpty(types))
@@ -219,6 +227,11 @@ public class RetrofitManager {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", pageNum + "");
         map.put("numPerPage", numPerPage + "");
+        if (UsrMgr.getUseInfo()!=null){
+            if (!TextUtils.isEmpty(UsrMgr.getUseInfo().getOrganizationArea()))
+                map.put("organizationArea", UsrMgr.getUseInfo().getOrganizationArea());
+        }
+
         if (!TextUtils.isEmpty(title))
             map.put("title", title);
         KLog.a(map.toString());

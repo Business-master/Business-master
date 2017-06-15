@@ -40,7 +40,7 @@ import rx.Subscriber;
  */
 public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
 
-
+    //joinType : 2  // 参会状态  0未报名 1未签到 2已签到 3本人参加 4助理参加  5请假   6取消报名 7未参加 8已过期
    private  Button cancel_apply;
    private   Button btn_apply;
    private   Button   btn_leave;
@@ -65,9 +65,9 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
     protected void convert(final BaseViewHolder baseViewHolder, final MeetingBean likeBean) {
         int status = Integer.valueOf(likeBean.getStatus());
 
-        View view0 = baseViewHolder.getView(R.id.item_0);//即将召开会议
-        View view1 = baseViewHolder.getView(R.id.item_1);//正在召开会议
-        View view2= baseViewHolder.getView(R.id.item_2);//历史召开会议
+        View view0 = baseViewHolder.getView(R.id.item_0);//即将召开会议 的视图
+        View view1 = baseViewHolder.getView(R.id.item_1);//正在召开会议的视图
+        View view2= baseViewHolder.getView(R.id.item_2);//历史召开会议的视图
         view0.setVisibility(View.GONE);
         view1.setVisibility(View.GONE);
         view2.setVisibility(View.GONE);

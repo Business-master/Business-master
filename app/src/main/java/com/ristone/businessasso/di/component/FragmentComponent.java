@@ -6,6 +6,7 @@ import android.content.Context;
 import com.ristone.businessasso.di.module.FragmentModule;
 import com.ristone.businessasso.di.scope.ContextLife;
 import com.ristone.businessasso.di.scope.PerFragment;
+import com.ristone.businessasso.mvp.ui.fragment.BusinessFragment;
 import com.ristone.businessasso.mvp.ui.fragment.DropDownFragment;
 import com.ristone.businessasso.mvp.ui.fragment.ExpertFragment;
 import com.ristone.businessasso.mvp.ui.fragment.MainPagerFragment;
@@ -13,7 +14,7 @@ import com.ristone.businessasso.mvp.ui.fragment.MeetingFragment;
 import com.ristone.businessasso.mvp.ui.fragment.MineFragment;
 import com.ristone.businessasso.mvp.ui.fragment.NewMeetingFragment;
 import com.ristone.businessasso.mvp.ui.fragment.NewsFragment;
-import com.ristone.businessasso.mvp.ui.fragment.NewsFragment_new;
+import com.ristone.businessasso.mvp.ui.fragment.OrganizationFragment;
 import com.ristone.businessasso.mvp.ui.fragment.PolicyFragment;
 import com.ristone.businessasso.mvp.ui.fragment.QzybFragment;
 import com.ristone.businessasso.mvp.ui.fragment.SzhwFragment;
@@ -39,7 +40,7 @@ public interface FragmentComponent {
     Activity getActivity();
 
     void inject(MainPagerFragment fragment);
-    void inject(NewsFragment fragment);
+    void inject(BusinessFragment fragment);
     void inject(MeetingFragment fragment);
     void inject(NewMeetingFragment newMeetingFragment);
 
@@ -47,7 +48,7 @@ public interface FragmentComponent {
 
     void inject(MineFragment mineFragment);
 
-    void inject(NewsFragment_new newsFragment_new);
+    void inject(OrganizationFragment organizationFragment);
 
     void inject(WanFragment2 wanFragment2);
 
@@ -60,4 +61,6 @@ public interface FragmentComponent {
     void inject(DropDownFragment dropDownFragment);
 
     void inject(PolicyFragment policyFragment);
+
+    void inject(NewsFragment newsFragment_);
 }

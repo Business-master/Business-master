@@ -22,7 +22,7 @@
         android:layout_marginLeft="10dp"
         android:gravity="center"
         android:singleLine="true"
-        android:text="-4"
+        tools:text="-4"
         android:textColor="@color/color_3bd1f7"
         android:textSize="30sp" />
 
@@ -69,7 +69,7 @@
                 android:gravity="center"
                 tools:text="多云6/-5℃"
                 android:textColor="@color/color_3bd1f7"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
 
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 tools:text="2016-12-22"
                 android:textColor="@color/color_333333"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_no_date"
@@ -94,7 +94,7 @@
                 android:layout_toRightOf="@+id/tv_times"
                 tools:text="十一月"
                 android:textColor="@color/color_333333"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_week"
@@ -104,7 +104,7 @@
                 android:layout_toRightOf="@+id/tv_no_date"
                 tools:text="周四"
                 android:textColor="@color/color_333333"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_pm"
@@ -114,7 +114,7 @@
                 android:layout_marginTop="3dp"
                 android:text="PM"
                 android:textColor="@color/color_333333"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_pmten"
@@ -125,7 +125,7 @@
                 android:layout_toRightOf="@+id/tv_pm"
                 tools:text="17"
                 android:textColor="@color/color_3bd1f7"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_xian"
@@ -136,7 +136,7 @@
                 android:layout_toRightOf="@+id/tv_pmten"
                 android:text="限行尾号:"
                 android:textColor="@color/color_333333"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/tv_carNoLimit"
@@ -147,7 +147,7 @@
                 android:layout_toRightOf="@+id/tv_xian"
                 tools:text="3 , 8"
                 android:textColor="@color/color_fc5115"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
         </RelativeLayout>
     </RelativeLayout>

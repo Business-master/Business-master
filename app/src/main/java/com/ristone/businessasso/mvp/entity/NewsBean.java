@@ -1,6 +1,6 @@
 package com.ristone.businessasso.mvp.entity;
 
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
+
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import java.util.List;
  * @create_date 16/12/22
  */
 public class NewsBean {
-    private List<BaseNewBean> newsList;
+    private List<XinWenBean> newsList;
 
-    public List<BaseNewBean> getNewsList() {
+    public List<XinWenBean> getNewsList() {
         return newsList;
     }
 
-    public void setNewsList(List<BaseNewBean> newsList) {
+    public void setNewsList(List<XinWenBean> newsList) {
         this.newsList = newsList;
     }
 

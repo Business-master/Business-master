@@ -40,6 +40,40 @@ public class UserBean implements Serializable{
     private String userName;
     private int isAssistant;
     private Object organizationType;
+    private String organizationArea;//保存地区码值，用于请求新闻、商讯模块使用
+    private String areaName;//哪个区的显示哪一个
+
+    public String getqShPosition() {
+        return qShPosition;
+    }
+
+    public void setqShPosition(String qShPosition) {
+        this.qShPosition = qShPosition;
+    }
+
+    public String getsShPosition() {
+        return sShPosition;
+    }
+
+    public void setsShPosition(String sShPosition) {
+        this.sShPosition = sShPosition;
+    }
+
+    public String getOrganizationArea() {
+        return organizationArea;
+    }
+
+    public void setOrganizationArea(String organizationArea) {
+        this.organizationArea = organizationArea;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 
     public String getPosition() {
         return position;
@@ -193,21 +227,7 @@ public class UserBean implements Serializable{
         this.systemeType = systemeType;
     }
 
-    public String getQShPosition() {
-        return qShPosition;
-    }
 
-    public void setQShPosition(String qShPosition) {
-        this.qShPosition = qShPosition;
-    }
-
-    public String getSShPosition() {
-        return sShPosition;
-    }
-
-    public void setSShPosition(String sShPosition) {
-        this.sShPosition = sShPosition;
-    }
 
     public String getUserName() {
         return userName;
@@ -271,5 +291,35 @@ public class UserBean implements Serializable{
         context.startActivity(intent);
     }
 
-
+    @Override
+    public String toString() {
+        return "UserBean{" +
+                "position='" + position + '\'' +
+                ", niceName='" + niceName + '\'' +
+                ", utime=" + utime +
+                ", sex='" + sex + '\'' +
+                ", assistantedId='" + assistantedId + '\'' +
+                ", imei='" + imei + '\'' +
+                ", state='" + state + '\'' +
+                ", hasAssiistant=" + hasAssiistant +
+                ", userEmail='" + userEmail + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", qgslPosition='" + qgslPosition + '\'' +
+                ", ctime=" + ctime +
+                ", sgslPosition='" + sgslPosition + '\'' +
+                ", nation='" + nation + '\'' +
+                ", phoneModel='" + phoneModel + '\'' +
+                ", organizationCode=" + organizationCode +
+                ", id='" + id + '\'' +
+                ", phoneNo='" + phoneNo + '\'' +
+                ", systemeType='" + systemeType + '\'' +
+                ", qShPosition='" + qShPosition + '\'' +
+                ", sShPosition='" + sShPosition + '\'' +
+                ", userName='" + userName + '\'' +
+                ", isAssistant=" + isAssistant +
+                ", organizationType=" + organizationType +
+                ", organizationArea='" + organizationArea + '\'' +
+                ", areaName='" + areaName + '\'' +
+                '}';
+    }
 }

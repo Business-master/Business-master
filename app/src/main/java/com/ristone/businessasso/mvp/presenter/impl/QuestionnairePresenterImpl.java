@@ -4,7 +4,6 @@ import com.ristone.businessasso.common.LoadNewsType;
 import com.ristone.businessasso.mvp.entity.QuestionnaireBean;
 import com.ristone.businessasso.mvp.entity.response.RspNewsBean;
 import com.ristone.businessasso.mvp.entity.response.RspQuestionnaireBean;
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
 import com.ristone.businessasso.mvp.interactor.PolicyInteractor;
 import com.ristone.businessasso.mvp.interactor.impl.NewsInteractorImpl;
 import com.ristone.businessasso.mvp.interactor.impl.QuestionnaireInteractorImpl;

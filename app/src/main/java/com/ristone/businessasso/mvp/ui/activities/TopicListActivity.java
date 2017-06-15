@@ -27,7 +27,7 @@ import com.ristone.businessasso.common.ApiConstants;
 import com.ristone.businessasso.common.Constants;
 import com.ristone.businessasso.common.LoadNewsType;
 import com.ristone.businessasso.mvp.entity.TopicBean;
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
+
 import com.ristone.businessasso.mvp.presenter.impl.TopicsPresenterImpl;
 import com.ristone.businessasso.mvp.ui.activities.base.BaseActivity;
 import com.ristone.businessasso.mvp.ui.adapter.TopicsAdapter;
@@ -158,16 +158,15 @@ public class TopicListActivity extends BaseActivity implements SwipeRefreshLayou
 
     @Override
     public void setNewsList(List<TopicBean> newsBean, @LoadNewsType.checker int loadType) {
-//        checkIsEmpty(newsBean.getLikeList());
         switch (loadType) {
             case LoadNewsType.TYPE_REFRESH_SUCCESS:
                 mSwipeRefreshLayout.setRefreshing(false);
                 mTopicsAdapter.setNewData(newsBean);
-                //    checkIsEmpty(newsBean);
+                    checkIsEmpty(newsBean);
                 break;
             case LoadNewsType.TYPE_REFRESH_ERROR:
                 mSwipeRefreshLayout.setRefreshing(false);
-                //   checkIsEmpty(newsBean);
+                   checkIsEmpty(newsBean);
                 break;
             case LoadNewsType.TYPE_LOAD_MORE_SUCCESS:
                 if (newsBean == null){
@@ -222,7 +221,7 @@ public class TopicListActivity extends BaseActivity implements SwipeRefreshLayou
         mNewsPresenter.loadMore();
     }
 
-    private void checkIsEmpty(List<BaseNewBean> newsSummary) {
+    private void checkIsEmpty(List<TopicBean> newsSummary) {
         if (newsSummary == null && mTopicsAdapter.getData() == null) {
             mNewsRV.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);

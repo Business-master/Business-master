@@ -61,7 +61,7 @@ public abstract class CheckPermissionsActivity extends BaseActivity
 	
 	/**
 	 * 
-	 * @param needRequestPermissonList
+	 * @param permissions
 	 * @since 2.5.0
 	 *
 	 */

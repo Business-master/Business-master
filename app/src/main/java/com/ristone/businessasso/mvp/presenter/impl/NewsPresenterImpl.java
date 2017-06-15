@@ -1,8 +1,9 @@
 package com.ristone.businessasso.mvp.presenter.impl;
 
 import com.ristone.businessasso.common.LoadNewsType;
+import com.ristone.businessasso.mvp.entity.XinWenBean;
 import com.ristone.businessasso.mvp.entity.response.RspNewsBean;
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
+
 import com.ristone.businessasso.mvp.interactor.NewsInteractor;
 import com.ristone.businessasso.mvp.interactor.PolicyInteractor;
 import com.ristone.businessasso.mvp.interactor.impl.NewsInteractorImpl;
@@ -21,7 +22,7 @@ import javax.inject.Inject;
  * @version 1.0
  * @create_date 16/12/22
  */
-public class NewsPresenterImpl extends BasePresenterImpl<NewsView<List<BaseNewBean>>, RspNewsBean>
+public class NewsPresenterImpl extends BasePresenterImpl<NewsView<List<XinWenBean>>, RspNewsBean>
         implements PolicyPresenter {
 
     private PolicyInteractor<RspNewsBean> mNewsInteractor;

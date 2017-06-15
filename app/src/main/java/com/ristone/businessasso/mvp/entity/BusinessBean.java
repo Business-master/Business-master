@@ -1,57 +1,66 @@
 package com.ristone.businessasso.mvp.entity;
 
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
+
 
 /**
- * @author xch
- * @version 1.0
- * @create_date 16/12/28
+ * 首页-商情-子项目数据解析
  */
-@Deprecated
-public class BusinessBean extends BaseNewBean{
 
+public class BusinessBean {
+    @Override
+    public String toString() {
+        return "BusinessBean{" +
+                "utime=" + utime +
+                ", sort=" + sort +
+                ", areaCode='" + areaCode + '\'' +
+                ", status='" + status + '\'' +
+                ", contactsS='" + contactsS + '\'' +
+                ", fmImg='" + fmImg + '\'' +
+                ", emailS='" + emailS + '\'' +
+                ", ctime=" + ctime +
+                ", id=" + id +
+                ", phoneNo='" + phoneNo + '\'' +
+                ", title='" + title + '\'' +
+                ", inAmount=" + inAmount +
+                ", plane='" + plane + '\'' +
+                ", chambreCode='" + chambreCode + '\'' +
+                ", faxS='" + faxS + '\'' +
+                '}';
+    }
 
     /**
-     * phoneNo : 1234123412
-     * id : 1
-     * utime : 1482473380000
-     * title : 商讯标题
-     * inAmount : 11
-     * plane : 1234123
-     * status : 0
-     * contactsS : 联系人
-     * fmImg : 123.123.123.123:1111
-     * emailS : 321@11.com
-     * ctime : 1482459183000
-     * areaId : 1
-     * faxS : 111-1111
+     * utime : 1490343997000
+     * sort : 43
+     * areaCode : 大兴区
+     * status : 通过
+     * contactsS : 工商联
+     * fmImg : /business/633b60e0211742b391dbd4442942720e.jpg
+     * emailS : xuanjiaochu@bjgsl.org.cn
+     * ctime : 1490343997000
+     * id : 34
+     * phoneNo : 13333333333
+     * title : 北京新航城东区再生水厂
+     * inAmount : 3.0E8
+     * plane : 010-2222222
+     * chambreCode : 住宅房地产商会
+     * faxS : 010-2222222
      */
 
-    private String phoneNo;
-    private int id;
     private long utime;
-    private int inAmount;
-    private String plane;
+    private int sort;
+    private String areaCode;
     private String status;
     private String contactsS;
+    private String fmImg;
     private String emailS;
+    private long ctime;
+    private int id;
+    private String phoneNo;
+    private String title;
+    private double inAmount;
+    private String plane;
+    private String chambreCode;
     private String faxS;
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public long getUtime() {
         return utime;
@@ -61,20 +70,20 @@ public class BusinessBean extends BaseNewBean{
         this.utime = utime;
     }
 
-    public int getInAmount() {
-        return inAmount;
+    public int getSort() {
+        return sort;
     }
 
-    public void setInAmount(int inAmount) {
-        this.inAmount = inAmount;
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 
-    public String getPlane() {
-        return plane;
+    public String getAreaCode() {
+        return areaCode;
     }
 
-    public void setPlane(String plane) {
-        this.plane = plane;
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
     }
 
     public String getStatus() {
@@ -93,6 +102,14 @@ public class BusinessBean extends BaseNewBean{
         this.contactsS = contactsS;
     }
 
+    public String getFmImg() {
+        return fmImg;
+    }
+
+    public void setFmImg(String fmImg) {
+        this.fmImg = fmImg;
+    }
+
     public String getEmailS() {
         return emailS;
     }
@@ -101,26 +118,67 @@ public class BusinessBean extends BaseNewBean{
         this.emailS = emailS;
     }
 
+    public long getCtime() {
+        return ctime;
+    }
+
+    public void setCtime(long ctime) {
+        this.ctime = ctime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public double getInAmount() {
+        return inAmount;
+    }
+
+    public void setInAmount(double inAmount) {
+        this.inAmount = inAmount;
+    }
+
+    public String getPlane() {
+        return plane;
+    }
+
+    public void setPlane(String plane) {
+        this.plane = plane;
+    }
+
+    public String getChambreCode() {
+        return chambreCode;
+    }
+
+    public void setChambreCode(String chambreCode) {
+        this.chambreCode = chambreCode;
+    }
+
     public String getFaxS() {
         return faxS;
     }
 
     public void setFaxS(String faxS) {
         this.faxS = faxS;
-    }
-
-    @Override
-    public String toString() {
-        return "BusinessBean{" +
-                "phoneNo='" + phoneNo + '\'' +
-                ", id=" + id +
-                ", utime=" + utime +
-                ", inAmount=" + inAmount +
-                ", plane='" + plane + '\'' +
-                ", status='" + status + '\'' +
-                ", contactsS='" + contactsS + '\'' +
-                ", emailS='" + emailS + '\'' +
-                ", faxS='" + faxS + '\'' +
-                '}';
     }
 }

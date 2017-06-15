@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import javax.inject.Inject;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.data.JPushLocalNotification;
 
 /**
  * @author xch
@@ -68,6 +69,9 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "接受到推送下来的通知");
+
+
+
             EventBus.getDefault().post(new ChangeSearchStateEvent(3));
             receivingNotification(context, bundle);
             receiveMessage(context, bundle);

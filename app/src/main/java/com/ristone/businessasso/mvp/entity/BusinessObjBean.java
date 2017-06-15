@@ -1,6 +1,6 @@
 package com.ristone.businessasso.mvp.entity;
 
-import com.ristone.businessasso.mvp.entity.response.base.BaseNewBean;
+
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import java.util.List;
  */
 public class BusinessObjBean {
 
-    private List<BaseNewBean> businessList;
+    private List<BusinessBean> businessList;
 
-    public List<BaseNewBean> getBusinessList() {
+    public List<BusinessBean> getBusinessList() {
         return businessList;
     }
 
-    public void setBusinessList(List<BaseNewBean> businessList) {
+    public void setBusinessList(List<BusinessBean> businessList) {
         this.businessList = businessList;
     }
 
