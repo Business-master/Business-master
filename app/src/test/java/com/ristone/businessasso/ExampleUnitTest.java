@@ -1,4 +1,4 @@
-package com.bus.business;
+package com.ristone.businessasso;
 
 import org.junit.Test;
 
