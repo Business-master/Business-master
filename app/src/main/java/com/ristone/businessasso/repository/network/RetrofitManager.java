@@ -513,6 +513,11 @@ public class RetrofitManager {
     }
 
 
-
+    public Observable<BaseRspObj> LastlogTime() {
+        Map<String, String> map = new HashMap<>();
+        map.put("userId", UsrMgr.getUseId());
+        KLog.a(map.toString());
+        return mNewsService.LastlogTime(map);
+    }
 
 }

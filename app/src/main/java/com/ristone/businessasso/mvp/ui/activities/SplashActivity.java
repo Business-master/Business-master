@@ -9,8 +9,16 @@ import android.support.v4.app.FragmentActivity;
 import com.ristone.businessasso.R;
 import com.ristone.businessasso.common.Constants;
 import com.ristone.businessasso.common.UsrMgr;
+import com.ristone.businessasso.mvp.entity.response.base.BaseRspObj;
+import com.ristone.businessasso.mvp.event.ReadMeeting;
+import com.ristone.businessasso.repository.network.RetrofitManager;
 import com.ristone.businessasso.utils.MarkUtils;
+import com.ristone.businessasso.utils.TransformUtils;
+import com.socks.library.KLog;
 
+import org.greenrobot.eventbus.EventBus;
+
+import rx.Subscriber;
 
 
 /**
@@ -27,7 +35,7 @@ public class SplashActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        recordLogin();
         initLaunchLogo();
     }
 
@@ -49,6 +57,28 @@ public class SplashActivity extends FragmentActivity {
                 SplashActivity.this.finish();
             }
         }, 500);
+    }
+
+    //记录登陆时间和次数
+    public void recordLogin(){
+        RetrofitManager.getInstance(1).LastlogTime()
+                .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
+                .subscribe(new Subscriber<BaseRspObj>() {
+                    @Override
+                    public void onCompleted() {
+                        KLog.d();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        KLog.e(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(BaseRspObj responseBody) {
+                        KLog.a(responseBody.toString());
+                    }
+                });
     }
 
 }

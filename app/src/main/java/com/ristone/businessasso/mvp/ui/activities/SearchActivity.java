@@ -57,6 +57,7 @@ import com.ristone.businessasso.utils.DBUtils;
 import com.ristone.businessasso.utils.NetUtil;
 import com.ristone.businessasso.utils.UT;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.ristone.businessasso.utils.VideoVisibleUtils;
 import com.socks.library.KLog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -69,6 +70,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import fm.jiecao.jcvideoplayer_lib.VideoEvent;
 
 /**
  * 首页搜索页
@@ -119,6 +122,7 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
     @Inject
     AreaSeaPresenterImpl mAreaSeaPresenterImpl;
     boolean flag = false;//是否为视频新闻
+    VideoVisibleUtils videoVisibleUtils;
 
     @Override
     public int getLayoutId() {
@@ -140,6 +144,13 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
         initRecyclerView();
         initEdittext();
         initSearchBox();
+        videoVisibleUtils =    new VideoVisibleUtils(mActivity);
+        videoVisibleUtils.judgeVisible(mNewsRV);
+    }
+
+    @Subscribe
+    public void onVideoEventMainThread(final VideoEvent event){
+        videoVisibleUtils.setPostion(event.getPosition());
     }
 
     /*初始化搜索框*/
@@ -543,5 +554,19 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
         super.onDestroy();
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (JCVideoPlayer.backPress()){
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
 
 }

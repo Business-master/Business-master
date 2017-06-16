@@ -11,8 +11,8 @@ public class ApiConstants {
     //线下
 //    public static final String NETEAST_HOST = "http://172.16.10.15:9300/";
 //    public static final String NETEAST_HOST = "http://172.16.6.81:8080/";
-    public static final String NETEAST_HOST = "http://43.254.24.113:9300";
-//    public static final String NETEAST_HOST = "http://43.254.24.113:9100/";//新的外网地址
+//    public static final String NETEAST_HOST = "http://43.254.24.113:9300";
+    public static final String NETEAST_HOST = "http://43.254.24.113:9100/";//新的外网地址
     public static final String NETEAST_IMG_HOST = "http://files.heweather.com/cond_icon/%s.png";
 
     //线上
@@ -88,5 +88,8 @@ public class ApiConstants {
     public static final String VersionInfo = "gsl-api/mblVersion/getVersionInfo";//版本信息
 
     public static final String DownVersion = "gsl-api/mblVersion/download";//下载版本
+
+
+    public static final String LastLogTime = "gsl-api/gsl/sysUser/lastlogTime";//登陆时间和次数
 
 }

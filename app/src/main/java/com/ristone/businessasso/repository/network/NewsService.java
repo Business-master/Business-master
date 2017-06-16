@@ -188,4 +188,8 @@ public interface NewsService {
     @POST(ApiConstants.VersionInfo)
     Observable<RspVersion> getVersionInfo(@FieldMap Map<String, String> map);
 
+    @FormUrlEncoded
+    @POST(ApiConstants.LastLogTime)
+    Observable<BaseRspObj> LastlogTime(@FieldMap Map<String, String> map);
+
 }
