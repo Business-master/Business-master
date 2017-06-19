@@ -22,7 +22,7 @@ public class DateUtil {
             "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"};
 
     public static String getCurGroupDay(long time){
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         return format.format(new Date(time));
     }
 

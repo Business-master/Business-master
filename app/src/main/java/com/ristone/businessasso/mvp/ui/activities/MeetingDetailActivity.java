@@ -178,14 +178,13 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         }
         initBottom_Map(meetingBean);
 
-
-
+        KLog.a("meetingBean.getModiType()：-----"+meetingBean.getModiType());
 
         mTitle.setText(meetingBean.getMeetingName());
         mJoinDate.setText("持续时间:     "+meetingBean.getDuration()+"天");
         mPubDate.setText("开始时间:     "+DateUtil.getCurGroupDay(meetingBean.getMeetingTime()));
         tv_publish_address.setText("会议来源:     "+meetingBean.getAreaCode());
-        mJoinAddress.setText("地        址:      "+meetingBean.getMeetingLoc());
+        mJoinAddress.setText("会议地址:      "+meetingBean.getMeetingLoc());
 
         KLog.a("详情内容：-----"+meetingBean.getMeetingContent());
         if(!TextUtils.isEmpty( meetingBean.getMeetingContent())){

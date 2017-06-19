@@ -35,7 +35,10 @@ public class SplashActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        recordLogin();
+        if (UsrMgr.isLogin()){
+            recordLogin();
+        }
+
         initLaunchLogo();
     }
 
@@ -60,7 +63,7 @@ public class SplashActivity extends FragmentActivity {
     }
 
     //记录登陆时间和次数
-    public void recordLogin(){
+    public static void recordLogin(){
         RetrofitManager.getInstance(1).LastlogTime()
                 .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                 .subscribe(new Subscriber<BaseRspObj>() {

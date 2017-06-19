@@ -98,6 +98,10 @@ public class LoginActivity extends BaseActivity {
                             KLog.a("userInfo--->" + UsrMgr.getUseInfo().toString());
 
                             registeJpushToService();
+
+
+                            //记录登陆时间和次数
+                            SplashActivity.recordLogin();
                         }else {
                             UT.show(rspUserBean.getHead().getRspMsg());
                         }
