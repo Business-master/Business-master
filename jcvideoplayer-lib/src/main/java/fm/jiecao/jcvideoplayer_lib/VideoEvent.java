@@ -1,7 +1,7 @@
 package fm.jiecao.jcvideoplayer_lib;
 
 /**
- * Created by ATRSnail on 2017/6/6.
+ * Created by ATRSnail on 2017/6/20.
  */
 
 public class VideoEvent {

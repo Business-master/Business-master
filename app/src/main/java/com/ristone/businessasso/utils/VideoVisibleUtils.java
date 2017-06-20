@@ -1,16 +1,15 @@
 package com.ristone.businessasso.utils;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.ristone.businessasso.R;
+
 import com.socks.library.KLog;
 
-import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
  * Created by ATRSnail on 2017/3/31.
@@ -43,7 +42,7 @@ public class VideoVisibleUtils {
                     LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                     int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
                     int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
-//                    KLog.a("第一个可见Item的po" + firstVisibleItemPosition + "--------新闻位置" + postion);
+                    KLog.a("第一个可见Item的po" + firstVisibleItemPosition + "--------新闻位置" + postion);
 
                     if (postion < firstVisibleItemPosition &&isSlidingToLast) {
                         JCVideoPlayer.releaseAllVideos();

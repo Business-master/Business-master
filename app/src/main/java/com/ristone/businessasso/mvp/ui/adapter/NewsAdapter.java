@@ -17,11 +17,9 @@ import com.ristone.businessasso.common.Constants;
 import com.ristone.businessasso.mvp.entity.XinWenBean;
 
 import com.ristone.businessasso.utils.DateUtil;
-import com.socks.library.KLog;
 
 import java.util.List;
 
-import fm.jiecao.jcvideoplayer_lib.JCMediaManager;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
@@ -65,6 +63,7 @@ public class NewsAdapter extends BaseQuickAdapter<XinWenBean> {
 
         video.time.setText( DateUtil.getCurGroupDay(likeModel.getCtime()));
         video.area.setText(likeModel.getAreaCode());
+
 
         video.setUp(ApiConstants.NETEAST_HOST+likeModel.getVideoUrl(), JCVideoPlayer.SCREEN_LAYOUT_LIST,likeModel.getTitle());
         video.titleTextView.setMaxLines(2);

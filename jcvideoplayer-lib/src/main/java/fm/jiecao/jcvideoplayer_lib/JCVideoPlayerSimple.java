@@ -27,17 +27,10 @@ public class JCVideoPlayerSimple extends JCVideoPlayer {
     }
 
     @Override
-    public boolean setUp(String url, int screen, Object... objects) {
-        if (super.setUp(url, screen, objects)) {
-            if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
-                fullscreenButton.setImageResource(R.drawable.jc_shrink);
-            } else {
-                fullscreenButton.setImageResource(R.drawable.jc_enlarge);
-            }
-            fullscreenButton.setVisibility(View.GONE);
-            return true;
-        }
-        return false;
+    public void setUp(String url, int screen, Object... objects) {
+        super.setUp(url, screen, objects);
+        updateFullscreenButton();
+        fullscreenButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -71,6 +64,14 @@ public class JCVideoPlayerSimple extends JCVideoPlayer {
         }
     }
 
+    public void updateFullscreenButton() {
+        if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
+            fullscreenButton.setImageResource(R.drawable.jc_shrink);
+        } else {
+            fullscreenButton.setImageResource(R.drawable.jc_enlarge);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.fullscreen && currentState == CURRENT_STATE_NORMAL) {
@@ -89,10 +90,5 @@ public class JCVideoPlayerSimple extends JCVideoPlayer {
             }
         }
         super.onProgressChanged(seekBar, progress, fromUser);
-    }
-
-    @Override
-    public boolean backToOtherListener() {
-        return false;
     }
 }

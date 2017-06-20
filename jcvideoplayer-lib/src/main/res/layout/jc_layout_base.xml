@@ -11,12 +11,6 @@
 
     </FrameLayout>
 
-    <fm.jiecao.jcvideoplayer_lib.JCResizeImageView
-        android:id="@+id/cache"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
-
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"
@@ -35,7 +29,7 @@
             android:textColor="#ffffff" />
 
         <SeekBar
-            android:id="@+id/progress"
+            android:id="@+id/bottom_seek_progress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -46,8 +40,8 @@
             android:minHeight="4dp"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:progressDrawable="@drawable/jc_seek_progress"
-            android:thumb="@drawable/jc_seek_thumb" />
+            android:progressDrawable="@drawable/jc_bottom_seek_progress"
+            android:thumb="@drawable/jc_bottom_seek_thumb" />
 
         <TextView
             android:id="@+id/total"

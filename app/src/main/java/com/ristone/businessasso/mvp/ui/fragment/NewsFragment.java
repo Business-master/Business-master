@@ -238,6 +238,7 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
         likeBeanList = new ArrayList<>();
 
         mNewsListAdapter = new NewsAdapter(R.layout.layout_new, likeBeanList);
+//        mNewsListAdapter = new NewsAdapter(R.layout.testt_new, likeBeanList);
         mNewsListAdapter.setOnLoadMoreListener(this);
         if (isXunFrg) {
             mNewsListAdapter.addHeaderView(weatherView);

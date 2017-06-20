@@ -53,6 +53,13 @@
             </SvnBranchConfiguration>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/jcvideoplayer-lib">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="trunkUrl" value="https://172.16.2.25/svn/XUSJSP2016/Gongshl/01_SDL/03_SourceCodes/android/Business-master/jcvideoplayer-lib" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="mySupportsUserInfoFilter" value="true" />
