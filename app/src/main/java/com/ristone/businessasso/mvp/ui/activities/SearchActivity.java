@@ -557,9 +557,9 @@ public class SearchActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Override
     public void onBackPressed() {
-//        if (JCVideoPlayer.backPress()){
-//            return;
-//        }
+        if (JCVideoPlayer.backPress()){
+            return;
+        }
         super.onBackPressed();
     }
 

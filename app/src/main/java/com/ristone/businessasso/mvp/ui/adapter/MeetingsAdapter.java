@@ -101,7 +101,7 @@ public class MeetingsAdapter extends BaseQuickAdapter<MeetingBean> {
         TextView date = (TextView) view.findViewById(R.id.tv_date);
         name.setText(likeBean.getMeetingName());
         address.setText(likeBean.getAreaCode());
-        date.setText(DateUtil.getCurGroupDay(likeBean.getMeetingTime()));
+        date.setText(DateUtil.getDetailCurGroupDay(likeBean.getMeetingTime()));
     }
 
 

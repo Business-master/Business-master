@@ -178,7 +178,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         }
         initBottom_Map(meetingBean);
 
-        KLog.a("meetingBean.getModiType()：-----"+meetingBean.getModiType());
+//        KLog.a("meetingBean.getModiType()：-----"+meetingBean.getModiType());
 
         mTitle.setText(meetingBean.getMeetingName());
         mJoinDate.setText("持续时间:     "+meetingBean.getDuration()+"天");
@@ -186,7 +186,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
         tv_publish_address.setText("会议来源:     "+meetingBean.getAreaCode());
         mJoinAddress.setText("会议地址:      "+meetingBean.getMeetingLoc());
 
-        KLog.a("详情内容：-----"+meetingBean.getMeetingContent());
+//        KLog.a("详情内容：-----"+meetingBean.getMeetingContent());
         if(!TextUtils.isEmpty( meetingBean.getMeetingContent())){
             mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv,meetingBean.getMeetingContent(), 2);
 //            mNewsDetailBodyTv.setText(Html.fromHtml(meetingBean.getMeetingContent(),mUrlImageGetter, null));
@@ -256,7 +256,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
             if (!TextUtils.isEmpty(meet.getLatitude()) || !TextUtils.isEmpty(meet.getLongitude())) {
               double  latitude = Double.valueOf(meet.getLatitude());
                 double longitude = Double.valueOf(meet.getLongitude());
-                KLog.a("纬度"+Double.valueOf(meet.getLatitude())+"经度"+Double.valueOf(meet.getLongitude()));
+//                KLog.a("纬度"+Double.valueOf(meet.getLatitude())+"经度"+Double.valueOf(meet.getLongitude()));
                 init(latitude,longitude,meet.getMeetingLoc());
                 map_rl.setVisibility(View.VISIBLE);
             }else {
@@ -282,7 +282,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
             if (!TextUtils.isEmpty(meet.getLatitude()) || !TextUtils.isEmpty(meet.getLongitude())) {
                 double  latitude = Double.valueOf(meet.getLatitude());
                 double longitude = Double.valueOf(meet.getLongitude());
-                KLog.a("纬度"+Double.valueOf(meet.getLatitude())+"经度"+Double.valueOf(meet.getLongitude()));
+//                KLog.a("纬度"+Double.valueOf(meet.getLatitude())+"经度"+Double.valueOf(meet.getLongitude()));
                 init(latitude,longitude,meet.getMeetingLoc());
                 map_rl.setVisibility(View.VISIBLE);
             }else {
@@ -320,7 +320,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
                     @Override
                     public void onNext(RspMeetingDetailBean rspMeetingDetailBean) {
-                      KLog.a("****"+rspMeetingDetailBean.toString());
+//                      KLog.a("****"+rspMeetingDetailBean.toString());
                         MeetingDetailBean meetingDetailBean=rspMeetingDetailBean.getBody().getMeetingDatail().get(0);
                         initBottom_Map(meetingDetailBean);
                     }
@@ -729,14 +729,14 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
 
             //解析定位结果
             if (flag){
-                KLog.a("loc---->"+loc.toStr());
+//                KLog.a("loc---->"+loc.toStr());
                 UT.show("所在地--->"+loc.getAddress());
                 startActivityForResult(new Intent(this, CaptureActivity.class), 0);
             }
 
-            KLog.a("flag---->---->---->"+flag);
+//            KLog.a("flag---->---->---->"+flag);
             flag = false;
-            KLog.a("flag---->---->---->"+flag);
+//            KLog.a("flag---->---->---->"+flag);
         } else {
             UT.show("定位失败,请重新定位");
         }
@@ -807,7 +807,7 @@ public class MeetingDetailActivity extends CheckPermissionsActivity {
     }
 
     private void signInMeeting(String meetingId) {
-        KLog.a("location--->"+location.toStr());
+//        KLog.a("location--->"+location.toStr());
         RetrofitManager.getInstance(1).signInMeeting(meetingId,location.getLongitude(),location.getLatitude())
                 .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                 .subscribe(new Subscriber<BaseRspObj>() {

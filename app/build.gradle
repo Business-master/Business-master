@@ -10,7 +10,7 @@ android {
         applicationId "com.ristone.businessasso"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 8
+        versionCode 9
         versionName "2.3.9"
 
         ndk {

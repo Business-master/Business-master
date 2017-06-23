@@ -42,7 +42,7 @@ public class VideoVisibleUtils {
                     LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                     int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
                     int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
-                    KLog.a("第一个可见Item的po" + firstVisibleItemPosition + "--------新闻位置" + postion);
+//                    KLog.a("第一个可见Item的po" + firstVisibleItemPosition + "--------新闻位置" + postion);
 
                     if (postion < firstVisibleItemPosition &&isSlidingToLast) {
                         JCVideoPlayer.releaseAllVideos();
