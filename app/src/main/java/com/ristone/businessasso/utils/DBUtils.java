@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
+import com.socks.library.KLog;
+
 
 /**
  * Created by ATRSnail on 2017/3/30.
@@ -27,28 +29,34 @@ public class DBUtils {
 
     /*插入数据*/
     public void insertData(String tempName) {
-        if (TextUtils.isEmpty(tempName)&"".equals(tempName)){
+        if (TextUtils.isEmpty(tempName)||"".equals(tempName)){
+
             return;
         }
+
+        String name = tempName.replaceAll("'","");
+
         db = helper.getWritableDatabase();
-        db.execSQL("insert into records(name) values('" + tempName + "')");
+        db.execSQL("insert into records(name) values('" + name + "')");
         db.close();
     }
 
     /*模糊查询数据 并显示在ListView列表上*/
     public Cursor queryData(String tempName) {
 
+        String name = tempName.replaceAll("'","");
         //模糊搜索
         Cursor cursor = helper.getReadableDatabase().rawQuery(
-                "select id as _id,name from records where name like '%" + tempName + "%' order by id desc ", null);
+                "select id as _id,name from records where name like '%" + name + "%' order by id desc ", null);
       return cursor;
     }
 
     /*检查数据库中是否已经有该条记录*/
     public boolean hasData(String tempName) {
-        //从Record这个表里找到name=tempName的id
+        //从Record这个表里找到name=name
+        String name = tempName.replaceAll("'","");
         Cursor cursor = helper.getReadableDatabase().rawQuery(
-                "select id as _id,name from records where name =?", new String[]{tempName});
+                "select id as _id,name from records where name =?", new String[]{name});
         //判断是否有下一个
         return cursor.moveToNext();
     }
