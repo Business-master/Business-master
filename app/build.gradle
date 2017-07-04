@@ -10,8 +10,8 @@ android {
         applicationId "com.ristone.businessasso"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 8
-        versionName "2.3.8"
+        versionCode 9
+        versionName "2.3.9"
 
         ndk {
             //选择要添加的对应cpu类型的.so库。

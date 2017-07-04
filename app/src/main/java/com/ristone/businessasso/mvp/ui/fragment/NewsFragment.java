@@ -50,6 +50,7 @@ import com.ristone.businessasso.mvp.ui.adapter.NewsAdapter;
 import com.ristone.businessasso.mvp.ui.fragment.base.BaseLazyFragment;
 import com.ristone.businessasso.mvp.view.NewsView;
 import com.ristone.businessasso.repository.network.RetrofitManager;
+import com.ristone.businessasso.utils.CalendarUtil;
 import com.ristone.businessasso.utils.CustomUtils;
 import com.ristone.businessasso.utils.DateUtil;
 import com.ristone.businessasso.utils.NetUtil;
@@ -64,6 +65,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -300,7 +302,8 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
         tv_carNoLimit.setText(singleStr);
         tv_pmten.setText(weatherBean.getPmten());
         tv_times.setText(weatherBean.getTimes());
-        tv_no_date.setText(DateUtil.getLunarMonth() + DateUtil.getLunarDay());
+//        tv_no_date.setText(DateUtil.getLunarMonth() + DateUtil.getLunarDay());//阴历日期有问题
+        tv_no_date.setText(new CalendarUtil(Calendar.getInstance()).getDay());
         tv_week.setText(DateUtil.getWeek());
         Glide.with(App.getAppContext()).load(String.format(ApiConstants.NETEAST_IMG_HOST, weatherBean.getCode())).asBitmap() // gif格式有时会导致整体图片不显示，貌似有冲突
                 .format(DecodeFormat.PREFER_ARGB_8888)
