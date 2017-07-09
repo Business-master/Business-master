@@ -77,7 +77,10 @@ public class ProgressWebView extends WebView {
             super.onReceivedTitle(view, title);
             //回调改变activity标题
             if (webPageFinishCallBack != null)
-                webPageFinishCallBack.onWebPageFinishCallBack(title);
+                if (title!=null && !view.getUrl().contains(title)){
+                    webPageFinishCallBack.onWebPageFinishCallBack(title);
+                }
+
         }
 
         /**
