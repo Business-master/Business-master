@@ -58,7 +58,7 @@ public class PlaceActivity extends BaseActivity {
         cityAdapter = new CityAdapter(R.layout.item_city, cityList);
         mRecycle.setHasFixedSize(true);
         mRecycle.addItemDecoration(new RecyclerViewDivider(mActivity,
-                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
+                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.gray)));
         mRecycle.setLayoutManager(new LinearLayoutManager(mActivity,
                 LinearLayoutManager.VERTICAL, false));
         mRecycle.setItemAnimator(new DefaultItemAnimator());

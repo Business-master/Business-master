@@ -232,7 +232,7 @@ public class DropDownFragment extends BaseFragment implements DropdownListView.C
     private void initRecyclerView() {
         mNewsRV.setHasFixedSize(true);
         mNewsRV.addItemDecoration(new RecyclerViewDivider(mActivity,
-                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
+                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.gray)));
         mLayoutManager = new LinearLayoutManager(mActivity,
                 LinearLayoutManager.VERTICAL, false);
         mNewsRV.setLayoutManager(mLayoutManager);
