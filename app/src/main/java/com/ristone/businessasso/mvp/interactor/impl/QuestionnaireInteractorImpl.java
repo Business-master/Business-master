@@ -23,9 +23,9 @@ public class QuestionnaireInteractorImpl implements PolicyInteractor<RspQuestion
     }
 
     @Override
-    public Subscription loadNews(final RequestCallBack<RspQuestionnaireBean> listener, int pageNum, int numPerPage,String title,String types) {
+    public Subscription loadNews(final RequestCallBack<RspQuestionnaireBean> listener, int pageNum, int numPerPage,String phoneNo,String types) {
 
-        return RetrofitManager.getInstance(1).getAllQuestionnaire(pageNum, numPerPage)
+        return RetrofitManager.getInstance(1).getAllQuestionnaire(pageNum, numPerPage,phoneNo)
                 .compose(TransformUtils.<RspQuestionnaireBean>defaultSchedulers())
                 .subscribe(new Subscriber<RspQuestionnaireBean>() {
                     @Override
@@ -41,7 +41,7 @@ public class QuestionnaireInteractorImpl implements PolicyInteractor<RspQuestion
 
                     @Override
                     public void onNext(RspQuestionnaireBean newsBean) {
-                        KLog.d(newsBean.toString());
+                        KLog.a(newsBean.getBody().getQuestionnaireList().size());
                         listener.success(newsBean);
                     }
                 });

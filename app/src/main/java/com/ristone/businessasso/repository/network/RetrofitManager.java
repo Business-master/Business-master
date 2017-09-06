@@ -496,10 +496,11 @@ public class RetrofitManager {
         return mNewsService.GetUserById(map);
     }
 
-    public Observable<RspQuestionnaireBean> getAllQuestionnaire(int  pageNum,int numPerPage) {
+    public Observable<RspQuestionnaireBean> getAllQuestionnaire(int  pageNum,int numPerPage,String phoneNo) {
         Map<String, String> map = new HashMap<>();
         map.put("pageNum", String.valueOf(pageNum));
         map.put("numPerPage",  String.valueOf(numPerPage));
+        map.put("phoneNo", phoneNo);
         KLog.a(map.toString());
         return mNewsService.getAllQuestionnaire(map);
     }
