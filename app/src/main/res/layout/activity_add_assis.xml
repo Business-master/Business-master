@@ -134,17 +134,28 @@
         <TextView
             style="@style/font3_text"
             android:text="单位职务 ："/>
+        <!--<TextView-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:drawableRight="@drawable/apply_xiabiao"-->
+            <!--android:clickable="true"-->
+            <!--android:id="@+id/duty_add_assis"-->
+            <!--style="@style/font_text"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:maxLines="1"-->
+            <!--android:hint="请选择职务"/>-->
         <TextView
             android:layout_marginRight="40dp"
-            android:drawableRight="@drawable/apply_xiabiao"
             android:clickable="true"
+            android:drawableRight="@mipmap/icon_credit"
             android:id="@+id/duty_add_assis"
             style="@style/font_text"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:hint="请选择职务"/>
+            android:hint="请输入职务"/>
     </LinearLayout>
     <LinearLayout
         android:layout_marginLeft="20dp"

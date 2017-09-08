@@ -491,7 +491,7 @@ public class RetrofitManager {
 
     public Observable<RspUserInfoBean> GetUserById(String  userId) {
         Map<String, String> map = new HashMap<>();
-        map.put("userId", userId);
+        map.put("id", userId);
         KLog.a(map.toString());
         return mNewsService.GetUserById(map);
     }

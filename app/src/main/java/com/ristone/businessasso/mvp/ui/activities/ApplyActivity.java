@@ -1,12 +1,12 @@
 package com.ristone.businessasso.mvp.ui.activities;
 
 
-
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +26,6 @@ import com.ristone.businessasso.mvp.entity.MeetingBean;
 
 import com.ristone.businessasso.mvp.entity.NationBean;
 import com.ristone.businessasso.mvp.entity.UserBean;
-import com.ristone.businessasso.mvp.entity.response.RspNationBean;
 import com.ristone.businessasso.mvp.entity.response.base.BaseRspObj;
 import com.ristone.businessasso.mvp.event.AssisApplyEvent;
 import com.ristone.businessasso.mvp.event.MeetingDetailEvent;
@@ -59,14 +58,12 @@ import static android.widget.LinearLayout.*;
 /**
  * 报名Activity
  */
-public class ApplyActivity extends BaseActivity implements AssisView{
+public class ApplyActivity extends BaseActivity implements AssisView {
 
     private MeetingBean meetingBean;
-//    private  int index=-1;
+    //    private  int index=-1;
     private static final String[] MINZU = new String[56];
-    private  String[] ZHIWU ;
-
-
+//    private  String[] ZHIWU ;
 
 
 //    @BindView(R.id.assis_ll)
@@ -95,68 +92,68 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     AssisPresenterImpl assisPresenterImpl;
 
     @BindView(R.id.apply_self)
-     TextView apply_self;
+    TextView apply_self;
     @BindView(R.id.apply_assis)
-     TextView apply_assis;
+    TextView apply_assis;
     @BindView(R.id.drop_assis)
     ImageView drop_assis;
     @BindView(R.id.ll_assis)
     LinearLayout ll_assis;
 
     @BindView(R.id.apply_rg)
-     RadioGroup apply_rg;
+    RadioGroup apply_rg;
     @BindView(R.id.apply_man)
-     RadioButton apply_man;
+    RadioButton apply_man;
     @BindView(R.id.apply_woman)
-     RadioButton apply_woman;
+    RadioButton apply_woman;
 
 
     @BindView(R.id.apply_name)
-     EditText apply_name;
+    EditText apply_name;
     @BindView(R.id.apply_company)
-     EditText apply_company;
+    EditText apply_company;
     @BindView(R.id.apply_duty)
-     TextView apply_duty;
+    TextView apply_duty;
     @BindView(R.id.apply_phone)
-     TextView apply_phone;
+    TextView apply_phone;
     @BindView(R.id.apply_cause)
-     EditText apply_cause;
+    EditText apply_cause;
     @BindView(R.id.apply_nation)
     TextView apply_nation;
-  @BindView(R.id.remark_num)
+    @BindView(R.id.remark_num)
     TextView remark_num;
     @BindView(R.id.replace)
     LinearLayout replace;
 
 
-    int[] meetings= new  int[]{R.drawable.apply_self,R.drawable.apply_assis};
-    int[] eats= new  int[]{R.drawable.apply_zili,R.drawable.apply_need};
+    int[] meetings = new int[]{R.drawable.apply_self, R.drawable.apply_assis};
+    int[] eats = new int[]{R.drawable.apply_zili, R.drawable.apply_need};
 
-    String[] stayNames= new  String[]{"自理","需要提供"};
+    String[] stayNames = new String[]{"自理", "需要提供"};
     String[] assistantNames;
-    String[] driverTagNames= new  String[]{"无","有"};
-    String[] driverNames= new  String[]{"需要提供","自理"};
+    String[] driverTagNames = new String[]{"无", "有"};
+    String[] driverNames = new String[]{"需要提供", "自理"};
 
-    private int joinType=-1;//参加会议的状态
-    private int foodId=-1;//饮食的状态
-    private int stay=-1;//住宿的状态
-    private String userAssistantId="";//代理当前用户的助理id
-    private String carNo="";//车牌号
-    private int driver=-1;//司机的状态
-    private String cause="";//拒绝或者请假原因//替会
-    private String desp="";//备注
-    private String leadName="";//领导名称
-    private String nation="";//民族
-    private String sex="";//性别
-    private String companyName="";//公司名称
-    private String job="";//职位
+    private int joinType = -1;//参加会议的状态
+    private int foodId = -1;//饮食的状态
+    private int stay = -1;//住宿的状态
+    private String userAssistantId = "";//代理当前用户的助理id
+    private String carNo = "";//车牌号
+    private int driver = -1;//司机的状态
+    private String cause = "";//拒绝或者请假原因//替会
+    private String desp = "";//备注
+    private String leadName = "";//领导名称
+    private String nation = "";//民族
+    private String sex = "";//性别
+    private String companyName = "";//公司名称
+    private String job = "";//职位
 
 
     private List<NationBean> nation_List;
-    private  List<NationBean> dutyList=new ArrayList<>();//职务列表
-    private AssisBean assisBean ;
+    private List<NationBean> dutyList = new ArrayList<>();//职务列表
+    private AssisBean assisBean;
     private List<AssisBean> list;
-    private UserBean userBean=null;
+    private UserBean userBean = null;
 
     @Override
     public int getLayoutId() {
@@ -167,14 +164,15 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     @Override
     public void initInjector() {
-      mActivityComponent.inject(this);
+        mActivityComponent.inject(this);
     }
 
 
     @Override
     public void initViews() {
         EventBus.getDefault().register(this);
-        userBean  =UsrMgr.getUseInfo();
+        userBean = UsrMgr.getUseInfo();
+
         meetingBean = (MeetingBean) getIntent().getSerializableExtra(MeetingBean.MEETINGBEAN);
 //        index = getIntent().getIntExtra("index",-1);
 
@@ -182,10 +180,10 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         setCustomTitle("会务报名");
         showOrGoneSearchRl(View.GONE);
         initPresenter();
-        initJobData();
+//        initJobData();
         TypedArray minzu = getResources().obtainTypedArray(R.array.minzu);
-        for (int i = 0; i <minzu.length() ; i++) {
-            MINZU[i]=minzu.getString(i);
+        for (int i = 0; i < minzu.length(); i++) {
+            MINZU[i] = minzu.getString(i);
         }
         minzu.recycle();
 
@@ -203,9 +201,9 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length()<200)
-                { remark_num.setText((200-s.length())+"");}
-                else {
+                if (s.length() < 200) {
+                    remark_num.setText((200 - s.length()) + "");
+                } else {
                     UT.show("只能输入200字");
                     remark_num.setText("0");
                 }
@@ -223,39 +221,42 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 //        eat_rg.setOnCheckedChangeListener(this);
 //        sleep_rg.setOnCheckedChangeListener(this);
 //        driver_rg.setOnCheckedChangeListener(this);
+//        initUSerInfoBean();
 
         initSelfView();//初始化选择本人
 
     }
 
 
+
+
     private void initJobData() {
-        RetrofitManager.getInstance(1).getAllPosition()
-                .compose(TransformUtils.<RspNationBean>defaultSchedulers())
-                .subscribe(new Subscriber<RspNationBean>() {
-                    @Override
-                    public void onCompleted() {
-                        KLog.d();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        KLog.e(e.toString());
-                    }
-
-                    @Override
-                    public void onNext(RspNationBean rspNationBean) {
-                        KLog.d(rspNationBean.toString());
-                        if ("0".equals(rspNationBean.getHead().getRspCode())){
-                            dutyList = (List<NationBean>) rspNationBean.getBody().getList();
-                            ZHIWU = new String[dutyList.size()];
-                            for (int i = 0; i <dutyList.size() ; i++) {
-                                NationBean nationBean = dutyList.get(i);
-                                ZHIWU[i]=nationBean.getName();
-                            }
-                        }
-                    }
-                });
+//        RetrofitManager.getInstance(1).getAllPosition()
+//                .compose(TransformUtils.<RspNationBean>defaultSchedulers())
+//                .subscribe(new Subscriber<RspNationBean>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        KLog.d();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        KLog.e(e.toString());
+//                    }
+//
+//                    @Override
+//                    public void onNext(RspNationBean rspNationBean) {
+//                        KLog.d(rspNationBean.toString());
+//                        if ("0".equals(rspNationBean.getHead().getRspCode())){
+//                            dutyList = (List<NationBean>) rspNationBean.getBody().getList();
+//                            ZHIWU = new String[dutyList.size()];
+//                            for (int i = 0; i <dutyList.size() ; i++) {
+//                                NationBean nationBean = dutyList.get(i);
+//                                ZHIWU[i]=nationBean.getName();
+//                            }
+//                        }
+//                    }
+//                });
     }
 
     private void initSelfView() {
@@ -272,20 +273,20 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
 
         //报名页面自动加载 本人信息
-        if (userBean==null){
+        if (userBean == null) {
             return;
         }
         apply_name.setText(userBean.getNiceName());
 
 
         sex = userBean.getSex();
-         if ("男".equals(userBean.getSex())){
+        if ("男".equals(userBean.getSex())) {
             apply_man.setChecked(true);
-         }else   if ("女".equals(userBean.getSex())){
-             apply_woman.setChecked(true);
-         }else {
-             apply_rg.clearCheck();//后台数据性别为空
-         }
+        } else if ("女".equals(userBean.getSex())) {
+            apply_woman.setChecked(true);
+        } else {
+            apply_rg.clearCheck();//后台数据性别为空
+        }
 
         apply_company.setText(userBean.getCompanyName());
         apply_duty.setText(userBean.getPosition());
@@ -296,21 +297,20 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     private void initAssisView(AssisBean assisBean) {
         //报名页面自动加载 所选助理信息
-        if (assisBean==null){
+        if (assisBean == null) {
             return;
         }
         apply_name.setText(assisBean.getNiceName());
 
 
-            sex = assisBean.getSex();
-            if ("男".equals(assisBean.getSex())){
-                apply_man.setChecked(true);
-            }else   if ("女".equals(assisBean.getSex())){
-                apply_woman.setChecked(true);
-            }else {
-                apply_rg.clearCheck();//后台数据性别为空
-            }
-
+        sex = assisBean.getSex();
+        if ("男".equals(assisBean.getSex())) {
+            apply_man.setChecked(true);
+        } else if ("女".equals(assisBean.getSex())) {
+            apply_woman.setChecked(true);
+        } else {
+            apply_rg.clearCheck();//后台数据性别为空
+        }
 
 
         apply_company.setText(assisBean.getCompanyName());
@@ -321,7 +321,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
 
     private void initPresenter() {
-        assisPresenterImpl.setNewsTypeAndId(1, Constants.numPerPage, "",-1);
+        assisPresenterImpl.setNewsTypeAndId(1, Constants.numPerPage, "", -1);
         mPresenter = assisPresenterImpl;
         mPresenter.attachView(this);
         mPresenter.onCreate();
@@ -336,27 +336,23 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     }
 
 
-
-
-
     @Override
     public void setAssissList(List<AssisBean> assissList, @LoadNewsType.checker int loadType) {
         list = assissList;
 
         List<String> stringList = new ArrayList<>();
-        for (int i = 0; i <assissList.size() ; i++) {
+        for (int i = 0; i < assissList.size(); i++) {
             assisBean = assissList.get(i);
-            if (assisBean.getIsAssistant()==2){//此助理空闲
+            if (assisBean.getIsAssistant() == 2) {//此助理空闲
                 stringList.add(assisBean.getUserName());
             }
 
         }
 
         assistantNames = new String[stringList.size()];
-        for (int i = 0; i <stringList.size() ; i++) {
-            assistantNames[i] =stringList.get(i);
+        for (int i = 0; i < stringList.size(); i++) {
+            assistantNames[i] = stringList.get(i);
         }
-
 
 
 //        initRadioGroup(assistant_rg,assistantNames,assistantNames);
@@ -366,24 +362,23 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     //助理弹出框，点击了 x（取消） 通知跳转 到本人（参会人）
     @Subscribe
-    public void onEventMainThread(AssisApplyEvent event){
-        if (event.isFlag()){
+    public void onEventMainThread(AssisApplyEvent event) {
+        if (event.isFlag()) {
             initSelfView();
         }
     }
 
 
-    @OnClick({R.id.apply_self,R.id.ll_assis,R.id.apply_man,R.id.apply_woman,
-            R.id.apply_duty,R.id.sleep_zl,R.id.sleep_need,R.id.eat_zl,R.id.eat_need
-            ,R.id.apply_nation,R.id.driver_zl,R.id.driver_need,R.id.ensure_apply})
+    @OnClick({R.id.apply_self, R.id.ll_assis, R.id.apply_man, R.id.apply_woman,
+            R.id.apply_duty, R.id.sleep_zl, R.id.sleep_need, R.id.eat_zl, R.id.eat_need
+            , R.id.apply_nation, R.id.driver_zl, R.id.driver_need, R.id.ensure_apply})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.apply_self:
                 initSelfView();
                 break;
             case R.id.ll_assis:
-                if (assistantNames!=null&&assistantNames.length>0)
-                {
+                if (assistantNames != null && assistantNames.length > 0) {
                     joinType = 4;
                     drop_assis.setImageResource(R.mipmap.icon_drop);
                     replace.setVisibility(VISIBLE);
@@ -391,57 +386,87 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                     ll_assis.setBackgroundResource(R.drawable.apply_rectange);
                     apply_self.setTextColor(getResources().getColor(R.color.color_cccccc));
                     apply_self.setBackgroundResource(R.drawable.leave_rectange);
-                    initWheelView("请选择助理",assistantNames);
-                }else {
+                    initWheelView("请选择助理", assistantNames);
+                } else {
                     UT.show("暂无数据");
                 }
                 break;
             case R.id.apply_man:
-                sex="男";
+                sex = "男";
                 break;
             case R.id.apply_woman:
-                sex="女";
+                sex = "女";
                 break;
             case R.id.apply_duty:
-                if (ZHIWU!=null&&ZHIWU.length>0)
-                initWheelView("请选择职务",ZHIWU);
+//                if (ZHIWU!=null&&ZHIWU.length>0)
+//                initWheelView("请选择职务",ZHIWU);
+                choiceDutyDialog();
                 break;
             case R.id.sleep_zl:
-               stay = 1;
+                stay = 1;
                 break;
             case R.id.sleep_need:
                 stay = 2;
                 break;
             case R.id.eat_zl:
-               foodId=1;
+                foodId = 1;
                 break;
             case R.id.eat_need:
-                foodId=2;
+                foodId = 2;
                 break;
             case R.id.apply_nation:
-                 initWheelView("请选择民族",MINZU);
+                initWheelView("请选择民族", MINZU);
                 break;
             case R.id.driver_zl:
-               driver=2;
+                driver = 2;
                 break;
             case R.id.driver_need:
-                driver=1;
+                driver = 1;
                 break;
             case R.id.ensure_apply:
                 getData();
-                KLog.a("meetingBean.getId()  "+meetingBean.getId()+"\njoinType"+joinType+"\nfoodId" +foodId+"\n职务"+job+
-                        " \nstay"+stay+"\nUserAssistantId"+userAssistantId
-                        +"\nCarNo"+carNo
-                        +"\ndriver"+driver
-                        +"\ncause"+cause
-                        +"\ndesp"+desp
-                        +"\nleadName"+leadName
-                        +"\nnation"+nation+
-                        "\nsex"+sex
-                        +"\ncompanyName"+companyName+"\njob"+job);
-               applyMetting();
+                KLog.a("meetingBean.getId()  " + meetingBean.getId() + "\njoinType" + joinType + "\nfoodId" + foodId + "\n职务" + job +
+                        " \nstay" + stay + "\nUserAssistantId" + userAssistantId
+                        + "\nCarNo" + carNo
+                        + "\ndriver" + driver
+                        + "\ncause" + cause
+                        + "\ndesp" + desp
+                        + "\nleadName" + leadName
+                        + "\nnation" + nation +
+                        "\nsex" + sex
+                        + "\ncompanyName" + companyName + "\njob" + job);
+                applyMetting();
                 break;
         }
+    }
+
+    private void choiceDutyDialog() {
+        final EditText editText = new EditText(this);
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("请输入职务")
+                .setView(editText)
+                .setPositiveButton("确定", null)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String duty = editText.getText().toString().trim();
+                if (TextUtils.isEmpty(duty)) {
+                    UT.show("输入不能为空");
+                    return;
+                }
+                apply_duty.setText(duty);
+                dialog.dismiss();
+            }
+        });
     }
 
     private void initWheelView(final String title, String[] planets) {
@@ -454,7 +479,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
         wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
             public void onSelected(int selectedIndex, String item) {
-                selecItem[0] =item;
+                selecItem[0] = item;
             }
         });
 
@@ -462,21 +487,22 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                 .setTitle(title)
                 .setContentView(outerView)
                 .setCancelable(false)
-                .setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //如果没有选择，默认选择第一个
-                        if ("".equals(selecItem[0])){
-                            selecItem[0]= wv.getSeletedItem();
+                        if ("".equals(selecItem[0])) {
+                            selecItem[0] = wv.getSeletedItem();
                         }
-                        if ("请选择民族".equals(title)){
-                            apply_nation.setText( selecItem[0]);
-                        }else  if ("请选择助理".equals(title)){
+                        if ("请选择民族".equals(title)) {
+                            apply_nation.setText(selecItem[0]);
+                        } else if ("请选择助理".equals(title)) {
                             apply_assis.setText(selecItem[0]);
-                           initApplyData( selecItem[0]);
-                        }else  if ("请选择职务".equals(title)){
-                            apply_duty.setText( selecItem[0]);
+                            initApplyData(selecItem[0]);
                         }
+//                        else  if ("请选择职务".equals(title)){
+//                            apply_duty.setText( selecItem[0]);
+//                        }
                         dialog.dismiss();
                     }
                 }).create().show();
@@ -484,40 +510,41 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
     private void applyMetting() {
 
-        if (joinType ==-1 ||foodId ==-1 ||stay ==-1 ||driver ==-1  || "".equals(sex)
+        if (joinType == -1 || foodId == -1 || stay == -1 || driver == -1 || "".equals(sex)
                 || "".equals(companyName) || "".equals(job)
-                || "".equals(nation)){
+                || "".equals(nation)) {
             UT.show("请完善报名信息");
             return;
         }
 
 
-        if (joinType==4){//助理报名时，leadName不能为空
-            if ("".equals(leadName))
-            {UT.show("请完善报名信息");
-                return;}
-        }else {
-               leadName="";//本人报名时，不传leadName值
+        if (joinType == 4) {//助理报名时，leadName不能为空
+            if ("".equals(leadName)) {
+                UT.show("请完善报名信息");
+                return;
+            }
+        } else {
+            leadName = "";//本人报名时，不传leadName值
         }
 
 
-        if (assistantNames!=null&&assistantNames.length>0){
-            if (joinType==4){
-                if ("".equals(userAssistantId) || "".equals(cause))
-                {UT.show("请完善报名信息");
-                   return;}
+        if (assistantNames != null && assistantNames.length > 0) {
+            if (joinType == 4) {
+                if ("".equals(userAssistantId) || "".equals(cause)) {
+                    UT.show("请完善报名信息");
+                    return;
+                }
             }
-        }else {
-            if (joinType!=3){
+        } else {
+            if (joinType != 3) {
                 UT.show("请完善报名信息");
                 return;
             }
         }
 
 
-
-        RetrofitManager.getInstance(1).joinMeeting(meetingBean.getId(),joinType,foodId
-                ,stay,userAssistantId,carNo,driver,cause,desp,leadName,nation,sex,companyName,job)
+        RetrofitManager.getInstance(1).joinMeeting(meetingBean.getId(), joinType, foodId
+                , stay, userAssistantId, carNo, driver, cause, desp, leadName, nation, sex, companyName, job)
                 .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                 .subscribe(new Subscriber<BaseRspObj>() {
                     @Override
@@ -534,7 +561,7 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                     public void onNext(BaseRspObj responseBody) {
                         if (responseBody.getHead().getRspCode().equals("0")) {
 //                          if (index==1){
-                                EventBus.getDefault().post(new MeetingDetailEvent(1));
+                            EventBus.getDefault().post(new MeetingDetailEvent(1));
 //                            }
                             finish();
                         }
@@ -543,8 +570,6 @@ public class ApplyActivity extends BaseActivity implements AssisView{
                     }
                 });
     }
-
-
 
 
     @Override
@@ -562,7 +587,6 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 
 
     }
-
 
 
 //    @Override
@@ -586,12 +610,12 @@ public class ApplyActivity extends BaseActivity implements AssisView{
 //
 //        }
 //
-        if (joinType==4){
+        if (joinType == 4) {
             //判断选取哪一个助理
-            if (assistantNames!=null&assistantNames.length>0&list!=null&list.size()>0){
-                for (int i = 0; i <list.size() ; i++) {
-                    AssisBean  assisBean = list.get(i);
-                    if (name.equals(assisBean.getUserName())){
+            if (assistantNames != null & assistantNames.length > 0 & list != null & list.size() > 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    AssisBean assisBean = list.get(i);
+                    if (name.equals(assisBean.getUserName())) {
                         userAssistantId = assisBean.getId();
                         initAssisView(assisBean);
                         break;
@@ -631,17 +655,15 @@ public class ApplyActivity extends BaseActivity implements AssisView{
     }
 
 
-
     private void getData() {
 
-        leadName=userBean.getNiceName();
-        companyName=apply_company.getText().toString().trim();
-        job=apply_duty.getText().toString().trim();
-        nation =apply_nation.getText().toString().trim();
+        leadName = userBean.getNiceName();
+        companyName = apply_company.getText().toString().trim();
+        job = apply_duty.getText().toString().trim();
+        nation = apply_nation.getText().toString().trim();
         carNo = car_num.getText().toString().trim();
         desp = remark_apply.getText().toString().trim();
         cause = apply_cause.getText().toString().trim();
-
 
 
     }

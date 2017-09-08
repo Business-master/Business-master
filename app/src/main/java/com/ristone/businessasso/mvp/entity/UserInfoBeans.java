@@ -7,13 +7,13 @@ import java.util.List;
  */
 
 public class UserInfoBeans {
-    List<UserInfoBean>  list;
+    UserInfoBean  list;
 
-    public List<UserInfoBean> getList() {
+    public UserInfoBean getList() {
         return list;
     }
 
-    public void setList(List<UserInfoBean> list) {
+    public void setList(UserInfoBean list) {
         this.list = list;
     }
 
