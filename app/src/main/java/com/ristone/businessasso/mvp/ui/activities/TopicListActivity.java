@@ -131,7 +131,7 @@ public class TopicListActivity extends BaseActivity implements SwipeRefreshLayou
     private void initRecyclerView() {
         mNewsRV.setHasFixedSize(true);
         mNewsRV.addItemDecoration(new RecyclerViewDivider(mActivity,
-                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
+                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.gray)));
         mNewsRV.setLayoutManager(new LinearLayoutManager(mActivity,
                 LinearLayoutManager.VERTICAL, false));
         mNewsRV.setItemAnimator(new DefaultItemAnimator());

@@ -84,7 +84,7 @@ public class URLImageGetter implements Html.ImageGetter {
 
     @NonNull
     private Drawable getDrawableFromNet(final String source) {
-        KLog.d("source--->"+source);
+//        KLog.d("source--->"+source);
         mSubscription = RetrofitManager.getInstance(1)
                 .getNewsBodyHtmlPhoto(source)
                 .unsubscribeOn(Schedulers.io())
@@ -109,9 +109,9 @@ public class URLImageGetter implements Html.ImageGetter {
                     @Override
                     public void onNext(Boolean isLoadSuccess) {
                         mPicCount++;
-                        KLog.d("source--->"+mPicCount+"----"+mPicTotal);
+//                        KLog.d("source--->"+mPicCount+"----"+mPicTotal);
                         if (isLoadSuccess) {
-                            KLog.i("isloadSuccess--->"+isLoadSuccess);
+//                            KLog.i("isloadSuccess--->"+isLoadSuccess);
                             mTextView.setText(Html.fromHtml(mNewsBody, URLImageGetter.this, null));
                         }
                     }

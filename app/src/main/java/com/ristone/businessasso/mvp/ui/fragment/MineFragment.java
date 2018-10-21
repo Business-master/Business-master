@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.ristone.businessasso.App;
 import com.ristone.businessasso.R;
 import com.ristone.businessasso.common.UsrMgr;
@@ -86,7 +87,7 @@ public class MineFragment extends BaseFragment {
     @Inject
     Activity mActivity;
 
-    private   String[] ZHIWU ;
+//    private   String[] ZHIWU ;
     private  List<NationBean> dutyList=new ArrayList<>();
     private String dutyCode;
 
@@ -126,36 +127,36 @@ public class MineFragment extends BaseFragment {
 //            initData();
 //        }
 
-        initData();
+//        initData();
     }
 
     private void initData() {
-        RetrofitManager.getInstance(1).getAllPosition()
-                .compose(TransformUtils.<RspNationBean>defaultSchedulers())
-                .subscribe(new Subscriber<RspNationBean>() {
-                    @Override
-                    public void onCompleted() {
-                        KLog.d();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        KLog.e(e.toString());
-                    }
-
-                    @Override
-                    public void onNext(RspNationBean rspNationBean) {
-                        KLog.d(rspNationBean.toString());
-                        if ("0".equals(rspNationBean.getHead().getRspCode())){
-                            dutyList = (List<NationBean>) rspNationBean.getBody().getList();
-                            ZHIWU = new String[dutyList.size()];
-                            for (int i = 0; i <dutyList.size() ; i++) {
-                                NationBean nationBean = dutyList.get(i);
-                               ZHIWU[i]=nationBean.getName();
-                            }
-                        }
-                    }
-                });
+//        RetrofitManager.getInstance(1).getAllPosition()
+//                .compose(TransformUtils.<RspNationBean>defaultSchedulers())
+//                .subscribe(new Subscriber<RspNationBean>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        KLog.d();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        KLog.e(e.toString());
+//                    }
+//
+//                    @Override
+//                    public void onNext(RspNationBean rspNationBean) {
+//                        KLog.d(rspNationBean.toString());
+//                        if ("0".equals(rspNationBean.getHead().getRspCode())){
+//                            dutyList = (List<NationBean>) rspNationBean.getBody().getList();
+////                            ZHIWU = new String[dutyList.size()];
+//                            for (int i = 0; i <dutyList.size() ; i++) {
+//                                NationBean nationBean = dutyList.get(i);
+////                               ZHIWU[i]=nationBean.getName();
+//                            }
+//                        }
+//                    }
+//                });
     }
 
 
@@ -275,6 +276,8 @@ public class MineFragment extends BaseFragment {
                             KLog.d(baseRspObj.toString());
                             if (baseRspObj.getHead().getRspCode().equals("0")){
                                 tv_position.setText(duty);
+                                userBean.setPosition(duty);
+                                UsrMgr.cacheUserInfo(new Gson().toJson(userBean));
                                 dialog.dismiss();
                             }
                             UT.show(baseRspObj.getHead().getRspMsg());

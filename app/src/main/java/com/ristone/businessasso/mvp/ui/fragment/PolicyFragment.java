@@ -140,7 +140,7 @@ public class PolicyFragment extends BaseFragment implements SwipeRefreshLayout.O
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mActivity,
                 LinearLayoutManager.VERTICAL, false);
         mNewsRV.addItemDecoration(new RecyclerViewDivider(mActivity,
-                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
+                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.gray)));
         mNewsRV.setLayoutManager(mLayoutManager);
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
 

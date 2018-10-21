@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -234,7 +235,7 @@ NewsFragment extends BaseLazyFragment implements SwipeRefreshLayout.OnRefreshLis
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mActivity,
                 LinearLayoutManager.VERTICAL, false);
         mNewsRV.addItemDecoration(new RecyclerViewDivider(mActivity,
-                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.red)));
+                LinearLayoutManager.VERTICAL, 2, getResources().getColor(R.color.gray)));
         mNewsRV.setLayoutManager(mLayoutManager);
         mNewsRV.setItemAnimator(new DefaultItemAnimator());
         likeBeanList = new ArrayList<>();

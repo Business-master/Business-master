@@ -2,12 +2,14 @@ package com.ristone.businessasso.mvp.ui.activities;
 
 
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -67,11 +69,11 @@ public class AddAssisActivity extends BaseActivity {
 
     String sexCode ;
     String companyCode ;
-    String dutyCode ;
+//    String dutyCode ;
     String nationCode;
     String assisId;//修改助理的ID
 
-    private  String[] ZHIWU ;
+//    private  String[] ZHIWU ;
     private static final String[] MINZU = new String[56];
     private String [] companyNames;
 
@@ -228,32 +230,32 @@ public class AddAssisActivity extends BaseActivity {
                     }
                 });
 
-        RetrofitManager.getInstance(1).getAllPosition()
-                .compose(TransformUtils.<RspNationBean>defaultSchedulers())
-                .subscribe(new Subscriber<RspNationBean>() {
-                    @Override
-                    public void onCompleted() {
-                        KLog.d();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        KLog.e(e.toString());
-                    }
-
-                    @Override
-                    public void onNext(RspNationBean rspNationBean) {
-                        KLog.d(rspNationBean.toString());
-                        if ("0".equals(rspNationBean.getHead().getRspCode())){
-                            dutyList = (List<NationBean>) rspNationBean.getBody().getList();
-                            ZHIWU = new String[dutyList.size()];
-                            for (int i = 0; i <dutyList.size() ; i++) {
-                                NationBean nationBean = dutyList.get(i);
-                                ZHIWU[i]=nationBean.getName();
-                            }
-                        }
-                    }
-                });
+//        RetrofitManager.getInstance(1).getAllPosition()
+//                .compose(TransformUtils.<RspNationBean>defaultSchedulers())
+//                .subscribe(new Subscriber<RspNationBean>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        KLog.d();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        KLog.e(e.toString());
+//                    }
+//
+//                    @Override
+//                    public void onNext(RspNationBean rspNationBean) {
+//                        KLog.d(rspNationBean.toString());
+//                        if ("0".equals(rspNationBean.getHead().getRspCode())){
+//                            dutyList = (List<NationBean>) rspNationBean.getBody().getList();
+//                            ZHIWU = new String[dutyList.size()];
+//                            for (int i = 0; i <dutyList.size() ; i++) {
+//                                NationBean nationBean = dutyList.get(i);
+//                                ZHIWU[i]=nationBean.getName();
+//                            }
+//                        }
+//                    }
+//                });
 
         RetrofitManager.getInstance(1).getAllNation()
                 .compose(TransformUtils.<RspNationBean>defaultSchedulers())
@@ -285,8 +287,10 @@ public class AddAssisActivity extends BaseActivity {
                     addAssis();
                 break;
             case R.id.duty_add_assis:
-                if (ZHIWU!=null&&ZHIWU.length>0)
-                initWheelView("请选择职务",ZHIWU);
+//                if (ZHIWU!=null&&ZHIWU.length>0)
+//                initWheelView("请选择职务",ZHIWU);
+
+                choiceDutyDialog();
                 break;
             case R.id.nation_add_assis:
                 initWheelView("请选择民族",MINZU);
@@ -296,6 +300,36 @@ public class AddAssisActivity extends BaseActivity {
 //                break;
         }
 
+    }
+
+
+    private void choiceDutyDialog() {
+        final EditText editText = new EditText(this);
+        final AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("请输入职务")
+                .setView(editText)
+                .setPositiveButton("确定",null)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String duty = editText.getText().toString().trim();
+                if (TextUtils.isEmpty(duty)){
+                    UT.show("输入不能为空");
+                    return;
+                }
+                duty_add_assis.setText( duty);
+                dialog.dismiss();
+            }
+        });
     }
 
 
@@ -325,9 +359,10 @@ public class AddAssisActivity extends BaseActivity {
                         if ("".equals(selecItem[0])){
                             selecItem[0]= wv.getSeletedItem();
                         }
-                       if ("请选择职务".equals(title)){
-                            duty_add_assis.setText( selecItem[0]);
-                        }else if ("请选择民族".equals(title)){
+//                       if ("请选择职务".equals(title)){
+//                            duty_add_assis.setText( selecItem[0]);
+//                        }else
+                            if ("请选择民族".equals(title)){
                            nation_add_assis.setText( selecItem[0]);
                        }
 //                       else if ("请选择单位".equals(title)){
@@ -341,7 +376,7 @@ public class AddAssisActivity extends BaseActivity {
 
     private void addAssis() {
         if (judgement()){
-            RetrofitManager.getInstance(1).getAddAssisListObservable(nameStr,passStr,phoneStr,sexCode,companyCode,dutyCode,nationCode,assisId)
+            RetrofitManager.getInstance(1).getAddAssisListObservable(nameStr,passStr,phoneStr,sexCode,companyCode,duty,nationCode,assisId)
                     .compose(TransformUtils.<BaseRspObj>defaultSchedulers())
                     .subscribe(new Subscriber<BaseRspObj>() {
                         @Override
@@ -416,15 +451,15 @@ public class AddAssisActivity extends BaseActivity {
         }
 
         //遍历 根据 中文 职务 查找 code
-          if (!TextUtils.isEmpty(duty)& dutyList!=null &dutyList.size()>0){
-            for (int i = 0; i <dutyList.size() ; i++) {
-                NationBean nationBean = dutyList.get(i);
-                if (duty.equals(nationBean.getName())){
-                    dutyCode = nationBean.getCode();
-                    break;
-                }
-            }
-        }
+//          if (!TextUtils.isEmpty(duty)& dutyList!=null &dutyList.size()>0){
+//                  for (int i = 0; i <dutyList.size() ; i++) {
+//                      NationBean nationBean = dutyList.get(i);
+//                      if (duty.equals(nationBean.getName())){
+//                          dutyCode = nationBean.getCode();
+//                          break;
+//                      }
+//                  }
+//        }
 
           if (index==2){
               if (!TextUtils.isEmpty(nameStr)){
@@ -465,7 +500,7 @@ public class AddAssisActivity extends BaseActivity {
                       ||TextUtils.isEmpty(sexCode)
                       ||TextUtils.isEmpty(companyCode)
                       ||TextUtils.isEmpty(nationCode)
-                      ||TextUtils.isEmpty(dutyCode)
+                      ||TextUtils.isEmpty(duty)
                       ||TextUtils.isEmpty(firmStr)){
                   UT.show("输入不能为空");
                   right=false;

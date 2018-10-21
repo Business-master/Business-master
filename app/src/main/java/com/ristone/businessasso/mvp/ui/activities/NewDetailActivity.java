@@ -1,6 +1,8 @@
 package com.ristone.businessasso.mvp.ui.activities;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,6 +17,7 @@ import com.ristone.businessasso.mvp.entity.response.RspNewDetailBean;
 import com.ristone.businessasso.mvp.ui.activities.base.BaseActivity;
 import com.ristone.businessasso.repository.network.RetrofitManager;
 import com.ristone.businessasso.utils.DateUtil;
+import com.ristone.businessasso.utils.HtmlUtils;
 import com.ristone.businessasso.utils.TransformUtils;
 import com.ristone.businessasso.widget.URLImageGetter;
 import com.socks.library.KLog;
@@ -205,13 +208,19 @@ public class NewDetailActivity extends BaseActivity {
 //        mFundTv.setText(Html.fromHtml(str));
 
         mFundTv.setText(formMoney(bean.getInAmount()) + "元");
-        KLog.a("项目投资----------"+formMoney(bean.getInAmount())+"实际数据"+bean.getInAmount());
+//        KLog.a("项目投资----------"+formMoney(bean.getInAmount())+"实际数据"+bean.getInAmount());
 //        mFundTv.setText("项目总投资 : " +formMoney(bean.getInAmount()) + "元");
         mPhone.setText("联系电话 : " + bean.getPhoneNo());
         mZPhone.setText("座机电话 : "+bean.getPlane());
         KLog.a("详情内容：-----"+bean.getContentS());
         mUrlImageGetter = new URLImageGetter(mNewsDetailBodyTv, bean.getContentS(), 2);
         mNewsDetailBodyTv.setText(Html.fromHtml(bean.getContentS(), mUrlImageGetter, null));
+//        mNewsDetailBodyTv.setText(HtmlUtils.fromHtml(bean.getContentS(), mUrlImageGetter, null));
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            mNewsDetailBodyTv.setText(Html.fromHtml(bean.getContentS(),Html.FROM_HTML_MODE_COMPACT ,mUrlImageGetter, null));
+//        }else {
+//            mNewsDetailBodyTv.setText(Html.fromHtml(bean.getContentS(), mUrlImageGetter, null));
+//        }
     }
 
     private String formAmount(double num) {

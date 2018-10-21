@@ -12,7 +12,6 @@ import com.ristone.businessasso.common.UsrMgr;
 import com.ristone.businessasso.mvp.entity.response.base.BaseRspObj;
 import com.ristone.businessasso.mvp.event.ReadMeeting;
 import com.ristone.businessasso.repository.network.RetrofitManager;
-import com.ristone.businessasso.utils.MarkUtils;
 import com.ristone.businessasso.utils.TransformUtils;
 import com.socks.library.KLog;
 

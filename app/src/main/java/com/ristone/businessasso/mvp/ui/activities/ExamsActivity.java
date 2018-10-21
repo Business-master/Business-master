@@ -18,6 +18,7 @@ import com.ristone.businessasso.R;
 import com.ristone.businessasso.common.ApiConstants;
 import com.ristone.businessasso.common.Constants;
 import com.ristone.businessasso.common.LoadNewsType;
+import com.ristone.businessasso.common.UsrMgr;
 import com.ristone.businessasso.mvp.entity.AssisBean;
 import com.ristone.businessasso.mvp.entity.QuestionnaireBean;
 import com.ristone.businessasso.mvp.presenter.impl.AssisPresenterImpl;
@@ -106,7 +107,9 @@ public class ExamsActivity extends BaseActivity implements SwipeRefreshLayout.On
 
     private void initPresenter() {
 //        questionnairePresenterImpl.setNewsTypeAndId(pageNum, Constants.numPerPage, "","");
-        questionnairePresenterImpl.setNewsTypeAndId(pageNum, 100, "","");
+
+        if(UsrMgr.getUseInfo()!=null )
+        questionnairePresenterImpl.setNewsTypeAndId(pageNum, 100, UsrMgr.getUsePhone(),"");
         mPresenter = questionnairePresenterImpl;
         mPresenter.attachView(this);
         mPresenter.onCreate();
